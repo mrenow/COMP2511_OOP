@@ -11,7 +11,8 @@ import unsw.gloriaromanus.*;
 public class UnitTest{
     @Test
     public void blahTest(){
-        assertEquals("a", "a");
+        assertEquals("a", "b");
+        String s;
     }
     
     @Test
