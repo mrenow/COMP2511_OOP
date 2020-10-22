@@ -5,6 +5,10 @@ import java.util.List;
 import org.geojson.Point;
 
 public class GameController {
+	public GameController(FactionType ... factions) {
+		
+	}
+	
 	public Faction getCurrentTurn() {return null;}
 	
 //	Constraints:
