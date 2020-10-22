@@ -2,8 +2,8 @@ package unsw.gloriaromanus;
 
 public enum FactionType {
 	// Placeholders
-	PLAYER		("Player"),
-	ENEMY		("Enemy");
+	ROMANS		("Romans"),
+	GAULS		("Gauls");
 	
 	private String name;
 	
