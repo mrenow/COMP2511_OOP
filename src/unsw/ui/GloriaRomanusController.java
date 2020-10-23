@@ -1,4 +1,4 @@
-package unsw.gloriaromanus;
+package unsw.ui;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
+import unsw.gloriaromanus.ArrayUtil;
 
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
 import com.esri.arcgisruntime.data.FeatureTable;
