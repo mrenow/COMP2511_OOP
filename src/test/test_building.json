@@ -1,0 +1,7 @@
+{
+	"maxLevel" : 2,
+	"names" : ["Test Building Level 1", "Test Building Level 2"],
+	"descriptions" : "Its probably a house.",
+	"costs" : [10,20],
+	"durations" : [1,2]
+}

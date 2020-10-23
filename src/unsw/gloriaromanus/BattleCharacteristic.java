@@ -1,8 +1,13 @@
 package unsw.gloriaromanus;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class BattleCharacteristic {
 	
 	double armour = 0;
@@ -12,20 +17,15 @@ public class BattleCharacteristic {
 	double defenseSkill = 0;
 	double shieldDefense = 0;
 	
-	// These should not change 
-	double armourMult = 1;
-	double moraleMult = 1;
-	double speedMult = 1;
-	double attackMult = 1;
-	
+	double armourmult = 1;
+	double moralemult = 1;
+	double speedmult = 1;
+	double attackmult = 1;  
 	@JsonCreator
-	public BattleCharacteristic(
-			@JsonProperty("armour") double armour,
-			@JsonProperty("morale") double morale,
-			@JsonProperty("speed") double speed,
-			@JsonProperty("attack") double attack,
-			@JsonProperty("defenseSkill") double defenseSkill,
-			@JsonProperty("shieldDefense") double shieldDefense) {
+	private BattleCharacteristic() {}
+	public BattleCharacteristic(double armour, double morale, double speed, double attack, double defenseSkill,
+			double shieldDefense) {
+		super();
 		this.armour = armour;
 		this.morale = morale;
 		this.speed = speed;
@@ -33,17 +33,18 @@ public class BattleCharacteristic {
 		this.defenseSkill = defenseSkill;
 		this.shieldDefense = shieldDefense;
 	}
+
 	public double getArmour() {
-		return armour*armourMult;
+		return armour;
 	}
 	public double getMorale() {
-		return morale*moraleMult;
+		return morale;
 	}
 	public double getSpeed() {
-		return speed*speedMult;
+		return speed;
 	}
 	public double getAttack() {
-		return attack*attackMult;
+		return attack;
 	}
 	public double getDefenseSkill() {
 		return defenseSkill;
@@ -52,7 +53,6 @@ public class BattleCharacteristic {
 		return shieldDefense;
 	}
 	
-	// Should not be touched on original battle characteristic
 	void addArmour(double armour) {
 		this.armour += armour;
 	}
@@ -72,15 +72,15 @@ public class BattleCharacteristic {
 		this.shieldDefense += shieldDefense;
 	}
 	void addArmourmult(double armourmult) {
-		this.armourMult += armourmult;
+		this.armourmult += armourmult;
 	}
 	void addMoralemult(double moralemult) {
-		this.moraleMult += moralemult;
+		this.moralemult += moralemult;
 	}
 	void setSpeedmult(double speedmult) {
-		this.speedMult += speedmult;
+		this.speedmult += speedmult;
 	}
 	void setAttackmult(double attackmult) {
-		this.attackMult += attackmult;
+		this.attackmult += attackmult;
 	}
 }

@@ -1,26 +1,54 @@
 package unsw.gloriaromanus;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.geojson.Point;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser.Feature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class GameController {
+	
 	private List<Faction> factionTurnOrder;
 	private List<Province> allProvinces;
-	private Set<Province> landlockedProvinces;
 	
-
-	public static GameController loadFromSave(String saveFilename) {
+	private List<ItemType> currentMercenaries;
+	private int round = 0;
+	private int currentTurn = 0; // Must always be less than factionTurnOrder.size()
+	
+	@JsonCreator
+	private GameController() {}
+	
+	/**
+	 * Does what it says on the can.
+	 * We try to fill in as many values as we can as defaults so that we can construct sparse, clear testing files.
+	 * @param saveFilename
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 */
+	public static GameController loadFromSave(String saveFilename) throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper om = new ObjectMapper();
-		
-		
+		return om.readValue(new File(saveFilename), GameController.class);
+	}
+	public void saveGame(String saveFilename) throws JsonGenerationException, JsonMappingException, IOException {
+		ObjectMapper om = new ObjectMapper();
+		om.writeValue(new File(saveFilename), this);
 	}
 		
 	/**
@@ -31,9 +59,9 @@ public class GameController {
 	 * @param ownershipFilepath
 	 * @param landlockedFilepath
 	 */
-
 	public GameController(String adjacencyFilePath,
-			String landlockedFilepath, String ownershipFilepath) {
+			String landlockedFilePath, String ownershipFilePath) {
+		
 	}
 	
 	/**

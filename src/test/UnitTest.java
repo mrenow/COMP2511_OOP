@@ -18,7 +18,6 @@ public class UnitTest{
     @Test
     public void blahTest2(){
         Unit u = new Unit();
-        assertEquals(u.getNumTroops(), 50);
     }
 }
 

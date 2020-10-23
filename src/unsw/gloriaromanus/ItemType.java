@@ -39,6 +39,8 @@ public enum ItemType{
 //	// units
 //	HEAVY_INFANTRY			(),
 //	ARCHER					(),
+	TEST_TROOP				("src/test/test_troop.json"),
+	TEST_BUILDING			("src/test/test_building.json"),
 	HEAVY_CAVALRY			();
 	
 	private static final String SOURCE_DIR = "src/data";
@@ -164,14 +166,7 @@ public enum ItemType{
 	}
 	
 	public static void main(String[] args) {
-		ItemType i = ItemType.HEAVY_CAVALRY;
-		System.out.println(i.maxLevel);
-		System.out.println(i.getName(1));
-		System.out.println(i.getName(0));
-		System.out.println(i.getCost(0));
-		System.out.println(i.getCost(1));
-		System.out.println(i.getDescription(0));
-		System.out.println(i.getDescription(1));
+		ItemType i = ItemType.TEST_TROOP;
 		System.out.println(i.attributes);
 		
 	}

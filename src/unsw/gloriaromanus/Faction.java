@@ -9,14 +9,14 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class Faction {
 	public static final int STARTING_GOLD = 100;
+	public static final Faction NO_ONE = new Faction(FactionType.NO_ONE);
 	
-	private FactionType type;
-	private int gold;
-	
-	private List<Province> provinces;
+	private FactionType type = FactionType.ROME;
+	private int gold = 0;
+	private List<Province> provinces = new ArrayList<Province>();
 	
 	/**
 	 * Load constructor
@@ -25,30 +25,24 @@ public class Faction {
 	 * @param provinces
 	 */
 	@JsonCreator
-	public Faction(
-			@JsonProperty("type") 		FactionType type,
-			@JsonProperty("gold") 		int gold,
-			@JsonProperty("provinces") 	List<Province> provinces) {
+	private Faction() {};
+	public Faction(	FactionType type,int gold,	List<Province> provinces) {
 		this.type = type;
 		this.gold = gold;
-		this.provinces = new ArrayList<Province>(provinces);
+		this.provinces.addAll(provinces);
 	}
 	/**
 	 * Start constructor
 	 * @param type
 	 */
-	public Faction(FactionType type, Collection<Province> startingProvinces) {
+	public Faction(FactionType type) {
 		this.type = type;
-		this.provinces = new ArrayList<Province>(startingProvinces);
 	}
 
-	@JsonGetter
 	public FactionType getType() {return type;}
 
-	@JsonGetter
 	public List<Province> getProvinces(){return new ArrayList<Province>(provinces);}
 	
-	@JsonGetter
 	public int getGold() {return gold;}
 	
 	public String getTitle() {return type.getTitle();}

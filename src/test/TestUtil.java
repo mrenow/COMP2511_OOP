@@ -88,30 +88,4 @@ public class TestUtil {
 					.collect(Collectors.toList()));	
 	}
 	
-	public static void main(String[] args) {
-		HashSet<String> set1 = new HashSet<String>();
-		set1.add("b");
-		set1.add("a");
-		set1.add("c");
-		List<String> list1 = new ArrayList<String>();
-		list1.add("a");
-		list1.add("b");
-		list1.add("c");
-		
-		// All these tests Succeed
-		assertCollectionEquals(List.of("a", "c", "b"), set1);
-		assertCollectionEquals(List.of("b", "a", "c"), list1);
-		
-		List<SampleObject> list2 = new LinkedList<SampleObject>();
-		list2.add(new SampleObject(1, 3, "c"));
-		list2.add(new SampleObject(6, 2, "b"));
-		list2.add(new SampleObject(1, 36, "a"));
-		// :: gets the instance method from SampleObject. Method is applied to each element of list2.
-		assertCollectionAttributeEquals(List.of("a","b","c"), list2, SampleObject::getAttr3);
-		assertCollectionAttributeEquals(List.of(1,1,6), list2, SampleObject::getAttr1);
-		// order now matters
-		assertListAttributeEquals(List.of(3,2,36), list2, SampleObject::getAttr2);
-		
-		
-	}
 }

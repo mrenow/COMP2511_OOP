@@ -1,5 +1,6 @@
 package unsw.gloriaromanus;
 
-public class BuildingSlotEntry {
+
+public class BuildingSlotEntry extends ItemSlotEntry{
 
 }

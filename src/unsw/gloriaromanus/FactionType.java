@@ -6,10 +6,11 @@ import java.util.Objects;
 
 public enum FactionType {
 	// Placeholders
+	NO_ONE		("Barbarian", "Barbarians"),
 	ROME		("Roman", "Romans"),
 	GAUL		("Gallic", "Gauls");
 	
-	private String title;
+	public String title;
 	private String adjective;
 	private String plural;
 

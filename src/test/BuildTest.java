@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import unsw.gloriaromanus.*;
 
 
-
 public class BuildTest {
     GameController game;
 	@BeforeEach
@@ -82,6 +81,5 @@ public class BuildTest {
     @Test
     public void blahTest2(){
         Unit u = new Unit();
-        assertEquals(u.getNumTroops(), 50);
     }
 }
