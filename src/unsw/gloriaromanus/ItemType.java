@@ -5,10 +5,9 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 //Represents a queueable task for a province that takes duration turns to complete
-enum ItemType{
+public enum ItemType{
 	// enum potential values
 	// infrastructure
-	BASIC_INFRASTRUCTURE	(),
 	FARM					(),
 	MINE					(),
 	PORT					(),
@@ -20,13 +19,14 @@ enum ItemType{
 	STABLES					(),
 	BARRACKS				(),
 	ARCHERY_RANGE			(),
+	ARTILLERY_RANGE			(),
 	
 	// units
-	BASIC_TROOP				(),
 	HEAVY_INFANTRY			(),
+	ARCHER					(),
 	HEAVY_CAVALRY			();
 	
-	private static final String SOURCE_DIR = "data";
+	private static final String SOURCE_DIR = "src/data";
 	
 	// Attributes
 	private List<String> names;
