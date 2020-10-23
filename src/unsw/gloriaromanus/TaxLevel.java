@@ -10,14 +10,14 @@ public enum TaxLevel {
 	private int wealthGen;
 		
 	private TaxLevel(int wealthgen, int taxpercentage) {
-		this.wealthgen = wealthgen;
-		this.taxrate = (1.0/100) * taxpercentage;
+		this.wealthGen = wealthgen;
+		this.taxRate = (1.0/100) * taxpercentage;
 	}
 	public double getTaxRate() {
-		return taxrate;
+		return taxRate;
 	}
 	public int getwealthgen() {
-		return wealthgen;
+		return wealthGen;
 	}
 
 }
