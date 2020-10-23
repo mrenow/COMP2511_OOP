@@ -14,12 +14,14 @@ public class BuildTest {
     GameController game;
 	@BeforeEach
     public void setupGame() {
-    	game = new GameController(FactionType.ROMANS, FactionType.GAULS);
-    	game.buildInfrastructure(, infratype);
+    	game = new GameController(
+    			"src/test/test1adjacency.json",
+    			"src/test/test1landlocked.json",
+    			"src/test/test1ownership.json");
     }
     
 	@Test
-    public void blahTest(){
+    public void build (){
         assertEquals("a", "b");
         String s;
     }

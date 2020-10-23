@@ -8,13 +8,25 @@ import java.util.NoSuchElementException;
 enum ItemType{
 	// enum potential values
 	// infrastructure
-	BASIC_INFRASTRUCTURE	(""),
-	FARM					("data/farm.json"),
-	MINE					("data/mine.json"),
+	BASIC_INFRASTRUCTURE	(),
+	FARM					(),
+	MINE					(),
+	PORT					(),
+	MARKET					(),
+	WALLS					(),
+	SMITH					(),
+	ROADS					(),
+	ROAD					(),
+	STABLES					(),
+	BARRACKS				(),
+	ARCHERY_RANGE			(),
+	
 	// units
-	BASIC_TROOP				(""),
-	HEAVY_INFANTRY			("data/heavy_infantry.json"),
-	HEAVY_CAVALRY			("data/heavy_calvalry.json");
+	BASIC_TROOP				(),
+	HEAVY_INFANTRY			(),
+	HEAVY_CAVALRY			();
+	
+	private static final String SOURCE_DIR = "data";
 	
 	// Attributes
 	private List<String> names;
@@ -26,8 +38,25 @@ enum ItemType{
 	// Mapping between string (name of attribute) and List of integers (attribute values for each level)
 	private Map<String, List<Object>> attributes; 
 	
+	private ItemType() throws ExceptionInInitializerError{
+		// Filename determined automatically
+		constructFromFile(
+				String.format("%s/%s.json",
+						SOURCE_DIR,
+						this.name().toLowerCase())
+				);
+	}
 	private ItemType(String filename) throws ExceptionInInitializerError{
-		 // Filling the enum attributes and attributes list, throws an error if name, desc, cost, duratio or maxlvl is missing from the file
+		constructFromFile(filename);
+	}
+	/**
+	 * Fills in the enum attributes and attributes list.
+	 * @param filename
+	 * @throws ExceptionInInitializerError if name, desc, cost,
+	 * duration or maxlvl is missing from the file
+	 */
+	private void constructFromFile(String filename) throws ExceptionInInitializerError{
+		// TODO
 	}
 	public String getDescription(int level) {
 		return descriptions.get(level);
