@@ -1,6 +1,7 @@
 package unsw.gloriaromanus;
 
 import java.util.List;
+import java.util.Set;
 
 public class Faction {
 	private FactionType type;

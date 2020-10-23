@@ -1,11 +1,14 @@
 package unsw.gloriaromanus;
 
 import java.util.List;
+import java.util.Set;
 
 public class Province {
 	public Faction getOwner() {return null;}
 	
 	public boolean isLandlocked() {return false;}
+	
+	public List<Province> getAdjacent() {return null;}
 	
 	public int getWealth() {return 0;}
 	
