@@ -72,11 +72,11 @@ public class BuildTest {
     	
     	assertEquals(gaul, game.getCurrentTurn());
     }
+    
 	@Test
-    public void TestBuild (){
+    public void testBuild (){
 		Faction current = game.getCurrentTurn();
-		current.getProvince("P1");
-		
+	
 		
     }
     
