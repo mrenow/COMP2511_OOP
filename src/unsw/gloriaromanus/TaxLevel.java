@@ -6,8 +6,8 @@ public enum TaxLevel {
 	HIGH_TAX		(-10, 20),
 	VERY_HIGH_TAX	(-30, 25); // Also -1 morale to units inside province with this taxrate;
 	
-	private double taxrate;
-	private int wealthgen;
+	private double taxRate;
+	private int wealthGen;
 		
 	private TaxLevel(int wealthgen, int taxpercentage) {
 		this.wealthgen = wealthgen;

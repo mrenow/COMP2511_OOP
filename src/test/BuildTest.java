@@ -11,23 +11,22 @@ import unsw.gloriaromanus.*;
 
 
 public class BuildTest {
-	public class UnitTest{
-	    @Before
-	    public void setupGame() {
-	    	
-	    }
-	    
-		
-		@Test
-	    public void blahTest(){
-	        assertEquals("a", "b");
-	        String s;
-	    }
-	    
-	    @Test
-	    public void blahTest2(){
-	        Unit u = new Unit();
-	        assertEquals(u.getNumTroops(), 50);
-	    }
-	}
+    GameController game;
+	@BeforeEach
+    public void setupGame() {
+    	game = new GameController(FactionType.ROMANS, FactionType.GAULS);
+    	game.buildInfrastructure(, infratype);
+    }
+    
+	@Test
+    public void blahTest(){
+        assertEquals("a", "b");
+        String s;
+    }
+    
+    @Test
+    public void blahTest2(){
+        Unit u = new Unit();
+        assertEquals(u.getNumTroops(), 50);
+    }
 }

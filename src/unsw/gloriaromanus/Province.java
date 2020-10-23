@@ -5,6 +5,8 @@ import java.util.List;
 public class Province {
 	public Faction getOwner() {return null;}
 	
+	public boolean isLandlocked() {return false;}
+	
 	public int getWealth() {return 0;}
 	
 	public String getName() {return null;}

@@ -21,7 +21,7 @@ enum ItemType{
 	private List<String> descriptions;
 	private List<Integer> costs;
 	private List<Integer> durations; // duration to train/build
-	private int maxlevel;
+	private int maxLevel;
 	 
 	// Mapping between string (name of attribute) and List of integers (attribute values for each level)
 	private Map<String, List<Object>> attributes; 
@@ -43,7 +43,7 @@ enum ItemType{
 		return durations.get(level);
 	}
 	public int getMaxLevel() {
-		return maxlevel;
+		return maxLevel;
 	}
 
 	public Object getAttribute(String name, int level) throws NoSuchElementException{	
@@ -51,9 +51,13 @@ enum ItemType{
 		if (list == null) {
 			throw new NoSuchElementException(this.name() + " has no attribute " + name);
 		}
-		if(level >= maxlevel) {
+		if(level >= maxLevel) {
 			throw new NoSuchElementException(
-					String.format("%s has max level %d, tried to access level %d", this.name(), this.maxlevel, level));
+					String.format("%s has max level %d, tried to access level %d",
+							this.name(),
+							this.maxLevel,
+							level)
+					);
 		}
 		return list.get(level);
 	}

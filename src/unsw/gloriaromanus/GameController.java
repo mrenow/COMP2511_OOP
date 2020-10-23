@@ -1,29 +1,56 @@
 package unsw.gloriaromanus;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.geojson.Point;
 
 public class GameController {
-	public GameController(FactionType ... factions) {
-		
+	private List<Faction> factionTurnOrder;
+	private List<Province> allProvinces;
+	private Map<Faction, Set<Province>> provinceOwnership;
+	private boolean[][] provinceAdjacencyMatrix; 
+	private Set<Province> landlockedProvinces; 
+	/**
+	 * Uses file contents to decide ownership. Turn order and factions decided by
+	 * the order in which factions appear in the file at <code>ownershipFilePath</code>.
+	 * primarily used for testing backend.
+	 * @param adjacencyFilePath
+	 * @param ownershipFilepath
+	 * @param landlockedFilepath
+	 */
+
+	public GameController(String adjacencyFilePath,
+			String landlockedFilepath, String ownershipFilepath) {
 	}
 	
+	/**
+	 * Uses default province allocation algorithm to decide ownership
+	 * Uses faction list order to determine turn order.
+	 * @param factions
+	 * @param adjacencyFilePath
+	 * @param landlockedFilePath
+	 */
+	public GameController(String adjacencyFilePath, String landlockedFilePath,
+			List<FactionType> factions) {
+	
+	}
 	public Faction getCurrentTurn() {return null;}
 	
 //	Constraints:
 //	UnitType must be in getMercenaries()
-	public void hireUnit(Province province, ItemType unittype) {}
+	public void hireUnit(Province province, ItemType unitType) {}
 	
 //	Constraints:
 //	ItemType must be in getTrainable()
 //	Free slots must be available
-	public void trainUnit (Province province, ItemType unittype) {}
+	public void trainUnit (Province province, ItemType unitType) {}
 	
 //	Constraints:
 //	ItemType must be in getBuildable()
 //	Free slots must be available
-	public void buildInfrastructure(Province province, ItemType infratype) {} // also upgrade
+	public void buildInfrastructure(Province province, ItemType infraType) {} // also upgrade
 	
 //	Constraints:
 //	InfrastructureEntity must be in getCurrentInfrastructure 
@@ -34,7 +61,7 @@ public class GameController {
 	public void cancelTraining(TrainingSlotEntry entry) {}
 	
 //	Constraints: None
-	public void setTax (Province province, TaxLevel taxlevel) {}
+	public void setTax (Province province, TaxLevel taxLevel) {}
 	
 //	Constraints:
 //	attacker.faction != defender.faction
@@ -56,7 +83,7 @@ public class GameController {
 /* Getters */
 	
 //	Called when a group of units is selected to determine which provinces to highlight
-	public List<Province> getDestinations(List<Unit> unitgroup){return null;}
+	public List<Province> getDestinations(List<Unit> unitGroup){return null;}
 	
 //	Called when highlighting provinces to attack
 	public List<Province> getAttackable(Province province){return null;}
