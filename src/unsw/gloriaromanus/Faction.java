@@ -8,6 +8,14 @@ import com.fasterxml.jackson.annotation.*;
 public class Faction {
 	private FactionType type;
 	private int gold;
+	
+	public Faction(FactionType type, int gold, List<Province> provinces) {
+		super();
+		this.type = type;
+		this.gold = gold;
+		this.provinces = provinces;
+	}
+
 	private List<Province> provinces;
 
 	public FactionType getType() {return type;}

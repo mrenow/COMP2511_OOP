@@ -12,6 +12,8 @@ public class GameController {
 	private Map<Faction, Set<Province>> provinceOwnership;
 	private boolean[][] provinceAdjacencyMatrix; 
 	private Set<Province> landlockedProvinces; 
+
+	
 	/**
 	 * Uses file contents to decide ownership. Turn order and factions decided by
 	 * the order in which factions appear in the file at <code>ownershipFilePath</code>.

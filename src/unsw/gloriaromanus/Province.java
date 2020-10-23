@@ -4,6 +4,22 @@ import java.util.List;
 import java.util.Set;
 
 public class Province {
+	private Faction owner;
+	private int buildingwealth;
+	private int townwealth;
+	private List<Unit> units; 
+	private TaxLevel taxrate;
+
+	
+	public Province(Faction owner, int buildingwealth, int townwealth, List<Unit> units, TaxLevel taxrate) {
+		super();
+		this.owner = owner;
+		this.buildingwealth = buildingwealth;
+		this.townwealth = townwealth;
+		this.units = units;
+		this.taxrate = taxrate;
+	}
+
 	public Faction getOwner() {return null;}
 	
 	public boolean isLandlocked() {return false;}
