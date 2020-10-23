@@ -1,8 +1,10 @@
 {
-  "Rome": [
-    "P1", "P2"
-  ],
-  "Gaul": [
-    "P3", "P4"
-  ]
+  "Rome": {
+	  "provinces":  ["P1", "P2" ],
+	  "gold" : 50
+  },
+  "Gaul": {
+	  "provinces" : [ "P3", "P4" ],
+	  "gold" : 50
+	 } 
 }
