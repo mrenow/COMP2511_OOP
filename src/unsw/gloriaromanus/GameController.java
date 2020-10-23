@@ -6,14 +6,23 @@ import java.util.Set;
 
 import org.geojson.Point;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParser.Feature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class GameController {
 	private List<Faction> factionTurnOrder;
 	private List<Province> allProvinces;
-	private Map<Faction, Set<Province>> provinceOwnership;
-	private boolean[][] provinceAdjacencyMatrix; 
-	private Set<Province> landlockedProvinces; 
-
+	private Set<Province> landlockedProvinces;
 	
+
+	public static GameController loadFromSave(String saveFilename) {
+		ObjectMapper om = new ObjectMapper();
+		
+		
+	}
+		
 	/**
 	 * Uses file contents to decide ownership. Turn order and factions decided by
 	 * the order in which factions appear in the file at <code>ownershipFilePath</code>.

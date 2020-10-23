@@ -2,7 +2,7 @@ package unsw.gloriaromanus;
 
 public enum TaxLevel {
 	LOW_TAX			(10, 10),
-	MEDIUM_TAX		(0, 15),
+	NORMAL_TAX		(0, 15),
 	HIGH_TAX		(-10, 20),
 	VERY_HIGH_TAX	(-30, 25); // Also -1 morale to units inside province with this taxrate;
 	
