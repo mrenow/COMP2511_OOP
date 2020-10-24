@@ -16,7 +16,7 @@ import unsw.gloriaromanus.*;
 public class BuildTest {
     GameController game;
 	@BeforeEach
-    public void setupGame() {
+    public void setupGame() throws GameInitializationException {
     	game = new GameController(
     			"src/test/test1adjacency.json",
     			"src/test/test1landlocked.json",

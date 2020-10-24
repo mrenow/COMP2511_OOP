@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class Faction {
 	public static final int STARTING_GOLD = 100;
@@ -18,14 +19,9 @@ public class Faction {
 	private int gold = 0;
 	private List<Province> provinces = new ArrayList<Province>();
 	
-	/**
-	 * Load constructor
-	 * @param type
-	 * @param gold
-	 * @param provinces
-	 */
 	@JsonCreator
 	private Faction() {};
+	
 	public Faction(	FactionType type,int gold,	List<Province> provinces) {
 		this.type = type;
 		this.gold = gold;
@@ -54,4 +50,17 @@ public class Faction {
 		return null;
 	}
 	
+	void takeProvince(Province p) {
+		p.getOwner().removeProvince(p);
+		p.changeOwner(this);
+		provinces.add(p);
+	}
+	
+	private void removeProvince(Province p) {
+		provinces.remove(p);
+	}
+	@Override
+	public String toString() {
+		return getTitle();
+	}
 }

@@ -1,10 +1,12 @@
-{
-  "Rome": {
-	  "provinces":  ["P1", "P2" ],
-	  "gold" : 50
-  },
-  "Gaul": {
-	  "provinces" : [ "P3", "P4" ],
-	  "gold" : 50
-	 } 
-}
+[
+	{
+		"type" : "ROME",
+		"provinceNames":  ["P1", "P2" ],
+	 	"gold" : 50
+	},
+  	{
+  		"type" : "GAUL",
+	  	"provinceNames" : [ "P3", "P4" ],
+	 	"gold" : 50
+	} 
+]

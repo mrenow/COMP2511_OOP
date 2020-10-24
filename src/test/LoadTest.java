@@ -21,7 +21,7 @@ import unsw.gloriaromanus.*;
 public class LoadTest {
     GameController game;
 	@BeforeEach
-    public void setupGame() {
+    public void setupGame() throws GameInitializationException{
     	game = new GameController(
     			"src/test/test1adjacency.json",
     			"src/test/test1landlocked.json",
@@ -29,7 +29,9 @@ public class LoadTest {
     }
     @Test
     public void testFactionSerialization(){
-
+    	TestUtil.assertCollectionAttributeEquals(List.of("P1","P2","P3","P4"), game.getProvinces(null), Province::getName);
+    	TestUtil.assertCollectionAttributeEquals(List.of("Rome", "Gaul"), game.getFactions(),
+    			Faction::getTitle);
     	
     }
 }

@@ -19,6 +19,7 @@ public class Province {
 	// Required, assigned in constructor
 	@JsonIgnore private String name; 
 
+	// Optional
 	private Faction owner = Faction.NO_ONE; 
 
 	private List<Province> adjacent = new ArrayList<Province>();
@@ -27,7 +28,7 @@ public class Province {
 	private int townwealth = 0;
 	private TaxLevel taxrate = TaxLevel.NORMAL_TAX;
 
-	private boolean isLandlocked = true;
+	private boolean isLandlocked = false;
 
 	private List<Unit> units = new ArrayList<Unit>(); 
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<BuildingSlotEntry>();
@@ -36,7 +37,6 @@ public class Province {
 	@JsonCreator
 	Province(
 			@JsonProperty("name") String name){
-		this.owner = owner;
 		this.name = name;
 	}
 
@@ -49,16 +49,28 @@ public class Province {
 		this.owner = owner;	
 		this.adjacent.addAll(adjacent);
 	}
+	/**
+	 * Should not be used outside setup
+	 */
+	void addConnection(Province p) {
+		this.adjacent.add(p);
+	}
+	/**
+	 * Should not be used outside setup
+	 */
+	void setLandlocked(boolean state) {
+		isLandlocked = state;
+	}
 
-	public Faction getOwner() {return null;}
+	public Faction getOwner() {return owner;}
 	
-	public boolean isLandlocked() {return false;}
+	public boolean isLandlocked() {return isLandlocked;}
 	
 	public List<Province> getAdjacent() {return new ArrayList<Province>(adjacent);}
 	
 	public int getWealth() {return 0;}
 	
-	public String getName() {return null;}
+	public String getName() {return name;}
 	
 	public TaxLevel getTaxLevel() {return null;}
 	
@@ -84,13 +96,31 @@ public class Province {
 //	Called when province training menu is opened
 	public List<ItemType> getTrainable(){return null;}
 	
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 	/**
-	 * Only used to setup the province.
+	 * Sets owner. If owner is different to previous, Item slots are cleared.
 	 */
-	void addConnection(Province p) {
-		this.adjacent.add(p);
+	void changeOwner(Faction owner) {
+		if(owner != this.owner) {
+			this.owner = owner;
+			onConquered();
+		}
 	}
-	void setOwner(Faction owner) {
-		this.owner = owner;
+	
+	/**
+	 * All state changes when province switches hands.
+	 * IMPORTANT: New units entering a province must only enter *after* this method is called.
+	 */
+	private void onConquered() {
+		buildingSlots.clear();
+		trainingSlots.clear();
+		units.clear();
+		taxrate = TaxLevel.NORMAL_TAX;
 	}
+
+	
 }

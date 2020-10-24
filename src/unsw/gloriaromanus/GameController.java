@@ -2,6 +2,8 @@ package unsw.gloriaromanus;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,13 +22,15 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import test.TestUtil;
+
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class GameController {
 	
-	private List<Faction> factionTurnOrder;
-	private List<Province> allProvinces;
+	private List<Faction> factionOrder;
+	private Collection<Province> allProvinces;
 	
-	private List<ItemType> currentMercenaries;
+	private List<ItemType> currentMercenaries = new ArrayList<ItemType>();
 	private int round = 0;
 	private int currentTurn = 0; // Must always be less than factionTurnOrder.size()
 	
@@ -42,39 +46,68 @@ public class GameController {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static GameController loadFromSave(String saveFilename) throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper om = new ObjectMapper();
-		return om.readValue(new File(saveFilename), GameController.class);
+	public static GameController loadFromSave(String saveFilename) throws GameInitializationException {
+		try{
+			return new ObjectMapper().readValue(new File(saveFilename), GameController.class);
+		}catch(Exception e) {
+			throw new GameInitializationException("Error while loading game");
+		}
+		
 	}
-	public void saveGame(String saveFilename) throws JsonGenerationException, JsonMappingException, IOException {
-		ObjectMapper om = new ObjectMapper();
-		om.writeValue(new File(saveFilename), this);
+	public void saveGame(String saveFilename) throws IOException {
+		new ObjectMapper().writeValue(new File(saveFilename), this);
 	}
 		
 	/**
 	 * Uses file contents to decide ownership. Turn order and factions decided by
 	 * the order in which factions appear in the file at <code>ownershipFilePath</code>.
 	 * primarily used for testing backend.
-	 * @param adjacencyFilePath
-	 * @param ownershipFilepath
-	 * @param landlockedFilepath
 	 */
-	public GameController(String adjacencyFilePath,
-			String landlockedFilePath, String ownershipFilePath) {
+	public GameController(String adjacencyFile,
+			String landlockedFile, String factionFile) throws GameInitializationException{
+		Map<String, Province> provinceMap;
+		try {
+			provinceMap = Parsing.readAdjacency(adjacencyFile);
+			Parsing.readLandlocked(landlockedFile, provinceMap);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new GameInitializationException("Error while constructing provinces");
+		}
 		
+		try {
+			this.factionOrder = Parsing.readFactions(factionFile, provinceMap);
+			this.allProvinces = provinceMap.values();
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new GameInitializationException("Error while constructing game from files");
+		}
 	}
 	
 	/**
 	 * Uses default province allocation algorithm to decide ownership
-	 * Uses faction list order to determine turn order.
-	 * @param factions
-	 * @param adjacencyFilePath
-	 * @param landlockedFilePath
+	 * Uses factionTypes list order to determine turn order.
 	 */
-	public GameController(String adjacencyFilePath, String landlockedFilePath,
-			List<FactionType> factions) {
-	
+	public GameController(String adjacencyFile, String landlockedFile,
+			List<FactionType> factionTypes) throws GameInitializationException{
+		Map<String, Province> provinceMap;
+		try {
+			provinceMap = Parsing.readAdjacency(adjacencyFile);
+			Parsing.readLandlocked(landlockedFile, provinceMap);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new GameInitializationException("Error while constructing provinces");
+		}
+		try {	
+			this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap);
+			this.allProvinces = provinceMap.values();
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new GameInitializationException("Error while constructing game from automatic allocation");
+		}
 	}
+
+	
+	
 	public Faction getCurrentTurn() {return null;}
 	
 //	Constraints:
@@ -130,10 +163,17 @@ public class GameController {
 //	Called when the mercenary hire menu is opened
 	public List<ItemType> getMercenaries(){return null;}
 	
-	public List<Faction> getFactions(){return null;}
+	public List<Faction> getFactions(){return new ArrayList<Faction>(factionOrder);}
 	
 //	returns provinces owned by a particular faction. Will return all provinces when Faction == null
-	public List<Province> getProvinces(Faction faction){return null;}
+	public Collection<Province> getProvinces(Faction faction){
+		if(faction != null) {
+			// TODO
+			return null;
+		}else {
+			return new ArrayList<Province>(allProvinces);
+		}
+	}
 	
 //	returns the province under the specified location
 	public Province getProvince(Point location) {return null;}
@@ -143,5 +183,5 @@ public class GameController {
 	
 //	Displayed on UI
 	public int getYear() {return 0;}
-
+		
 }
