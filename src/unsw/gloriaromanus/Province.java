@@ -17,9 +17,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class Province {
-	// Required, assigned in constructor
-	@JsonIgnore private String name; 
-
+	// Required
+	private String name; 
+	
 	// Optional
 	@JsonIdentityReference(alwaysAsId = true)
 	private Faction owner = Faction.NO_ONE; 
@@ -38,10 +38,8 @@ public class Province {
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
 
 	@JsonCreator
-	Province(
-			@JsonProperty("name") String name){
-		this.name = name;
-	}
+	Province(){}
+
 	/*
 	 * Used for init only.
 	 */
@@ -77,7 +75,7 @@ public class Province {
 	
 	public boolean isLandlocked() {return isLandlocked;}
 	
-	public List<Province> getAdjacent() {return new ArrayList<Province>(adjacent);}
+	public List<Province> getAdjacent() {return new ArrayList<>(adjacent);}
 	
 	public int getWealth() {return 0;}
 	

@@ -3,16 +3,16 @@ package unsw.gloriaromanus;
 /**
  * Thrown when an unhandlable exception occurs while constructing a GameController
  */
-public class GameInitializationException extends Exception{
+public class DataInitializationException extends Exception{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public GameInitializationException(String message) {
+	public DataInitializationException(String message) {
 		super(message);
 	}
-	public GameInitializationException(String message, Exception e) {
+	public DataInitializationException(String message, Exception e) {
 		super(message, e);
 	}
 

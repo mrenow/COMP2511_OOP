@@ -64,8 +64,8 @@ public enum ItemType{
 							SOURCE_DIR,
 							this.name().toLowerCase())
 					);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -73,8 +73,9 @@ public enum ItemType{
 	private ItemType(String filename) {
 		try {
 			constructFromFile(filename);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -84,11 +85,11 @@ public enum ItemType{
 	/**
 	 * Fills in the enum attributes and attributes list.
 	 * @param filename
-	 * @throws IOException 
+	 * @throws Exception 
 	 * @throws ExceptionInInitializerError if name, desc, cost,
 	 * duration or maxlvl is missing from the file
 	 */
-	private void constructFromFile(String filename) throws IOException{
+	private void constructFromFile(String filename) throws Exception{
 		ObjectMapper om = new ObjectMapper();
 		JsonNode root = om.readTree(new File(filename));
 		
@@ -111,10 +112,6 @@ public enum ItemType{
 				throw new IOException(String.format("%s of %s had wrong number of elements.", nodeName, this.name()));
 			}
 		}
-		
-		// Make assertions:
-		
-		
 	}
 	private <T> List<T> makeConstantList(T data, int size){
 		List<T> out = new ArrayList<T>();
@@ -124,9 +121,18 @@ public enum ItemType{
  		return out;
 	}
 	
-	private <T> List<T> generateLevelList(ObjectMapper om, JsonNode node) throws JsonMappingException, JsonProcessingException{
+	private <T> List<T> generateLevelList(ObjectMapper om, JsonNode node) throws Exception{
 		if(node.isArray()) {
-			return om.readValue(node.toString(), new TypeReference<List<T>>(){});			
+			List<T> out = om.readValue(node.toString(), new TypeReference<List<T>>(){});
+			if (out.size() != maxLevel) {
+				throw new DataInitializationException(
+						String.format("Error while parsing %s, to many elements in Json String: %s",
+								this.name(),
+								node.toString()
+								)
+						);
+			}
+			return out;
 		}else {
 			return makeConstantList(om.readValue(node.toString(), new TypeReference<T>() {}), this.maxLevel);
 		}
