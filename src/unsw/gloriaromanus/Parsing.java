@@ -14,34 +14,31 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+ * Does all jobs for parsing game state
+ * 
+ */
 public class Parsing {
 	// Constructs provinces
 	public static Map<String, Province> readAdjacency(String provinceFile) throws JsonProcessingException, IOException {
-		Map<String, Province> allProvinces = new HashMap<String, Province>();
+		Map<String, Province> provinceMap= new HashMap<>();
 		ObjectMapper om = new ObjectMapper();
-		JsonNode root = om.readTree(new File(provinceFile));
-		// First construct all provinces 
-		root.fieldNames()
-		.forEachRemaining((name)->
-			allProvinces.put(name, new Province(name))
-			);
-		
-		// Then construct a connection for each adjacent province
-		for(Entry<String, Province> provinceEntry : allProvinces.entrySet()) {
-			// Iterate through Json
-			for (Iterator<String> adjacencyIter = root.get(provinceEntry.getKey()).fieldNames(); adjacencyIter.hasNext();) {
-				String adjacentName = adjacencyIter.next(); 
-				if(root.get(adjacentName).asBoolean()) {
-					provinceEntry.getValue().addConnection(allProvinces.get(adjacentName));			
-				}	
-			}
-			
+		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		List<Province> allProvinces = om.readValue(new File(provinceFile), new TypeReference<List<Province>>() {});
+		int i = 0;
+		for (JsonNode node : om.readTree(new File(provinceFile))) {
+			allProvinces.get(i).assignName(node.get("@id").asText());
+			i++;
 		}
-		return allProvinces;
+		System.out.println(allProvinces);
+		for (Province p : allProvinces) {
+			provinceMap.put(p.getName(), p);
+		}
+		return provinceMap;
 	}
 	public static void readLandlocked(String landlockedFile, Map<String, Province> allProvinces) throws JsonProcessingException, IOException {
 		ObjectMapper om = new ObjectMapper();
@@ -54,6 +51,7 @@ public class Parsing {
 	public static List<Faction> readFactions(String factionFile, Map<String, Province> allProvinces) throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper om = new ObjectMapper();
 		JsonNode root = om.readTree(new File(factionFile));
+		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		// Construct factions without provinces
 		List<Faction> factionOrder = om.readValue(new File(factionFile), new TypeReference<List<Faction>>() {});
 		// Province stuff

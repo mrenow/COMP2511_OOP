@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class Faction {
 	public static final int STARTING_GOLD = 100;
@@ -17,6 +16,7 @@ public class Faction {
 	
 	private FactionType type = FactionType.ROME;
 	private int gold = 0;
+	@JsonIdentityReference(alwaysAsId = true)
 	private List<Province> provinces = new ArrayList<Province>();
 	
 	@JsonCreator

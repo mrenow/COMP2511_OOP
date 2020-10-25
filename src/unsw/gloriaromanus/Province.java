@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -20,13 +21,15 @@ public class Province {
 	@JsonIgnore private String name; 
 
 	// Optional
+	@JsonIdentityReference(alwaysAsId = true)
 	private Faction owner = Faction.NO_ONE; 
 
+	@JsonIdentityReference(alwaysAsId = true)
 	private List<Province> adjacent = new ArrayList<Province>();
 	
-	private int buildingwealth = 0;
-	private int townwealth = 0;
-	private TaxLevel taxrate = TaxLevel.NORMAL_TAX;
+	private int buildingWealth = 0;
+	private int townWealth = 0;
+	private TaxLevel taxRate = TaxLevel.NORMAL_TAX;
 
 	private boolean isLandlocked = false;
 
@@ -39,7 +42,15 @@ public class Province {
 			@JsonProperty("name") String name){
 		this.name = name;
 	}
-
+	/*
+	 * Used for init only.
+	 */
+	void assignName(String name){
+		if(this.name == null) {
+			this.name = name;
+		}
+	}
+	
 	/**
 	 * Called during game initialization.
 	 * @return
@@ -119,7 +130,7 @@ public class Province {
 		buildingSlots.clear();
 		trainingSlots.clear();
 		units.clear();
-		taxrate = TaxLevel.NORMAL_TAX;
+		taxRate = TaxLevel.NORMAL_TAX;
 	}
 
 	

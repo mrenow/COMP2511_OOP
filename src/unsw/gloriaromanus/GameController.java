@@ -22,13 +22,11 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import test.TestUtil;
-
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class GameController {
-	
-	private List<Faction> factionOrder;
+
 	private Collection<Province> allProvinces;
+	private List<Faction> factionOrder;
 	
 	private List<ItemType> currentMercenaries = new ArrayList<ItemType>();
 	private int round = 0;
@@ -50,7 +48,9 @@ public class GameController {
 		try{
 			return new ObjectMapper().readValue(new File(saveFilename), GameController.class);
 		}catch(Exception e) {
-			throw new GameInitializationException("Error while loading game");
+			e.printStackTrace();
+			throw new GameInitializationException("Error while loading game:\n" + 
+					e.getMessage());
 		}
 		
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -26,6 +27,7 @@ public class Unit {
 	
 	private int maxMovPoints;
 	private int movPoints;
+	@JsonIdentityReference(alwaysAsId = true)
 	private Province province;
 	private boolean isMercenary;
 	private int health;
