@@ -25,7 +25,7 @@ public class Province {
 	private Faction owner = Faction.NO_ONE; 
 
 	@JsonIdentityReference(alwaysAsId = true)
-	private List<Province> adjacent = new ArrayList<Province>();
+	private List<Province> adjacent = new ArrayList<>();
 	
 	private int buildingWealth = 0;
 	private int townWealth = 0;
@@ -33,9 +33,9 @@ public class Province {
 
 	private boolean isLandlocked = false;
 
-	private List<Unit> units;
-	private List<BuildingSlotEntry> buildingSlots;
-	private List<TrainingSlotEntry> trainingSlots;
+	private List<Unit> units = new ArrayList<>();
+	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
+	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
 
 	@JsonCreator
 	Province(
@@ -59,12 +59,6 @@ public class Province {
 		this.isLandlocked = isLandlocked;
 		this.owner = owner;	
 		this.adjacent.addAll(adjacent);
-
-		//create unit list
-		this.units = new ArrayList<Unit>();
-		this.buildingSlots = new ArrayList<BuildingSlotEntry>();
-		this.trainingSlots = new ArrayList<TrainingSlotEntry>();
-	
 	}
 	/**
 	 * Should not be used outside setup
@@ -113,7 +107,7 @@ public class Province {
 //	Called when province training menu is opened
 	public List<ItemType> getTrainable(){return null;}
 
-	public void moveUnits(List<Unit> units){this.units.add(units);}
+	//public void moveUnits(List<Unit> units){this.units.add(units);}
 	
 	@Override
 	public String toString() {

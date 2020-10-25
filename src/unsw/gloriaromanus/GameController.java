@@ -49,8 +49,7 @@ public class GameController {
 			return new ObjectMapper().readValue(new File(saveFilename), GameController.class);
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new GameInitializationException("Error while loading game:\n" + 
-					e.getMessage());
+			throw new GameInitializationException("Error while loading game", e);
 		}
 		
 	}
@@ -71,7 +70,7 @@ public class GameController {
 			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new GameInitializationException("Error while constructing provinces");
+			throw new GameInitializationException("Error while constructing provinces", e);
 		}
 		
 		try {
@@ -79,7 +78,7 @@ public class GameController {
 			this.allProvinces = provinceMap.values();
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new GameInitializationException("Error while constructing game from files");
+			throw new GameInitializationException("Error while constructing game from files", e);
 		}
 	}
 	
@@ -95,14 +94,14 @@ public class GameController {
 			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new GameInitializationException("Error while constructing provinces");
+			throw new GameInitializationException("Error while constructing provinces", e);
 		}
 		try {	
 			this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap);
 			this.allProvinces = provinceMap.values();
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new GameInitializationException("Error while constructing game from automatic allocation");
+			throw new GameInitializationException("Error while constructing game from automatic allocation", e);
 		}
 	}
 
