@@ -14,8 +14,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="name")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY,
+setterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, getterVisibility = Visibility.NONE)
 public class Province {
 	// Required
 	private String name; 

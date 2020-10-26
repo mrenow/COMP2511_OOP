@@ -1,18 +1,18 @@
 [
     {
-    	"@id" : "P1",
+    	"name" : "P1",
         "adjacent" : ["P2" , "P4"]
     },
     {    	
-    	"@id" : "P2",
+    	"name" : "P2",
         "adjacent" : ["P1" , "P2"]
     },
     {    	
-    	"@id" : "P3",
+    	"name" : "P3",
         "adjacent" : ["P2" , "P4"]
     },
     {    
-    	"@id" : "P4",
+    	"name" : "P4",
         "adjacent" : ["P1" , "P2"]
     }   
 ]

@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * 
  */
 @JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY,
+setterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, getterVisibility = Visibility.NONE)
 public class BattleCharacteristic {
 	
 	double armour = 0;

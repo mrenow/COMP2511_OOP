@@ -1,214 +1,214 @@
 [
     {
-        "@id" : "Britannia",
+        "name" : "Britannia",
         "adjacent" : ["Lugdunensis"]
     },
     {
-        "@id" : "Lugdunensis",
+        "name" : "Lugdunensis",
         "adjacent" : ["Britannia", "Belgica", "Aquitania", "Germania Superior", "Narbonensis"]
     },
     {
-        "@id" : "Belgica",
+        "name" : "Belgica",
         "adjacent" : ["Lugdunensis", "Germania Inferior", "Germania Superior"]
     },
     {
-        "@id" : "Germania Inferior",
+        "name" : "Germania Inferior",
         "adjacent" : ["Belgica", "Germania Superior"]
     },
     {
-        "@id" : "Aquitania",
+        "name" : "Aquitania",
         "adjacent" : ["Lugdunensis", "Narbonensis", "Tarraconensis"]
     },
     {
-        "@id" : "Germania Superior",
+        "name" : "Germania Superior",
         "adjacent" : ["Lugdunensis", "Belgica", "Germania Inferior", "Alpes Graiae et Poeninae", "Narbonensis", "Raetia"]
     },
     {
-        "@id" : "Alpes Graiae et Poeninae",
+        "name" : "Alpes Graiae et Poeninae",
         "adjacent" : ["Germania Superior", "XI", "Alpes Cottiae", "Narbonensis", "Raetia"]
     },
     {
-        "@id" : "XI",
+        "name" : "XI",
         "adjacent" : ["Alpes Graiae et Poeninae", "Alpes Cottiae", "IX", "Raetia", "Noricum", "X", "VIII"]
     },
     {
-        "@id" : "Alpes Cottiae",
+        "name" : "Alpes Cottiae",
         "adjacent" : ["Alpes Graiae et Poeninae", "XI", "Alpes Maritimae", "IX", "Narbonensis"]
     },
     {
-        "@id" : "Alpes Maritimae",
+        "name" : "Alpes Maritimae",
         "adjacent" : ["Alpes Cottiae", "IX", "Narbonensis"]
     },
     {
-        "@id" : "IX",
+        "name" : "IX",
         "adjacent" : ["XI", "Alpes Cottiae", "Alpes Maritimae", "VIII", "VII"]
     },
     {
-        "@id" : "Narbonensis",
+        "name" : "Narbonensis",
         "adjacent" : ["Lugdunensis", "Aquitania", "Germania Superior", "Alpes Graiae et Poeninae", "Alpes Cottiae", "Alpes Maritimae", "Tarraconensis"]
     },
     {
-        "@id" : "Tarraconensis",
+        "name" : "Tarraconensis",
         "adjacent" : ["Aquitania", "Narbonensis", "Baetica", "Lusitania"]
     },
     {
-        "@id" : "Baetica",
+        "name" : "Baetica",
         "adjacent" : ["Tarraconensis", "Lusitania", "Mauretania Tingitana"]
     },
     {
-        "@id" : "Lusitania",
+        "name" : "Lusitania",
         "adjacent" : ["Tarraconensis", "Baetica"]
     },
     {
-        "@id" : "Raetia",
+        "name" : "Raetia",
         "adjacent" : ["Germania Superior", "Alpes Graiae et Poeninae", "XI", "Noricum"]
     },
     {
-        "@id" : "Noricum",
+        "name" : "Noricum",
         "adjacent" : ["XI", "Raetia", "X", "Pannonia Superior"]
     },
     {
-        "@id" : "X",
+        "name" : "X",
         "adjacent" : ["XI", "Noricum", "VIII", "Pannonia Superior", "Dalmatia"]
     },
     {
-        "@id" : "VIII",
+        "name" : "VIII",
         "adjacent" : ["XI", "IX", "X", "VII", "VI"]
     },
     {
-        "@id" : "VII",
+        "name" : "VII",
         "adjacent" : ["IX", "VIII", "VI", "IV", "I", "Sardinia et Corsica"]
     },
     {
-        "@id" : "VI",
+        "name" : "VI",
         "adjacent" : ["VIII", "VII", "IV", "V"]
     },
     {
-        "@id" : "IV",
+        "name" : "IV",
         "adjacent" : ["VII", "VI", "V", "I", "II"]
     },
     {
-        "@id" : "V",
+        "name" : "V",
         "adjacent" : ["VI", "IV"]
     },
     {
-        "@id" : "I",
+        "name" : "I",
         "adjacent" : ["VII", "IV", "III", "II"]
     },
     {
-        "@id" : "III",
+        "name" : "III",
         "adjacent" : ["I", "Sicilia", "II"]
     },
     {
-        "@id" : "Sicilia",
+        "name" : "Sicilia",
         "adjacent" : ["III", "Africa Proconsularis"]
     },
     {
-        "@id" : "Pannonia Superior",
+        "name" : "Pannonia Superior",
         "adjacent" : ["Noricum", "X", "Pannonia Inferior", "Dalmatia"]
     },
     {
-        "@id" : "Pannonia Inferior",
+        "name" : "Pannonia Inferior",
         "adjacent" : ["Pannonia Superior", "Dalmatia", "Moesia Superior"]
     },
     {
-        "@id" : "Dalmatia",
+        "name" : "Dalmatia",
         "adjacent" : ["X", "Pannonia Superior", "Pannonia Inferior", "Moesia Superior", "Macedonia"]
     },
     {
-        "@id" : "II",
+        "name" : "II",
         "adjacent" : ["IV", "I", "III"]
     },
     {
-        "@id" : "Sardinia et Corsica",
+        "name" : "Sardinia et Corsica",
         "adjacent" : ["VII"]
     },
     {
-        "@id" : "Moesia Superior",
+        "name" : "Moesia Superior",
         "adjacent" : ["Pannonia Inferior", "Dalmatia", "Dacia", "Moesia Inferior", "Thracia", "Macedonia"]
     },
     {
-        "@id" : "Dacia",
+        "name" : "Dacia",
         "adjacent" : ["Moesia Superior", "Moesia Inferior"]
     },
     {
-        "@id" : "Moesia Inferior",
+        "name" : "Moesia Inferior",
         "adjacent" : ["Moesia Superior", "Dacia", "Thracia"]
     },
     {
-        "@id" : "Thracia",
+        "name" : "Thracia",
         "adjacent" : ["Moesia Superior", "Moesia Inferior", "Macedonia", "Bithynia et Pontus"]
     },
     {
-        "@id" : "Macedonia",
+        "name" : "Macedonia",
         "adjacent" : ["Dalmatia", "Moesia Superior", "Thracia", "Belgica7"]
     },
     {
-        "@id" : "Achaia",
+        "name" : "Achaia",
         "adjacent" : ["Macedonia"]
     },
     {
-        "@id" : "Bithynia et Pontus",
+        "name" : "Bithynia et Pontus",
         "adjacent" : ["Thracia", "Galatia et Cappadocia", "Asia"]
     },
     {
-        "@id" : "Cilicia",
+        "name" : "Cilicia",
         "adjacent" : ["Cyprus", "Syria", "Galatia et Cappadocia", "Lycia et Pamphylia"]
     },
     {
-        "@id" : "Creta et Cyrene",
+        "name" : "Creta et Cyrene",
         "adjacent" : ["Aegyptus", "Africa Proconsularis"]
     },
     {
-        "@id" : "Cyprus",
+        "name" : "Cyprus",
         "adjacent" : ["Cilicia"]
     },
     {
-        "@id" : "Aegyptus",
+        "name" : "Aegyptus",
         "adjacent" : ["Creta et Cyrene", "Arabia"]
     },
     {
-        "@id" : "Arabia",
+        "name" : "Arabia",
         "adjacent" : ["Aegyptus", "Iudaea", "Syria"]
     },
     {
-        "@id" : "Iudaea",
+        "name" : "Iudaea",
         "adjacent" : ["Arabia", "Syria"]
     },
     {
-        "@id" : "Syria",
+        "name" : "Syria",
         "adjacent" : ["Cilicia", "Arabia", "Iudaea", "Galatia et Cappadocia", "Armenia Mesopotamia"]
     },
     {
-        "@id" : "Africa Proconsularis",
+        "name" : "Africa Proconsularis",
         "adjacent" : ["Sicilia", "Creta et Cyrene", "Numidia"]
     },
     {
-        "@id" : "Numidia",
+        "name" : "Numidia",
         "adjacent" : ["Africa Proconsularis", "Mauretania Caesariensis"]
     },
     {
-        "@id" : "Mauretania Caesariensis",
+        "name" : "Mauretania Caesariensis",
         "adjacent" : ["Numidia", "Mauretania Tingitana"]
     },
     {
-        "@id" : "Mauretania Tingitana",
+        "name" : "Mauretania Tingitana",
         "adjacent" : ["Baetica", "Mauretania Caesariensis"]
     },
     {
-        "@id" : "Galatia et Cappadocia",
+        "name" : "Galatia et Cappadocia",
         "adjacent" : ["Bithynia et Pontus", "Cilicia", "Syria", "Lycia et Pamphylia", "Asia", "Armenia Mesopotamia"]
     },
     {
-        "@id" : "Lycia et Pamphylia",
+        "name" : "Lycia et Pamphylia",
         "adjacent" : ["Cilicia", "Galatia et Cappadocia", "Asia"]
     },
     {
-        "@id" : "Asia",
+        "name" : "Asia",
         "adjacent" : ["Bithynia et Pontus", "Galatia et Cappadocia", "Lycia et Pamphylia"]
     },
     {
-        "@id" : "Armenia Mesopotamia",
+        "name" : "Armenia Mesopotamia",
         "adjacent" : ["Syria", "Galatia et Cappadocia"]
     }
 ]

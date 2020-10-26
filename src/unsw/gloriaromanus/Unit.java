@@ -18,8 +18,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * 
  * current version represents a heavy infantry unit (almost no range, decent armour and morale)
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY,
+setterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, getterVisibility = Visibility.NONE)
 public class Unit {
 	private ItemType type = ItemType.TEST_TROOP;
 	private BattleCharacteristic baseCharacteristic;

@@ -9,12 +9,10 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 /**
  * Identifies a battle modifying strategy
- * @param e
+ * Probably going to change this a lot yikes
+ * @param e,
  * @return
  */
-
-	
-	
 public enum BattleModifier {
 	//
 	DRUIDIC_FERVOUR{

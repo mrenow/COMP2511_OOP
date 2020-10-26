@@ -29,11 +29,7 @@ public class Parsing {
 		ObjectMapper om = new ObjectMapper();
 		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		List<Province> allProvinces = om.readValue(new File(provinceFile), new TypeReference<List<Province>>() {});
-		int i = 0;
-		for (JsonNode node : om.readTree(new File(provinceFile))) {
-			allProvinces.get(i).assignName(node.get("@id").asText());
-			i++;
-		}
+
 		System.out.println(allProvinces);
 		for (Province p : allProvinces) {
 			provinceMap.put(p.getName(), p);
