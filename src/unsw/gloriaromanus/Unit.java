@@ -1,5 +1,6 @@
 package unsw.gloriaromanus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -31,6 +32,42 @@ public class Unit {
 	private Province province;
 	private boolean isMercenary;
 	private int health;
+
+	public ItemType getType() {
+		return type;
+	}
+
+	public BattleCharacteristic getBaseCharacteristic() {
+		return baseCharacteristic;
+	}
+
+	public List<BattleModifier> getSupportModifiers() {
+		return new ArrayList<>(supportModifiers);
+	}
+
+	public List<BattleModifier> getEngagementModifiers() {
+		return new ArrayList<>(engagementModifiers);
+	}
+
+	public int getMaxMovPoints() {
+		return maxMovPoints;
+	}
+
+	public int getMovPoints() {
+		return movPoints;
+	}
+
+	public Province getProvince() {
+		return province;
+	}
+
+	public boolean isMercenary() {
+		return isMercenary;
+	}
+
+	public int getHealth() {
+		return health;
+	}
 
 	@JsonCreator
 	public Unit() {}

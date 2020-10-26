@@ -38,7 +38,11 @@ public class Province {
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
 
 	@JsonCreator
-	Province(){}
+	private Province(){
+		
+		
+		
+	}
 
 	/*
 	 * Used for init only.
