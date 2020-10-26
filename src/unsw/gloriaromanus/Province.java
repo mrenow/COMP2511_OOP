@@ -31,7 +31,7 @@ public class Province {
 	
 	// Generated every turn
 	private int townWealth = 0;
-	private TaxLevel taxRate = TaxLevel.NORMAL_TAX;
+	private TaxLevel taxLevel = TaxLevel.NORMAL_TAX;
 
 	private boolean isLandlocked = false;
 
@@ -143,7 +143,11 @@ public class Province {
 		buildingSlots.clear();
 		trainingSlots.clear();
 		units.clear();
-		taxRate = TaxLevel.NORMAL_TAX;
+		taxLevel = TaxLevel.NORMAL_TAX;
+	}
+
+	void setTaxLevel(TaxLevel taxLevel) {
+		this.taxLevel = taxLevel;
 	}
 	
 }

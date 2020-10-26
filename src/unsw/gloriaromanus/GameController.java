@@ -2,11 +2,14 @@ package unsw.gloriaromanus;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 import org.geojson.Point;
 
@@ -107,42 +110,104 @@ public class GameController {
 	}
 
 	
-	/**
-	 * Gets the faction cur
-	 * @return
-	 */
-	public Faction getCurrentTurn() {return null;}
+	public Faction getCurrentTurn() {
+		return this.factionOrder.get(this.currentTurn);
+	}
 	
 //	Constraints:
 //	UnitType must be in getMercenaries()
-	public void hireUnit(Province province, ItemType unitType) {}
+	public void hireUnit(Province province, ItemType unitType) {
+		Faction currFaction = this.factionOrder.get(this.currentTurn);
+		int level = 0;
+		//TODO need create a mercenaries
+		Unit unit = new Unit();
+
+		int cost = unitType.getCost(level);
+		int gold = currFaction.getGold();
+		if (gold<cost) {
+			//TODO cant hire: not enought gold
+		} else {
+			// TODO create a hireFunc in province to complete here
+			// province.hireUnit(unit);
+		}
+	}
 	
 //	Constraints:
 //	ItemType must be in getTrainable()
 //	Free slots must be available
-	public void trainUnit (Province province, ItemType unitType) {}
+	public void trainUnit (Province province, ItemType unitType) {
+		//TODO create a unit with unitType
+		List<ItemType> trainable = province.getTrainable();
+		if (trainable.contains(unitType)) {
+			// TODO train Unit
+		} else {
+			// TODO fail to train unit
+		}
+	}
 	
 //	Constraints:
 //	ItemType must be in getBuildable()
 //	Free slots must be available
-	public void buildInfrastructure(Province province, ItemType infraType) {} // also upgrade
+	public void buildInfrastructure(Province province, ItemType infraType) {
+		if (province.getBuildable().contains(infraType)) {
+			//can be build
+			// TODO :add build to building queue #func in province
+			
+			// province.build();
+		} else {
+			//cannot build
+			// TODO :print to terminal cannot bulid
+		}
+		// should return the entry?
+	} // also upgrade
 	
 //	Constraints:
 //	InfrastructureEntity must be in getCurrentInfrastructure 
-	public void cancelInfrastructure(BuildingSlotEntry entry) {}
+	public void cancelInfrastructure(BuildingSlotEntry entry) {
+		Province province = entry.getProvince();
+		province.getCurrentConstruction().remove(entry);
+	}
 	
 //	Constraints:
 //	TrainingEntity must be in getCurrentTraining
-	public void cancelTraining(TrainingSlotEntry entry) {}
+	public void cancelTraining(TrainingSlotEntry entry) {
+		Province province = entry.getProvince();
+		province.getCurrentTraining().remove(entry);
+	}
 	
 //	Constraints: None
-	public void setTax (Province province, TaxLevel taxLevel) {}
+	public void setTax (Province province, TaxLevel taxLevel) {
+		province.setTaxLevel(taxLevel);
+	}
 	
+	/**
+	 * select units in a province
+	 * @param province
+	 * @param units
+	 * @return true if province owner make select, false for else
+	 */
+	public boolean selectUnits(Province province, List<Unit> units){
+		//find out who is selecting
+		Faction currFaction = this.factionOrder.get(this.currentTurn);
+
+		if(!currFaction.getProvinces().contains(province)){
+			return false;
+		} else {
+			//TODO :how to store select units
+			Faction faction;
+			return false;//TODO return just keeping the compiler happy
+		}
+	}
 //	Constraints:
 //	attacker.faction != defender.faction
 //	Province.adjacent(attacker, defender)
 	public AttackInfo attack (Province attacker, Province defender) {return null;}
 	
+
+	public AttackInfo invade(List<Unit>attackers,List<Unit> defenders){
+		
+		return null;
+	}
 //	Constraints:
 //	destination from getDestinations()
 //	units.province is invariant
@@ -153,7 +218,9 @@ public class GameController {
 	public VictoryInfo endTurn() {return null;}
 	
 //	returns non-null VictoryInfo if the player ending their turn has won.
-	public VictoryInfo checkVictory() {return null;}
+	public VictoryInfo checkVictory() {
+		return null;
+	}
 	
 /* Getters */
 	
