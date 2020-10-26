@@ -5,6 +5,6 @@
 	"costs" : [10, 20, 30],
 	"durations" : [2,2,3],
 	
-	"buildingWealth" : 10,
-	"weatlhGen" : 20
+	"buildingWealth" : [10, 40],
+	"wealthGen" : [20, 30]
 }

@@ -1,0 +1,29 @@
+{
+  "allProvinces" : [ {
+    "name" : "P1",
+    "owner" : "ROME",
+    "townWealth" : 100,
+    "taxLevel" : "LOW_TAX"
+  }, {
+    "name" : "P2",
+    "owner" : "ROME",
+    "townWealth" : 100,
+    "taxLevel" : "NORMAL_TAX"
+  }, {
+    "name" : "P3",
+    "owner" : "ROME",
+    "townWealth" : 100,
+    "taxLevel" : "HIGH_TAX"
+  }, {
+    "name" : "P4",
+    "owner" : "ROME",
+    "townWealth" : 100,
+    "taxLevel" : "VERY_HIGH_TAX"
+  } ],
+  
+  "factionOrder" : [ {
+    "type" : "ROME",
+    "gold" : 100,
+    "provinces" : [ "P1", "P2" , "P3", "P4"]
+  } ]
+}
