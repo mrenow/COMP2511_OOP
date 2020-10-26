@@ -9,8 +9,6 @@ import java.util.List;
  */
 public class EngagementData {
 	public List<Unit>[] armies;
-	// Controls which unit will be damaged.
-	// DO NOT USE FOR ANYTHING ELSE or unexpected results may occur.
 	public Unit[] units; 
 	public BattleCharacteristic[] unitCharacteristics;
 }

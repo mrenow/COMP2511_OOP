@@ -39,10 +39,7 @@ public class GameController {
 	 * Does what it says on the can.
 	 * We try to fill in as many values as we can as defaults so that we can construct sparse, clear testing files.
 	 * @param saveFilename
-	 * @return
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
+	 * @return Game from save file
 	 */
 	public static GameController loadFromSave(String saveFilename) throws DataInitializationException {
 		try{
@@ -53,6 +50,9 @@ public class GameController {
 		}
 		
 	}
+	/**
+	 * Saves game in human readable json
+	 */
 	public void saveGame(String saveFilename) throws IOException {
 		ObjectMapper om = new ObjectMapper();
 		om.writerWithDefaultPrettyPrinter().writeValue(new File(saveFilename), this);
@@ -107,7 +107,10 @@ public class GameController {
 	}
 
 	
-	
+	/**
+	 * Gets the faction cur
+	 * @return
+	 */
 	public Faction getCurrentTurn() {return null;}
 	
 //	Constraints:

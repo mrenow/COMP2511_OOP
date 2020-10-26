@@ -19,7 +19,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//Represents a queueable task for a province that takes duration turns to complete
+/**
+ * Represents a queueable task for a province that takes <code>duration</code>turns to complete
+ * @author ezra
+ *
+ */
 public enum ItemType{
 	// enum potential values
 	// infrastructure
@@ -138,20 +142,48 @@ public enum ItemType{
 			return makeConstantList(om.readValue(node.toString(), new TypeReference<T>() {}), this.maxLevel);
 		}
 	}
-	
+	/**
+	 * Gets item description for the given level. This will be displayed on the UI.
+	 * @param level
+	 * @return
+	 */
 	public String getDescription(int level) {
 		return descriptions.get(level);
 	}
-	
+
+	/**
+	 * Gets item description for the given level. This will be displayed on the UI.
+	 * @param level
+	 * @return
+	 */
 	public String getName(int level) {
 		return names.get(level);
 	}
+
+	/**
+	 * Gets item description for the given level. This will be displayed on the UI.
+	 * @param level
+	 * @return
+	 */
 	public int getCost(int level) {
 		return costs.get(level);
 	}
+
+	/**
+	 * Gets the number of turns this item will take to complete for the given level.
+	 * This will be displayed on the UI, and also passedInto the ItemEntry
+	 * @param level
+	 * @return
+	 */
 	public int getDuration(int level) {
 		return durations.get(level);
 	}
+
+	/**
+	 * Gets the maximum level of this item.
+	 * @param level
+	 * @return
+	 */
 	public int getMaxLevel() {
 		return maxLevel;
 	}

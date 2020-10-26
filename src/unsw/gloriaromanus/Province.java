@@ -27,7 +27,9 @@ public class Province {
 	@JsonIdentityReference(alwaysAsId = true)
 	private List<Province> adjacent = new ArrayList<>();
 	
-	private int buildingWealth = 0;
+	private List<Infrastructure> buildings = new ArrayList<>();
+	
+	// Generated every turn
 	private int townWealth = 0;
 	private TaxLevel taxRate = TaxLevel.NORMAL_TAX;
 
@@ -36,13 +38,9 @@ public class Province {
 	private List<Unit> units = new ArrayList<>();
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
-
+	
 	@JsonCreator
-	private Province(){
-		
-		
-		
-	}
+	private Province(){}
 
 	/*
 	 * Used for init only.
@@ -91,6 +89,17 @@ public class Province {
 	
 	public int getInfrastructureSlots() {return 0;}
 	
+	public int buildingWealth() {
+		return 0;
+	}
+	
+	public int getTownWealth() {
+		return 0;
+	}
+	public int getTotalWealth() {
+		return 0;
+	}
+	
 //	Ordered list corresponding to training slots
 	public List<TrainingSlotEntry> getCurrentTraining(){return null;}
 	
@@ -136,6 +145,5 @@ public class Province {
 		units.clear();
 		taxRate = TaxLevel.NORMAL_TAX;
 	}
-
 	
 }
