@@ -2,11 +2,11 @@
 	{
 		"type" : "ROME",
 		"provinceNames":  ["P1", "P2" ],
-	 	"gold" : 100
+	 	"gold" : 50
 	},
   	{
   		"type" : "GAUL",
 	  	"provinceNames" : [ "P3", "P4" ],
-	 	"gold" : 10
+	 	"gold" : 50
 	} 
 ]
