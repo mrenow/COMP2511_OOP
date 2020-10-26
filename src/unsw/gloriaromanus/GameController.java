@@ -48,13 +48,14 @@ public class GameController {
 		try{
 			return new ObjectMapper().readValue(new File(saveFilename), GameController.class);
 		}catch(Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 			throw new DataInitializationException("Error while loading game", e);
 		}
 		
 	}
 	public void saveGame(String saveFilename) throws IOException {
-		new ObjectMapper().writeValue(new File(saveFilename), this);
+		ObjectMapper om = new ObjectMapper();
+		om.writerWithDefaultPrettyPrinter().writeValue(new File(saveFilename), this);
 	}
 		
 	/**
