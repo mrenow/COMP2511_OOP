@@ -10,42 +10,78 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
 public class BattleCharacteristic {
 	
-	double armour = 0;
-	double morale = 0;
-	double speed = 0;
-	double attack = 0;
-	double defenseSkill = 0;
-	double shieldDefense = 0;
+	// Base characteristics
+	// base = Double.POSITIVE_INFINITY -> infinite of that characteristic, regardless of modifiers
+	// base = Double.NEGATIVE_INFINITY -> exactly 0 of that characteristic, regardless of modifiers.
+	// Otherwise, the characteristic is calculated using armourAdd and armourMult.
+	private double armourBase = 0; 
+	private double moraleBase = 0;
+	private double speedBase = 0; 
+	private double attackBase = 0; 
 	
-	double armourmult = 1;
-	double moralemult = 1;
-	double speedmult = 1;
-	double attackmult = 1;  
+	private double defenseSkill = 0;
+	private double shieldDefense = 0;
+	
+	private double armourMult = 1;
+	private double moraleMult = 1;
+	private double speedMult = 1;
+	private double attackMult = 1;
+	
+	private double armourAdd = 0;
+	private double moraleAdd = 0;
+	private double speedAdd = 0;
+	private double attackAdd = 0;  
+
 	@JsonCreator
 	private BattleCharacteristic() {}
 	public BattleCharacteristic(double armour, double morale, double speed, double attack, double defenseSkill,
 			double shieldDefense) {
 		super();
-		this.armour = armour;
-		this.morale = morale;
-		this.speed = speed;
-		this.attack = attack;
+		this.armourBase = armour;
+		this.moraleBase = morale;
+		this.speedBase = speed;
+		this.attackBase = attack;
 		this.defenseSkill = defenseSkill;
 		this.shieldDefense = shieldDefense;
 	}
 
 	public double getArmour() {
-		return armour;
+		if (armourBase == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
+		if (armourBase == Double.POSITIVE_INFINITY) {
+			return armourBase;
+		}
+		return Math.max(1, (armourBase + armourAdd) * armourMult);
 	}
 	public double getMorale() {
-		return morale;
+		if (moraleBase == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
+		if (moraleBase == Double.POSITIVE_INFINITY) {
+			return moraleBase;
+		}
+		return Math.max(1, (moraleBase + moraleAdd) * moraleMult);
 	}
 	public double getSpeed() {
-		return speed;
+		if (speedBase == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
+		if (speedBase == Double.POSITIVE_INFINITY) {
+			return speedBase;
+		}
+		return Math.max(1, (speedBase + speedAdd) * speedMult);
 	}
 	public double getAttack() {
-		return attack;
+		if (attackBase == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
+		if (attackBase == Double.POSITIVE_INFINITY) {
+			return attackBase;
+		}
+		return Math.max(1, (attackBase + attackAdd) * attackMult);
 	}
+	
 	public double getDefenseSkill() {
 		return defenseSkill;
 	}
@@ -53,34 +89,55 @@ public class BattleCharacteristic {
 		return shieldDefense;
 	}
 	
+	public void setArmour(double armour) {
+		this.armourBase = armour;
+	}
+	public void setMorale(double morale) {
+		this.moraleBase = morale;
+	}
+	public void setSpeed(double speed) {
+		this.speedBase = speed;
+	}
+	public void setAttack(double attack) {
+		this.attackBase = attack;
+	}
+	public void setShieldDefense(double shieldDefense) {
+		this.shieldDefense = shieldDefense;
+	}
+	public void setDefenseSkill(double defenseSkill) {
+		this.defenseSkill = defenseSkill;
+	}
+	
 	void addArmour(double armour) {
-		this.armour += armour;
+		this.armourAdd += armour;
 	}
 	void addMorale(double morale) {
-		this.morale += morale;
+		this.moraleAdd += morale;
 	}
 	void addSpeed(double speed) {
-		this.speed += speed;
+		this.speedAdd += speed;
 	}
 	void addAttack(double attack) {
-		this.attack += attack;
+		this.attackAdd += attack;
 	}
-	void addDefenseSkill(double defenseskill) {
-		this.defenseSkill += defenseskill;
+	
+	void addDefenseSkill(double defenseSkill) {
+		this.defenseSkill += defenseSkill;
 	}
 	void addShieldDefense(double shieldDefense) {
 		this.shieldDefense += shieldDefense;
 	}
-	void addArmourmult(double armourmult) {
-		this.armourmult += armourmult;
+	
+	void applyArmourMult(double armourMult) {
+		this.armourMult *= armourMult;
 	}
-	void addMoralemult(double moralemult) {
-		this.moralemult += moralemult;
+	void applyMoraleMult(double moraleMult) {
+		this.moraleMult *= moraleMult;
 	}
-	void setSpeedmult(double speedmult) {
-		this.speedmult += speedmult;
+	void applySpeedMult(double speedMult) {
+		this.speedMult *= speedMult;
 	}
-	void setAttackmult(double attackmult) {
-		this.attackmult += attackmult;
+	void applyAttackMult(double attackMult) {
+		this.attackMult *= attackMult;
 	}
 }
