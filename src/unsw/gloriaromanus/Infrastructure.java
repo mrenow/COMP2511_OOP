@@ -19,11 +19,11 @@ public class Infrastructure {
 	@JsonCreator
 	private Infrastructure() {}
 	
-	public Infrastructure(ItemType type, int level, int buildingWealth,int wealthRate) {
+	public Infrastructure(ItemType type, int level) {
 		this.type = type;
 		this.level = level;
-		this.buildingWealth = buildingWealth;
-		this.wealthRate = wealthRate;
+		this.buildingWealth = (Integer)type.getAttribute("buildingWealth", level);
+		this.wealthRate = (Integer)type.getAttribute("wealthRate", level);
 	}
 	
 	public ItemType getType() {

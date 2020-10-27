@@ -30,7 +30,6 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 public class Parsing {
 	public static final ObjectMapper mapper = configuredObjectMapper();
 	
-	
 	private static ObjectMapper configuredObjectMapper() {
 		ObjectMapper newMapper = JsonMapper.builder()
 				.enable(

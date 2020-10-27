@@ -147,7 +147,7 @@ public enum ItemType{
 	 * @return
 	 */
 	public String getDescription(int level) {
-		return descriptions.get(level);
+		return descriptions.get(level - 1);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public enum ItemType{
 	 * @return
 	 */
 	public String getName(int level) {
-		return names.get(level);
+		return names.get(level - 1);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public enum ItemType{
 	 * @return
 	 */
 	public int getCost(int level) {
-		return costs.get(level);
+		return costs.get(level - 1);
 	}
 
 	/**
@@ -200,7 +200,7 @@ public enum ItemType{
 							level)
 					);
 		}
-		return list.get(level);
+		return list.get(level-1);
 	}
 	
 	public static void main(String[] args) {
