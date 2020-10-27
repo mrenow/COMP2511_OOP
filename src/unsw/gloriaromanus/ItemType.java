@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Represents a queueable task for a province that takes <code>duration</code>turns to cParsing.OMplete
+ * Represents a queueable task for a province that takes <code>duration</code>turns to complete
  * @author ezra
  *
  */
@@ -40,7 +40,6 @@ public enum ItemType{
 //	ARCHERY_RANGE			(),
 //	ARTILLERY_RANGE			(),
 //	
-//	// units
 //	HEAVY_INFANTRY			(),
 //	ARCHER					(),
 	DRUID					("src/test/test_troop.json"),
@@ -62,7 +61,7 @@ public enum ItemType{
 	private Map<String, List<Object>> attributes; 
 	
 	private ItemType(){
-		// Filename determined autParsing.OMatically
+		// Filename determined automatically
 		try {
 			constructFromFile(
 					String.format("%s/%s.json",
@@ -96,9 +95,8 @@ public enum ItemType{
 	 */
 	private void constructFromFile(String filename) throws Exception{
 		JsonNode root = Parsing.mapper.readTree(new File(filename));
-		
 		// Needed to determine list size
-		this.maxLevel = Parsing.mapper.readValue(root.get("maxLevel").toString(), Integer.class);
+		this.maxLevel = root.get("maxLevel").asInt();
 		
 		this.names = generateLevelList(root.get("names"));
 		this.descriptions = generateLevelList(root.get("descriptions"));

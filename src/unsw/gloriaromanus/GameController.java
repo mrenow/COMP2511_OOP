@@ -71,7 +71,9 @@ public class GameController {
 		Map<String, Province> provinceMap;
 		try {
 			provinceMap = Parsing.readAdjacency(adjacencyFile);
-			Parsing.readLandlocked(landlockedFile, provinceMap);
+			if(landlockedFile != null) {
+				Parsing.readLandlocked(landlockedFile, provinceMap);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new DataInitializationException("Error while constructing provinces", e);
@@ -95,7 +97,9 @@ public class GameController {
 		Map<String, Province> provinceMap;
 		try {
 			provinceMap = Parsing.readAdjacency(adjacencyFile);
-			Parsing.readLandlocked(landlockedFile, provinceMap);
+			if(landlockedFile != null) {
+				Parsing.readLandlocked(landlockedFile, provinceMap);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new DataInitializationException("Error while constructing provinces", e);
@@ -120,7 +124,7 @@ public class GameController {
 		Faction currFaction = this.factionOrder.get(this.currentTurn);
 		int level = 0;
 		//TODO need create a mercenaries
-		Unit unit = new Unit();
+		//Unit unit = new Unit();
 
 		int cost = unitType.getCost(level);
 		int gold = currFaction.getGold();
@@ -220,6 +224,15 @@ public class GameController {
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo checkVictory() {
 		return null;
+	}
+	
+/* Testing only (could become a game mechanic but doubt) */
+	
+	public void disownProvince(Province province) {
+		assert(getCurrentTurn() == province.getOwner());
+		List<Unit> disownedUnits = new ArrayList<>(province.getUnits());
+		Faction.NO_ONE.takeProvince(province);
+		province.addUnits(disownedUnits);
 	}
 	
 /* Getters */

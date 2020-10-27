@@ -149,5 +149,12 @@ public class Province {
 	void setTaxLevel(TaxLevel taxLevel) {
 		this.taxLevel = taxLevel;
 	}
+	/*
+	 * Helper method. Directly adds units onto this province.
+	 * 
+	 */
+	void addUnits(List<Unit> units) {
+		this.units.addAll(units);
+	}
 	
 }

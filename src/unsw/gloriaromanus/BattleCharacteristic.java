@@ -21,12 +21,15 @@ public class BattleCharacteristic {
 	double defenseSkill = 0;
 	double shieldDefense = 0;
 	
+	
+	// Should not change 
 	double armourmult = 1;
 	double moralemult = 1;
 	double speedmult = 1;
 	double attackmult = 1;  
 	@JsonCreator
 	private BattleCharacteristic() {}
+	
 	public BattleCharacteristic(double armour, double morale, double speed, double attack, double defenseSkill,
 			double shieldDefense) {
 		super();
@@ -38,6 +41,9 @@ public class BattleCharacteristic {
 		this.shieldDefense = shieldDefense;
 	}
 
+	public BattleCharacteristic(ItemType type) {
+		// TODO Load all relevant fields from type.
+	}
 	public double getArmour() {
 		return armour;
 	}

@@ -50,7 +50,7 @@ public class Parsing {
 	
 	
 	// Constructs provinces
-	public static Map<String, Province> readAdjacency(String provinceFile) throws JsonProcessingException, IOException {
+	public static Map<String, Province> readAdjacency(String provinceFile) throws Exception {
 		Map<String, Province> provinceMap= new HashMap<>();
 		// MUST COPY BEFORE EDITING MAPPER CONFIG
 		ObjectMapper om = mapper.copy();
@@ -62,14 +62,14 @@ public class Parsing {
 		}
 		return provinceMap;
 	}
-	public static void readLandlocked(String landlockedFile, Map<String, Province> allProvinces) throws JsonProcessingException, IOException {
+	public static void readLandlocked(String landlockedFile, Map<String, Province> allProvinces) throws Exception {
 		JsonNode root = mapper.readTree(new File(landlockedFile));
 		for (JsonNode name : root) {
 			allProvinces.get(name.asText()).setLandlocked(true);
 		}
 	}
 	
-	public static List<Faction> readFactions(String factionFile, Map<String, Province> allProvinces) throws JsonParseException, JsonMappingException, IOException {
+	public static List<Faction> readFactions(String factionFile, Map<String, Province> allProvinces) throws Exception {
 		// MUST COPY BEFORE EDITING MAPPER CONFIG
 		ObjectMapper om = mapper.copy();
 		JsonNode root = om.readTree(new File(factionFile));
