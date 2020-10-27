@@ -19,7 +19,12 @@ public class Battle {
     public Battle() {
     }
 
-    public boolean getResult(){
+    public Battle(List<Unit> attackers, List<Unit> defenders) {
+        this.attackers = attackers;
+        this.defenders = defenders;
+	}
+
+	public boolean getResult(){
 
         while (!isBattleEnd()) {
             //setupengagement data for unit

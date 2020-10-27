@@ -98,6 +98,14 @@ public class Unit {
 		return health;
 	}
 
+	public Province getProvince() {
+		return province;
+	}
+
+	public void setProvince(Province province) {
+		this.province = province;
+	}
+
 
 
     
