@@ -9,8 +9,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="type")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY,
-setterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, getterVisibility = Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Faction {
 	public static final int STARTING_GOLD = 100;
 	public static final Faction NO_ONE = new Faction(FactionType.NO_ONE);

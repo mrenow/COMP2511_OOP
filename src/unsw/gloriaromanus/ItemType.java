@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Represents a queueable task for a province that takes <code>duration</code>turns to complete
+ * Represents a queueable task for a province that takes <code>duration</code>turns to cParsing.OMplete
  * @author ezra
  *
  */
@@ -62,7 +62,7 @@ public enum ItemType{
 	private Map<String, List<Object>> attributes; 
 	
 	private ItemType(){
-		// Filename determined automatically
+		// Filename determined autParsing.OMatically
 		try {
 			constructFromFile(
 					String.format("%s/%s.json",
@@ -92,27 +92,26 @@ public enum ItemType{
 	 * @param filename
 	 * @throws Exception 
 	 * @throws ExceptionInInitializerError if name, desc, cost,
-	 * duration or maxlvl is missing from the file
+	 * duration or maxlvl is missing frParsing.OM the file
 	 */
 	private void constructFromFile(String filename) throws Exception{
-		ObjectMapper om = new ObjectMapper();
-		JsonNode root = om.readTree(new File(filename));
+		JsonNode root = Parsing.mapper.readTree(new File(filename));
 		
 		// Needed to determine list size
-		this.maxLevel = om.readValue(root.get("maxLevel").toString(), Integer.class);
+		this.maxLevel = Parsing.mapper.readValue(root.get("maxLevel").toString(), Integer.class);
 		
-		this.names = generateLevelList(om, root.get("names"));
-		this.descriptions = generateLevelList(om, root.get("descriptions"));
-		this.costs = generateLevelList(om, root.get("costs"));
-		this.durations = generateLevelList(om, root.get("durations"));
-		this.names = generateLevelList(om, root.get("names"));
+		this.names = generateLevelList(root.get("names"));
+		this.descriptions = generateLevelList(root.get("descriptions"));
+		this.costs = generateLevelList( root.get("costs"));
+		this.durations = generateLevelList(root.get("durations"));
+		this.names = generateLevelList(root.get("names"));
 		
 		this.attributes = new HashMap<String, List<Object>>();
 
 		Iterator<String> nodeNames = root.fieldNames();
 		while(nodeNames.hasNext() ) {
 			String nodeName = nodeNames.next();
-			attributes.put(nodeName, generateLevelList(om, root.get(nodeName)));
+			attributes.put(nodeName, generateLevelList(root.get(nodeName)));
 			if(attributes.get(nodeName).size() != maxLevel) {
 				throw new IOException(String.format("%s of %s had wrong number of elements.", nodeName, this.name()));
 			}
@@ -126,9 +125,9 @@ public enum ItemType{
  		return out;
 	}
 	
-	private <T> List<T> generateLevelList(ObjectMapper om, JsonNode node) throws Exception{
+	private <T> List<T> generateLevelList(JsonNode node) throws Exception{
 		if(node.isArray()) {
-			List<T> out = om.readValue(node.toString(), new TypeReference<List<T>>(){});
+			List<T> out = Parsing.mapper.readValue(node.toString(), new TypeReference<List<T>>(){});
 			if (out.size() != maxLevel) {
 				throw new DataInitializationException(
 						String.format("Error while parsing %s, to many elements in Json String: %s",
@@ -139,7 +138,7 @@ public enum ItemType{
 			}
 			return out;
 		}else {
-			return makeConstantList(om.readValue(node.toString(), new TypeReference<T>() {}), this.maxLevel);
+			return makeConstantList(Parsing.mapper.readValue(node.toString(), new TypeReference<T>() {}), this.maxLevel);
 		}
 	}
 	/**

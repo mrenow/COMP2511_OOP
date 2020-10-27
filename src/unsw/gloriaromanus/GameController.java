@@ -25,7 +25,8 @@ import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class GameController {
 
 	private Collection<Province> allProvinces;
@@ -46,7 +47,7 @@ public class GameController {
 	 */
 	public static GameController loadFromSave(String saveFilename) throws DataInitializationException {
 		try{
-			return new ObjectMapper().readValue(new File(saveFilename), GameController.class);
+			return Parsing.mapper.readValue(new File(saveFilename), GameController.class);
 		}catch(Exception e) {
 			e.printStackTrace(); 
 			throw new DataInitializationException("Error while loading game", e);
@@ -57,8 +58,7 @@ public class GameController {
 	 * Saves game in human readable json
 	 */
 	public void saveGame(String saveFilename) throws IOException {
-		ObjectMapper om = new ObjectMapper();
-		om.writerWithDefaultPrettyPrinter().writeValue(new File(saveFilename), this);
+		Parsing.mapper.writerWithDefaultPrettyPrinter().writeValue(new File(saveFilename), this);
 	}
 		
 	/**

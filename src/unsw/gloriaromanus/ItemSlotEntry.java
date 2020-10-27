@@ -12,8 +12,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * it calls onFinish() which will spawn a troop or create a building.
  * @author ezra
  */
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY,
-setterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, getterVisibility = Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public abstract class ItemSlotEntry {
 	protected ItemType type;
 	protected Province province;

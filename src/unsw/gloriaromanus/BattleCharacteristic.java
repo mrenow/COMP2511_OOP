@@ -10,9 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * An information struct which contains all the data needed to determine the result of an engagement.
  * 
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY,
-setterVisibility = Visibility.NONE, isGetterVisibility = Visibility.NONE, getterVisibility = Visibility.NONE)
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class BattleCharacteristic {
 	
 	double armour = 0;
