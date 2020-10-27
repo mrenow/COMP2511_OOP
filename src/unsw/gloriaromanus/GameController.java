@@ -32,7 +32,7 @@ public class GameController {
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;
 	
-	private List<ItemType> currentMercenaries = new ArrayList<ItemType>();
+	//private List<ItemType> currentMercenaries = new ArrayList<ItemType>();
 	private int round = 0;
 	private int currentTurn = 0; // Must always be less than factionTurnOrder.size()
 	
@@ -121,7 +121,7 @@ public class GameController {
 //	Constraints:
 //	UnitType must be in getMercenaries()
 	public void hireUnit(Province province, ItemType unitType) {
-		Faction currFaction = this.factionOrder.get(this.currentTurn);
+		Faction currFaction = getCurrentTurn();
 		int level = 0;
 		//TODO need create a mercenaries
 		//Unit unit = new Unit();
@@ -184,46 +184,66 @@ public class GameController {
 		province.setTaxLevel(taxLevel);
 	}
 	
-	/**
-	 * select units in a province
-	 * @param province
-	 * @param units
-	 * @return true if province owner make select, false for else
-	 */
-	public boolean selectUnits(Province province, List<Unit> units){
-		//find out who is selecting
-		Faction currFaction = this.factionOrder.get(this.currentTurn);
+	// /**
+	//  * select units in a province
+	//  * @param province
+	//  * @param units
+	//  * @return true if province owner make select, false for else
+	//  */
+	// public boolean selectUnits(Province province, List<Unit> units){
+	// 	//find out who is selecting
+	// 	Faction currFaction = this.factionOrder.get(this.currentTurn);
 
-		if(!currFaction.getProvinces().contains(province)){
-			return false;
-		} else {
-			//TODO :how to store select units
-			Faction faction;
-			return false;//TODO return just keeping the compiler happy
-		}
-	}
+	// 	if(!currFaction.getProvinces().contains(province)){
+	// 		return false;
+	// 	} else {
+	// 		//TODO :how to store select units
+	// 		Faction faction;
+	// 		return false;//TODO return just keeping the compiler happy
+	// 	}
+	// }
 //	Constraints:
 //	attacker.faction != defender.faction
 //	Province.adjacent(attacker, defender)
-	public AttackInfo attack (Province attacker, Province defender) {return null;}
+	public AttackInfo attack (Province attacker, Province defender) {
+		//check if adjency
+		if (attacker.getAdjacent().contains(defender)) {
+			//for now we invade with everything
+			List<Unit> attackers = attacker.getUnits();
+			List<Unit> defenders = defender.getUnits();
+			//could invade with only selected units
+			return invade(attackers, defenders);
+		} else {
+			//TODO: return not adjancent
+			return null;
+		}
+	}
 	
-
 	public AttackInfo invade(List<Unit>attackers,List<Unit> defenders){
-		
-		return null;
+		Battle battle = new Battle(attackers,defenders);
+		AttackInfo attackInfo = new AttackInfo();
+		//TODO set up attackinfo baseed on battle result
+		return attackInfo;
 	}
 //	Constraints:
 //	destination from getDestinations()
 //	units.province is invariant
-	public void move (List<Unit> units, Province destination) {}
+	public void move (List<Unit> units, Province destination) {
+		for (Unit unit : units) {
+			unit.getProvince().getUnits().remove(unit);
+		}
+	}
 	
 //	Increases the turn counter by 1 
 //	returns non-null VictoryInfo if the player ending their turn has won.
-	public VictoryInfo endTurn() {return null;}
+	public VictoryInfo endTurn() {
+		this.currentTurn++;
+		return checkVictory();
+	}
 	
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo checkVictory() {
-		return null;
+		return getCurrentTurn().getVictoryInfo();
 	}
 	
 /* Testing only (could become a game mechanic but doubt) */
@@ -239,7 +259,14 @@ public class GameController {
 	
 //	Called when a group of units is selected to determine which provinces to highlight
 //  Does not return the province the units are in.
-	public Collection<Province> getDestinations(List<Unit> unitGroup){return null;}
+	public Collection<Province> getDestinations(List<Unit> unitGroup){
+		List<Province> provinces = new ArrayList<>();
+		provinces.addAll(getCurrentTurn().getProvinces());
+		for (Unit unit : unitGroup) {
+			provinces.remove(unit.getProvince());
+		}
+		return provinces;
+	}
 	
 //	Called when highlighting provinces to attack
 	public Collection<Province> getAttackable(Province province){return null;}
@@ -252,8 +279,7 @@ public class GameController {
 //	returns provinces owned by a particular faction. Will return all provinces when Faction == null
 	public Collection<Province> getProvinces(Faction faction){
 		if(faction != null) {
-			// TODO
-			return null;
+			return faction.getProvinces();
 		}else {
 			return new ArrayList<Province>(allProvinces);
 		}
@@ -266,6 +292,6 @@ public class GameController {
 	public Province getProvince(String name){return null;}
 	
 //	Displayed on UI
-	public int getYear() {return 0;}
+	public int getYear() {return 200+round;}
 		
 }
