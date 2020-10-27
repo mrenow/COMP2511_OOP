@@ -63,4 +63,8 @@ public class Faction {
 	public String toString() {
 		return getTitle();
 	}
+
+	public VictoryInfo getVictoryInfo() {
+		return null;
+	}
 }
