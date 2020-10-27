@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import unsw.gloriaromanus.*;
 
-
 public class MoveTest {
     private GameController game;
     private Faction player;
@@ -55,5 +54,31 @@ public class MoveTest {
 		
 		
 	}
-	
+    /*
+     * Player starting with x provinces owned, move units to adjacent province
+     * 
+     * @throws Exception
+     
+    @BeforeEach
+    public void setupGame() throws Exception{
+        // TODO
+    	game = GameController.loadFromSave("");
+    	player = game.getCurrentTurn(); 
+    }
+
+    @Test
+    public void testMoveUnits() {
+        Province p2 = game.getProvince("P2");
+        Province p3 = game.getProvince("P3");
+        testList = new ArrayList<Unit>();
+
+        // TODO
+        testList.add(HEAVY_CALVARY);
+        game.endTurn();
+
+        game.move(testList, p3);
+        game.endTurn();
+        System.out.println(p3.getUnits().contains(HEAVY_CALVARY));
+    }
+     */
 }
