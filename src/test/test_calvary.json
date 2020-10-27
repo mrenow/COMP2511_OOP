@@ -1,0 +1,17 @@
+{
+	"maxLevel" : 1,
+	"names" : ["Calvary"],
+	"descriptions" : "I am fat.",
+	"costs" : [20],
+	"durations" : [1,2],
+	
+	// Unit-specific info:
+	"health" : 1,
+	"movPoints" : 3,
+	armour : 0,
+	morale : 0,
+	speed : 0,
+	attack : 0,
+ 	defenseSkill : 0,
+	shieldDefense : 0
+}
