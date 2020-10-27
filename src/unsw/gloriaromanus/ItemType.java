@@ -45,7 +45,7 @@ public enum ItemType{
 	DRUID					("src/test/test_troop.json"),
 	TEST_TROOP				("src/test/test_troop.json"),
 	TEST_BUILDING			("src/test/test_building.json"),
-	HEAVY_CAVALRY			();
+	HEAVY_CAVALRY			("src/test/test_calvary.json");
 	
 	private static final String SOURCE_DIR = "src/data";
 	
