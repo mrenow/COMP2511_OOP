@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
-public class BattleCharacteristic {
+public class CombatStats {
 	
 	// Base characteristics
 	// base = Double.POSITIVE_INFINITY -> infinite of that characteristic, regardless of modifiers
@@ -29,20 +29,18 @@ public class BattleCharacteristic {
 
 	// Should not change 
 	private double armourMult = 1;
-	private double moraleMult = 1;
 	private double speedMult = 1;
 	private double attackMult = 1;
 	
 	private double armourAdd = 0;
-	private double moraleAdd = 0;
 	private double speedAdd = 0;
 	private double attackAdd = 0;  
 
 
 	@JsonCreator
-	private BattleCharacteristic() {}
+	private CombatStats() {}
 	
-	public BattleCharacteristic(double armour, double morale, double speed, double attack, double defenseSkill,
+	public CombatStats(double armour, double morale, double speed, double attack, double defenseSkill,
 			double shieldDefense) {
 		super();
 		this.armourBase = armour;
@@ -53,7 +51,7 @@ public class BattleCharacteristic {
 		this.shieldDefense = shieldDefense;
 	}
 
-	public BattleCharacteristic(ItemType type) {
+	public CombatStats(ItemType type) {
 		// TODO Load all relevant fields from type.
 	}
 	public double getArmour() {
@@ -64,15 +62,6 @@ public class BattleCharacteristic {
 			return armourBase;
 		}
 		return Math.max(1, (armourBase + armourAdd) * armourMult);
-	}
-	public double getMorale() {
-		if (moraleBase == Double.NEGATIVE_INFINITY) {
-			return 0;
-		}
-		if (moraleBase == Double.POSITIVE_INFINITY) {
-			return moraleBase;
-		}
-		return Math.max(1, (moraleBase + moraleAdd) * moraleMult);
 	}
 	public double getSpeed() {
 		if (speedBase == Double.NEGATIVE_INFINITY) {
@@ -146,9 +135,6 @@ public class BattleCharacteristic {
 	void addArmour(double armour) {
 		this.armourAdd += armour;
 	}
-	void addMorale(double morale) {
-		this.moraleAdd += morale;
-	}
 	void addSpeed(double speed) {
 		this.speedAdd += speed;
 	}
@@ -163,16 +149,14 @@ public class BattleCharacteristic {
 		this.shieldDefense += shieldDefense;
 	}
 	
-	void applyArmourMult(double armourMult) {
+	void multArmour(double armourMult) {
 		this.armourMult *= armourMult;
 	}
-	void applyMoraleMult(double moraleMult) {
-		this.moraleMult *= moraleMult;
-	}
-	void applySpeedMult(double speedMult) {
+
+	void multSpeed(double speedMult) {
 		this.speedMult *= speedMult;
 	}
-	void applyAttackMult(double attackMult) {
+	void multAttack(double attackMult) {
 		this.attackMult *= attackMult;
 	}
 	

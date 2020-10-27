@@ -22,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Unit {
-	private BattleCharacteristic baseCharacteristic;
-	private List<BattleModifier> supportModifiers = new ArrayList<>();
-	private List<BattleModifier> engagementModifiers = new ArrayList<>();
+	private CombatStats baseCharacteristic;
+	private List<CombatModifier> supportModifiers = new ArrayList<>();
+	private List<CombatModifier> engagementModifiers = new ArrayList<>();
 
 	private int level = 1;
 	private ItemType type = ItemType.TEST_TROOP;
@@ -33,6 +33,9 @@ public class Unit {
 	private Province province;
 	private boolean isMercenary = false;
 	private boolean isRanged = false;
+
+	private double morale;
+
 	private int health;
 	private int maxMovPoints;
 	private int movPoints;
@@ -49,11 +52,11 @@ public class Unit {
 		}
 		this.maxMovPoints = (Integer)this.type.getAttribute("movPoints", this.level);
 		this.health = (Integer)this.type.getAttribute("health", this.level);
-		this.baseCharacteristic = new BattleCharacteristic(this.type);
+		this.baseCharacteristic = new CombatStats(this.type);
 		this.movPoints = this.maxMovPoints;
 	}
 
-	public Unit(ItemType type, int level, BattleCharacteristic baseCharacteristic, Province province) {
+	public Unit(ItemType type, int level, CombatStats baseCharacteristic, Province province) {
 		super();
 		this.type = type;
 		this.movPoints = this.maxMovPoints;
@@ -67,15 +70,15 @@ public class Unit {
 		return type;
 	}
 
-	public BattleCharacteristic getBaseCharacteristic() {
+	public CombatStats getBaseCharacteristic() {
 		return baseCharacteristic;
 	}
 
-	public List<BattleModifier> getSupportModifiers() {
+	public List<CombatModifier> getSupportModifiers() {
 		return new ArrayList<>(supportModifiers);
 	}
 
-	public List<BattleModifier> getEngagementModifiers() {
+	public List<CombatModifier> getEngagementModifiers() {
 		return new ArrayList<>(engagementModifiers);
 	}
 
@@ -98,12 +101,20 @@ public class Unit {
 		return health;
 	}
 
+	public double getMorale() {
+		return morale;
+	}
 	public Province getProvince() {
 		return province;
 	}
 
 	public void setProvince(Province province) {
 		this.province = province;
+	}
+
+	public CombatStats getCombatStats() {
+		// return a copy of the base combat stats
+		return null;
 	}
 
 

@@ -12,8 +12,8 @@ public class Battle {
     //data for setup a engagement
     Unit attacker;
     Unit defender;
-    EngagementData aData;
-    EngagementData dData;
+    CombatData aData;
+    CombatData dData;
     //current engagement
     Engagement engagement;
     public Battle() {
@@ -46,8 +46,8 @@ public class Battle {
         //random choose two units
         this.attacker = pickUnit(this.attackers);
         this.defender = pickUnit(this.defenders);
-        this.aData = new EngagementData();
-        this.dData = new EngagementData();
+        this.aData = new CombatData();
+        this.dData = new CombatData();
         //setupdata
 
         //do some change to data
