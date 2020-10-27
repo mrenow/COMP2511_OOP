@@ -53,7 +53,11 @@ public enum BattleModifier {
 				}
 				double rangedChance = 0.5 + 0.1*(rangedStats.getSpeed() - meleeStats.getSpeed());
 				
-				
+				if (GlobalRandom.generator.nextDouble() % 1 < rangedChance) {
+					meleeStats.setAttack(Double.NEGATIVE_INFINITY);
+					e.unitCharacteristics[0].setDefenseSkill(Double.NEGATIVE_INFINITY);
+					e.unitCharacteristics[1].setDefenseSkill(Double.NEGATIVE_INFINITY);
+				}
 				
 			}
 	},
@@ -135,6 +139,7 @@ public enum BattleModifier {
 		default: return false; 
 		}
 	};
+	
 	public boolean isMorale() {
 		switch(characteristic) {
 		case MORALE: return true;
