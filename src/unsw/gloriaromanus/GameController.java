@@ -238,10 +238,11 @@ public class GameController {
 /* Getters */
 	
 //	Called when a group of units is selected to determine which provinces to highlight
-	public List<Province> getDestinations(List<Unit> unitGroup){return null;}
+//  Does not return the province the units are in.
+	public Collection<Province> getDestinations(List<Unit> unitGroup){return null;}
 	
 //	Called when highlighting provinces to attack
-	public List<Province> getAttackable(Province province){return null;}
+	public Collection<Province> getAttackable(Province province){return null;}
 	
 //	Called when the mercenary hire menu is opened
 	public List<ItemType> getMercenaries(){return null;}
