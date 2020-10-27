@@ -94,28 +94,52 @@ public class BattleCharacteristic {
 	}
 	
 	public double getDefenseSkill() {
+		if (defenseSkill == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
 		return defenseSkill;
 	}
 	public double getShieldDefense() {
+		if (shieldDefense == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
 		return shieldDefense;
 	}
 	
 	public void setArmour(double armour) {
+		if (armourBase == Double.NEGATIVE_INFINITY) {
+			return;
+		}
 		this.armourBase = armour;
 	}
 	public void setMorale(double morale) {
+		if (moraleBase == Double.NEGATIVE_INFINITY) {
+			return;
+		}
 		this.moraleBase = morale;
 	}
 	public void setSpeed(double speed) {
+		if (speedBase == Double.NEGATIVE_INFINITY) {
+			return;
+		}
 		this.speedBase = speed;
 	}
 	public void setAttack(double attack) {
+		if (attackBase == Double.NEGATIVE_INFINITY) {
+			return;
+		}
 		this.attackBase = attack;
 	}
 	public void setShieldDefense(double shieldDefense) {
+		if (shieldDefense == Double.NEGATIVE_INFINITY) {
+			return;
+		}
 		this.shieldDefense = shieldDefense;
 	}
 	public void setDefenseSkill(double defenseSkill) {
+		if (defenseSkill == Double.NEGATIVE_INFINITY) {
+			return;
+		}
 		this.defenseSkill = defenseSkill;
 	}
 	
@@ -151,4 +175,5 @@ public class BattleCharacteristic {
 	void applyAttackMult(double attackMult) {
 		this.attackMult *= attackMult;
 	}
+	
 }
