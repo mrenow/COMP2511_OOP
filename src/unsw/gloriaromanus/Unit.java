@@ -29,13 +29,12 @@ public class Unit {
 	private int level = 1;
 	private ItemType type = ItemType.TEST_TROOP;
 	
+	@JsonIdentityReference(alwaysAsId = true)
+	private Province province;
+	private boolean isMercenary = false;
+	private int health;
 	private int maxMovPoints;
 	private int movPoints;
-	// We will see if this is needed in future
-	// @JsonIdentityReference(alwaysAsId = true)
-	// private Province province;
-	private boolean isMercenary;
-	private int health;
 	
 	@JsonCreator
 	public Unit(
@@ -53,14 +52,14 @@ public class Unit {
 		this.movPoints = this.maxMovPoints;
 	}
 
-	public Unit(ItemType type, int level, BattleCharacteristic baseCharacteristic) {
+	public Unit(ItemType type, int level, BattleCharacteristic baseCharacteristic, Province province) {
 		super();
 		this.type = type;
 		this.movPoints = this.maxMovPoints;
-		this.isMercenary = false;
 		this.maxMovPoints = (Integer)this.type.getAttribute("movPoints", this.level);
 		this.health = (Integer)this.type.getAttribute("health", this.level);
 		this.movPoints = maxMovPoints;
+		this.province = province;
 	}
 	
 	public ItemType getType() {
