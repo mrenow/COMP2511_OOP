@@ -1,0 +1,59 @@
+{
+  "allProvinces" : [ {
+  // Single building
+  	"name" : "P5",
+    "owner" : "ROME",
+    "townWealth" : 10,
+    "taxLevel" : "LOW_TAX",
+    "buildings" : [ {
+		"type" : "TEST_BUILDING",
+		"level" : 1,
+		"buildingWealth" : 20,
+		"wealthRate" : 20
+    } ]
+  }, {
+    "name" : "P6",
+    "owner" : "ROME",
+    "townWealth" : 10,
+    "taxLevel" : "NORMAL_TAX",
+    "buildings" : [ {
+		"type" : "TEST_BUILDING",
+		"level" : 1,
+		"buildingWealth" : 30,
+		"wealthRate" : 20
+    },{
+		"type" : "TEST_BUILDING",
+		"level" : 1,
+		"buildingWealth" : 20,
+		"wealthRate" : 20
+    } ]
+  }, {
+    "name" : "P7",
+    "owner" : "ROME",
+    "townWealth" : 10,
+    "taxLevel" : "HIGH_TAX",
+    "buildings" : [ {
+		"type" : "TEST_BUILDING",
+		"level" : 1,
+		"buildingWealth" : 30,
+		"wealthRate" : 5
+     } ]
+  }, {
+    "name" : "P8",
+    "owner" : "ROME",
+    "townWealth" : 10,
+    "taxLevel" : "VERY_HIGH_TAX",
+    "buildings" : [ {
+		"type" : "TEST_BUILDING",
+		"level" : 1,
+		"buildingWealth" : 30,
+		"wealthRate" : 20
+    } ]
+  }],
+  
+  "factionOrder" : [ {
+    "type" : "ROME",
+    "gold" : 100,
+    "provinces" : [ "P5", "P6", "P7", "P8" ]
+  } ]
+}

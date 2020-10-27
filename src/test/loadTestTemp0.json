@@ -1,1 +1,59 @@
-{"allProvinces":[{"@id":"fe6528f1-746d-4d34-b300-609dbbe60e09","name":"P1","owner":{"@id":"5162fff2-dd62-4838-a6c8-c90d95a2f903","type":"ROME","gold":100,"provinces":["fe6528f1-746d-4d34-b300-609dbbe60e09","4fe7118c-6fdb-46c6-a317-7ff518abdcf3"]},"adjacent":[{"@id":"4fe7118c-6fdb-46c6-a317-7ff518abdcf3","name":"P2","owner":"5162fff2-dd62-4838-a6c8-c90d95a2f903","adjacent":["fe6528f1-746d-4d34-b300-609dbbe60e09","4fe7118c-6fdb-46c6-a317-7ff518abdcf3"],"buildingWealth":0,"townWealth":0,"taxRate":"NORMAL_TAX","isLandlocked":false,"units":[],"buildingSlots":[],"trainingSlots":[],"landlocked":false},{"@id":"8d925768-8c0e-48b0-94b8-3126895377ea","name":"P4","owner":{"@id":"3d2cea9e-f312-4665-9d2b-8e193becb875","type":"GAUL","gold":10,"provinces":["cdaa06e4-9133-4915-bdac-9af05d28a88a","8d925768-8c0e-48b0-94b8-3126895377ea"]},"adjacent":["fe6528f1-746d-4d34-b300-609dbbe60e09","4fe7118c-6fdb-46c6-a317-7ff518abdcf3"],"buildingWealth":0,"townWealth":0,"taxRate":"NORMAL_TAX","isLandlocked":false,"units":[],"buildingSlots":[],"trainingSlots":[],"landlocked":false}],"buildingWealth":0,"townWealth":0,"taxRate":"NORMAL_TAX","isLandlocked":true,"units":[],"buildingSlots":[],"trainingSlots":[],"landlocked":true},"4fe7118c-6fdb-46c6-a317-7ff518abdcf3",{"@id":"cdaa06e4-9133-4915-bdac-9af05d28a88a","name":"P3","owner":"3d2cea9e-f312-4665-9d2b-8e193becb875","adjacent":["4fe7118c-6fdb-46c6-a317-7ff518abdcf3","8d925768-8c0e-48b0-94b8-3126895377ea"],"buildingWealth":0,"townWealth":0,"taxRate":"NORMAL_TAX","isLandlocked":true,"units":[],"buildingSlots":[],"trainingSlots":[],"landlocked":true},"8d925768-8c0e-48b0-94b8-3126895377ea"],"factionOrder":["5162fff2-dd62-4838-a6c8-c90d95a2f903","3d2cea9e-f312-4665-9d2b-8e193becb875"],"currentMercenaries":[],"round":0,"currentTurn":0}
+{
+  "allProvinces" : [ {
+    "name" : "P1",
+    "owner" : "ROME",
+    "adjacent" : [ "P2", "P4" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "isLandlocked" : true,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ]
+  }, {
+    "name" : "P2",
+    "owner" : "ROME",
+    "adjacent" : [ "P1", "P2" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "isLandlocked" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ]
+  }, {
+    "name" : "P3",
+    "owner" : "GAUL",
+    "adjacent" : [ "P2", "P4" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "isLandlocked" : true,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ]
+  }, {
+    "name" : "P4",
+    "owner" : "GAUL",
+    "adjacent" : [ "P1", "P2" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "isLandlocked" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ]
+  } ],
+  "factionOrder" : [ {
+    "type" : "ROME",
+    "gold" : 100,
+    "provinces" : [ "P1", "P2" ]
+  }, {
+    "type" : "GAUL",
+    "gold" : 10,
+    "provinces" : [ "P3", "P4" ]
+  } ],
+  "currentMercenaries" : [ ],
+  "round" : 0,
+  "currentTurn" : 0
+}

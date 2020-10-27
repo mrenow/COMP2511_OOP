@@ -86,8 +86,4 @@ public class InitTest {
     }
     
     
-    @Test
-    public void blahTest2(){
-        Unit u = new Unit();
-    }
 }

@@ -19,8 +19,7 @@
     "owner" : "ROME",
     "townWealth" : 100,
     "taxLevel" : "VERY_HIGH_TAX"
-  } ],
-  
+  }],  
   "factionOrder" : [ {
     "type" : "ROME",
     "gold" : 100,
