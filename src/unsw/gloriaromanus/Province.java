@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="name")
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Province {
 	// Required
 	private String name; 
@@ -27,22 +27,20 @@ public class Province {
 	@JsonIdentityReference(alwaysAsId = true)
 	private List<Province> adjacent = new ArrayList<>();
 	
-	private int buildingWealth = 0;
+	private List<Infrastructure> buildings = new ArrayList<>();
+	
+	// Generated every turn
 	private int townWealth = 0;
-	private TaxLevel taxRate = TaxLevel.NORMAL_TAX;
+	private TaxLevel taxLevel = TaxLevel.NORMAL_TAX;
 
 	private boolean isLandlocked = false;
 
 	private List<Unit> units = new ArrayList<>();
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
-
+	
 	@JsonCreator
-	private Province(){
-		
-		
-		
-	}
+	private Province(){}
 
 	/*
 	 * Used for init only.
@@ -91,6 +89,17 @@ public class Province {
 	
 	public int getInfrastructureSlots() {return 0;}
 	
+	public int buildingWealth() {
+		return 0;
+	}
+	
+	public int getTownWealth() {
+		return 0;
+	}
+	public int getTotalWealth() {
+		return 0;
+	}
+	
 //	Ordered list corresponding to training slots
 	public List<TrainingSlotEntry> getCurrentTraining(){return null;}
 	
@@ -134,8 +143,18 @@ public class Province {
 		buildingSlots.clear();
 		trainingSlots.clear();
 		units.clear();
-		taxRate = TaxLevel.NORMAL_TAX;
+		taxLevel = TaxLevel.NORMAL_TAX;
 	}
 
+	void setTaxLevel(TaxLevel taxLevel) {
+		this.taxLevel = taxLevel;
+	}
+	/*
+	 * Helper method. Directly adds units onto this province.
+	 * 
+	 */
+	void addUnits(List<Unit> units) {
+		this.units.addAll(units);
+	}
 	
 }

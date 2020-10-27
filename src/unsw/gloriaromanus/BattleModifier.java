@@ -9,16 +9,13 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 /**
  * Identifies a battle modifying strategy
- * @param e
+ * Probably going to change this a lot yikes
+ * @param e,
  * @return
  */
+public enum BattleModifier {
 
-	
-	
-public abstract class BattleModifier {
-	//
-	public static final BattleModifier WALLS = 
-			new BattleModifier(ApplicationType.SUPPORT, CharacteristicType.DAMAGE) {
+	WALLS(ApplicationType.SUPPORT, CharacteristicType.DAMAGE) {
 		@Override
 		public void alterEngagement(EngagementData e, BattleSide side) {
 			// Check if both are ranged
@@ -27,21 +24,40 @@ public abstract class BattleModifier {
 			// Otherwise 
 			
 		}
-	};
-	public static final BattleModifier TRY_RANGED = 
-		new BattleModifier(ApplicationType.SUPPORT, CharacteristicType.DAMAGE){
+	},
+	TRY_RANGED(ApplicationType.SUPPORT, CharacteristicType.DAMAGE){
 			@Override
 			public void alterEngagement(EngagementData e, BattleSide side) {
-				// Check if both are ranged
-				// Check if both are meelee
+				boolean isSelfRanged = e.units[side.ordinal()].isRanged();
+				boolean isOtherRanged = e.units[side.ordinal()].isRanged();
+				BattleCharacteristic rangedStats = null;
+				BattleCharacteristic meleeStats = null;
 				
-				// Otherwise 
+				boolean isRangedEngagement = false;
+				if(isSelfRanged && isOtherRanged) {
+					e.unitCharacteristics[0].setDefenseSkill(Double.NEGATIVE_INFINITY);
+					e.unitCharacteristics[1].setDefenseSkill(Double.NEGATIVE_INFINITY);
+					return;
+				}
+				if(isSelfRanged) {
+					rangedStats = e.unitCharacteristics[side.ordinal()];
+					meleeStats = e.unitCharacteristics[side.other().ordinal()];
+				}
+				if(isOtherRanged) {
+					rangedStats = e.unitCharacteristics[side.other().ordinal()];
+					meleeStats = e.unitCharacteristics[side.ordinal()];
+				}
 				
-		
+				if(rangedStats == null) {
+					return; // melee enagagment
+				}
+				double rangedChance = 0.5 + 0.1*(rangedStats.getSpeed() - meleeStats.getSpeed());
+				
+				
+				
 			}
-	};
-	public static final BattleModifier DRUIDIC_FERVOUR =
-		new BattleModifier(ApplicationType.SUPPORT, CharacteristicType.MORALE){
+	},
+	DRUIDIC_FERVOUR(ApplicationType.SUPPORT, CharacteristicType.MORALE){
 		// This is really dumb but 2511 has forced my hand
 		@Override
 		public void alterEngagement(EngagementData e, BattleSide side) {
@@ -60,27 +76,24 @@ public abstract class BattleModifier {
 			e.unitCharacteristics[side.ordinal()].applyMoraleMult(moraleBuff);
 			e.unitCharacteristics[side.other().ordinal()].applyMoraleMult(moraleDebuff);
 		}
-	};	
-	public static final BattleModifier FIRE_ARROWS_MORALE =
-		new BattleModifier(ApplicationType.ENGAGEMENT, CharacteristicType.MORALE){
+	},
+	FIRE_ARROWS_MORALE(ApplicationType.ENGAGEMENT, CharacteristicType.MORALE){
 		@Override
 		public void alterEngagement(EngagementData e, BattleSide side) {
 			e.unitCharacteristics[side.other().ordinal()].applyMoraleMult(0.8);
 		}
-	};
-	public static final BattleModifier FIRE_ARROWS_DAMAGE =
-		new BattleModifier(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
+	},
+	// Guarantee: Unit is Ranged
+	FIRE_ARROWS_DAMAGE(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
 		@Override
 		public void alterEngagement(EngagementData e, BattleSide side) {
 			BattleCharacteristic self = e.unitCharacteristics[side.ordinal()];
 			self.applyAttackMult(0.9);
 		}
-	};
-	public static final BattleModifier ARTILLERY =
-		new BattleModifier(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
-
+	},
+	// Guarantee: Unit is artillery
+	ARTILLERY(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
 		@Override
-		// 
 		public void alterEngagement(EngagementData e, BattleSide side) {
 			Unit enemy = e.units[side.other().ordinal()];			
 			if(enemy.getClass() == Tower.class) {
@@ -90,9 +103,8 @@ public abstract class BattleModifier {
 		
 			}
 		}
-	};
-	public static final BattleModifier TOWER
-	= new BattleModifier(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
+	},
+	TOWER(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
 		@Override
 		public void alterEngagement(EngagementData e, BattleSide side) {
 			Unit enemy = e.units[side.ordinal()];
@@ -104,9 +116,8 @@ public abstract class BattleModifier {
 			// tower engagements are ranged, so they nullify shield defense
 			enemyCharacteristic.setDefenseSkill(Double.NEGATIVE_INFINITY);
 		}
-	};
-	public static final BattleModifier SHIELD_CHARGE
-	= new BattleModifier(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
+	},
+	SHIELD_CHARGE(ApplicationType.ENGAGEMENT, CharacteristicType.DAMAGE){
 		@Override
 		public void alterEngagement(EngagementData e, BattleSide side) {
 			// TODO Every 4th charge? 
@@ -133,7 +144,8 @@ public abstract class BattleModifier {
 	
 	public abstract void alterEngagement(EngagementData e, BattleSide side);
 	private BattleModifier(ApplicationType application, CharacteristicType characteristic) {
-
+		this.application = application;
+		this.characteristic = characteristic;
 		
 	}
 	enum ApplicationType {

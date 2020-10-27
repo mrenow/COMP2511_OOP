@@ -14,10 +14,5 @@ public class UnitTest{
         assertEquals("a", "b");
         String s;
     }
-    
-    @Test
-    public void blahTest2(){
-        Unit u = new Unit();
-    }
 }
 

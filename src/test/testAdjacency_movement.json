@@ -1,0 +1,59 @@
+
+/*
+   2 - 3
+  /     \ 
+ 1 - 7 - 4 - 8 - 9 - 10 - 11 - 12
+  \     /
+   6 - 5
+*/
+[
+    {
+    	"name" : "P1",
+        "adjacent" : ["P2" , "P7", "P6"],
+        "units" : [ {"health" : 1, "movPoints" : 1}, {"health" : 2, "movPoints" : 2}, {"health" : 3, "movPoints" : 3}, {"health" : 4, "movPoints" : 4}] // four default units, each with 
+    },
+    {    	
+    	"name" : "P2",
+        "adjacent" : ["P1" , "P3"]
+    },
+    {    	
+    	"name" : "P3",
+        "adjacent" : ["P2" , "P4"]
+    },
+    {    
+    	"name" : "P4",
+        "adjacent" : ["P3" , "P5", "P7", "P8"]
+    },
+    {
+    	"name" : "P5",
+        "adjacent" : ["P4" , "P6"]
+    },
+    {    	
+    	"name" : "P6",
+        "adjacent" : ["P1" , "P5"]
+    },
+    {    	
+    	"name" : "P7",
+        "adjacent" : ["P1" , "P4"]
+    },
+    {    
+    	"name" : "P8",
+        "adjacent" : ["P4", "P9"]
+    },
+    {    
+    	"name" : "P9",
+        "adjacent" : ["P8", "P10"]
+    },
+    {    
+    	"name" : "P10",
+        "adjacent" : ["P9", "P11"]
+    },
+    {    
+    	"name" : "P11",
+        "adjacent" : ["P10", "P12"]
+    },
+    {    
+    	"name" : "P12",
+        "adjacent" : ["P11"]
+    }    
+]

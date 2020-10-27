@@ -1,26 +1,18 @@
-{
-	"P1" : {
-		"P1" : false,
-		"P2" : true,
-		"P3" : false,
-		"P4" : true
-	},
-	"P2" : {
-		"P1" : true,
-		"P2" : false,
-		"P3" : true,
-		"P4" : false
-		},
-	"P3" : {
-		"P1" : false,
-		"P2" : true,
-		"P3" : false,
-		"P4" : true
-		},
-	"P4" : {
-		"P1" : true,
-		"P2" : false,
-		"P3" : true,
-		"P4" : false
-		}
-}
+[
+    {
+    	"name" : "P1",
+        "adjacent" : ["P2" , "P4"]
+    },
+    {    	
+    	"name" : "P2",
+        "adjacent" : ["P1" , "P2"]
+    },
+    {    	
+    	"name" : "P3",
+        "adjacent" : ["P2" , "P4"]
+    },
+    {    
+    	"name" : "P4",
+        "adjacent" : ["P1" , "P2"]
+    }   
+]

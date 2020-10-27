@@ -19,7 +19,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//Represents a queueable task for a province that takes duration turns to complete
+/**
+ * Represents a queueable task for a province that takes <code>duration</code>turns to complete
+ * @author ezra
+ *
+ */
 public enum ItemType{
 	// enum potential values
 	// infrastructure
@@ -36,7 +40,6 @@ public enum ItemType{
 //	ARCHERY_RANGE			(),
 //	ARTILLERY_RANGE			(),
 //	
-//	// units
 //	HEAVY_INFANTRY			(),
 //	ARCHER					(),
 	DRUID					("src/test/test_troop.json"),
@@ -88,27 +91,25 @@ public enum ItemType{
 	 * @param filename
 	 * @throws Exception 
 	 * @throws ExceptionInInitializerError if name, desc, cost,
-	 * duration or maxlvl is missing from the file
+	 * duration or maxlvl is missing frParsing.OM the file
 	 */
 	private void constructFromFile(String filename) throws Exception{
-		ObjectMapper om = new ObjectMapper();
-		JsonNode root = om.readTree(new File(filename));
-		
+		JsonNode root = Parsing.mapper.readTree(new File(filename));
 		// Needed to determine list size
-		this.maxLevel = om.readValue(root.get("maxLevel").toString(), Integer.class);
+		this.maxLevel = root.get("maxLevel").asInt();
 		
-		this.names = generateLevelList(om, root.get("names"));
-		this.descriptions = generateLevelList(om, root.get("descriptions"));
-		this.costs = generateLevelList(om, root.get("costs"));
-		this.durations = generateLevelList(om, root.get("durations"));
-		this.names = generateLevelList(om, root.get("names"));
+		this.names = generateLevelList(root.get("names"));
+		this.descriptions = generateLevelList(root.get("descriptions"));
+		this.costs = generateLevelList( root.get("costs"));
+		this.durations = generateLevelList(root.get("durations"));
+		this.names = generateLevelList(root.get("names"));
 		
 		this.attributes = new HashMap<String, List<Object>>();
 
 		Iterator<String> nodeNames = root.fieldNames();
 		while(nodeNames.hasNext() ) {
 			String nodeName = nodeNames.next();
-			attributes.put(nodeName, generateLevelList(om, root.get(nodeName)));
+			attributes.put(nodeName, generateLevelList(root.get(nodeName)));
 			if(attributes.get(nodeName).size() != maxLevel) {
 				throw new IOException(String.format("%s of %s had wrong number of elements.", nodeName, this.name()));
 			}
@@ -122,9 +123,9 @@ public enum ItemType{
  		return out;
 	}
 	
-	private <T> List<T> generateLevelList(ObjectMapper om, JsonNode node) throws Exception{
+	private <T> List<T> generateLevelList(JsonNode node) throws Exception{
 		if(node.isArray()) {
-			List<T> out = om.readValue(node.toString(), new TypeReference<List<T>>(){});
+			List<T> out = Parsing.mapper.readValue(node.toString(), new TypeReference<List<T>>(){});
 			if (out.size() != maxLevel) {
 				throw new DataInitializationException(
 						String.format("Error while parsing %s, to many elements in Json String: %s",
@@ -135,23 +136,51 @@ public enum ItemType{
 			}
 			return out;
 		}else {
-			return makeConstantList(om.readValue(node.toString(), new TypeReference<T>() {}), this.maxLevel);
+			return makeConstantList(Parsing.mapper.readValue(node.toString(), new TypeReference<T>() {}), this.maxLevel);
 		}
 	}
-	
+	/**
+	 * Gets item description for the given level. This will be displayed on the UI.
+	 * @param level
+	 * @return
+	 */
 	public String getDescription(int level) {
-		return descriptions.get(level);
+		return descriptions.get(level - 1);
 	}
-	
+
+	/**
+	 * Gets item description for the given level. This will be displayed on the UI.
+	 * @param level
+	 * @return
+	 */
 	public String getName(int level) {
-		return names.get(level);
+		return names.get(level - 1);
 	}
+
+	/**
+	 * Gets item description for the given level. This will be displayed on the UI.
+	 * @param level
+	 * @return
+	 */
 	public int getCost(int level) {
-		return costs.get(level);
+		return costs.get(level - 1);
 	}
+
+	/**
+	 * Gets the number of turns this item will take to complete for the given level.
+	 * This will be displayed on the UI, and also passedInto the ItemEntry
+	 * @param level
+	 * @return
+	 */
 	public int getDuration(int level) {
 		return durations.get(level);
 	}
+
+	/**
+	 * Gets the maximum level of this item.
+	 * @param level
+	 * @return
+	 */
 	public int getMaxLevel() {
 		return maxLevel;
 	}
@@ -169,7 +198,7 @@ public enum ItemType{
 							level)
 					);
 		}
-		return list.get(level);
+		return list.get(level-1);
 	}
 	
 	public static void main(String[] args) {

@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,21 +19,50 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * 
  * current version represents a heavy infantry unit (almost no range, decent armour and morale)
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Unit {
-	private ItemType type = ItemType.TEST_TROOP;
 	private BattleCharacteristic baseCharacteristic;
-	private List<BattleModifier> supportModifiers;
-	private List<BattleModifier> engagementModifiers;
+	private List<BattleModifier> supportModifiers = new ArrayList<>();
+	private List<BattleModifier> engagementModifiers = new ArrayList<>();
+
+	private int level = 1;
+	private ItemType type = ItemType.TEST_TROOP;
 	
-	private int maxMovPoints;
-	private int movPoints;
 	@JsonIdentityReference(alwaysAsId = true)
 	private Province province;
-	private boolean isMercenary;
+	private boolean isMercenary = false;
+	private boolean isRanged = false;
 	private int health;
+	private int maxMovPoints;
+	private int movPoints;
+	
+	@JsonCreator
+	public Unit(
+			@JsonProperty("type") ItemType newType,
+			@JsonProperty("level") int newLevel) {
+		if(newType != null) {
+			this.type = newType;
+		}
+		if(newLevel != 0) {
+			this.level = newLevel;
+		}
+		this.maxMovPoints = (Integer)this.type.getAttribute("movPoints", this.level);
+		this.health = (Integer)this.type.getAttribute("health", this.level);
+		this.baseCharacteristic = new BattleCharacteristic(this.type);
+		this.movPoints = this.maxMovPoints;
+	}
 
+	public Unit(ItemType type, int level, BattleCharacteristic baseCharacteristic, Province province) {
+		super();
+		this.type = type;
+		this.movPoints = this.maxMovPoints;
+		this.maxMovPoints = (Integer)this.type.getAttribute("movPoints", this.level);
+		this.health = (Integer)this.type.getAttribute("health", this.level);
+		this.movPoints = maxMovPoints;
+		this.province = province;
+	}
+	
 	public ItemType getType() {
 		return type;
 	}
@@ -57,35 +87,18 @@ public class Unit {
 		return movPoints;
 	}
 
-	public Province getProvince() {
-		return province;
-	}
-
 	public boolean isMercenary() {
 		return isMercenary;
+	}
+	public boolean isRanged() {
+		return isRanged;
 	}
 
 	public int getHealth() {
 		return health;
 	}
 
-	@JsonCreator
-	public Unit() {}
 
-	public Unit(ItemType type, BattleCharacteristic baseCharacteristic, List<BattleModifier> supportModifiers,
-			List<BattleModifier> engagementModifiers, int maxMovpoints, int movPoints, Province province,
-			boolean isMercenary, int health) {
-		super();
-		this.type = type;
-		this.baseCharacteristic = baseCharacteristic;
-		this.supportModifiers = supportModifiers;
-		this.engagementModifiers = engagementModifiers;
-		this.maxMovPoints = maxMovpoints;
-		this.movPoints = movPoints;
-		this.province = province;
-		this.isMercenary = isMercenary;
-		this.health = health;
-	}
 
     
 }

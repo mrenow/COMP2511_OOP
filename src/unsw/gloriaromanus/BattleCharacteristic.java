@@ -6,8 +6,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.StringIdGenerator.class, property="@id")
-@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, creatorVisibility = Visibility.ANY)
+/**
+ * An information struct which contains all the data needed to determine the result of an engagement.
+ * 
+ */
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class BattleCharacteristic {
 	
 	// Base characteristics
@@ -19,9 +23,11 @@ public class BattleCharacteristic {
 	private double speedBase = 0; 
 	private double attackBase = 0; 
 	
+
 	private double defenseSkill = 0;
 	private double shieldDefense = 0;
-	
+
+	// Should not change 
 	private double armourMult = 1;
 	private double moraleMult = 1;
 	private double speedMult = 1;
@@ -32,8 +38,10 @@ public class BattleCharacteristic {
 	private double speedAdd = 0;
 	private double attackAdd = 0;  
 
+
 	@JsonCreator
 	private BattleCharacteristic() {}
+	
 	public BattleCharacteristic(double armour, double morale, double speed, double attack, double defenseSkill,
 			double shieldDefense) {
 		super();
@@ -45,6 +53,9 @@ public class BattleCharacteristic {
 		this.shieldDefense = shieldDefense;
 	}
 
+	public BattleCharacteristic(ItemType type) {
+		// TODO Load all relevant fields from type.
+	}
 	public double getArmour() {
 		if (armourBase == Double.NEGATIVE_INFINITY) {
 			return 0;
