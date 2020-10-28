@@ -10,20 +10,29 @@ import java.util.List;
  * @param <T>
  */
 public class Concatenator<T> implements Iterable<T>{	
-	List<List<T>> lists;
+	private List<Iterable<T>> iterables;
 
 	@SafeVarargs
-	public Concatenator(List<T> ... lists) {
-		this.lists = List.of(lists);
+	public Concatenator(Iterable<T> ... iterables) {
+		this.iterables = List.of(iterables);
 	}
 	
+	public Concatenator<T> add(Iterable<T> iterable) {
+		this.iterables.add(iterable);
+		return this;
+	}
+	public Concatenator<T> add(T value) {
+		this.iterables.add(List.of(value));
+		return this;
+	}
+		
 	@Override
 	public Iterator<T> iterator() {
 		return new ConcatenateIterator();
 	}
 	
 	public class ConcatenateIterator implements Iterator<T> {
-		Iterator<List<T>> 	parentIterator = lists.iterator();
+		Iterator<Iterable<T>> 	parentIterator = iterables.iterator();
 		// Set to empty iterator to handle init.
 		Iterator<T> childIterator = Collections.emptyIterator();
 		@Override
