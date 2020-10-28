@@ -119,7 +119,7 @@ public class Battle {
 
 		Unit routeUnit = null;
 		Unit chaseUnit = null;
-
+		
 		while (numEngagements < 200) {
 			numEngagements++;
 
@@ -128,7 +128,7 @@ public class Battle {
 			
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 
-			combatModifiers = tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls)
+			combatModifiers = tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls);
 
 			inflictDamage(attackUnit, defendUnit, ATTACKER, combatModifiers);
 			inflictDamage(defendUnit, attackUnit, DEFENDER, combatModifiers);
