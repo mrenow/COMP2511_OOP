@@ -14,7 +14,10 @@ import java.util.List;
  */
 public class Concatenator<T> implements Iterable<T>{	
 	protected final Iterable<Iterable<T>> iterables;
-	
+	@SafeVarargs
+	public Concatenator(T ... items) {
+		iterables = List.of(List.of(items));
+	}
 	public Concatenator(Iterable<T> i1, Iterable<T> i2) {
 		this.iterables = List.of(i1, i2);
 	}
@@ -44,6 +47,10 @@ public class Concatenator<T> implements Iterable<T>{
 	@SafeVarargs
 	public final Concatenator<T> and(Iterable<T> ... iterables) {
 		return new Concatenator<T>(this, new Concatenator<T>(iterables)); 
+	}
+	@SafeVarargs
+	public final Concatenator<T> and(T ... items){
+		return new Concatenator<T>(this, new Concatenator<T>(items));
 	}
 	
 	@Override
