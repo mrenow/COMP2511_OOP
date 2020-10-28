@@ -42,24 +42,23 @@ public class CombatData {
 	}
 
 	/* Curse you demeter!!!!! */
-	public double getArmour(BattleSide side) {
-		return data.get(side).stats.getArmour();
-	}
-
-	public double getSpeed(BattleSide side) {
-		return data.get(side).stats.getSpeed();
-	}
 
 	public double getAttack(BattleSide side) {
 		return data.get(side).stats.getAttack();
 	}
-
+	
+	public double getArmour(BattleSide side) {
+		return data.get(side).stats.getArmour();
+	}
 	public double getDefenseSkill(BattleSide side) {
 		return data.get(side).stats.getDefenseSkill();
 	}
 
 	public double getShieldDefense(BattleSide side) {
 		return data.get(side).stats.getShieldDefense();
+	}
+	public double getEffectiveArmour(BattleSide side) {
+		return getShieldDefense(side) + getDefenseSkill(side) + getArmour(side);
 	}
 
 	void setArmour(BattleSide side, double armour) {
@@ -68,10 +67,6 @@ public class CombatData {
 
 	void setMorale(BattleSide side, double morale) {
 		data.get(side).stats.setMorale(morale);
-	}
-
-	void setSpeed(BattleSide side, double speed) {
-		data.get(side).stats.setSpeed(speed);
 	}
 
 	void setAttack(BattleSide side, double attack) {
@@ -90,10 +85,6 @@ public class CombatData {
 		data.get(side).stats.addArmour(armour);
 	}
 
-	void addSpeed(BattleSide side, double speed) {
-		data.get(side).stats.addSpeed(speed);
-	}
-
 	void addAttack(BattleSide side, double attack) {
 		data.get(side).stats.addAttack(attack);
 	}
@@ -108,10 +99,6 @@ public class CombatData {
 
 	void multArmour(BattleSide side, double armourMult) {
 		data.get(side).stats.multArmour(armourMult);
-	}
-
-	void multSpeed(BattleSide side, double speedMult) {
-		data.get(side).stats.multSpeed(speedMult);
 	}
 
 	void multAttack(BattleSide side, double attackMult) {

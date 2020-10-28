@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import util.MappingIterable;
+import util.MathUtil;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -151,7 +152,9 @@ public class Unit {
 	void addCombatModifier(CombatModifierMethod m) {
 		combatModifiers.get(m.getActiveType()).add(m);
 	}
-	
+	void damage(int damage) {
+		health = MathUtil.max(health-damage, 0);
+	}
 }
 
 

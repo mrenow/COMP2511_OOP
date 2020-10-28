@@ -16,7 +16,7 @@ public class CombatModifier{
 		this.method = method;
 	}
 	
-	public void alterEngagement(CombatData data) {
+	public void modify(CombatData data) {
 		method.alterEngagement(data, side);
 	}
 }
@@ -25,14 +25,14 @@ public class CombatModifier{
 /**
  * Identifies a battle modifying strategy
  * Probably going to change this a lot yikes
- * @param e,
+ * @param data,
  * @return
  */
 enum CombatModifierMethod {
 
 	WALLS(SUPPORT) {
 		@Override
-		public void alterEngagement(CombatData e, BattleSide side) {
+		public void alterEngagement(CombatData data, BattleSide side) {
 			// Check if both are ranged
 			// Check if both are meelee
 			
@@ -40,51 +40,50 @@ enum CombatModifierMethod {
 			
 		}
 	},
-	TRY_RANGED(SUPPORT){
+	RANGED(null){
 			@Override
-			public void alterEngagement(CombatData e, BattleSide side) {
-				if(!e.getUnit(side).isRanged()) {
-					e.setAttack(side, Double.NEGATIVE_INFINITY);	
+			public void alterEngagement(CombatData data, BattleSide side) {
+				if(!data.getUnit(side).isRanged()) {
+					data.setAttack(side, Double.NEGATIVE_INFINITY);	
 				}			
-				e.setDefenseSkill(side, Double.NEGATIVE_INFINITY);
-				
+				data.setDefenseSkill(side, Double.NEGATIVE_INFINITY);
 			}
 	},
 
 	// Guarantee: Unit is Ranged
 	FIRE_ARROWS_DAMAGE(ENGAGEMENT){
 		@Override
-		public void alterEngagement(CombatData e, BattleSide side) {
-			e.multAttack(side, 0.9);
+		public void alterEngagement(CombatData data, BattleSide side) {
+			data.multAttack(side, 0.9);
 		}
 	},
 	// Guarantee: Unit is artillery
 	ARTILLERY(ENGAGEMENT){
 		@Override
-		public void alterEngagement(CombatData e, BattleSide side) {
-			Unit enemy = e.getUnit(side.other());			
+		public void alterEngagement(CombatData data, BattleSide side) {
+			Unit enemy = data.getUnit(side.other());			
 			if(enemy.getClass() == Tower.class) {
-				Artillery self = (Artillery)e.getUnit(side);
-				e.setAttack(side, self.getTowerAttack());
+				Artillery self = (Artillery)data.getUnit(side);
+				data.setAttack(side, self.getTowerAttack());
 		
 			}
 		}
 	},
 	TOWER(ENGAGEMENT){
 		@Override
-		public void alterEngagement(CombatData e, BattleSide side) {
-			Unit enemy = e.getUnit(side);
+		public void alterEngagement(CombatData data, BattleSide side) {
+			Unit enemy = data.getUnit(side);
 			if(enemy.getClass() != Artillery.class) {
 				// non-artillery units cannot damage towers
-				e.setAttack(side.other(), Double.NEGATIVE_INFINITY);
+				data.setAttack(side.other(), Double.NEGATIVE_INFINITY);
 			}
-			// tower engagements are ranged, so they nullify shield defense
-			e.setDefenseSkill(side.other(), Double.NEGATIVE_INFINITY);
+			// tower datangagements are ranged, so they nullify shield defense
+			data.setDefenseSkill(side.other(), Double.NEGATIVE_INFINITY);
 		}
 	},
 	SHIELD_CHARGE(ENGAGEMENT){
 		@Override
-		public void alterEngagement(CombatData e, BattleSide side) {
+		public void alterEngagement(CombatData data, BattleSide side) {
 			// TODO Every 4th charge? 
 		}
 	};
@@ -108,10 +107,14 @@ enum CombatModifierMethod {
 	}
 	
 	
-	public abstract void alterEngagement(CombatData e, BattleSide side);
+	public abstract void alterEngagement(CombatData data, BattleSide side);
 	
 }
-
+/**
+ * Denotes whether the method is global or local to the given datangagement.
+ * null values are accepted: they indicate that this method does not belong to a unit
+ * and an error will be thrown when one attempts to add them to a unit.
+ */
 enum ActiveType {
 	SUPPORT, ENGAGEMENT;
 }

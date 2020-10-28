@@ -25,8 +25,8 @@ enum MoraleModifierMethod {
 	DRUIDIC_FERVOUR(SUPPORT){
 		// This is really dumb but 2511 has forced my hand
 		@Override
-		public void alterMorale(MoraleData d, BattleSide side) {
-			List<Unit> allies = d.getArmy(side);
+		public void alterMorale(MoraleData data, BattleSide side) {
+			List<Unit> allies = data.getArmy(side);
 			// search allies for druids
 			int numDruids = 0;
 			for (Unit u : allies) { 
@@ -38,14 +38,14 @@ enum MoraleModifierMethod {
 			double moraleBuff = Math.pow(1 + 0.1*Math.min(numDruids, 5), 1.0/numDruids);
 			double moraleDebuff = Math.pow(1 - 0.1*Math.min(numDruids, 5), 1.0/numDruids);
 			// Apply morale bonus
-			d.multMorale(side, moraleBuff);
-			d.multMorale(side.other(), moraleDebuff);
+			data.multMorale(side, moraleBuff);
+			data.multMorale(side.other(), moraleDebuff);
 		}
 	},
 	FIRE_ARROWS_MORALE(ENGAGEMENT){
 		@Override
-		public void alterMorale(MoraleData d, BattleSide side) {
-			d.multMorale(side.other(), 0.8);
+		public void alterMorale(MoraleData data, BattleSide side) {
+			data.multMorale(side.other(), 0.8);
 		}
 	};
 	
