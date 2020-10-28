@@ -30,6 +30,8 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 public class Parsing {
 	public static final ObjectMapper mapper = configuredObjectMapper();
 	
+	
+	
 	private static ObjectMapper configuredObjectMapper() {
 		ObjectMapper newMapper = JsonMapper.builder()
 				.enable(
@@ -47,6 +49,16 @@ public class Parsing {
 				
 		return newMapper;
 	}
+	
+	public static <T extends Enum<T>> T getEnum(String name) {
+		try {
+			// Im lazy
+			return Parsing.mapper.readValue(name.toUpperCase(), new TypeReference<T>() {});
+		}catch(Exception e){
+			return null;
+		}
+	}
+	
 	
 	
 	// Constructs provinces

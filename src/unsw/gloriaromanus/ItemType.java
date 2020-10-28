@@ -47,6 +47,8 @@ public enum ItemType{
 	TEST_BUILDING			("src/test/test_building.json"),
 	HEAVY_CAVALRY			("src/test/test_calvary.json");
 	
+	
+	
 	private static final String SOURCE_DIR = "src/data";
 	
 	// Attributes
@@ -128,7 +130,7 @@ public enum ItemType{
 			List<T> out = Parsing.mapper.readValue(node.toString(), new TypeReference<List<T>>(){});
 			if (out.size() != maxLevel) {
 				throw new DataInitializationException(
-						String.format("Error while parsing %s, to many elements in Json String: %s",
+						String.format("Error while parsing %s, too many elements in Json String: %s",
 								this.name(),
 								node.toString()
 								)
