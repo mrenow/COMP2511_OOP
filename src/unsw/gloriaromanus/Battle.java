@@ -72,8 +72,8 @@ public class Battle {
 		// read in buffs
 		// TODO
 		// random choose two units
-		this.attackUnit = pickUnit(this.attackArmy);
-		this.defendUnit = pickUnit(this.defendArmy);
+		this.attackUnit = pickUnit(ATTACKER);
+		this.defendUnit = pickUnit(DEFENDER);
 //        this.aData = new CombatData();
 //        this.dData = new CombatData();
 		// setupdata

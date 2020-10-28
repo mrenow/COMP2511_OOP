@@ -65,10 +65,6 @@ public class CombatData {
 		data.get(side).stats.setArmour(armour);
 	}
 
-	void setMorale(BattleSide side, double morale) {
-		data.get(side).stats.setMorale(morale);
-	}
-
 	void setAttack(BattleSide side, double attack) {
 		data.get(side).stats.setAttack(attack);
 	}
