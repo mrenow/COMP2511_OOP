@@ -44,6 +44,7 @@ public class Unit {
 	private int health;
 	private int maxMovPoints;
 	private int movPoints;
+	private double speed;
 	
 	@JsonCreator
 	public Unit(
@@ -59,6 +60,7 @@ public class Unit {
 		this.maxMovPoints = (Integer) this.type.getAttribute("movPoints", this.level);
 		this.health = (Integer) this.type.getAttribute("health", this.level);
 		this.morale = (Double) this.type.getAttribute("morale", this.level);
+		this.speed = (Double) this.type.getAttribute("speed", this.level);
 		this.baseCharacteristic = new CombatStats(this.type);
 		this.movPoints = this.maxMovPoints;
 	}
@@ -121,7 +123,11 @@ public class Unit {
 	public double getMorale() {
 		return morale;
 	}
-	
+
+	public double getSpeed() {
+		return speed;
+	}
+
 	public Province getProvince() {
 		return province;
 	}
