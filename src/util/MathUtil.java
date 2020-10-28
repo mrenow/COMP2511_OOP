@@ -2,39 +2,39 @@ package util;
 
 public class MathUtil {
 	
-	public int min(int a, int b) {
+	public static int min(int a, int b) {
 		return a < b ? a : b; 	
 	}
 	
-	public double min(double a, double b) {
+	public static double min(double a, double b) {
 		return a < b ? a : b; 	
 	}
 	
-	public <T extends Comparable<T>> T min(T a, T b){
+	public static <T extends Comparable<T>> T min(T a, T b){
 		return a.compareTo(b) < 0 ? a : b;
 	} 
 
-	public int max(int a, int b) {
+	public static int max(int a, int b) {
 		return a > b ? a : b; 	
 	}
 	
-	public double max(double a, double b) {
+	public static double max(double a, double b) {
 		return a > b ? a : b; 	
 	}
 	
-	public <T extends Comparable<T>> T max(T a, T b){
+	public static <T extends Comparable<T>> T max(T a, T b){
 		return a.compareTo(b) > 0 ? a : b;
 	} 
 	
-	public int constrain(int a, int max, int min) {
+	public static int constrain(int a, int min, int max) {
 		return max(min(a, max),min);
 	}
 	
-	public double constrain(double a, double max, double min) {
+	public static double constrain(double a, double min, double max) {
 		return max(min(a, max),min);
 	}
 	
-	public <T extends Comparable<T>> T constrain(T a, T max, T min) {
+	public static <T extends Comparable<T>> T constrain(T a, T min, T max) {
 		return max(min(a, max),min);
 	}
 
