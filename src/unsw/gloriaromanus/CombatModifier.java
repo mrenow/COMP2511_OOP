@@ -109,6 +109,7 @@ enum CombatModifierMethod {
 			}
 		}
 	},
+	/* Done in Unit Creation
 	BERSERKER_RAGE(ENGAGEMENT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side){
@@ -125,11 +126,15 @@ enum CombatModifierMethod {
 			data.multShieldDefense(side, 2);
 		}
 	},
+	*/
 	CANTABRIAN_CIRCLE(ENGAGEMENT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side) {
 			// TODO Enemy missile units 50% loss missileatkDMG
-
+			Unit enemy = data.getUnit(side);
+			if(enemy.getClass() == ) {
+				
+			}
 		}
 	},
 	HEROIC_CHARGE(ENGAGEMENT) {
@@ -162,4 +167,12 @@ enum CombatModifierMethod {
 	
 	public abstract void alterEngagement(CombatData data, BattleSide side);
 	
+}
+/**
+ * Denotes whether the method is global or local to the given datangagement.
+ * null values are accepted: they indicate that this method does not belong to a unit
+ * and an error will be thrown when one attempts to add them to a unit.
+ */
+enum ActiveType {
+	SUPPORT, ENGAGEMENT;
 }

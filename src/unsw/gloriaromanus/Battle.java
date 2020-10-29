@@ -129,10 +129,13 @@ public class Battle {
 			
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 
-			combatModifiers = tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls);
-
-			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers);
-			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers);
+			boolean isRanged = tryRanged(attackUnit, defendUnit, hasWalls);
+			if(isRanged){
+				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
+			}
+			
+			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged);
+			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
 			
 			// Unit died, end engagement
 			// Removal from armies is handled by inflictDamage
@@ -187,7 +190,11 @@ public class Battle {
 	private void runBreaking(Unit chaseUnit, Unit routeUnit, BattleSide chaseSide) {
 		Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 		while(routeUnit.isAlive()) {
-			inflictDamage(chaseUnit, routeUnit, chaseSide, tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls));
+			boolean isRanged = tryRanged(chaseUnit, routeUnit, hasWalls);
+			if(isRanged){
+				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
+			}
+			inflictDamage(chaseUnit, routeUnit, chaseSide, combatModifiers, isRanged);
 			
 			double routeChance = 0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed());
 			// unit routes
@@ -202,7 +209,7 @@ public class Battle {
 	/**
 	 * Handles picking units in elephants amok, CombatModifiers, damage, and killing units 
 	 */
-	private void inflictDamage(Unit aggressor, Unit victim, BattleSide aggressorSide, Concatenator<CombatModifier> combatModifiers) {
+	private void inflictDamage(Unit aggressor, Unit victim, BattleSide aggressorSide, Concatenator<CombatModifier> combatModifiers, boolean isRanged) {
     	// Elephants running amok:
 		// Late nights and a dim screen are all I've known,
 		// Every new day bringing new incorrect solution.
@@ -225,10 +232,10 @@ public class Battle {
 		CombatData data;
 		switch(aggressorSide) {
 		case ATTACK:
-			data = new CombatData(aggressor, victim, armies.get(ATTACK), armies.get(DEFEND));
+			data = new CombatData(aggressor, victim, armies.get(ATTACK), armies.get(DEFEND), isRanged);
 			break;
 		case DEFEND:
-			data = new CombatData(victim, aggressor, armies.get(ATTACK), armies.get(DEFEND));
+			data = new CombatData(victim, aggressor, armies.get(ATTACK), armies.get(DEFEND), isRanged);
 			break;
 		default:
 			throw new NullPointerException("aggressorSide was null you dumbass");
@@ -269,15 +276,13 @@ public class Battle {
 	 * @returns returns the input and with a ranged modifier if the engagment is ranged. 
 	 * returns the input CombatModifier Concatenator otherwise.
 	 */
-	private static Concatenator<CombatModifier> tryModifyRanged(Concatenator<CombatModifier> m, Unit u1, Unit u2, boolean walls) {
+	private static boolean tryRanged(Unit u1, Unit u2, boolean walls) {
 		if (u1.isRanged() && u2.isRanged()) {
-			return m.and(RANGED_MODIFIER);
-		}else if (!u1.isRanged() && u2.isRanged()) {
-			return m;
+			return u1.isRanged();
 		}
 		// Not in spec anymore
 		if (u1 instanceof Tower || u2 instanceof Tower) {
-			return m.and(RANGED_MODIFIER);
+			return true;
 		}
 		
 		double baseChance = 0.5;
@@ -289,11 +294,7 @@ public class Battle {
 		// We know either u1 or u2 is ranged.
 		double rangedChance = baseChance + (u1.getSpeed() - u2.getSpeed()) * (u1.isRanged() ? 0.1 : -0.1);
 		rangedChance = MathUtil.constrain(rangedChance, 0.05, 0.95);
-		if(GlobalRandom.nextUniform() < rangedChance) {
-			return m.and(RANGED_MODIFIER);
-		} else {
-			return m;
-		}
+		return GlobalRandom.nextUniform() < rangedChance;
 	}
 
 

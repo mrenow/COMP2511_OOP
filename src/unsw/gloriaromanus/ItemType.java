@@ -46,6 +46,7 @@ public enum ItemType{
 	TEST_TROOP				("src/test/test_troop.json"),
 	TEST_BUILDING			("src/test/test_building.json"),
 	HEAVY_CAVALRY			("src/test/test_calvary.json"),
+	JAVELIN_SKIRMISHER		("src/test/test_troop.json"),
 	ELEPHANTS				("src/test/test_troop.json");
 	
 	
