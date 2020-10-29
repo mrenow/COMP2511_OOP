@@ -112,15 +112,17 @@ enum CombatModifierMethod {
 	BERSERKER_RAGE(ENGAGEMENT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side){
-			// TODO Unit has infinite morale, double meleeATK, no armour, no shield
-				
+			// Unit has infinite morale, double meleeATK, no armour, no shield
+			data.multAttack(side, 2);
+			data.multArmour(side, Double.NEGATIVE_INFINITY);
+			data.setDefenseSkill(side, Double.NEGATIVE_INFINITY);
 		}
 	},
 	PHALANX(ENGAGEMENT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side) {
 			// TODO Unit has double meleeDEF, half speed
-
+			data.multShieldDefense(side, 2);
 		}
 	},
 	CANTABRIAN_CIRCLE(ENGAGEMENT) {

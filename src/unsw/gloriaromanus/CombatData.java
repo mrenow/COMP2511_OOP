@@ -101,4 +101,8 @@ public class CombatData {
 		data.get(side).stats.multAttack(attackMult);
 	}
 
+	void multShieldDefense(BattleSide side, double shieldDefense) {
+		data.get(side).stats.multShieldDefense(shieldDefense);
+	}
+
 }
