@@ -26,8 +26,6 @@ public class MoveTest {
     private Faction player;
     private List<Unit> allUnits;
     
-    
-    
     public void setup() throws DataInitializationException {
     	game = new GameController("src/test/testAdjacency_movement.json", null, "src/test/testOwnership_movement.json");
 		player = game.getCurrentTurn();
@@ -89,9 +87,8 @@ public class MoveTest {
 		// Check that all movement points are regained.
 		assertEquals(4, U(3).getMovPoints());
 		TestUtil.assertCollectionEquals(List.of(P(1), P(2), P(3), P(5), P(6), P(7), P(8), P(9), P(10), P(11)), game.getDestinations(List.of(U(3))));
-		
-		
 	}
+	
 	@Test
 	public void movementWithEnemy(){
 		// disown middle province
@@ -108,21 +105,19 @@ public class MoveTest {
 		game.move(List.of(U(3)), P(3));
 		assertEquals(0, U(3).getMovPoints());
 	}
+	
 	// eh ceebs.
 	public void movementWithRoads() {
 		
 
 		
 	}
-	
+
 	private Province P(int index) {
 		return game.getProvince("P" + index);
 	}	
 	private Unit U( int index) {
 		return allUnits.get(index);
-	}
-	private int intMax(int a, int b) {
-		return a > b ? a : b;
 	}
 	@AfterEach
 	public void cleanUp() {
