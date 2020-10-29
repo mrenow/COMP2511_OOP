@@ -14,6 +14,8 @@ import java.util.List;
  * @author ezra
  */
 public class CombatData {
+	
+	private boolean isRanged;
 	private EnumMap<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
 
 	private class SideData {
@@ -27,8 +29,8 @@ public class CombatData {
 			this.stats = unit.getCombatStats();
 		}
 	}
-	
-	public CombatData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy) {
+	 
+	public CombatData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy, boolean isRanged) {
 		data.put(ATTACK, new SideData(attackerUnit, attackerArmy));
 		data.put(DEFEND, new SideData(defenderUnit, defenderArmy));
 	}
@@ -42,7 +44,10 @@ public class CombatData {
 	}
 
 	/* Curse you demeter!!!!! */
-
+	public boolean isRanged() {
+		return isRanged;
+	}
+	
 	public double getAttack(BattleSide side) {
 		return data.get(side).stats.getAttack();
 	}
