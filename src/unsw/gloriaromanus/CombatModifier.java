@@ -115,6 +115,12 @@ enum CombatModifierMethod {
 			// TODO Unit has infinite morale, double meleeATK, no armour, no shield
 				
 		}
+	},
+	PHALANX(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// TODO Unit has double meleeDEF, half speed
+		}
 	};
 	
 	
