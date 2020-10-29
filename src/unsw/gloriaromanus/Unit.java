@@ -158,6 +158,9 @@ public class Unit {
 	void damage(int damage) {
 		health = MathUtil.max(health-damage, 0);
 	}
+	void expendMovement(int cost) {
+		movPoints -= cost;
+	}
 }
 
 

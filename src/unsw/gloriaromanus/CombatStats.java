@@ -130,5 +130,4 @@ public class CombatStats {
 	void multShieldDefense(double shieldDefense) {
 		this.shieldDefense *= shieldDefense;
 	}
-
 }

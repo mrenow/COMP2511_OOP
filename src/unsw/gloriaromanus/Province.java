@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="name")
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
-public class Province {
+public class Province{
 	// Required
 	private String name; 
 	
@@ -32,8 +32,10 @@ public class Province {
 	// Generated every turn
 	private int townWealth = 0;
 	private TaxLevel taxLevel = TaxLevel.NORMAL_TAX;
-
+	
+	private int movCost = 4;
 	private boolean isLandlocked = false;
+	private boolean isConquered = false;
 
 	private List<Unit> units = new ArrayList<>();
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
@@ -60,12 +62,14 @@ public class Province {
 		this.owner = owner;	
 		this.adjacent.addAll(adjacent);
 	}
+	
 	/**
 	 * Should not be used outside setup
 	 */
 	void addConnection(Province p) {
 		this.adjacent.add(p);
 	}
+	
 	/**
 	 * Should not be used outside setup
 	 */
@@ -117,7 +121,13 @@ public class Province {
 	
 //	Called when province training menu is opened
 	public List<ItemType> getTrainable(){return null;}
-
+	
+	public int getMovCost() {
+		return movCost;
+	}
+	public boolean isConquered() {
+		return isConquered;
+	}
 	//public void moveUnits(List<Unit> units){this.units.add(units);}
 	
 	@Override
@@ -158,7 +168,9 @@ public class Province {
 	}
 	void removeUnit(Unit unit) {
 		this.units.remove(unit);
-		
 	}
+	
+
+	
 	
 }

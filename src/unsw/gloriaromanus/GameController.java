@@ -2,28 +2,26 @@ package unsw.gloriaromanus;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
-
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 import org.geojson.Point;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import util.MappingIterable;
+import util.MathUtil;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser.Feature;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
@@ -69,6 +67,8 @@ public class GameController {
 	public GameController(String adjacencyFile,
 			String landlockedFile, String factionFile) throws DataInitializationException{
 		Map<String, Province> provinceMap;
+		
+		
 		try {
 			provinceMap = Parsing.readAdjacency(adjacencyFile);
 			if(landlockedFile != null) {
@@ -225,14 +225,48 @@ public class GameController {
 		//TODO set up attackinfo baseed on battle result
 		return attackInfo;
 	}
+	
 //	Constraints:
 //	destination from getDestinations()
 //	units.province is invariant
-	public void move (List<Unit> units, Province destination) {
-		for (Unit unit : units) {
-			unit.getProvince().getUnits().remove(unit);
+	public void move (List<Unit> unitGroup, Province destination) {
+		Map<Province, Integer> seen = new HashMap<>(allProvinces.size());
+		for(Province p : allProvinces) {
+			seen.put(p, Integer.MAX_VALUE);
 		}
-		destination.addUnits(units);
+		
+		int movCost = -1;
+		Queue<Province> queued = new LinkedList<>();
+		
+		Province start = unitGroup.get(0).getProvince(); // 
+		Faction faction = start.getOwner();
+		
+		queued.add(start);
+		seen.put(start, 0);
+		while(!queued.isEmpty()) {
+			Province p = queued.poll();
+			int dist = seen.get(p) + p.getMovCost();
+			for (Province q : p.getAdjacent()) {
+				if(q.equals(destination)) {
+					movCost = dist;
+					queued.clear();
+					break;
+				}
+				if(seen.get(q) <= dist || !faction.equals(q.getOwner())) {
+					continue;
+				}
+				seen.put(q, dist);
+				queued.add(p);
+			}
+		}
+		assert movCost != -1 : "either contract was breached or algorithm is buggy";
+		
+		// Move units between provinces and subtract mov points accordingly.
+		for (Unit unit : unitGroup) {
+			start.getUnits().remove(unit);
+			unit.expendMovement(movCost);
+		}
+		destination.addUnits(unitGroup);
 	}
 	
 //	Increases the turn counter by 1 
@@ -265,13 +299,42 @@ public class GameController {
 	
 //	Called when a group of units is selected to determine which provinces to highlight
 //  Does not return the province the units are in.
+// 	Modify later to return a path?s
 	public Collection<Province> getDestinations(List<Unit> unitGroup){
-		List<Province> provinces = new ArrayList<>();
-		provinces.addAll(getCurrentTurn().getProvinces());
-		for (Unit unit : unitGroup) {
-			provinces.remove(unit.getProvince());
+		int distMax = MathUtil.min(new MappingIterable<>(unitGroup, Unit::getMovPoints));
+		if(distMax == 0) {
+			return Collections.emptySet();
 		}
-		return provinces;
+		Collection<Province> out = new HashSet<Province>();
+		
+		Map<Province, Integer> seen = new HashMap<>(allProvinces.size());
+		for(Province p : allProvinces) {
+			seen.put(p, Integer.MAX_VALUE);
+		}
+		
+		Queue<Province> queued = new LinkedList<>();
+		
+		Province start = unitGroup.get(0).getProvince();
+		Faction faction = start.getOwner();
+		// dont add start to out
+		queued.add(start);
+		seen.put(start, 0);
+		while(!queued.isEmpty()) {
+			Province p = queued.poll();
+			int dist = seen.get(p) + p.getMovCost();
+			if(dist == distMax + p.getMovCost()){
+				continue;
+			}
+			for (Province q : p.getAdjacent()) {
+				if(seen.get(q) <= dist || !faction.equals(q.getOwner())) {
+					continue;
+				}
+				out.add(q);
+				seen.put(q, dist);
+				queued.add(p);
+			}
+		}
+		return out;
 	}
 	
 //	Called when highlighting provinces to attack
@@ -296,8 +359,10 @@ public class GameController {
 	
 //	returns the province with this name (debug / testing only).
 	public Province getProvince(String name){return null;}
-	
+	public int getNumProvinces() {
+		return allProvinces.size();
+	}
 //	Displayed on UI
 	public int getYear() {return 200+round;}
-		
+	
 }
