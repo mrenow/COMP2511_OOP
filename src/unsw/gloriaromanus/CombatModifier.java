@@ -97,6 +97,48 @@ enum CombatModifierMethod {
 				data.addAttack(side, data.getShieldDefense(side));				
 			}
 		}
+	},
+	SKIRMISHER_ANTI_ARMOUR(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// Check if ranged engagement
+			// TODO
+			if () {
+				// Enemy only has half armour value
+				data.multArmour(side.other(), 0.5);
+			}
+		}
+	},
+	BERSERKER_RAGE(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side){
+			// Unit has infinite morale, double meleeATK, no armour, no shield
+			data.multAttack(side, 2);
+			data.multArmour(side, Double.NEGATIVE_INFINITY);
+			data.setDefenseSkill(side, Double.NEGATIVE_INFINITY);
+		}
+	},
+	PHALANX(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// TODO Unit has double meleeDEF, half speed
+			data.multShieldDefense(side, 2);
+		}
+	},
+	CANTABRIAN_CIRCLE(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// TODO Enemy missile units 50% loss missileatkDMG
+
+		}
+	},
+	HEROIC_CHARGE(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// When army has <50% of enemy units, apply this
+			// TODO Double attack dmg, 50% inc morale
+
+		}
 	};
 	
 	

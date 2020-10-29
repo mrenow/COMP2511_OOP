@@ -127,4 +127,8 @@ public class CombatStats {
 		this.attackMult *= attackMult;
 	}
 	
+	void multShieldDefense(double shieldDefense) {
+		this.shieldDefense *= shieldDefense;
+	}
+
 }
