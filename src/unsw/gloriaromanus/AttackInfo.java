@@ -1,8 +1,15 @@
 package unsw.gloriaromanus;
-/**
- * Information struct containing all the results of an attack
- * 
- */
-public class AttackInfo {
 
+public enum AttackInfo {
+    WIN, LOSE, DRAW;
+    public AttackInfo defenderView(AttackInfo info){
+        switch (info) {
+            case WIN:
+                return LOSE;
+            case LOSE:
+                return WIN;
+            default:
+                return info;
+        }
+    }
 }

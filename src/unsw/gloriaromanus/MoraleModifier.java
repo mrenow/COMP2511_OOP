@@ -47,6 +47,31 @@ enum MoraleModifierMethod {
 		public void alterMorale(MoraleData data, BattleSide side) {
 			data.multMorale(side.other(), 0.8);
 		}
+	},
+	LEGIONARY_EAGLE(SUPPORT) {
+		@Override
+		public void alterMorale(MoraleData data, BattleSide side) {
+			Unit myUnit = data.getUnit(side);
+			Province p = myUnit.getProvince();
+			// TODO +1 Morale to all units in province
+			for ( SOMETHINGHERE : listofunits) {
+				data.addMorale(side, 1);
+			}
+		}
+	},
+	HEROIC_CHARGE(ENGAGEMENT) {
+		@Override
+		public void alterMorale(MoraleData data, BattleSide side) {
+			// When army has <50% of enemy units, apply this
+			// Double attack dmg, 50% inc morale
+			Unit enemy = data.getUnit(side.other());
+			Unit myUnit = data.getUnit(side);
+
+			int value = (myUnit.getHealth() / enemy.getHealth()) * 100;
+			if (value < 50) {
+				data.multMorale(side, 1.5);
+			}
+		}
 	};
 	
 

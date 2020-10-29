@@ -221,7 +221,7 @@ public class GameController {
 	
 	public AttackInfo invade(List<Unit>attackers,List<Unit> defenders){
 		Battle battle = new Battle(attackers,defenders);
-		AttackInfo attackInfo = new AttackInfo();
+		AttackInfo attackInfo = battle.getResult();
 		//TODO set up attackinfo baseed on battle result
 		return attackInfo;
 	}

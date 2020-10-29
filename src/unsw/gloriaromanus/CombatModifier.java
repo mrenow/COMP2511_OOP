@@ -103,12 +103,13 @@ enum CombatModifierMethod {
 		public void alterEngagement(CombatData data, BattleSide side) {
 			// Check if ranged engagement
 			// TODO
-			if () {
+			if (data.isRanged()) {
 				// Enemy only has half armour value
 				data.multArmour(side.other(), 0.5);
 			}
 		}
 	},
+	/* Done in Unit Creation instead
 	BERSERKER_RAGE(ENGAGEMENT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side){
@@ -125,19 +126,29 @@ enum CombatModifierMethod {
 			data.multShieldDefense(side, 2);
 		}
 	},
+	*/
 	CANTABRIAN_CIRCLE(ENGAGEMENT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side) {
 			// TODO Enemy missile units 50% loss missileatkDMG
-
+			Unit enemy = data.getUnit(side.other());
+			if (enemy.getClass() == ) {
+				data.multAttack(side.other(), 0.5);
+			}
 		}
 	},
 	HEROIC_CHARGE(ENGAGEMENT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side) {
 			// When army has <50% of enemy units, apply this
-			// TODO Double attack dmg, 50% inc morale
+			// Double attack dmg, 50% inc morale
+			Unit enemy = data.getUnit(side.other());
+			Unit myUnit = data.getUnit(side);
 
+			int value = (myUnit.getHealth() / enemy.getHealth()) * 100;
+			if (value < 50) {
+				data.multAttack(side, 2);
+			}
 		}
 	};
 	
