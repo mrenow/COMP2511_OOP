@@ -54,8 +54,8 @@ enum MoraleModifierMethod {
 			Unit myUnit = data.getUnit(side);
 			Province p = myUnit.getProvince();
 			// TODO +1 Morale to all units in province
-			for ( ) {
-
+			for ( SOMETHINGHERE : listofunits) {
+				data.addMorale(side, 1);
 			}
 		}
 	},
