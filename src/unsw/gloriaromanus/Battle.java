@@ -118,6 +118,9 @@ public class Battle {
 	
 	// Placeholder
 	private boolean hasWalls = false;
+	public void setWalls(Boolean wall){
+		this.hasWalls = wall;
+	}
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
 		// Begin engagement
 		
