@@ -43,7 +43,7 @@ public class Battle {
 		armies.put(ATTACK, attackArmy);
 		armies.put(DEFEND, defendArmy);
 
-		this.attackInfo = new AttackInfo();
+		//this.attackInfo = new AttackInfo();
 		// Get support modifies from both armies
 		// IMPORTANT: Iterables will update as the army and the unit update.
 		Iterable<Iterable<CombatModifier>> attCombatSupport = 
@@ -75,6 +75,9 @@ public class Battle {
 
 		}
 		// default: attacker never wins
+		if (this.numEngagements>200) {
+			this.attackInfo = AttackInfo.DRAW;
+		}
 		return this.attackInfo;
 	}
 
