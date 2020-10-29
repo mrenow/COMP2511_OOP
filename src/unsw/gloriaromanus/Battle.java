@@ -3,6 +3,7 @@ package unsw.gloriaromanus;
 import static unsw.gloriaromanus.ActiveType.*;
 import static unsw.gloriaromanus.BattleSide.*;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -17,9 +18,10 @@ public class Battle {
 	
 	
 	// basic info of a battle
-	List<Unit> attackArmy;
-	List<Unit> defendArmy;
-	int numEngage = 0;
+	// Units participating in battle that have not died/routed.
+	// Get each army by doing armies.get(ATTACK) or armies.get(DEFEND)
+	private EnumMap<BattleSide, List<Unit>> armies = new EnumMap<>(BattleSide.class);
+	private int numEngagements;
 
 	// data for setup a engagement
 	Unit attackUnit;
@@ -30,26 +32,31 @@ public class Battle {
 	Engagement engagement;
 	Iterable<MoraleModifier> moraleSupport;
 	Iterable<CombatModifier> combatSupport;
-	private int numEngagements;
 
 	public Battle() {
 	}
 
+	// Passed lists should be copies from the province
 	public Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
-		this.attackArmy = attackArmy;
-		this.defendArmy = defendArmy;
+		armies.put(ATTACK, attackArmy);
+		armies.put(DEFEND, defendArmy);
 
 		// Get support modifies from both armies
-		// IMPORTANT: Iterables will update as the army updates.
-		this.combatSupport = new Concatenator<CombatModifier>(new MappingIterable<Unit, Iterable<CombatModifier>>(
-				this.attackArmy, u -> u.getCombatModifiers(SUPPORT, ATTACKER)))
-						.and(new MappingIterable<Unit, Iterable<CombatModifier>>(this.defendArmy,
-								u -> u.getCombatModifiers(SUPPORT, DEFENDER)));
+		// IMPORTANT: Iterables will update as the army and the unit update.
+		Iterable<Iterable<CombatModifier>> attCombatSupport = 
+				new MappingIterable<>(armies.get(ATTACK), (Unit u) -> u.getCombatModifiers(SUPPORT, ATTACK));
+		Iterable<Iterable<CombatModifier>> defCombatSupport = 
+				new MappingIterable<>(armies.get(DEFEND), (Unit u) -> u.getCombatModifiers(SUPPORT, DEFEND));
+		
+		this.combatSupport = new Concatenator<CombatModifier>(attCombatSupport).and(defCombatSupport);
 
-		this.moraleSupport = new Concatenator<MoraleModifier>(new MappingIterable<Unit, Iterable<MoraleModifier>>(
-				this.attackArmy, u -> u.getMoraleModifiers(SUPPORT, ATTACKER)))
-						.and(new MappingIterable<Unit, Iterable<MoraleModifier>>(this.defendArmy,
-								u -> u.getMoraleModifiers(SUPPORT, DEFENDER)));
+		Iterable<Iterable<MoraleModifier>> attMoraleSupport = 
+				new MappingIterable<>(armies.get(ATTACK), (Unit u) -> u.getMoraleModifiers(SUPPORT, ATTACK));
+		Iterable<Iterable<MoraleModifier>> defMoraleSupport = 
+				new MappingIterable<>(armies.get(DEFEND), (Unit u) -> u.getMoraleModifiers(SUPPORT, DEFEND));
+				
+		this.moraleSupport = new Concatenator<MoraleModifier>(attMoraleSupport).and(defMoraleSupport);
+		
 	}
 
 	public boolean getResult() {
@@ -62,9 +69,11 @@ public class Battle {
 			// checkresult and do other stuff
 			engagement.result();
 			// flee route breaking unitdead stuff...
-			this.numEngage++;
+			// Already done in skirmish
+			//this.numEngage++;
 		}
 		// default: attacker never wins
+		
 		return false;
 	}
 
@@ -72,8 +81,8 @@ public class Battle {
 		// read in buffs
 		// TODO
 		// random choose two units
-		this.attackUnit = pickUnit(ATTACKER);
-		this.defendUnit = pickUnit(DEFENDER);
+		this.attackUnit = pickUnit(ATTACK);
+		this.defendUnit = pickUnit(DEFEND);
 //        this.aData = new CombatData();
 //        this.dData = new CombatData();
 		// setupdata
@@ -90,15 +99,8 @@ public class Battle {
 	private Unit pickUnit(BattleSide side) {
 
 		// uniformly randomed
-		switch (side) {
-		case ATTACKER:
-			return attackArmy.get(GlobalRandom.nextInt(attackArmy.size()));
-		case DEFENDER:
-			return defendArmy.get(GlobalRandom.nextInt(defendArmy.size()));
-		default:
-			// only when side is null
-			return null;
-		}
+		int armyLength = armies.get(side).size();
+		return armies.get(side).get(GlobalRandom.nextInt(armyLength));
 	}
 	/**
 	 * check if the end of battle condition reached
@@ -113,12 +115,7 @@ public class Battle {
 	// Placeholder
 	private boolean hasWalls = false;
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
-
-
 		// Begin engagement
-
-		Unit routeUnit = null;
-		Unit chaseUnit = null;
 		
 		while (numEngagements < 200) {
 			numEngagements++;
@@ -130,40 +127,39 @@ public class Battle {
 
 			combatModifiers = tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls);
 
-			inflictDamage(attackUnit, defendUnit, ATTACKER, combatModifiers);
-			inflictDamage(defendUnit, attackUnit, DEFENDER, combatModifiers);
+			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers);
+			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers);
 			
 			// Unit died, end engagement
+			// Removal from armies is handled by inflictDamage
 			if(!(attackUnit.isAlive() && defendUnit.isAlive())) {
 				break;
 			}
 				
 			// Create morale data
-			MoraleData d = new MoraleData(attackUnit, defendUnit, attackArmy, defendArmy);
+			MoraleData d = new MoraleData(attackUnit, defendUnit, armies.get(ATTACK), armies.get(DEFEND));
 
 			// Modify morale
-			new Concatenator<MoraleModifier>(moraleSupport, defendUnit.getMoraleModifiers(ENGAGEMENT, DEFENDER),
-					attackUnit.getMoraleModifiers(ENGAGEMENT, ATTACKER)).forEach((m) -> m.modify(d));
-
-
+			new Concatenator<MoraleModifier>(moraleSupport, defendUnit.getMoraleModifiers(ENGAGEMENT, DEFEND),
+					attackUnit.getMoraleModifiers(ENGAGEMENT, ATTACK)).forEach((m) -> m.modify(d));
 			
 			// Check for breaking
 			double attLoss = 1.0 - (double) attackUnit.getHealth() / attOldHealth;
 			double defLoss = 1.0 - (double) defendUnit.getHealth() / defOldHealth;
-			double attBreakChance = MathUtil.constrain(1 - 0.1 * (d.getMorale(ATTACKER) + attLoss / defLoss), 0.05, 1);
-			double defBreakChance = MathUtil.constrain(1 - 0.1 * (d.getMorale(DEFENDER) + defLoss / attLoss), 0.05, 1);
+			double attBreakChance = MathUtil.constrain(1 - 0.1 * (d.getMorale(ATTACK) + attLoss / defLoss), 0.05, 1);
+			double defBreakChance = MathUtil.constrain(1 - 0.1 * (d.getMorale(DEFEND) + defLoss / attLoss), 0.05, 1);
 
 			boolean defBreaks = GlobalRandom.nextUniform() < defBreakChance;
 			boolean attBreaks = GlobalRandom.nextUniform() < attBreakChance;
 
 			if (attBreaks && defBreaks) {
-				// end whole engagement
+				// end whole skirmish
 				break;
 			} else if (attBreaks) {
-				runRoute(defendUnit, attackUnit, DEFENDER);
+				runBreaking(defendUnit, attackUnit, DEFEND);
 				break;
 			} else if (defBreaks) {
-				runRoute(attackUnit, defendUnit, ATTACKER);
+				runBreaking(attackUnit, defendUnit, ATTACK);
 				break;
 			}
 		}
@@ -191,6 +187,7 @@ public class Battle {
 			
 			double routeChance = 0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed());
 			if(GlobalRandom.nextUniform() < routeChance) {
+				armies.get(chaseSide.other()).remove(routeUnit);
 				// TODO log route? ??? or dont
 				return;
 			}
@@ -221,11 +218,11 @@ public class Battle {
 		// Create CombatData
 		CombatData data;
 		switch(aggressorSide) {
-		case ATTACKER:
-			data = new CombatData(aggressor, victim, attackArmy, defendArmy);
+		case ATTACK:
+			data = new CombatData(aggressor, victim, armies.get(ATTACK), armies.get(DEFEND));
 			break;
-		case DEFENDER:
-			data = new CombatData(victim, aggressor, attackArmy, defendArmy);
+		case DEFEND:
+			data = new CombatData(victim, aggressor, armies.get(ATTACK), armies.get(DEFEND));
 			break;
 		default:
 			throw new NullPointerException("aggressorSide was null you dumbass");
@@ -253,9 +250,16 @@ public class Battle {
 		}
 	}
 	private void killUnit(Unit u) {
-		boolean victimRemoved = attackArmy.remove(u) || defendArmy.remove(u);
-		assert victimRemoved : "Victim wasnt in any army?????";
+		u.kill();
+		// Remove from armies participaing in battle
+		armies.get(ATTACK).remove(u);
+		armies.get(DEFEND).remove(u);
 		// TODO log casualty
+
+	}
+	private void routeUnit(Unit u){
+		armies.get(ATTACK).remove(u);
+		armies.get(DEFEND).remove(u);
 	}
 	
 	/**

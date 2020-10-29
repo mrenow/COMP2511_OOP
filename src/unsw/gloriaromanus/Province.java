@@ -156,5 +156,9 @@ public class Province {
 	void addUnits(List<Unit> units) {
 		this.units.addAll(units);
 	}
+	void removeUnit(Unit unit) {
+		this.units.remove(unit);
+		
+	}
 	
 }

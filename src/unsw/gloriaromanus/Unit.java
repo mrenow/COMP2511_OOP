@@ -132,7 +132,7 @@ public class Unit {
 	public Province getProvince() {
 		return province;
 	}
-
+	
 	public void setProvince(Province province) {
 		this.province = province;
 	}
@@ -144,6 +144,9 @@ public class Unit {
 	
 	public boolean isAlive() {
 		return health > 0;
+	}
+	public void kill() {
+		province.removeUnit(this);
 	}
 	
 	void addMoraleModifier(MoraleModifierMethod m) {

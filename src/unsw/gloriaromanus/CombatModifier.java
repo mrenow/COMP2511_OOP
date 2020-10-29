@@ -29,7 +29,7 @@ public class CombatModifier{
  * @return
  */
 enum CombatModifierMethod {
-
+	
 	WALLS(SUPPORT) {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side) {
@@ -81,10 +81,21 @@ enum CombatModifierMethod {
 			data.setDefenseSkill(side.other(), Double.NEGATIVE_INFINITY);
 		}
 	},
+	CAVALRY(ENGAGEMENT){
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// TODO
+			Cavalry c = (Cavalry)data.getUnit(side);
+			
+			
+		}
+
+	},
 	SHIELD_CHARGE(ENGAGEMENT){
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side) {
-			// TODO Every 4th charge? 
+			if(GlobalRandom.nextUniform() < 0.25) {
+				data.addAttack(side, data.getShieldDefense(side));				
+			}
 		}
 	};
 	

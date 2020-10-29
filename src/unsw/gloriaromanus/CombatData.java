@@ -29,8 +29,8 @@ public class CombatData {
 	}
 	
 	public CombatData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy) {
-		data.put(ATTACKER, new SideData(attackerUnit, attackerArmy));
-		data.put(DEFENDER, new SideData(defenderUnit, defenderArmy));
+		data.put(ATTACK, new SideData(attackerUnit, attackerArmy));
+		data.put(DEFEND, new SideData(defenderUnit, defenderArmy));
 	}
 
 	public List<Unit> getArmy(BattleSide side) {

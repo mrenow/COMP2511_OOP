@@ -3,11 +3,11 @@ package unsw.gloriaromanus;
  * Represents the side that an attacker can be on.
  */
 public enum BattleSide {
-	ATTACKER,DEFENDER;
+	ATTACK,DEFEND;
 	public BattleSide other() {
 		switch(this) {
-		case ATTACKER : return DEFENDER;
-		case DEFENDER : return ATTACKER;
+		case ATTACK : return DEFEND;
+		case DEFEND : return ATTACK;
 		default : return null;
 		}
 		

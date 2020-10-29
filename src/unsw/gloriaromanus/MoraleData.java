@@ -23,8 +23,8 @@ public class MoraleData {
 	}
 	
 	public MoraleData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy) {
-		data.put(ATTACKER, new SideData(attackerUnit, attackerArmy));
-		data.put(ATTACKER, new SideData(defenderUnit, defenderArmy));
+		data.put(ATTACK, new SideData(attackerUnit, attackerArmy));
+		data.put(ATTACK, new SideData(defenderUnit, defenderArmy));
 		
 	}
 	
