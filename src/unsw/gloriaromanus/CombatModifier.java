@@ -120,6 +120,22 @@ enum CombatModifierMethod {
 		@Override
 		public void alterEngagement(CombatData data, BattleSide side) {
 			// TODO Unit has double meleeDEF, half speed
+
+		}
+	},
+	CANTABRIAN_CIRCLE(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// TODO Enemy missile units 50% loss missileatkDMG
+
+		}
+	},
+	HEROIC_CHARGE(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// When army has <50% of enemy units, apply this
+			// TODO Double attack dmg, 50% inc morale
+
 		}
 	};
 	
