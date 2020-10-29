@@ -22,6 +22,8 @@ public class Battle {
 	// Get each army by doing armies.get(ATTACK) or armies.get(DEFEND)
 	private EnumMap<BattleSide, List<Unit>> armies = new EnumMap<>(BattleSide.class);
 	private int numEngagements;
+	// record in attackinfo
+	AttackInfo attackInfo;
 
 	// data for setup a engagement
 	Unit attackUnit;
@@ -41,6 +43,7 @@ public class Battle {
 		armies.put(ATTACK, attackArmy);
 		armies.put(DEFEND, defendArmy);
 
+		this.attackInfo = new AttackInfo();
 		// Get support modifies from both armies
 		// IMPORTANT: Iterables will update as the army and the unit update.
 		Iterable<Iterable<CombatModifier>> attCombatSupport = 
@@ -59,22 +62,20 @@ public class Battle {
 		
 	}
 
-	public boolean getResult() {
+	public AttackInfo getResult() {
 
 		while (!isBattleEnd()) {
 			// setupengagement data for unit
 			setUp();
 			// create engagement
-			Engagement engagement = new Engagement(aData, dData);
+			runSkirmish(attackUnit, defendUnit);
 			// checkresult and do other stuff
 			engagement.result();
 			// flee route breaking unitdead stuff...
-			// Already done in skirmish
-			//this.numEngage++;
+
 		}
 		// default: attacker never wins
-		
-		return false;
+		return this.attackInfo;
 	}
 
 	private void setUp() {
@@ -109,6 +110,9 @@ public class Battle {
 	 */
 	private boolean isBattleEnd() {
 		// TODO for now battle never start
+		if (this.numEngagements>=200) {
+			return true;
+		}
 		return true;
 	}
 	
@@ -186,7 +190,9 @@ public class Battle {
 			inflictDamage(chaseUnit, routeUnit, chaseSide, tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls));
 			
 			double routeChance = 0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed());
+			// unit routes
 			if(GlobalRandom.nextUniform() < routeChance) {
+				// remove unit from army.
 				armies.get(chaseSide.other()).remove(routeUnit);
 				// TODO log route? ??? or dont
 				return;
@@ -256,10 +262,6 @@ public class Battle {
 		armies.get(DEFEND).remove(u);
 		// TODO log casualty
 
-	}
-	private void routeUnit(Unit u){
-		armies.get(ATTACK).remove(u);
-		armies.get(DEFEND).remove(u);
 	}
 	
 	/**
