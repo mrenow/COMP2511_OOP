@@ -163,11 +163,3 @@ enum CombatModifierMethod {
 	public abstract void alterEngagement(CombatData data, BattleSide side);
 	
 }
-/**
- * Denotes whether the method is global or local to the given datangagement.
- * null values are accepted: they indicate that this method does not belong to a unit
- * and an error will be thrown when one attempts to add them to a unit.
- */
-enum ActiveType {
-	SUPPORT, ENGAGEMENT;
-}
