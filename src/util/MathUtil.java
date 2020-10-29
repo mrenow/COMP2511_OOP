@@ -9,10 +9,6 @@ public class MathUtil {
 	public static double min(double a, double b) {
 		return a < b ? a : b; 	
 	}
-	
-	public static <T extends Comparable<T>> T min(T a, T b){
-		return a.compareTo(b) < 0 ? a : b;
-	} 
 
 	public static int max(int a, int b) {
 		return a > b ? a : b; 	
@@ -21,11 +17,7 @@ public class MathUtil {
 	public static double max(double a, double b) {
 		return a > b ? a : b; 	
 	}
-	
-	public static <T extends Comparable<T>> T max(T a, T b){
-		return a.compareTo(b) > 0 ? a : b;
-	} 
-	
+		
 	public static int constrain(int a, int min, int max) {
 		return max(min(a, max),min);
 	}
@@ -34,8 +26,24 @@ public class MathUtil {
 		return max(min(a, max),min);
 	}
 	
-	public static <T extends Comparable<T>> T constrain(T a, T min, T max) {
-		return max(min(a, max),min);
+	public static Integer min(Iterable<Integer> collection) {
+		int runs = 0;
+		Integer min = Integer.MIN_VALUE;
+		for(Integer num : collection) {
+			runs++;
+			if(num < min) {
+				min = num;
+			}
+			if(runs > 1000000) {
+				System.err.print("Passed an infnite iterator?");
+				for (StackTraceElement e :Thread.currentThread().getStackTrace()){
+					System.err.println(e);
+				}
+				System.exit(1);
+			}
+		}
+		return min;
+		
 	}
 
 }
