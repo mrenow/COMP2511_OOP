@@ -8,12 +8,12 @@
           "type" : "Training_Building",
           "buildingWealth" : 30,
           "wealthRate" : 20,
-          "trainingSlots" : 5
+          "trainingSlots" : 3
       } ]
     }],
     "factionOrder" : [ {
       "type" : "ROME",
-      "gold" : 50,
+      "gold" : 60,
       "provinces" : [ "P1" ]
     } ]
   }
