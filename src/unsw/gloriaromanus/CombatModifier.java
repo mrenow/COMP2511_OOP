@@ -97,6 +97,24 @@ enum CombatModifierMethod {
 				data.addAttack(side, data.getShieldDefense(side));				
 			}
 		}
+	},
+	SKIRMISHER_ANTI_ARMOUR(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side) {
+			// Check if ranged engagement
+			// TODO
+			if () {
+				// Enemy only has half armour value
+				data.multArmour(side.other(), 0.5);
+			}
+		}
+	},
+	BERSERKER_RAGE(ENGAGEMENT) {
+		@Override
+		public void alterEngagement(CombatData data, BattleSide side){
+			// TODO Unit has infinite morale, double meleeATK, no armour, no shield
+				
+		}
 	};
 	
 	
