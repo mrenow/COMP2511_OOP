@@ -82,6 +82,10 @@ public class Concatenator<T> implements Iterable<T>{
 		for (String s : new Concatenator<>(a,b,c).and(new Concatenator<>(d), new Concatenator<>(e))) {
 			System.out.println(s);
 		}
+		for (Integer num: new Concatenator<>(1).and(2,3,4).and(5,6).and(7).and(8).and(9,10)) {
+			System.out.println(num);
+		}
+		
 		
 	}
 }
