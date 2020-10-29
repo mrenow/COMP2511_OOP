@@ -19,7 +19,8 @@ public class Battle {
 	// basic info of a battle
 	List<Unit> attackArmy;
 	List<Unit> defendArmy;
-	int numEngage = 0;
+	// record in attackinfo
+	AttackInfo attackInfo;
 
 	// data for setup a engagement
 	Unit attackUnit;
@@ -38,7 +39,7 @@ public class Battle {
 	public Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
 		this.attackArmy = attackArmy;
 		this.defendArmy = defendArmy;
-
+		this.attackInfo = new AttackInfo();
 		// Get support modifies from both armies
 		// IMPORTANT: Iterables will update as the army updates.
 		this.combatSupport = new Concatenator<CombatModifier>(new MappingIterable<Unit, Iterable<CombatModifier>>(
@@ -52,20 +53,19 @@ public class Battle {
 								u -> u.getMoraleModifiers(SUPPORT, DEFENDER)));
 	}
 
-	public boolean getResult() {
+	public AttackInfo getResult() {
 
 		while (!isBattleEnd()) {
 			// setupengagement data for unit
 			setUp();
 			// create engagement
-			Engagement engagement = new Engagement(aData, dData);
+			runSkirmish(attackUnit, defendUnit);
 			// checkresult and do other stuff
 			engagement.result();
 			// flee route breaking unitdead stuff...
-			this.numEngage++;
 		}
 		// default: attacker never wins
-		return false;
+		return this.attackInfo;
 	}
 
 	private void setUp() {
@@ -107,6 +107,9 @@ public class Battle {
 	 */
 	private boolean isBattleEnd() {
 		// TODO for now battle never start
+		if (this.numEngagements>=200) {
+			return true;
+		}
 		return true;
 	}
 	
@@ -128,7 +131,7 @@ public class Battle {
 			
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 
-			combatModifiers = tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls)
+			combatModifiers = tryModifyRanged(combatModifiers, attackUnit, defendUnit, hasWalls);
 
 			inflictDamage(attackUnit, defendUnit, ATTACKER, combatModifiers);
 			inflictDamage(defendUnit, attackUnit, DEFENDER, combatModifiers);

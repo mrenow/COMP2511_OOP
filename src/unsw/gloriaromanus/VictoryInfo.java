@@ -1,10 +1,7 @@
 package unsw.gloriaromanus;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
-
 public class VictoryInfo {
     //winCondition;
-    // TODO choose: using percentage or outof 100 as count for victory
     Double conquest;
     Double treasury;
     Double infrastructure;
