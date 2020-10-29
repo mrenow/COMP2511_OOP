@@ -31,7 +31,7 @@ public class GameController {
 
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;
-	
+
 	//private List<ItemType> currentMercenaries = new ArrayList<ItemType>();
 	private int round = 0;
 	private int currentTurn = 0; // Must always be less than factionTurnOrder.size()
@@ -87,7 +87,7 @@ public class GameController {
 			throw new DataInitializationException("Error while constructing game from files", e);
 		}
 	}
-	
+
 	/**
 	 * Uses default province allocation algorithm to decide ownership
 	 * Uses factionTypes list order to determine turn order.
@@ -232,6 +232,7 @@ public class GameController {
 		for (Unit unit : units) {
 			unit.getProvince().getUnits().remove(unit);
 		}
+		destination.addUnits(units);
 	}
 	
 //	Increases the turn counter by 1 
@@ -243,7 +244,12 @@ public class GameController {
 	
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo checkVictory() {
-		return getCurrentTurn().getVictoryInfo();
+		VictoryInfo vInfo = getCurrentTurn().getVictoryInfo();
+		if (vInfo.isVictory()) {
+			return vInfo;
+		} else {
+			return null;
+		}
 	}
 	
 /* Testing only (could become a game mechanic but doubt) */
