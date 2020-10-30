@@ -60,7 +60,7 @@ public class MoraleData {
 	 * @param side
 	 * @return The final morale calculation for the unit of the given side.
 	 */
-	public double getMorale(BattleSide side) {
+	public double getEffectiveMorale(BattleSide side) {
 		if(data.get(side).moraleBase == Double.NEGATIVE_INFINITY) {
 			return 0;
 		}else if (data.get(side).moraleBase == Double.POSITIVE_INFINITY) {

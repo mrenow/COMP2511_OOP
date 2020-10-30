@@ -2,8 +2,11 @@ package unsw.gloriaromanus;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -17,7 +20,8 @@ public class Faction {
 	private FactionType type = FactionType.ROME;
 	private int gold = 0;
 	@JsonIdentityReference(alwaysAsId = true)
-	private List<Province> provinces = new ArrayList<Province>();
+	private Collection<Province> provinces = new ArrayList<Province>();
+	private Map<Province, Integer> lostEagles = new HashMap<>();
 	
 	@JsonCreator
 	private Faction() {};
@@ -37,7 +41,7 @@ public class Faction {
 
 	public FactionType getType() {return type;}
 
-	public List<Province> getProvinces(){return new ArrayList<Province>(provinces);}
+	public Collection<Province> getProvinces(){return new ArrayList<Province>(provinces);}
 	
 	public int getGold() {return gold;}
 	
@@ -45,20 +49,29 @@ public class Faction {
 	
 	public int getTotalWealth() {return 0;}
 	
-	
 	public Province getProvince(String name) {
 		return null;
+	}
+	
+	public Collection<Province> getLostEagleProvinces() {
+		return lostEagles.keySet();
+	}
+	// get sum of values in map.
+	public int getNumLostEagles() {
+		return lostEagles.values().stream().reduce(0, Integer::sum);
 	}
 	
 	void takeProvince(Province p) {
 		p.getOwner().removeProvince(p);
 		p.changeOwner(this);
+		this.redeemProvince(p);
 		provinces.add(p);
 	}
 	
 	private void removeProvince(Province p) {
 		provinces.remove(p);
 	}
+	
 	@Override
 	public String toString() {
 		return getTitle();
@@ -66,5 +79,12 @@ public class Faction {
 
 	public VictoryInfo getVictoryInfo() {
 		return null;
+	}
+	void putLostEagles(Province lostProvince, int numEagles) {
+		int oldNumEagles = lostEagles.getOrDefault(lostProvince, 0);
+		lostEagles.put(lostProvince, oldNumEagles + numEagles);
+	}
+	private void redeemProvince(Province takenProvince) {
+		lostEagles.remove(takenProvince);
 	}
 }

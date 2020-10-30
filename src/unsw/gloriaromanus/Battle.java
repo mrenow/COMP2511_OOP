@@ -11,23 +11,39 @@ import java.util.Random;
 import util.Concatenator;
 import util.MappingIterable;
 import util.MathUtil;
+import util.Repeat;
 
 public class Battle {
 	// Ranged Modifier
 	static final CombatModifier RANGED_MODIFIER = new CombatModifier(CombatModifierMethod.RANGED, null);
-	
+	static final MoraleModifier ATTACKER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, ATTACK);
+	static final MoraleModifier DEFENDER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, DEFEND);
 	
 	// basic info of a battle
 	// Units participating in battle that have not died/routed.
 	// Get each army by doing armies.get(ATTACK) or armies.get(DEFEND)
 	private EnumMap<BattleSide, List<Unit>> armies = new EnumMap<>(BattleSide.class);
-	private int numEngagements;
+	/* number of times an engagement tried to occur.
+	 * This distinction is important as there is an edge case if an army is defeated on the 200th
+	 * engagement - another engagement will not be attempted, and so it is not a draw.
+	 * If the army is not defeated at the 200th engagement, another engagement will be attempted increasing
+	 * this number to 201 and resulting in a draw.
+	 * See Battle.tryEngagement().
+	 */
+	private int numEngagements = 0;
 	// record in attackinfo
 	AttackInfo attackInfo;
 
 	// data for setup a engagement
 	Unit attackUnit;
 	Unit defendUnit;
+	
+	Faction attackFaction;
+	Faction defendFaction;
+	Province attackProvince;
+	Province defendProvince;
+	
+	
 	CombatData aData;
 	CombatData dData;
 	// current engagement
@@ -42,6 +58,12 @@ public class Battle {
 	public Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
 		armies.put(ATTACK, attackArmy);
 		armies.put(DEFEND, defendArmy);
+		
+		attackProvince = attackArmy.get(0).getProvince();
+		attackFaction = attackProvince.getOwner();
+		defendProvince = defendArmy.get(0).getProvince();
+		defendFaction = defendProvince.getOwner();
+		
 
 		//this.attackInfo = new AttackInfo();
 		// Get support modifies from both armies
@@ -57,27 +79,53 @@ public class Battle {
 				new MappingIterable<>(armies.get(ATTACK), (Unit u) -> u.getMoraleModifiers(SUPPORT, ATTACK));
 		Iterable<Iterable<MoraleModifier>> defMoraleSupport = 
 				new MappingIterable<>(armies.get(DEFEND), (Unit u) -> u.getMoraleModifiers(SUPPORT, DEFEND));
-				
-		this.moraleSupport = new Concatenator<MoraleModifier>(attMoraleSupport).and(defMoraleSupport);
+		
+		// Lost eagles will be constant
+		Iterable<MoraleModifier> attEagleDebuff =
+				new Repeat<>(ATTACKER_LOST_EAGLE, attackFaction.getNumLostEagles());
+		Iterable<MoraleModifier> defEagleDebuff =
+				new Repeat<>(DEFENDER_LOST_EAGLE, defendFaction.getNumLostEagles());  
+		
+		this.moraleSupport = new Concatenator<MoraleModifier>(
+					attMoraleSupport)
+				.and(attEagleDebuff)
+				.and(defMoraleSupport)
+				.and(defEagleDebuff);
 		
 	}
 
 	public AttackInfo getResult() {
-
+	
+		int defNumEagles = 0;
+		for (Unit u  : armies.get(DEFEND)) {
+			if(u.getType() == ItemType.ROMAN_LEIGIONARY) {
+				defNumEagles++;
+			}
+		}
+	
 		while (!isBattleEnd()) {
 			// setupengagement data for unit
 			setUp();
-			// create engagement
+			
+			
+			// create skirmish
 			runSkirmish(attackUnit, defendUnit);
+			
 			// checkresult and do other stuff
-			engagement.result();
-			// flee route breaking unitdead stuff...
-
+			//
+			
 		}
 		// default: attacker never wins
-		if (this.numEngagements>200) {
+		if (this.numEngagements >= 200) {
 			this.attackInfo = AttackInfo.DRAW;
 		}
+		
+		// After attackinfo is assigned
+		// if the current province is taken
+		if(this.attackInfo == AttackInfo.WIN) {
+			defendFaction.putLostEagles(defendProvince, defNumEagles);
+		}
+		
 		return this.attackInfo;
 	}
 
@@ -113,7 +161,7 @@ public class Battle {
 	 */
 	private boolean isBattleEnd() {
 		// TODO for now battle never start
-		if (this.numEngagements>=200) {
+		if (this.numEngagements > 200) {
 			return true;
 		}
 		return true;
@@ -126,16 +174,14 @@ public class Battle {
 	}
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
 		// Begin engagement
-		
-		while (numEngagements < 200) {
-			numEngagements++;
-
+		while (tryEngagement()) {
+			
 			int attOldHealth = attackUnit.getHealth();
 			int defOldHealth = defendUnit.getHealth();
 			
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 
-			boolean isRanged = tryRanged(attackUnit, defendUnit, hasWalls);
+			boolean isRanged = tryRanged(attackUnit, defendUnit);
 			if(isRanged){
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 			}
@@ -150,21 +196,25 @@ public class Battle {
 			}
 				
 			// Create morale data
-			MoraleData d = new MoraleData(attackUnit, defendUnit, armies.get(ATTACK), armies.get(DEFEND));
+			MoraleData data = new MoraleData(attackUnit, defendUnit, armies.get(ATTACK), armies.get(DEFEND));
 
 			// Modify morale
-			new Concatenator<MoraleModifier>(moraleSupport, defendUnit.getMoraleModifiers(ENGAGEMENT, DEFEND),
-					attackUnit.getMoraleModifiers(ENGAGEMENT, ATTACK)).forEach((m) -> m.modify(d));
+			Concatenator<MoraleModifier> moraleModifiers = new Concatenator<MoraleModifier>(
+					moraleSupport,
+					defendUnit.getMoraleModifiers(ENGAGEMENT, DEFEND),
+					attackUnit.getMoraleModifiers(ENGAGEMENT, ATTACK));
+			moraleModifiers.forEach(m->m.modify(data));
+			
 			
 			// Check for breaking
 			double attLoss = 1.0 - (double) attackUnit.getHealth() / attOldHealth;
 			double defLoss = 1.0 - (double) defendUnit.getHealth() / defOldHealth;
-			double attBreakChance = MathUtil.constrain(1 - 0.1 * (d.getMorale(ATTACK) + attLoss / defLoss), 0.05, 1);
-			double defBreakChance = MathUtil.constrain(1 - 0.1 * (d.getMorale(DEFEND) + defLoss / attLoss), 0.05, 1);
+			double attBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(ATTACK) + attLoss / defLoss), 0.05, 1);
+			double defBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(DEFEND) + defLoss / attLoss), 0.05, 1);
 
 			boolean defBreaks = GlobalRandom.nextUniform() < defBreakChance;
 			boolean attBreaks = GlobalRandom.nextUniform() < attBreakChance;
-
+			
 			if (attBreaks && defBreaks) {
 				// end whole skirmish
 				break;
@@ -195,14 +245,20 @@ public class Battle {
 	 */
 	private void runBreaking(Unit chaseUnit, Unit routeUnit, BattleSide chaseSide) {
 		Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
-		while(routeUnit.isAlive()) {
-			boolean isRanged = tryRanged(chaseUnit, routeUnit, hasWalls);
+
+		// Try engagement
+		while(tryEngagement()) {
+			boolean isRanged = tryRanged(chaseUnit, routeUnit);
 			if(isRanged){
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 			}
-			inflictDamage(chaseUnit, routeUnit, chaseSide, combatModifiers, isRanged);
 			
-			double routeChance = 0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed());
+			inflictDamage(chaseUnit, routeUnit, chaseSide, combatModifiers, isRanged);
+			if(!routeUnit.isAlive()) {
+				return;
+			}
+			
+			double routeChance = MathUtil.max(0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed()), 0.1);
 			// unit routes
 			if(GlobalRandom.nextUniform() < routeChance) {
 				// remove unit from army.
@@ -248,10 +304,11 @@ public class Battle {
 		}
 		
 		// Get combat modifiers for both troops and apply them to data
-		combatModifiers
+		combatModifiers = combatModifiers
 			.and(aggressor.getCombatModifiers(ENGAGEMENT, aggressorSide))
-			.and(victim.getCombatModifiers(ENGAGEMENT, aggressorSide.other()))
-			.forEach(m-> m.modify(data));
+			.and(victim.getCombatModifiers(ENGAGEMENT, aggressorSide.other()));
+		
+		combatModifiers.forEach((m) -> m.modify(data));
 		
 		// Caculate inflicted casualties
 		double effectiveArmour = data.getEffectiveArmour(aggressorSide.other());
@@ -276,13 +333,23 @@ public class Battle {
 		// TODO log casualty
 
 	}
+	/**
+	 * Decide whether we have exceeded the engagement quota
+	 * @return
+	 */
+	private boolean tryEngagement() {
+		boolean out = numEngagements < 200;
+		// Increment num attempted engagements
+		numEngagements ++;
+		return out;
+	}
 	
 	/**
 	 * Uses the given parameters (and RNG) to decide whether an engagement is ranged, and 
 	 * @returns returns the input and with a ranged modifier if the engagment is ranged. 
 	 * returns the input CombatModifier Concatenator otherwise.
 	 */
-	private static boolean tryRanged(Unit u1, Unit u2, boolean walls) {
+	private boolean tryRanged(Unit u1, Unit u2) {
 		if (u1.isRanged() && u2.isRanged()) {
 			return u1.isRanged();
 		}
@@ -291,10 +358,7 @@ public class Battle {
 			return true;
 		}
 		
-		double baseChance = 0.5;
-		if (walls) {
-			baseChance = 0.9;
-		}
+		double baseChance = hasWalls? 0.9 : 0.5;
 		
 		// Based on speed
 		// We know either u1 or u2 is ranged.

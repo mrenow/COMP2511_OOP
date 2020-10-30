@@ -47,7 +47,8 @@ public enum ItemType{
 	TEST_BUILDING			("src/test/test_building.json"),
 	HEAVY_CAVALRY			("src/test/test_calvary.json"),
 	JAVELIN_SKIRMISHER		("src/test/test_troop.json"),
-	ELEPHANTS				("src/test/test_troop.json");
+	ELEPHANTS				("src/test/test_troop.json"),
+	ROMAN_LEIGIONARY  		("src/test/test_troop.json");
 	
 	
 	
@@ -100,7 +101,8 @@ public enum ItemType{
 	private void constructFromFile(String filename) throws Exception{
 		JsonNode root = Parsing.mapper.readTree(new File(filename));
 		// Needed to determine list size
-		this.maxLevel = root.get("maxLevel").asInt();
+		this.maxLevel = root.get("maxLevel").asInt();"src/test/test_troop.json"),
+		ROMAN_LEIGIONARY  		(
 		
 		this.names = generateLevelList(root.get("names"));
 		this.descriptions = generateLevelList(root.get("descriptions"));

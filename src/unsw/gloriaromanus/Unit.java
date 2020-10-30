@@ -38,14 +38,14 @@ public class Unit {
 	@JsonIdentityReference(alwaysAsId = true)
 	private Province province;
 	private boolean isMercenary = false;
+
+	// Assigned based on type
 	private boolean isRanged = false;
-
-	private double morale;
-
 	private int health;
 	private int maxMovPoints;
 	private int movPoints;
 	private double speed;
+	private double morale;
 	
 	@JsonCreator
 	public Unit(
