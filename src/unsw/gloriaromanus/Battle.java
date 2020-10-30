@@ -316,6 +316,7 @@ class Battle {
 			victim.damage(beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed);
 		} else {
 			double casualties = GlobalRandom.nextGaussian()*0.1*data.getAttack(aggressorSide)/effectiveArmour;
+			casualties = MathUtil.max(0, casualties);
 			victim.damage((int)Math.round(casualties));
 		}
 		

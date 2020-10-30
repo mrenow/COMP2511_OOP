@@ -32,4 +32,17 @@ public class GlobalRandom {
 	public static double nextGaussian() {
 		return generator.nextGaussian();
 	}
+	public static void main(String [] args) {
+		init(1);
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+		System.out.println(nextUniform());
+	}
 }
