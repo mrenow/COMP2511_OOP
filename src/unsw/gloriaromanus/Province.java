@@ -105,7 +105,22 @@ public class Province{
 	public int getTotalWealth() {
 		return 0;
 	}
-	
+	public int updateWealth(){
+		//do update
+		double gold=0;
+		gold += (this.townWealth + this.buildingWealth()) * this.taxLevel.getTaxRate();
+		this.townWealth += getWealthGrowth() + taxLevel.getwealthgen();
+		this.townWealth = Integer.max(townWealth, 0);
+		updateBuildingWealth();
+		return (int)gold;
+	}
+	private int getWealthGrowth(){
+		//TODO : calculate WealthGrowth
+		return 0;
+	}
+	private void updateBuildingWealth(){
+		//TODO :add updateBuildingWealth
+	}
 //	Ordered list corresponding to training slots
 	public List<TrainingSlotEntry> getCurrentTraining(){return null;}
 	
