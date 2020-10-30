@@ -205,7 +205,7 @@ public class GameController {
 //	Constraints:
 //	attacker.faction != defender.faction
 //	Province.adjacent(attacker, defender)
-	public AttackInfo attack (Province attacker, Province defender) {
+	public AttackInfo invade (Province attacker, Province defender) {
 		//check if adjency
 		if (attacker.getAdjacent().contains(defender)) {
 			//for now we invade with everything
@@ -219,7 +219,7 @@ public class GameController {
 		}
 	}
 	
-	public AttackInfo invade(List<Unit>attackers,List<Unit> defenders){
+	public AttackInfo invade(List<Unit> attackers, List<Unit> defenders){
 		Battle battle = new Battle(attackers,defenders);
 		AttackInfo attackInfo = battle.getResult();
 		//TODO set up attackinfo baseed on battle result

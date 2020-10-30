@@ -1,16 +1,16 @@
 package unsw.gloriaromanus;
 
 public class Artillery extends Unit{
-	private double seigeAttack = 0;
+	private double seige = 0;
 	
 	public Artillery(ItemType newType, int newLevel) {
 		super(newType, newLevel);
-		// TODO Auto-generated constructor stub
+		this.seige = ((Integer) getType().getAttribute("seige", getLevel())).doubleValue();
 	}
 
 	
 	public double getSeigeAttack() {
-		return seigeAttack;
+		return seige;
 	}
 	
 }

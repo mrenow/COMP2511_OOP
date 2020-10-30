@@ -55,6 +55,9 @@ class Battle {
 
 	// Passed lists should be copies from the province
 	Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
+		
+		
+		
 		armies.put(ATTACK, attackArmy);
 		armies.put(DEFEND, defendArmy);
 		
@@ -97,7 +100,7 @@ class Battle {
 	
 		int defNumEagles = 0;
 		for (Unit u  : armies.get(DEFEND)) {
-			if(u.getType() == ItemType.ROMAN_LEIGIONARY) {
+			if(u.getType() == ItemType.ROMAN_LEGIONARY) {
 				defNumEagles++;
 			}
 		}
@@ -330,20 +333,25 @@ class Battle {
 		
 		// Caculate inflicted casualties
 		double effectiveArmour = data.getEffectiveArmour(aggressorSide.other());
-		if(effectiveArmour == 0) {
-			int beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed = 10;
-			victim.damage(beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed);
-		} else {
-			double casualties = GlobalRandom.nextGaussian()*0.1*data.getAttack(aggressorSide)/effectiveArmour;
-			casualties = MathUtil.max(0, casualties);
-			victim.damage((int)Math.round(casualties));
-		}
 		
+		int beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed = 10;
+		double damage;
+		if(effectiveArmour != 0) {
+			damage = data.getAttack(aggressorSide)/effectiveArmour;
+		}else {
+			damage = beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed;
+		}
+			
+		double casualties = GlobalRandom.nextGaussian()*0.1*damage * victim.getHealth();
+		
+		casualties = MathUtil.max(0, casualties);
+		victim.damage((int)Math.round(casualties));
 		// Kill unit by yeeting it out of the list
 		if(!victim.isAlive()) {
 			killUnit(victim);
 		}
 	}
+	
 	private void killUnit(Unit u) {
 		u.kill();
 		// Remove from armies participaing in battle

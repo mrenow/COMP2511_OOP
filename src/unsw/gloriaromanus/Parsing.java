@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -58,6 +59,23 @@ public class Parsing {
 			return null;
 		}
 	}
+	
+	
+	// Comma seprated enum fields.
+	public static <T extends Enum<T>> List<T> getEnums(String enumString) throws DataInitializationException{
+		List<T> out = new ArrayList<>();
+		Scanner sc = new Scanner(enumString);
+		try {
+			while(sc.hasNext()) {
+				T val = Parsing.mapper.readValue(sc.next().toUpperCase(), new TypeReference<T>() {});
+				out.add(val);
+			}		
+		}catch(Exception e){
+			throw new DataInitializationException("Error while parsing enum list",e);
+		}
+		return out;
+	}
+		
 	
 	
 	

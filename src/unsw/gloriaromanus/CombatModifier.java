@@ -121,14 +121,14 @@ enum CombatModifierMethod {
 			}
 		}
 	},
-	// Guarantee: Unit is cavalry
+	// Guarantee: Unit is cavalry and melee
 	HEROIC_CHARGE_COMBAT(ENGAGEMENT) {
 		@Override
 		void alterEngagement(CombatData engagement, BattleSide side) {
 			// When army has <50% of enemy units, apply this
 			// Double attack dmg, 50% inc morale
 			Unit enemy = engagement.getUnit(side.other());
-			Cavalry self = (Cavalry) engagement.getUnit(side);
+			MeleeCavalry self = (MeleeCavalry) engagement.getUnit(side);
 
 			double chargeAttack = self.getChargeAttack();
 			if (self.getHealth() * 2 < enemy.getHealth()) {

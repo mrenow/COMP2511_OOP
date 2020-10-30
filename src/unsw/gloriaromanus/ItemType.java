@@ -40,24 +40,29 @@ public enum ItemType{
 //	ARCHERY_RANGE			(),
 
 	TRAINING_BUILDING		("src/test/test_building.json"),
-	DRUID					("src/test/test_troop.json"),
 	TEST_TROOP				("src/test/test_troop.json"),
 	TEST_BUILDING			("src/test/test_building.json"),
-
+	
 	//SPECIALS
-	JAVELIN_SKIRMISHER		("src/test/test_troop.json"),
-	ELEPHANTS				("src/test/test_troop.json"),
-	ROMAN_LEIGIONARY  		("src/test/test_troop.json"),
+	JAVELIN_SKIRMISHER		(),
+	ELEPHANTS				(),
+	ROMAN_LEGIONARY  		(),
+	
 	//ARTILLERY:
 	ARTILLERY_RANGE			(),
+	
 	//INFANTRY:
-	MISSILE_INFANTRY		(),
 	HEAVY_INFANTRY			(),
 	ARCHER					(),
 	SPEARMEN				(),
-	// CALVARY:
+	PIKEMEN 				(),
+	HOPILITE 				(),
+	
+	// CAVALRY:
 	HORSE_ARCHER			(),
-	HEAVY_CAVALRY			();
+	HEAVY_CAVALRY			(),
+	DRUID					("src/test/test_troop.json"),
+	CHARIOTS				();
 	
 	private static final String SOURCE_DIR = "src/data";
 	

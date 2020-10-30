@@ -60,27 +60,33 @@ public class Unit {
 			this.level = newLevel;
 		}
 		// By default take typeinfo
-		this.maxMovPoints = (Integer)this.type.getAttribute("movPoints", this.level);
-		this.health = (Integer) this.type.getAttribute("health", this.level);
-		this.morale = ((Integer) this.type.getAttribute("morale", this.level)).doubleValue();
-		this.speed = ((Integer) this.type.getAttribute("speed", this.level)).doubleValue();
-		this.baseCharacteristic = new CombatStats(this.type);
+		this.maxMovPoints = (Integer)type.getAttribute("movPoints", level);
+		this.health = (Integer) type.getAttribute("health", level);
+		this.morale = ((Integer) type.getAttribute("morale", level)).doubleValue();
+		this.speed = ((Integer) type.getAttribute("speed", level)).doubleValue();
+		
+		this.baseCharacteristic = new CombatStats(this.type, this.level);
 		this.movPoints = this.maxMovPoints;
-	}
-
-	public Unit(ItemType type, int level, CombatStats baseCharacteristic, Province province) {
-		super();
-		this.type = type;
-		this.movPoints = this.maxMovPoints;
-		this.maxMovPoints = (Integer) this.type.getAttribute("movPoints", this.level);
-		this.health = (Integer) this.type.getAttribute("health", this.level);
-		this.morale = (Double) this.type.getAttribute("morale", this.level);
-		this.movPoints = maxMovPoints;
-		this.province = province;
+		
+		// add modifiers
+		String combatString = (String)type.getAttribute("combatModifiers", level);
+		String moraleString = (String)type.getAttribute("moraleModifiers", level);
+		try {
+			Parsing.<CombatModifierMethod>getEnums(combatString).forEach(this::addCombatModifier);
+			Parsing.<MoraleModifierMethod>getEnums(moraleString).forEach(this::addMoraleModifier);
+		} catch (DataInitializationException e) {
+			e.printStackTrace();
+			// fatal
+			System.exit(1);
+		}
 	}
 	
+
 	public ItemType getType() {
 		return type;
+	}
+	public int getLevel() {
+		return level;
 	}
 
 	public CombatStats getBaseCharacteristic() {
@@ -140,13 +146,14 @@ public class Unit {
 	}
 
 	public CombatStats getCombatStats() {
-		// return a copy of the base combat stats
+		
 		return null;
 	}
 	
 	public boolean isAlive() {
 		return health > 0;
 	}
+	
 	public void kill() {
 		province.removeUnit(this);
 	}

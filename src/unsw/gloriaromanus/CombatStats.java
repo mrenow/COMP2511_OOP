@@ -2,6 +2,7 @@ package unsw.gloriaromanus;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,18 +19,21 @@ public class CombatStats {
 	// base = Double.POSITIVE_INFINITY -> infinite of that characteristic, regardless of modifiers
 	// base = Double.NEGATIVE_INFINITY -> exactly 0 of that characteristic, regardless of modifiers.
 	// Otherwise, the characteristic is calculated using armourAdd and armourMult.
-	private double armourBase = 0; 
-	private double attackBase = 0; 
 	
-
+	private double armourBase = 1; 
+	private double attackBase = 1; 
 	private double defenseSkill = 0;
 	private double shieldDefense = 0;
 
 	// Should not change 
+
+	@JsonIgnore
 	private double armourMult = 1;
+	@JsonIgnore
 	private double attackMult = 1;
-	
+	@JsonIgnore
 	private double armourAdd = 0;
+	@JsonIgnore
 	private double attackAdd = 0;  
 
 
@@ -45,9 +49,18 @@ public class CombatStats {
 		this.shieldDefense = shieldDefense;
 	}
 
-	public CombatStats(ItemType type) {
-		// TODO Load all relevant fields from type.
+	public CombatStats(CombatStats c) {
+		this(c.armourBase, c.attackBase, c.defenseSkill, c.shieldDefense);
 	}
+	public CombatStats(ItemType type, int level) {
+		this.armourBase = ((Integer)type.getAttribute("armour", level)).doubleValue();
+		this.attackBase = ((Integer)type.getAttribute("attack", level)).doubleValue();
+		this.defenseSkill = ((Integer)type.getAttribute("defenseSkill", level)).doubleValue();
+		this.shieldDefense = ((Integer)type.getAttribute("shieldDefense", level)).doubleValue();
+	}
+	
+	
+	
 	public double getArmour() {
 		if (armourBase == Double.NEGATIVE_INFINITY) {
 			return 0;
@@ -68,16 +81,12 @@ public class CombatStats {
 	}
 	
 	public double getDefenseSkill() {
-		if (defenseSkill == Double.NEGATIVE_INFINITY) {
-			return 0;
-		}
-		return defenseSkill;
+
+		return Math.max(0, defenseSkill);
 	}
+	
 	public double getShieldDefense() {
-		if (shieldDefense == Double.NEGATIVE_INFINITY) {
-			return 0;
-		}
-		return shieldDefense;
+		return Math.max(0, shieldDefense);
 	}
 	
 	void setArmour(double armour) {
