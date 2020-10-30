@@ -314,7 +314,7 @@ class Battle {
 		if(effectiveArmour == 0) {
 			int beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed = 10;
 			victim.damage(beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed);
-		}else {
+		} else {
 			double casualties = GlobalRandom.nextGaussian()*0.1*data.getAttack(aggressorSide)/effectiveArmour;
 			victim.damage((int)Math.round(casualties));
 		}
@@ -352,7 +352,7 @@ class Battle {
 		if (u1.isRanged() && u2.isRanged()) {
 			return u1.isRanged();
 		}
-		// Not in spec anymore
+		// Not in spec anymore, but whatever man
 		if (u1 instanceof Tower || u2 instanceof Tower) {
 			return true;
 		}

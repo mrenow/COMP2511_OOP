@@ -101,8 +101,7 @@ public enum ItemType{
 	private void constructFromFile(String filename) throws Exception{
 		JsonNode root = Parsing.mapper.readTree(new File(filename));
 		// Needed to determine list size
-		this.maxLevel = root.get("maxLevel").asInt();"src/test/test_troop.json"),
-		ROMAN_LEIGIONARY  		(
+		this.maxLevel = root.get("maxLevel").asInt();
 		
 		this.names = generateLevelList(root.get("names"));
 		this.descriptions = generateLevelList(root.get("descriptions"));
