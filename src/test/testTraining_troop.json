@@ -6,6 +6,8 @@
       "taxLevel" : "NORMAL_TAX",
       "buildingSlots" : [ ],
       "trainingSlots" : [ ],
+      "trainingSlotNum": 3,
+      "maxSlots": 3,
       "buildings" : [ {
           "type" : "TRAINING_BUILDING",
           "level" : 1,

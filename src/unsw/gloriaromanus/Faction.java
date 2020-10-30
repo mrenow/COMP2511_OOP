@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.esri.arcgisruntime.mapping.view.MapScaleChangedEvent;
+//import com.esri.arcgisruntime.mapping.view.MapScaleChangedEvent;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ser.std.CollectionSerializer;
@@ -26,6 +26,7 @@ public class Faction {
 	
 	private FactionType type = FactionType.ROME;
 	private int gold = 0;
+	private int costs = 1;
 	
 	@JsonIdentityReference(alwaysAsId = true)
 	private Collection<Province> provinces = new ArrayList<Province>();
@@ -52,15 +53,35 @@ public class Faction {
 
 	public FactionType getType() {return type;}
 
-	public Collection<Province> getProvinces(){return new ArrayList<Province>(provinces);}
+	public Collection<Province> getProvinces(){return provinces;}
 	
 	public int getGold() {return gold;}
+
+	void adjustGold(int trainCost) {
+		gold -= trainCost;
+	}
 	
 	public String getTitle() {return type.getTitle();}
 	
-	public int getTotalWealth() {return 0;}
-	
+	public int getTotalWealth() {
+		//calculation for total wealth
+		int wealth=0;
+		for (Province province : provinces) {
+			wealth += province.getTotalWealth();
+		}
+		return wealth;
+	}
+	public void updateWealth(){
+		for (Province province : provinces) {
+			this.gold += province.updateWealth();
+		}
+	}
 	public Province getProvince(String name) {
+		for (Province province : provinces) {
+			if (province.getName().equals(name)) {
+				return province;
+			}
+		}
 		return null;
 	}
 	

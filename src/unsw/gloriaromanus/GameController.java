@@ -141,15 +141,15 @@ public class GameController {
 //	Free slots must be available
 	public void trainUnit (Province province, ItemType unitType) {
 		// Create a unit with unitType
-		List<ItemType> trainable = province.getTrainable();
-		if (trainable.contains(unitType) && province.getTrainingSlots() > 0) {
+		//List<ItemType> trainable = province.getTrainable();
+		if (province.getTrainingSlots() > 0) {
 			province.trainUnit(unitType);
 		} else {
 			System.out.println("Failed to train unit");
 		}
 	}
-	
-//	Constraints:
+
+	// Constraints:
 //	ItemType must be in getBuildable()
 //	Free slots must be available
 	public void buildInfrastructure(Province province, ItemType infraType) {
@@ -177,6 +177,7 @@ public class GameController {
 	public void cancelTraining(TrainingSlotEntry entry) {
 		Province province = entry.getProvince();
 		province.getCurrentTraining().remove(entry);
+		province.adjustTraining();
 	}
 	
 //	Constraints: None
@@ -207,25 +208,36 @@ public class GameController {
 //	Province.adjacent(attacker, defender)
 	public AttackInfo invade (Province attacker, Province defender) {
 		//check if adjency
-		if (attacker.getAdjacent().contains(defender)) {
-			//for now we invade with everything
-			List<Unit> attackers = attacker.getUnits();
-			List<Unit> defenders = defender.getUnits();
-			//could invade with only selected units
-			return invade(attackers, defenders);
-		} else {
+		if (!attacker.getAdjacent().contains(defender)) {
 			//TODO: return not adjancent
 			return null;
 		}
-	}
-	
-	public AttackInfo invade(List<Unit> attackers, List<Unit> defenders){
+		//for now we invade with everything
+		List<Unit> attackers = attacker.getUnits();
+		List<Unit> defenders = defender.getUnits();
+		//could invade with only selected units
 		Battle battle = new Battle(attackers,defenders);
 		AttackInfo attackInfo = battle.getResult();
-		//TODO set up attackinfo baseed on battle result
+		if (attackInfo==AttackInfo.WIN) {
+			attacker.getOwner().takeProvince(defender);
+		}
 		return attackInfo;
 	}
 	
+	public AttackInfo invade(List<Unit>attackers,Province defender){
+		//check adjacent
+		if (!attackers.get(0).getProvince().getAdjacent().contains(defender)){
+			return null;
+		}
+		Faction attackOwner = attackers.get(0).getProvince().getOwner();
+		Battle battle = new Battle(attackers,defender.getUnits());
+		AttackInfo attackInfo = battle.getResult();
+		//change owner
+		if (attackInfo==AttackInfo.WIN) {
+			attackOwner.takeProvince(defender);
+		}
+		return attackInfo;
+	}
 //	Constraints:
 //	destination from getDestinations()
 //	units.province is invariant
@@ -274,6 +286,11 @@ public class GameController {
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo endTurn() {
 		this.currentTurn++;
+		if (this.factionOrder.size()<=this.currentTurn) {
+			this.round++;
+			this.currentTurn = this.currentTurn%this.factionOrder.size();	
+		}
+		getCurrentTurn().updateWealth();
 		return checkVictory();
 	}
 	

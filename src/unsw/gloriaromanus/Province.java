@@ -41,6 +41,10 @@ public class Province{
 	
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
+ 
+	private int trainingSlotNum = 1;
+	private int maxSlots = 1;
+	private Faction player;
 	
 	@JsonCreator
 	private Province(){
@@ -91,7 +95,9 @@ public class Province{
 	
 	public TaxLevel getTaxLevel() {return null;}
 	
-	public int getTrainingSlots() {return 0;}
+	public int getTrainingSlots() {
+		return trainingSlotNum;
+	}
 	
 	public int getInfrastructureSlots() {return 0;}
 	
@@ -105,9 +111,26 @@ public class Province{
 	public int getTotalWealth() {
 		return 0;
 	}
-	
+	public int updateWealth(){
+		//do update
+		double gold=0;
+		gold += (this.townWealth + this.buildingWealth()) * this.taxLevel.getTaxRate();
+		this.townWealth += getWealthGrowth() + taxLevel.getwealthgen();
+		this.townWealth = Integer.max(townWealth, 0);
+		updateBuildingWealth();
+		return (int)gold;
+	}
+	private int getWealthGrowth(){
+		//TODO : calculate WealthGrowth
+		return 0;
+	}
+	private void updateBuildingWealth(){
+		//TODO :add updateBuildingWealth
+	}
 //	Ordered list corresponding to training slots
-	public List<TrainingSlotEntry> getCurrentTraining(){return null;}
+	public List<TrainingSlotEntry> getCurrentTraining() {
+		return this.trainingSlots;
+	}
 	
 //	As above. Only a single element list for milestone 2.
 	public List<BuildingSlotEntry> getCurrentConstruction(){return null;}
@@ -124,7 +147,11 @@ public class Province{
 	public List<ItemType> getBuildable(){return null;}
 	
 //	Called when province training menu is opened
-	public List<ItemType> getTrainable(){return null;}
+	public List<ItemType> getTrainable() {
+		List<ItemType> trainableList = new ArrayList<>();
+		trainableList.add(ItemType.TEST_TROOP);
+		return trainableList;
+	}
 	
 	public int getMovCost() {
 		return movCost;
@@ -195,6 +222,23 @@ public class Province{
 		// Train Unit
 		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
 		this.trainingSlots.add(u);
+		// Adjust gold values
+		int trainCost = unit.getCost(1);
+		owner.adjustGold(trainCost);
+		// Adjust trainingslotnum
+		trainingSlotNum -= 1;
+	}
+
+	void trainFinishUnit(ItemType unit) {
+		// Remove unit from slot
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		this.trainingSlots.remove(u);
+		// Adjust trainingslotnum
+		adjustTraining();
+	}
+
+	void adjustTraining() {
+		trainingSlotNum += 1;
 	}
 
 	void addUnit(ItemType type) {

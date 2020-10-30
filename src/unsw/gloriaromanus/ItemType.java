@@ -49,7 +49,7 @@ public enum ItemType{
 	ROMAN_LEGIONARY  		(),
 	
 	//ARTILLERY:
-	ARTILLERY_RANGE			(),
+	TREBUCHET				(),
 	
 	//INFANTRY:
 	HEAVY_INFANTRY			(),
@@ -61,7 +61,8 @@ public enum ItemType{
 	// CAVALRY:
 	HORSE_ARCHER			(),
 	HEAVY_CAVALRY			(),
-	DRUID					("src/test/test_troop.json"),
+	LIGHT_CAVALRY			(),
+	DRUID					(),
 	CHARIOTS				();
 	
 	private static final String SOURCE_DIR = "src/data";
@@ -224,5 +225,4 @@ public enum ItemType{
 		
 	}
 
-	
 }
