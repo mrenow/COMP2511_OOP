@@ -170,7 +170,24 @@ public class Province{
 		this.units.remove(unit);
 	}
 	
+	void addBuilding(ItemType type) {
+		Infrastructure t = new Infrastructure(type, 1);
+		this.buildings.add(t);
+	}
+	
+	void build(ItemType type) {
+		// Start building
 
-	
-	
+	}
+
+	void trainUnit(ItemType unit) {
+		// Train Unit
+
+	}
+
+	void addUnit(ItemType type) {
+		Unit u = new Unit(type, 1);
+		this.units.add(u);
+	}
+
 }

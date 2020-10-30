@@ -8,6 +8,6 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 	@Override
 	void onFinish() {
 		// TODO Spawn relevant troop in provinces
-		
+		province.addUnit(type);
 	}
 }

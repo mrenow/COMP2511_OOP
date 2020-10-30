@@ -8,7 +8,8 @@ public class BuildingSlotEntry extends ItemSlotEntry{
 
 	@Override
 	void onFinish() {
-		// TODO Should construct and add the new building to the province's building list.
+		// Should construct and add the new building to the province's building list.
+		province.addBuilding(type);
 	}
 
 }
