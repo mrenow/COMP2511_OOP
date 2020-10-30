@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,23 +45,23 @@ public class TrainingTest {
 
         // Now, train calvary
         game.trainUnit(p1, calvary);
+        //System.out.println("im here");
         
-        // Check no. training slots left, and remaining gold
-        assertEquals(40, player.getGold());
+
+        // Check no training slots left, and remaining gold
+        assertEquals(50, player.getGold());
         assertEquals(2, p1.getTrainingSlots());
 
         //
         game.trainUnit(p1, calvary);
 
-        assertEquals(20, player.getGold());
+        assertEquals(40, player.getGold());
         assertEquals(1, p1.getTrainingSlots());
 
         game.trainUnit(p1, calvary);
 
-        assertEquals(0, player.getGold());
+        assertEquals(30, player.getGold());
         assertEquals(0, p1.getTrainingSlots());
-
-        game.endTurn();
 
     }
 
@@ -93,5 +94,12 @@ public class TrainingTest {
     @AfterEach
 	public void clear() {
 
-	}
+    }
+    
+    public static void main(String[] args) throws DataInitializationException {
+        GameController game;
+        Faction player;
+        game = GameController.loadFromSave("src/test/testTraining_troop.json");
+        player = game.getCurrentTurn();
+    }
 }

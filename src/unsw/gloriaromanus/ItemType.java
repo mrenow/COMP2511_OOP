@@ -49,15 +49,15 @@ public enum ItemType{
 	ELEPHANTS				("src/test/test_troop.json"),
 	ROMAN_LEIGIONARY  		("src/test/test_troop.json"),
 	//ARTILLERY:
-	ARTILLERY_RANGE			(),
+	ARTILLERY_RANGE			("src/test/test_building.json"),
 	//INFANTRY:
-	MISSILE_INFANTRY		(),
-	HEAVY_INFANTRY			(),
-	ARCHER					(),
-	SPEARMEN				(),
+	MISSILE_INFANTRY		("src/test/test_building.json"),
+	HEAVY_INFANTRY			("src/test/test_building.json"),
+	ARCHER					("src/test/test_building.json"),
+	SPEARMEN				("src/test/test_building.json"),
 	// CALVARY:
-	HORSE_ARCHER			(),
-	HEAVY_CAVALRY			();
+	HORSE_ARCHER			("src/test/test_building.json"),
+	HEAVY_CAVALRY			("src/test/test_building.json");
 	
 	private static final String SOURCE_DIR = "src/data";
 	

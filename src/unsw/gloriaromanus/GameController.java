@@ -141,15 +141,15 @@ public class GameController {
 //	Free slots must be available
 	public void trainUnit (Province province, ItemType unitType) {
 		// Create a unit with unitType
-		List<ItemType> trainable = province.getTrainable();
-		if (trainable.contains(unitType) && province.getTrainingSlots() > 0) {
+		//List<ItemType> trainable = province.getTrainable();
+		if (province.getTrainingSlots() > 0) {
 			province.trainUnit(unitType);
 		} else {
 			System.out.println("Failed to train unit");
 		}
 	}
-	
-//	Constraints:
+
+	// Constraints:
 //	ItemType must be in getBuildable()
 //	Free slots must be available
 	public void buildInfrastructure(Province province, ItemType infraType) {

@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.esri.arcgisruntime.mapping.view.MapScaleChangedEvent;
+//import com.esri.arcgisruntime.mapping.view.MapScaleChangedEvent;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ser.std.CollectionSerializer;
@@ -26,6 +26,7 @@ public class Faction {
 	
 	private FactionType type = FactionType.ROME;
 	private int gold = 0;
+	private int costs = 1;
 	
 	@JsonIdentityReference(alwaysAsId = true)
 	private Collection<Province> provinces = new ArrayList<Province>();
@@ -55,6 +56,10 @@ public class Faction {
 	public Collection<Province> getProvinces(){return new ArrayList<Province>(provinces);}
 	
 	public int getGold() {return gold;}
+
+	void adjustGold(int trainCost) {
+		gold -= trainCost;
+	}
 	
 	public String getTitle() {return type.getTitle();}
 	

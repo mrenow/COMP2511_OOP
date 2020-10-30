@@ -41,6 +41,10 @@ public class Province{
 	
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
+ 
+	private int trainingSlotNum = 1;
+	private int maxSlots = 1;
+	private Faction player;
 	
 	@JsonCreator
 	private Province(){
@@ -91,7 +95,9 @@ public class Province{
 	
 	public TaxLevel getTaxLevel() {return null;}
 	
-	public int getTrainingSlots() {return 0;}
+	public int getTrainingSlots() {
+		return trainingSlotNum;
+	}
 	
 	public int getInfrastructureSlots() {return 0;}
 	
@@ -124,7 +130,11 @@ public class Province{
 	public List<ItemType> getBuildable(){return null;}
 	
 //	Called when province training menu is opened
-	public List<ItemType> getTrainable(){return null;}
+	public List<ItemType> getTrainable() {
+		List<ItemType> trainableList = new ArrayList<>();
+		trainableList.add(ItemType.TEST_TROOP);
+		return trainableList;
+	}
 	
 	public int getMovCost() {
 		return movCost;
@@ -195,6 +205,19 @@ public class Province{
 		// Train Unit
 		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
 		this.trainingSlots.add(u);
+		// Adjust gold values
+		int trainCost = unit.getCost(1);
+		owner.adjustGold(trainCost);
+		// Adjust trainingslotnum
+		trainingSlotNum -= 1;
+	}
+
+	void trainFinishUnit(ItemType unit) {
+		// Remove unit from slot
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		this.trainingSlots.remove(u);
+		// Adjust trainingslotnum
+		trainingSlotNum += 1;
 	}
 
 	void addUnit(ItemType type) {
