@@ -159,11 +159,30 @@ class Battle {
 	 * @return if the battle ended
 	 */
 	private boolean isBattleEnd() {
-		// TODO for now battle never start
 		if (this.numEngagements > 200) {
+			this.attackInfo=AttackInfo.DRAW;
 			return true;
 		}
-		return true;
+		if (armies.get(ATTACK).size()>0){
+			if (armies.get(DEFEND).size()>0){
+				//both army lives
+				return false;
+			}
+			else{
+				//no defender yet attacker exist
+				this.attackInfo=AttackInfo.WIN;
+				return true;
+			}
+		}
+		if (armies.get(DEFEND).size()>0){
+			//no attacker yet defender exist
+			this.attackInfo=AttackInfo.LOSE;
+			return true;
+		}else{
+			//no attacker no defender DRAW
+			this.attackInfo=AttackInfo.DRAW;
+			return true;
+		}
 	}
 	
 	// Placeholder

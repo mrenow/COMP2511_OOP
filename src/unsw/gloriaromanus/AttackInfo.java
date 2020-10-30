@@ -1,15 +1,17 @@
 package unsw.gloriaromanus;
 
-public enum AttackInfo {
+enum AttackInfo {
     WIN, LOSE, DRAW;
-    public AttackInfo defenderView(AttackInfo info){
-        switch (info) {
+    public AttackInfo defenderView(){
+        switch (this) {
             case WIN:
                 return LOSE;
             case LOSE:
                 return WIN;
+            case DRAW:
+                return DRAW;
             default:
-                return info;
+                return null;
         }
     }
 }

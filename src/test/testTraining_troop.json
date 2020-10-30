@@ -4,6 +4,8 @@
       "owner" : "ROME",
       "townWealth" : 10,
       "taxLevel" : "NORMAL_TAX",
+      "buildingSlots" : [ ],
+      "trainingSlots" : [ ],
       "buildings" : [ {
           "type" : "TRAINING_BUILDING",
           "level" : 1,

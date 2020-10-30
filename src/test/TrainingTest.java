@@ -33,7 +33,7 @@ public class TrainingTest {
     public void basicTraining() throws DataInitializationException {
         game = GameController.loadFromSave("src/test/testTraining_troop.json");
         player = game.getCurrentTurn();
-        ItemType calvary = ItemType.HEAVY_CAVALRY;
+        ItemType calvary = ItemType.TEST_TROOP;
         Province p1 = game.getProvince("P1");
 
         
