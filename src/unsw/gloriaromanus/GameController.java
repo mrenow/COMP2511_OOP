@@ -177,6 +177,7 @@ public class GameController {
 	public void cancelTraining(TrainingSlotEntry entry) {
 		Province province = entry.getProvince();
 		province.getCurrentTraining().remove(entry);
+		province.adjustTraining();
 	}
 	
 //	Constraints: None

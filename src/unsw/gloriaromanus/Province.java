@@ -128,7 +128,9 @@ public class Province{
 		//TODO :add updateBuildingWealth
 	}
 //	Ordered list corresponding to training slots
-	public List<TrainingSlotEntry> getCurrentTraining(){return null;}
+	public List<TrainingSlotEntry> getCurrentTraining() {
+		return this.trainingSlots;
+	}
 	
 //	As above. Only a single element list for milestone 2.
 	public List<BuildingSlotEntry> getCurrentConstruction(){return null;}
@@ -232,6 +234,10 @@ public class Province{
 		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
 		this.trainingSlots.remove(u);
 		// Adjust trainingslotnum
+		adjustTraining();
+	}
+
+	void adjustTraining() {
 		trainingSlotNum += 1;
 	}
 

@@ -82,12 +82,12 @@ public class TrainingTest {
         // Check -1 on max training slots
         assertEquals(2, p1.getTrainingSlots());
 
-        //game.cancelTraining(one);
+        TrainingSlotEntry u = new TrainingSlotEntry(calvary, 1);
+        game.cancelTraining(u);
 
         // Check training slot back to full
         assertEquals(3, p1.getTrainingSlots());
 
-        game.endTurn();
 
     }
 
