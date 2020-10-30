@@ -8,6 +8,9 @@ import java.util.List;
  *
  * Side note: This and the mapping iterator uses Iterator, Strategy and Composite patterns at the same time.
  * I swear I did this out of necessity (or more like convenience)
+ * 
+ * Oh, Im basically reimplementing the streams libraray with iterables
+ * okay then.
  * @author ezra
  *
  * @param <T>
@@ -84,8 +87,6 @@ public class Concatenator<T> implements Iterable<T>{
 		}
 		for (Integer num: new Concatenator<>(1).and(2,3,4).and(5,6).and(7).and(8).and(9,10)) {
 			System.out.println(num);
-		}
-		
-		
+		}		
 	}
 }
