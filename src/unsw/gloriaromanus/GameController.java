@@ -205,27 +205,35 @@ public class GameController {
 //	Constraints:
 //	attacker.faction != defender.faction
 //	Province.adjacent(attacker, defender)
-	public AttackInfo attack (Province attacker, Province defender) {
+	public AttackInfo invade (Province attacker, Province defender) {
 		//check if adjency
 		if (attacker.getAdjacent().contains(defender)) {
 			//for now we invade with everything
 			List<Unit> attackers = attacker.getUnits();
 			List<Unit> defenders = defender.getUnits();
 			//could invade with only selected units
-			return invade(attackers, defenders);
+			Battle battle = new Battle(attackers,defenders);
+			AttackInfo attackInfo = battle.getResult();
+			if (attackInfo==AttackInfo.WIN) {
+				defender.changeOwner(attacker.getOwner());
+			}
+			return attackInfo;
 		} else {
 			//TODO: return not adjancent
 			return null;
 		}
 	}
 	
-	public AttackInfo invade(List<Unit>attackers,List<Unit> defenders){
-		Battle battle = new Battle(attackers,defenders);
+	public AttackInfo invade(List<Unit>attackers,Province defender){
+		Faction attackOwner = attackers.get(0).getProvince().getOwner();
+		Battle battle = new Battle(attackers,defender.getUnits());
 		AttackInfo attackInfo = battle.getResult();
-		//TODO set up attackinfo baseed on battle result
+		//change owner
+		if (attackInfo==AttackInfo.WIN) {
+			defender.changeOwner(attackOwner);
+		}
 		return attackInfo;
 	}
-	
 //	Constraints:
 //	destination from getDestinations()
 //	units.province is invariant
