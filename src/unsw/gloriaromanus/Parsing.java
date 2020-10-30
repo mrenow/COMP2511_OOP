@@ -70,6 +70,9 @@ public class Parsing {
 		List<Province> allProvinces = om.readValue(new File(provinceFile), new TypeReference<List<Province>>() {});
 		System.out.println(allProvinces);
 		for (Province p : allProvinces) {
+			for ( Unit u : p.getUnits()) {
+				u.loadProvince(p);
+			}
 			provinceMap.put(p.getName(), p);
 		}
 		return provinceMap;
@@ -93,7 +96,7 @@ public class Parsing {
 		for (JsonNode node : root) {
 			List<String> provinceNames = om.readValue(node.get("provinceNames").toString(), new TypeReference<List<String>>(){});
 			for (String name: provinceNames) {
-				factionOrder.get(factionIndex).takeProvince(allProvinces.get(name));
+				factionOrder.get(factionIndex).loadProvince(allProvinces.get(name));
 			}
 			factionIndex ++;
 		}
@@ -110,4 +113,7 @@ public class Parsing {
 		// TODO
 		return null;
 	}
+	
+	
+	
 }

@@ -11,7 +11,7 @@
     	"name" : "P1",
         "adjacent" : ["P2" , "P7", "P6"],
         "movCost" : 1, 
-        "units" : [ {"health" : 1, "movPoints" : 1}, {"health" : 2, "movPoints" : 2}, {"health" : 3, "movPoints" : 3}, {"health" : 4, "movPoints" : 4}] // four default units, each with 
+        "units" : [ {"health" : 1, "movPoints" : 1}, {"health" : 2, "movPoints" : 2}, {"health" : 3, "movPoints" : 3}, {"health" : 4, "movPoints" : 4}]
     },
     {    	
     	"name" : "P2",

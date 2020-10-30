@@ -27,7 +27,7 @@ public class TrainingTest {
      * Player starting with x provinces owned, move units to adjacent province
      * 
      * @throws DataInitializationException
-     * @throws Exception
+     * @throws Exception 
      */
     @Test
     public void basicTraining() throws DataInitializationException {
@@ -36,6 +36,7 @@ public class TrainingTest {
         ItemType calvary = ItemType.HEAVY_CAVALRY;
         Province p1 = game.getProvince("P1");
 
+        
         // Check faction gold
         assertEquals(60, player.getGold());
         // Check number of training slots
@@ -70,7 +71,7 @@ public class TrainingTest {
         ItemType calvary = ItemType.HEAVY_CAVALRY;
         Province p1 = game.getProvince("P1");
         // TBD
-        TrainingSlotEntry one = TrainingSlotEntry somethingTBD;
+        //TrainingSlotEntry one = TrainingSlotEntry somethingTBD;
 
         // Check for full training slots
         assertEquals(3, p1.getTrainingSlots());
@@ -80,7 +81,7 @@ public class TrainingTest {
         // Check -1 on max training slots
         assertEquals(2, p1.getTrainingSlots());
 
-        game.cancelTraining(one);
+        //game.cancelTraining(one);
 
         // Check training slot back to full
         assertEquals(3, p1.getTrainingSlots());

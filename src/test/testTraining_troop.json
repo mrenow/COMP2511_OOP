@@ -5,10 +5,10 @@
       "townWealth" : 10,
       "taxLevel" : "NORMAL_TAX",
       "buildings" : [ {
-          "type" : "Training_Building",
+          "type" : "TRAINING_BUILDING",
+          "level" : 1,
           "buildingWealth" : 30,
-          "wealthRate" : 20,
-          "trainingSlots" : 3
+          "wealthRate" : 20
       } ]
     }],
     "factionOrder" : [ {

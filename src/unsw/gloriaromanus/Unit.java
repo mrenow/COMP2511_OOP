@@ -37,6 +37,7 @@ public class Unit {
 	
 	@JsonIdentityReference(alwaysAsId = true)
 	private Province province;
+	
 	private boolean isMercenary = false;
 
 	// Assigned based on type
@@ -46,6 +47,7 @@ public class Unit {
 	private int movPoints;
 	private double speed;
 	private double morale;
+	
 	
 	@JsonCreator
 	public Unit(
@@ -58,10 +60,10 @@ public class Unit {
 			this.level = newLevel;
 		}
 		// By default take typeinfo
-		this.maxMovPoints = (Integer) this.type.getAttribute("movPoints", this.level);
+		this.maxMovPoints = (Integer)this.type.getAttribute("movPoints", this.level);
 		this.health = (Integer) this.type.getAttribute("health", this.level);
-		this.morale = (Double) this.type.getAttribute("morale", this.level);
-		this.speed = (Double) this.type.getAttribute("speed", this.level);
+		this.morale = ((Integer) this.type.getAttribute("morale", this.level)).doubleValue();
+		this.speed = ((Integer) this.type.getAttribute("speed", this.level)).doubleValue();
 		this.baseCharacteristic = new CombatStats(this.type);
 		this.movPoints = this.maxMovPoints;
 	}
@@ -161,6 +163,10 @@ public class Unit {
 	void expendMovement(int cost) {
 		movPoints -= cost;
 	}
+	// Used in loading only
+	void loadProvince(Province p) {
+		this.province = p;
+	} 
 }
 
 

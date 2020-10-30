@@ -42,10 +42,11 @@ public enum ItemType{
 //	
 //	HEAVY_INFANTRY			(),
 //	ARCHER					(),
+	TRAINING_BUILDING		("src/test/test_building.json"),
 	DRUID					("src/test/test_troop.json"),
 	TEST_TROOP				("src/test/test_troop.json"),
 	TEST_BUILDING			("src/test/test_building.json"),
-	HEAVY_CAVALRY			("src/test/test_calvary.json"),
+	HEAVY_CAVALRY			(),
 	JAVELIN_SKIRMISHER		("src/test/test_troop.json"),
 	ELEPHANTS				("src/test/test_troop.json"),
 	ROMAN_LEIGIONARY  		("src/test/test_troop.json");

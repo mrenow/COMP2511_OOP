@@ -57,17 +57,15 @@ public class TestUtil {
 			Collection<T> objects,
 			Function<? super T, ? extends R> attributeGetter) {
 		
-		assertIterableEquals(
-				actual
+		assertEquals(
+				new HashSet<>(actual
 					.stream()
-					.sorted()
-					.collect(Collectors.toList()),
-				objects
+					.collect(Collectors.toSet())),
+				new HashSet<>(objects
 					.stream()
 					.map(attributeGetter)
-					.sorted()
-					.collect(Collectors.toList())
-					);
+					.collect(Collectors.toSet())
+					));
 	}
 	/**
 	 * Asserts that two collections have the same elements. Does not care about order.
@@ -77,15 +75,13 @@ public class TestUtil {
 	public static void assertCollectionEquals(
 			Collection<?> actual,
 			Collection<?> objects) {
-		assertIterableEquals(
-				actual
+		assertEquals(
+				new HashSet<>(actual
 					.stream()
-					.sorted()
-					.collect(Collectors.toList()),
-				objects
+					.collect(Collectors.toSet())),
+				new HashSet<>(objects
 					.stream()
-					.sorted()
-					.collect(Collectors.toList()));	
+					.collect(Collectors.toSet())));	
 	}
 	
 }

@@ -12,9 +12,11 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Infrastructure {
+	// REQUIRED
 	private ItemType type = ItemType.TEST_BUILDING;
 	private int level = 1;
 	
+	// OPTIONAL
 	private int buildingWealth;
 	private int wealthRate;
 	

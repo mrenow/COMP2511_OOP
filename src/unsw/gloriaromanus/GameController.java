@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
+
 import org.geojson.Point;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -76,7 +78,6 @@ public class GameController {
 			e.printStackTrace();
 			throw new DataInitializationException("Error while constructing provinces", e);
 		}
-		
 		try {
 			this.factionOrder = Parsing.readFactions(factionFile, provinceMap);
 			this.allProvinces = provinceMap.values();
@@ -254,14 +255,15 @@ public class GameController {
 					continue;
 				}
 				seen.put(q, dist);
-				queued.add(p);
+				queued.add(q);
 			}
 		}
 		assert movCost != -1 : "either contract was breached or algorithm is buggy";
 		
 		// Move units between provinces and subtract mov points accordingly.
 		for (Unit unit : unitGroup) {
-			start.getUnits().remove(unit);
+			start.removeUnit(unit);
+			unit.setProvince(destination);
 			unit.expendMovement(movCost);
 		}
 		destination.addUnits(unitGroup);
@@ -300,10 +302,11 @@ public class GameController {
 // 	Modify later to return a path?s
 	public Collection<Province> getDestinations(List<Unit> unitGroup){
 		int distMax = MathUtil.min(new MappingIterable<>(unitGroup, Unit::getMovPoints));
+		System.out.println("distmax: " + distMax);
 		if(distMax == 0) {
 			return Collections.emptySet();
 		}
-		Collection<Province> out = new HashSet<Province>();
+		Set<Province> out = new HashSet<Province>();
 		
 		Map<Province, Integer> seen = new HashMap<>(allProvinces.size());
 		for(Province p : allProvinces) {
@@ -318,18 +321,21 @@ public class GameController {
 		queued.add(start);
 		seen.put(start, 0);
 		while(!queued.isEmpty()) {
-			Province p = queued.poll();
-			int dist = seen.get(p) + p.getMovCost();
-			if(dist == distMax + p.getMovCost()){
+			Province curr = queued.poll();
+			// 
+			int distNext = seen.get(curr) + curr.getMovCost();
+			if(distNext > distMax) {
 				continue;
 			}
-			for (Province q : p.getAdjacent()) {
-				if(seen.get(q) <= dist || !faction.equals(q.getOwner())) {
+			// Distanc ok.
+			// for each neighbour:
+			for (Province next : curr.getAdjacent()) {
+				if(seen.get(next) <= distNext || !faction.equals(next.getOwner())) {
 					continue;
 				}
-				out.add(q);
-				seen.put(q, dist);
-				queued.add(p);
+				out.add(next);
+				seen.put(next, distNext);
+				queued.add(next);
 			}
 		}
 		return out;
@@ -356,7 +362,15 @@ public class GameController {
 	public Province getProvince(Point location) {return null;}
 	
 //	returns the province with this name (debug / testing only).
-	public Province getProvince(String name){return null;}
+	public Province getProvince(String name){
+		for(Province p : allProvinces) {
+			if(p.getName().equals(name)) {
+				return p;
+			}
+		}
+		return null;
+		
+	}
 	public int getNumProvinces() {
 		return allProvinces.size();
 	}

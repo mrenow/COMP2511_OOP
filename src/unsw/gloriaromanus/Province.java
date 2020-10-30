@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="name")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Province{
 	// Required
@@ -25,7 +25,7 @@ public class Province{
 	private Faction owner = Faction.NO_ONE; 
 
 	@JsonIdentityReference(alwaysAsId = true)
-	private List<Province> adjacent = new ArrayList<>();
+	private Collection<Province> adjacent = new ArrayList<>();
 	
 	private List<Infrastructure> buildings = new ArrayList<>();
 	
@@ -36,13 +36,15 @@ public class Province{
 	private int movCost = 4;
 	private boolean isLandlocked = false;
 	private boolean isConquered = false;
-
+	
 	private List<Unit> units = new ArrayList<>();
+	
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
 	
 	@JsonCreator
-	private Province(){}
+	private Province(){
+	}
 
 	/*
 	 * Used for init only.
@@ -111,7 +113,9 @@ public class Province{
 	public List<BuildingSlotEntry> getCurrentConstruction(){return null;}
 	
 //	Called when the unit selection menu of a province is opened, and used to select units to move.
-	public List<Unit> getUnits(){return null;}
+	public List<Unit> getUnits(){
+		return new ArrayList<>(units);
+	}
 	
 //	Called when displaying infrastructure
 	public List<Infrastructure> getInfrastructure(){return null;}
@@ -139,6 +143,7 @@ public class Province{
 	 * Sets owner. If owner is different to previous, Item slots are cleared.
 	 */
 	void changeOwner(Faction owner) {
+		System.out.println("Change owner");
 		if(owner != this.owner) {
 			this.owner = owner;
 			onConquered();
@@ -170,6 +175,10 @@ public class Province{
 		this.units.remove(unit);
 	}
 	
+	// Used during load only.
+	void loadOwner(Faction owner) {
+		this.owner = owner;
+	}
 
 	
 	

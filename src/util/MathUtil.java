@@ -28,7 +28,7 @@ public class MathUtil {
 	
 	public static Integer min(Iterable<Integer> collection) {
 		int runs = 0;
-		Integer min = Integer.MIN_VALUE;
+		Integer min = Integer.MAX_VALUE;
 		for(Integer num : collection) {
 			runs++;
 			if(num < min) {
