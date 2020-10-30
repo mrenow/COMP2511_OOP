@@ -205,27 +205,38 @@ public class GameController {
 //	Constraints:
 //	attacker.faction != defender.faction
 //	Province.adjacent(attacker, defender)
-	public AttackInfo attack (Province attacker, Province defender) {
+	public AttackInfo invade (Province attacker, Province defender) {
 		//check if adjency
-		if (attacker.getAdjacent().contains(defender)) {
-			//for now we invade with everything
-			List<Unit> attackers = attacker.getUnits();
-			List<Unit> defenders = defender.getUnits();
-			//could invade with only selected units
-			return invade(attackers, defenders);
-		} else {
+		if (!attacker.getAdjacent().contains(defender)) {
 			//TODO: return not adjancent
 			return null;
 		}
-	}
-	
-	public AttackInfo invade(List<Unit>attackers,List<Unit> defenders){
+		//for now we invade with everything
+		List<Unit> attackers = attacker.getUnits();
+		List<Unit> defenders = defender.getUnits();
+		//could invade with only selected units
 		Battle battle = new Battle(attackers,defenders);
 		AttackInfo attackInfo = battle.getResult();
-		//TODO set up attackinfo baseed on battle result
+		if (attackInfo==AttackInfo.WIN) {
+			attacker.getOwner().takeProvince(defender);
+		}
 		return attackInfo;
 	}
 	
+	public AttackInfo invade(List<Unit>attackers,Province defender){
+		//check adjacent
+		if (!attackers.get(0).getProvince().getAdjacent().contains(defender)){
+			return null;
+		}
+		Faction attackOwner = attackers.get(0).getProvince().getOwner();
+		Battle battle = new Battle(attackers,defender.getUnits());
+		AttackInfo attackInfo = battle.getResult();
+		//change owner
+		if (attackInfo==AttackInfo.WIN) {
+			attackOwner.takeProvince(defender);
+		}
+		return attackInfo;
+	}
 //	Constraints:
 //	destination from getDestinations()
 //	units.province is invariant
@@ -274,6 +285,11 @@ public class GameController {
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo endTurn() {
 		this.currentTurn++;
+		if (this.factionOrder.size()<=this.currentTurn) {
+			this.round++;
+			this.currentTurn = this.currentTurn%this.factionOrder.size();	
+		}
+		getCurrentTurn().updateWealth();
 		return checkVictory();
 	}
 	

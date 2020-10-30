@@ -53,7 +53,7 @@ public class Faction {
 
 	public FactionType getType() {return type;}
 
-	public Collection<Province> getProvinces(){return new ArrayList<Province>(provinces);}
+	public Collection<Province> getProvinces(){return provinces;}
 	
 	public int getGold() {return gold;}
 
@@ -63,9 +63,25 @@ public class Faction {
 	
 	public String getTitle() {return type.getTitle();}
 	
-	public int getTotalWealth() {return 0;}
-	
+	public int getTotalWealth() {
+		//calculation for total wealth
+		int wealth=0;
+		for (Province province : provinces) {
+			wealth += province.getTotalWealth();
+		}
+		return wealth;
+	}
+	public void updateWealth(){
+		for (Province province : provinces) {
+			this.gold += province.updateWealth();
+		}
+	}
 	public Province getProvince(String name) {
+		for (Province province : provinces) {
+			if (province.getName().equals(name)) {
+				return province;
+			}
+		}
 		return null;
 	}
 	
