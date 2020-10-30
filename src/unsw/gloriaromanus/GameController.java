@@ -119,6 +119,7 @@ public class GameController {
 	
 //	Constraints:
 //	UnitType must be in getMercenaries()
+//	NOW NOT NEEDED FOR MILESTONE 2
 	public void hireUnit(Province province, ItemType unitType) {
 		Faction currFaction = getCurrentTurn();
 		int level = 0;
@@ -139,12 +140,12 @@ public class GameController {
 //	ItemType must be in getTrainable()
 //	Free slots must be available
 	public void trainUnit (Province province, ItemType unitType) {
-		//TODO create a unit with unitType
+		// Create a unit with unitType
 		List<ItemType> trainable = province.getTrainable();
-		if (trainable.contains(unitType)) {
-			// TODO train Unit
+		if (trainable.contains(unitType) && province.getTrainingSlots() > 0) {
+			province.trainUnit(unitType);
 		} else {
-			// TODO fail to train unit
+			System.out.println("Failed to train unit");
 		}
 	}
 	
@@ -152,17 +153,17 @@ public class GameController {
 //	ItemType must be in getBuildable()
 //	Free slots must be available
 	public void buildInfrastructure(Province province, ItemType infraType) {
-		if (province.getBuildable().contains(infraType)) {
+		if (province.getBuildable().contains(infraType) && province.getInfrastructureSlots() > 0) {
 			//can be build
-			// TODO :add build to building queue #func in province
-			
-			// province.build();
+			// add build to building queue #func in province
+			province.build(infraType);
 		} else {
 			//cannot build
-			// TODO :print to terminal cannot bulid
+			//print to terminal cannot bulid
+			System.out.println("Unable to build infrastructure.");
 		}
-		// should return the entry?
-	} // also upgrade
+		// should return the entry??
+	}
 	
 //	Constraints:
 //	InfrastructureEntity must be in getCurrentInfrastructure 

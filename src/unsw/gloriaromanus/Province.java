@@ -174,12 +174,32 @@ public class Province{
 	void removeUnit(Unit unit) {
 		this.units.remove(unit);
 	}
-	
+
 	// Used during load only.
 	void loadOwner(Faction owner) {
 		this.owner = owner;
 	}
 
+	void addBuilding(ItemType type) {
+		Infrastructure t = new Infrastructure(type, 1);
+		this.buildings.add(t);
+	}
 	
-	
+	void build(ItemType type) {
+		// Start building
+		BuildingSlotEntry t = new BuildingSlotEntry(type, 1);
+		this.buildingSlots.add(t);
+	}
+
+	void trainUnit(ItemType unit) {
+		// Train Unit
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		this.trainingSlots.add(u);
+	}
+
+	void addUnit(ItemType type) {
+		Unit u = new Unit(type, 1);
+		this.units.add(u);
+	}
+
 }
