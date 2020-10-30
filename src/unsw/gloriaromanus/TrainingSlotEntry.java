@@ -5,6 +5,9 @@ package unsw.gloriaromanus;
  * @author ezra
  */
 public class TrainingSlotEntry extends ItemSlotEntry{
+
+	public TrainingSlotEntry(ItemType type, int level) {}
+
 	@Override
 	void onFinish() {
 		// TODO Spawn relevant troop in provinces

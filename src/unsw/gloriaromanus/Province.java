@@ -177,12 +177,14 @@ public class Province{
 	
 	void build(ItemType type) {
 		// Start building
-
+		BuildingSlotEntry t = new BuildingSlotEntry(type, 1);
+		this.buildingSlots.add(t);
 	}
 
 	void trainUnit(ItemType unit) {
 		// Train Unit
-
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		this.trainingSlots.add(u);
 	}
 
 	void addUnit(ItemType type) {
