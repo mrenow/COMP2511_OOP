@@ -13,11 +13,12 @@ import util.MappingIterable;
 import util.MathUtil;
 import util.Repeat;
 
-public class Battle {
+// Object is temporary. Do not attempt to store.
+class Battle {
 	// Ranged Modifier
-	static final CombatModifier RANGED_MODIFIER = new CombatModifier(CombatModifierMethod.RANGED, null);
-	static final MoraleModifier ATTACKER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, ATTACK);
-	static final MoraleModifier DEFENDER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, DEFEND);
+	private static final CombatModifier RANGED_MODIFIER = new CombatModifier(CombatModifierMethod.RANGED, null);
+	private static final MoraleModifier ATTACKER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, ATTACK);
+	private static final MoraleModifier DEFENDER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, DEFEND);
 	
 	// basic info of a battle
 	// Units participating in battle that have not died/routed.
@@ -32,30 +33,28 @@ public class Battle {
 	 */
 	private int numEngagements = 0;
 	// record in attackinfo
-	AttackInfo attackInfo;
+	private AttackInfo attackInfo;
 
 	// data for setup a engagement
-	Unit attackUnit;
-	Unit defendUnit;
+	private Unit attackUnit;
+	private Unit defendUnit;
 	
-	Faction attackFaction;
-	Faction defendFaction;
-	Province attackProvince;
-	Province defendProvince;
+	private Faction attackFaction;
+	private Faction defendFaction;
+	private Province attackProvince;
+	private Province defendProvince;
 	
 	
-	CombatData aData;
-	CombatData dData;
+	private CombatData aData;
+	private CombatData dData;
 	// current engagement
-	Engagement engagement;
-	Iterable<MoraleModifier> moraleSupport;
-	Iterable<CombatModifier> combatSupport;
+	private Engagement engagement;
+	private Iterable<MoraleModifier> moraleSupport;
+	private Iterable<CombatModifier> combatSupport;
 
-	public Battle() {
-	}
 
 	// Passed lists should be copies from the province
-	public Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
+	Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
 		armies.put(ATTACK, attackArmy);
 		armies.put(DEFEND, defendArmy);
 		

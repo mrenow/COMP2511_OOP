@@ -6,8 +6,8 @@ import java.util.List;
 
 
 
-public class MoraleData {
-	public EnumMap<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
+class MoraleData {
+	EnumMap<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
 	
 	private class SideData {
 		private List<Unit> army;
@@ -22,18 +22,18 @@ public class MoraleData {
 		}
 	}
 	
-	public MoraleData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy) {
+	MoraleData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy) {
 		data.put(ATTACK, new SideData(attackerUnit, attackerArmy));
 		data.put(ATTACK, new SideData(defenderUnit, defenderArmy));
 		
 	}
 	
 	
-	public List<Unit> getArmy(BattleSide side){
+	List<Unit> getArmy(BattleSide side){
 		return data.get(side).army;
 	}
 	
-	public Unit getUnit(BattleSide side){
+	Unit getUnit(BattleSide side){
 		return data.get(side).unit;
 	}
 	
@@ -41,18 +41,18 @@ public class MoraleData {
 	 * This should be called only once with non-infinite values for val.
 	 * 
 	 */
-	public void setMorale(BattleSide side, double val) {
+	void setMorale(BattleSide side, double val) {
 		// Neg inf proceeds all
 		if(data.get(side).moraleBase != Double.NEGATIVE_INFINITY) {
 			data.get(side).moraleBase = val;
 		}
 	}
 	
-	public void addMorale(BattleSide side, double val) {
+	void addMorale(BattleSide side, double val) {
 		data.get(side).moraleAdd += val;
 	}
 	
-	public void multMorale(BattleSide side, double val) {
+	void multMorale(BattleSide side, double val) {
 		data.get(side).moraleMult *= val;
 	}
 	/**
@@ -60,7 +60,7 @@ public class MoraleData {
 	 * @param side
 	 * @return The final morale calculation for the unit of the given side.
 	 */
-	public double getEffectiveMorale(BattleSide side) {
+	double getEffectiveMorale(BattleSide side) {
 		if(data.get(side).moraleBase == Double.NEGATIVE_INFINITY) {
 			return 0;
 		}else if (data.get(side).moraleBase == Double.POSITIVE_INFINITY) {

@@ -80,25 +80,25 @@ public class CombatStats {
 		return shieldDefense;
 	}
 	
-	public void setArmour(double armour) {
+	void setArmour(double armour) {
 		if (armourBase == Double.NEGATIVE_INFINITY) {
 			return;
 		}
 		this.armourBase = armour;
 	}
-	public void setAttack(double attack) {
+	void setAttack(double attack) {
 		if (attackBase == Double.NEGATIVE_INFINITY) {
 			return;
 		}
 		this.attackBase = attack;
 	}
-	public void setShieldDefense(double shieldDefense) {
+	void setShieldDefense(double shieldDefense) {
 		if (shieldDefense == Double.NEGATIVE_INFINITY) {
 			return;
 		}
 		this.shieldDefense = shieldDefense;
 	}
-	public void setDefenseSkill(double defenseSkill) {
+	void setDefenseSkill(double defenseSkill) {
 		if (defenseSkill == Double.NEGATIVE_INFINITY) {
 			return;
 		}

@@ -13,7 +13,7 @@ import java.util.List;
  * 
  * @author ezra
  */
-public class CombatData {
+class CombatData {
 	
 	private boolean isRanged;
 	private EnumMap<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
@@ -30,39 +30,39 @@ public class CombatData {
 		}
 	}
 	 
-	public CombatData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy, boolean isRanged) {
+	CombatData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy, boolean isRanged) {
 		data.put(ATTACK, new SideData(attackerUnit, attackerArmy));
 		data.put(DEFEND, new SideData(defenderUnit, defenderArmy));
 	}
 
-	public List<Unit> getArmy(BattleSide side) {
+	List<Unit> getArmy(BattleSide side) {
 		return data.get(side).army;
 	}
 
-	public Unit getUnit(BattleSide side) {
+	Unit getUnit(BattleSide side) {
 		return data.get(side).unit;
 	}
 
 	/* Curse you demeter!!!!! */
-	public boolean isRanged() {
+	boolean isRanged() {
 		return isRanged;
 	}
 	
-	public double getAttack(BattleSide side) {
+	double getAttack(BattleSide side) {
 		return data.get(side).stats.getAttack();
 	}
 	
-	public double getArmour(BattleSide side) {
+	double getArmour(BattleSide side) {
 		return data.get(side).stats.getArmour();
 	}
-	public double getDefenseSkill(BattleSide side) {
+	double getDefenseSkill(BattleSide side) {
 		return data.get(side).stats.getDefenseSkill();
 	}
 
-	public double getShieldDefense(BattleSide side) {
+	double getShieldDefense(BattleSide side) {
 		return data.get(side).stats.getShieldDefense();
 	}
-	public double getEffectiveArmour(BattleSide side) {
+	double getEffectiveArmour(BattleSide side) {
 		return getShieldDefense(side) + getDefenseSkill(side) + getArmour(side);
 	}
 
