@@ -2,6 +2,8 @@ package unsw.gloriaromanus;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import unsw.gloriaromanus.VicCondition.*;
 
 public class VictoryInfo {
@@ -14,6 +16,7 @@ public class VictoryInfo {
 
     VicComponent vicConditions;
 
+    @JsonCreator
     public VictoryInfo(){}
 
     public VictoryInfo(VicComponent vic){this.vicConditions=vic;}
