@@ -180,7 +180,7 @@ public class Unit {
 
 	public CombatStats getCombatStats() {
 		
-		return null;
+		return new CombatStats(baseCharacteristic);
 	}
 	
 	public boolean isAlive() {

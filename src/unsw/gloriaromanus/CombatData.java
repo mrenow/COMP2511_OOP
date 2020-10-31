@@ -19,6 +19,7 @@ class CombatData {
 	private boolean isRanged;
 	private Map<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
 
+	
 	private class SideData {
 		private List<Unit> army;
 		private Unit unit;

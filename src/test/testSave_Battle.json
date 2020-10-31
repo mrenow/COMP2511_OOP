@@ -2,8 +2,40 @@
   "allProvinces" : [ {
     "name" : "P1",
     "owner" : "ROME",
+    "adjacent" : ["P2", "P4"],
     "units" : [
-	    {
+	    { // 0 : Invincible troop. Always wins an engagmenet.
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 99999.0, // cannot die
+	        "attackBase" : 99.0, // kills enemy eventually 
+	        "defenseSkill" : 0.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P1",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 10,
+	      "speed" : 9999.0, // enemy still has 10% route chance
+	      "morale" : 99999.0 // never routes
+	    },{ // 2 : never routes
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P1",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 10,
+	      "speed" : 10.0,
+	      "morale" : 9999.0
+	    },
+	    { // 3 : always breaks, dies while breaking (manipulate RNG)
 	      "type" : "TEST_TROOP",
 	      "level" : 1,
 	      "baseCharacteristic" : {
@@ -15,26 +47,11 @@
 	      "province" : "P1",
 	      "health" : 10,
 	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
-	      "speed" : 10.0,
-	      "morale" : 10.0
-	    },{
-	      "type" : "TEST_TROOP",
-	      "level" : 1,
-	      "baseCharacteristic" : {
-	        "armourBase" : 2.0,
-	        "attackBase" : 2.0,
-	        "defenseSkill" : 2.0,
-	        "shieldDefense" : 0.0
-	      },
-	      "province" : "P1",
-	      "health" : 10,
-	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
-	      "speed" : 10.0,
-	      "morale" : 10.0
+	      "movPoints" : 10,
+	      "speed" : 0.0,
+	      "morale" : 0.0
 	    },
-	    {
+	    { // 4 : always breaks, always flees.
 	      "type" : "TEST_TROOP",
 	      "level" : 1,
 	      "baseCharacteristic" : {
@@ -43,43 +60,43 @@
 	        "defenseSkill" : 2.0,
 	        "shieldDefense" : 0.0
 	      },
-	      "isRanged" : true,
 	      "province" : "P1",
 	      "health" : 10,
 	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
+	      "movPoints" : 10,
 	      "speed" : 10.0,
-	      "morale" : 10.0
-	    },
-	    {
-	      "type" : "TEST_TROOP",
-	      "level" : 1,
-	      "baseCharacteristic" : {
-	        "armourBase" : 2.0,
-	        "attackBase" : 2.0,
-	        "defenseSkill" : 2.0,
-	        "shieldDefense" : 0.0
-	      },
-	      "isRanged" : true,
-	      "province" : "P1",
-	      "health" : 10,
-	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
-	      "speed" : 10.0,
-	      "morale" : 10.0
+	      "morale" : 0.0
 	    }
     ]
   }, {
     "name" : "P2",
-    "owner" : "ROME"
+    "owner" : "ROME",
+    "adjacent" : ["P3", "P1"]
   }, {
     "name" : "P3",
-    "owner" : "GAUL"
+    "owner" : "GAUL",
+    "adjacent" : ["P2", "P4"]
   }, {
     "name" : "P4",
     "owner" : "GAUL",
+    "adjacent" : ["P3", "P1"],
     "units" : [
-	    {
+	 	    { // 0 : Invincible troop. Always wins an engagmenet.
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 99999.0, // cannot die
+	        "attackBase" : 99.0, // kills enemy eventually 
+	        "defenseSkill" : 0.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P4",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 10,
+	      "speed" : 9999.0, // enemy still has 10% route chance
+	      "morale" : 99999.0 // never routes
+	    },{ // 2 : never routes
 	      "type" : "TEST_TROOP",
 	      "level" : 1,
 	      "baseCharacteristic" : {
@@ -91,10 +108,27 @@
 	      "province" : "P4",
 	      "health" : 10,
 	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
+	      "movPoints" : 10,
 	      "speed" : 10.0,
-	      "morale" : 10.0
-	    },{
+	      "morale" : 9999.0
+	    },
+	    { // 3 : always breaks, dies while breaking (manipulate RNG)
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 0.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P4",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 10,
+	      "speed" : 0.0,
+	      "morale" : 0.0
+	    },
+	    { // 4 : always breaks, always flees.
 	      "type" : "TEST_TROOP",
 	      "level" : 1,
 	      "baseCharacteristic" : {
@@ -106,49 +140,17 @@
 	      "province" : "P4",
 	      "health" : 10,
 	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
+	      "movPoints" : 10,
 	      "speed" : 10.0,
-	      "morale" : 10.0
-	    },{
-	      "type" : "TEST_TROOP",
-	      "level" : 1,
-	      "baseCharacteristic" : {
-	        "armourBase" : 2.0,
-	        "attackBase" : 2.0,
-	        "defenseSkill" : 2.0,
-	        "shieldDefense" : 0.0
-	      },
-	      "isRanged" : true,
-	      "province" : "P4",
-	      "health" : 10,
-	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
-	      "speed" : 10.0,
-	      "morale" : 10.0
-	    },{
-	      "type" : "TEST_TROOP",
-	      "level" : 1,
-	      "baseCharacteristic" : {
-	        "armourBase" : 2.0,
-	        "attackBase" : 2.0,
-	        "defenseSkill" : 2.0,
-	        "shieldDefense" : 0.0
-	      },
-	      "isRanged" : true,
-	      "province" : "P4",
-	      "health" : 10,
-	      "maxMovPoints" : 10,
-	      "movPoints" : 2,
-	      "speed" : 10.0,
-	      "morale" : 10.0
+	      "morale" : 0.0
 	    }
     ]
   }],  
   "factionOrder" : [ {
     "type" : "ROME",
-    "provinces" : [ "P1", "P2" , "P3", "P4"]
+    "provinces" : [ "P1", "P2"]
   },{
     "type" : "GAUL",
-    "provinces" : [ "P1", "P2" , "P3", "P4"]
+    "provinces" : [ "P3", "P4"]
   } ]
 }

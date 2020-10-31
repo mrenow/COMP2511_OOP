@@ -306,12 +306,12 @@ public class GameController {
 	
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo checkVictory() {
-		VictoryInfo vInfo = getCurrentTurn().getVictoryInfo();
-		if (vInfo.isVictory()) {
+		return getCurrentTurn().getVictoryInfo();
+		/*if (vInfo.isVictory()) {
 			return vInfo;
 		} else {
 			return null;
-		}
+		}*/
 	}
 	
 /* Testing only (could become a game mechanic but doubt) */

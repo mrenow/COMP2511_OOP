@@ -3,6 +3,7 @@ package unsw.gloriaromanus;
 import static unsw.gloriaromanus.ActiveType.*;
 import static unsw.gloriaromanus.BattleSide.*;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +55,8 @@ class Battle {
 		
 		
 		
-		armies.put(ATTACK, attackArmy);
-		armies.put(DEFEND, defendProvince.getUnits());
+		armies.put(ATTACK, new ArrayList<>(attackArmy));
+		armies.put(DEFEND, new ArrayList<>(defendProvince.getUnits()));
 		
 		attackProvince = attackArmy.get(0).getProvince();
 		attackFaction = attackProvince.getOwner();
