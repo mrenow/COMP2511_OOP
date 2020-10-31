@@ -226,7 +226,7 @@ public class Province{
 
 	void trainUnit(ItemType unit) {
 		// Train Unit
-		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
 		this.trainingSlots.add(u);
 		// Adjust gold values
 		int trainCost = unit.getCost(1);
@@ -237,7 +237,7 @@ public class Province{
 
 	void trainFinishUnit(ItemType unit) {
 		// Remove unit from slot
-		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
 		this.trainingSlots.remove(u);
 		// Adjust trainingslotnum
 		adjustTraining();

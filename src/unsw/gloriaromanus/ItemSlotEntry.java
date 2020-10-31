@@ -20,8 +20,16 @@ public abstract class ItemSlotEntry {
 
 	protected int level;
 	protected int turnsRemaining;
+	protected String name;
+	protected double cost = 1;
 	
 	@JsonCreator
+	protected ItemSlotEntry() {}
+
+	public ItemSlotEntry(ItemType type, int level) {
+
+	}
+	/*
 	protected ItemSlotEntry(@JsonProperty("type") ItemType newType,
 							@JsonProperty("level") int newLevel){
 		//this();
@@ -32,7 +40,7 @@ public abstract class ItemSlotEntry {
 			this.level = newLevel;
 		}
 	}
-	
+*/
 
 	/**
 	 * The type of item in progress
