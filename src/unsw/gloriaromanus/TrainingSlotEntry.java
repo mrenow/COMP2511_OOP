@@ -1,18 +1,36 @@
 package unsw.gloriaromanus;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * An Item slot for training a troop Troop
  * @author ezra
  */
 public class TrainingSlotEntry extends ItemSlotEntry{
-	private String name;
-	private double cost;
+	//private String name = "";
+	//private double cost = 1;
+	//private Province province;
 
-
-	public TrainingSlotEntry(ItemType type, int level) {
+	@JsonCreator
+	private TrainingSlotEntry() {}
+/*
+	public TrainingSlotEntry(String name, double cost) {
 		super(type, level);
-		//this.name = (String) getType().getAttribute("type", level);
-		//this.cost = (Integer) getType().getAttribute("level", level);
+		this.name = name;
+		this.cost = cost;
+	}
+*/
+	
+	public TrainingSlotEntry(ItemType type, int level, Province p) {
+		super();
+		this.name = type.getName(level);
+		this.cost = type.getCost(level);
+		this.province = p;
+
+		/*
+		this.name = ((String)type.getAttribute("names", level));
+		this.cost = ((Integer)type.getAttribute("costs", level)).doubleValue();
+		*/
 	}
 
 	@Override

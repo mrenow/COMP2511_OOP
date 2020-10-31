@@ -5,9 +5,13 @@ package unsw.gloriaromanus;
  * @author ezra
  */
 public class BuildingSlotEntry extends ItemSlotEntry{
-
+	private String name;
+	private double cost;
+	
 	public BuildingSlotEntry(ItemType type, int level) {
-		super(type, level);
+		super();
+		this.name = (String) getType().getAttribute("type", level);
+		this.cost = (Integer) getType().getAttribute("level", level);
 	}
 
 	@Override

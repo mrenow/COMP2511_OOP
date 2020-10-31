@@ -4,7 +4,10 @@
       "owner" : "ROME",
       "townWealth" : 10,
       "taxLevel" : "NORMAL_TAX",
-      "buildingSlots" : [ ],
+      "buildingSlots" : [ {
+        "type": "",
+        "level": ""
+      } ],
       "trainingSlots" : [ ],
       "trainingSlotNum": 3,
       "buildingSlotNum": 2,

@@ -90,38 +90,53 @@ public class Province{
 	
 	public List<Province> getAdjacent() {return new ArrayList<>(adjacent);}
 	
-	public int getWealth() {return 0;}
+	public int getWealth() {return getTotalWealth();}
 	
 	public String getName() {return name;}
 	
-	public TaxLevel getTaxLevel() {return null;}
+	public TaxLevel getTaxLevel() {return taxLevel;}
 	
 	public int getTrainingSlots() {return trainingSlotNum;}
 	
 	public int getInfrastructureSlots() {return buildingSlotNum;}
 	
 	public int buildingWealth() {
-		return 0;
+		int bWealth=0;
+		for (Infrastructure building : buildings) {
+			bWealth+=building.getBuildingWealth();
+		}
+		return bWealth;
 	}
 	
 	public int getTownWealth() {
-		return 0;
+		return townWealth;
 	}
 	public int getTotalWealth() {
-		return 0;
+		return getTownWealth()+buildingWealth();
 	}
+
+	/**
+	 * updateWealth of province
+	 * @return how much gold generated
+	 */
 	public int updateWealth(){
-		//do update
-		double gold=0;
-		gold += (this.townWealth + this.buildingWealth()) * this.taxLevel.getTaxRate();
+		double gold = (this.townWealth + this.buildingWealth()) * this.taxLevel.getTaxRate();
 		this.townWealth += getWealthGrowth() + taxLevel.getwealthgen();
 		this.townWealth = Integer.max(townWealth, 0);
 		updateBuildingWealth();
-		return (int)gold;
+		int g = (int)gold;
+		double remain = gold % g;
+		if (remain>=0.5) {
+			return g+1;
+		}
+		return g;
 	}
 	private int getWealthGrowth(){
-		//TODO : calculate WealthGrowth
-		return 0;
+		int wealthGrowth=0;
+		for (Infrastructure building : buildings) {
+			wealthGrowth += building.getWealthRate();
+		}
+		return wealthGrowth;
 	}
 	private void updateBuildingWealth(){
 		//TODO :add updateBuildingWealth
@@ -138,7 +153,7 @@ public class Province{
 	}
 	
 //	Called when displaying infrastructure
-	public List<Infrastructure> getInfrastructure(){return null;}
+	public List<Infrastructure> getInfrastructure(){return buildings;}
 	
 //	Called when province building menu is opened
 	public List<ItemType> getBuildable(){return null;}
@@ -226,7 +241,7 @@ public class Province{
 
 	void trainUnit(ItemType unit) {
 		// Train Unit
-		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
 		this.trainingSlots.add(u);
 		// Adjust gold values
 		int trainCost = unit.getCost(1);
@@ -237,7 +252,7 @@ public class Province{
 
 	void trainFinishUnit(ItemType unit) {
 		// Remove unit from slot
-		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1);
+		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
 		this.trainingSlots.remove(u);
 		// Adjust trainingslotnum
 		adjustTraining();
