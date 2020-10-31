@@ -110,6 +110,38 @@ public class MoveTest {
 		assertEquals(0, U(3).getMovPoints());
 	}
 	
+	/**
+	 * AC: 
+	 */
+	@Test
+	public void movementAfterInvade() {
+		game.disownProvince(P(7));
+		game.invade(List.of(U(0),U(3)), P(7));
+		// check that movement points are set to zero
+		assertEquals(0, U(0).getMovPoints());
+		assertEquals(0, U(3).getMovPoints());
+		
+		// check that P(7) is now a valid destination, but does not allow passage through itself.
+		TestUtil.assertCollectionEquals(List.of(P(2), P(3), P(6), P(5), P(7)), game.getDestinations(List.of(U(1))));
+		// Check that moving to 4 expends the correct number of movement points assuming that P(7) is impassable
+		game.move(List.of(U(2)), P(4));
+		assertEquals(0, U(2).getMovPoints());
+		// move 1 onto 7.
+		
+		game.move(List.of(U(1)), P(7));
+		// Check that movPoints are 0;
+		assertEquals(0, U(1).getMovPoints());
+		
+		game.endTurn();
+		// Move 2 into 7
+		
+		game.move(List.of(U(2)), P(7));
+		// Ensure that 2 can now move out ot 7.
+		TestUtil.assertCollectionEquals(List.of(U(1), U(2), U(6), U(4), U(5), U(3), U(8)), game.getDestinations(List.of(U(2))));
+		// Movement points should be noramlly calculated.
+		assertEquals(4, U(3).getMovPoints());
+	}
+	
 	// eh ceebs.
 	public void movementWithRoads() {
 		

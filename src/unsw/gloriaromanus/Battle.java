@@ -5,6 +5,7 @@ import static unsw.gloriaromanus.BattleSide.*;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -23,7 +24,7 @@ class Battle {
 	// basic info of a battle
 	// Units participating in battle that have not died/routed.
 	// Get each army by doing armies.get(ATTACK) or armies.get(DEFEND)
-	private EnumMap<BattleSide, List<Unit>> armies = new EnumMap<>(BattleSide.class);
+	private Map<BattleSide, List<Unit>> armies = new EnumMap<>(BattleSide.class);
 	/* number of times an engagement tried to occur.
 	 * This distinction is important as there is an edge case if an army is defeated on the 200th
 	 * engagement - another engagement will not be attempted, and so it is not a draw.
@@ -44,11 +45,6 @@ class Battle {
 	private Province attackProvince;
 	private Province defendProvince;
 	
-	
-	private CombatData aData;
-	private CombatData dData;
-	// current engagement
-	private Engagement engagement;
 	private Iterable<MoraleModifier> moraleSupport;
 	private Iterable<CombatModifier> combatSupport;
 
@@ -134,8 +130,8 @@ class Battle {
 		// read in buffs
 		// TODO
 		// random choose two units
-		this.attackUnit = pickUnit(ATTACK);
-		this.defendUnit = pickUnit(DEFEND);
+		this.attackUnit = pickUnit(ATTACK); // RANDOM (ONCE)
+		this.defendUnit = pickUnit(DEFEND); // RANDOM (ONCE)
 //        this.aData = new CombatData();
 //        this.dData = new CombatData();
 		// setupdata
@@ -153,7 +149,7 @@ class Battle {
 
 		// uniformly randomed
 		int armyLength = armies.get(side).size();
-		return armies.get(side).get(GlobalRandom.nextInt(armyLength));
+		return armies.get(side).get(GlobalRandom.nextInt(armyLength)); // RANDOM (ONCE) (LENGTH)
 	}
 	/**
 	 * check if the end of battle condition reached
@@ -201,13 +197,14 @@ class Battle {
 			int defOldHealth = defendUnit.getHealth();
 			
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
-
-			boolean isRanged = tryRanged(attackUnit, defendUnit);
+			
+			// Decide engagement type
+			boolean isRanged = tryRanged(attackUnit, defendUnit); // RANDOM (ONCE)
 			if(isRanged){
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 			}
 			
-			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged);
+			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged); // RANDOM 
 			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
 			
 			// Unit died, end engagement
@@ -233,17 +230,17 @@ class Battle {
 			double attBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(ATTACK) + attLoss / defLoss), 0.05, 1);
 			double defBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(DEFEND) + defLoss / attLoss), 0.05, 1);
 
-			boolean defBreaks = GlobalRandom.nextUniform() < defBreakChance;
-			boolean attBreaks = GlobalRandom.nextUniform() < attBreakChance;
+			boolean defBreaks = GlobalRandom.nextUniform() < defBreakChance; // RANDOM (ONCE) 
+			boolean attBreaks = GlobalRandom.nextUniform() < attBreakChance; // RANDOM (ONCE)
 			
 			if (attBreaks && defBreaks) {
 				// end whole skirmish
 				break;
 			} else if (attBreaks) {
-				runBreaking(defendUnit, attackUnit, DEFEND);
+				runBreaking(defendUnit, attackUnit, DEFEND);	// RANDOM (MANY)
 				break;
 			} else if (defBreaks) {
-				runBreaking(attackUnit, defendUnit, ATTACK);
+				runBreaking(attackUnit, defendUnit, ATTACK);	// RANDOM (MANY)
 				break;
 			}
 		}
@@ -256,7 +253,7 @@ class Battle {
 	 */
 	
 	/**
-	 * Currently unit death is simply removal from army list. 
+	 * Currently unit death is simply removal from army list and province list. 
 	 * That should be all we need to do for our current design
 	 */
 
@@ -269,19 +266,20 @@ class Battle {
 
 		// Try engagement
 		while(tryEngagement()) {
-			boolean isRanged = tryRanged(chaseUnit, routeUnit);
+			boolean isRanged = tryRanged(chaseUnit, routeUnit); // RANDOM (ONCE)
 			if(isRanged){
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 			}
 			
 			inflictDamage(chaseUnit, routeUnit, chaseSide, combatModifiers, isRanged);
 			if(!routeUnit.isAlive()) {
+				// Unit death handled by inflict damage
 				return;
 			}
 			
 			double routeChance = MathUtil.max(0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed()), 0.1);
 			// unit routes
-			if(GlobalRandom.nextUniform() < routeChance) {
+			if(GlobalRandom.nextUniform() < routeChance) { // RANDOM (ONCE)
 				// remove unit from army.
 				armies.get(chaseSide.other()).remove(routeUnit);
 				// TODO log route? ??? or dont
@@ -303,7 +301,7 @@ class Battle {
 		// And am I a better person for it?
 		// The worst part is I may never know.
 
-		if(aggressor.getType() == ItemType.ELEPHANTS && GlobalRandom.nextUniform() < 0.1 && armies.get(aggressorSide).size() != 1){
+		if(aggressor.getType() == ItemType.ELEPHANTS && GlobalRandom.nextUniform() < 0.1 && armies.get(aggressorSide).size() != 1){ // RANDOM (ONCE)
     		// Ensuring that dumb elephant does not attack itself
 			// (As much as I would like it to)
 			// This is fine right?
@@ -342,7 +340,7 @@ class Battle {
 			damage = beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed;
 		}
 			
-		double casualties = GlobalRandom.nextGaussian() * 0.1 * damage * victim.getHealth();
+		double casualties = GlobalRandom.nextGaussian() * 0.1 * damage * victim.getHealth(); // RANDOM (ONCE) (GAUSSIAN)
 		
 		casualties = MathUtil.max(0, casualties);
 		victim.damage((int)Math.round(casualties));
@@ -390,7 +388,7 @@ class Battle {
 		// We know either u1 or u2 is ranged.
 		double rangedChance = baseChance + (u1.getSpeed() - u2.getSpeed()) * (u1.isRanged() ? 0.1 : -0.1);
 		rangedChance = MathUtil.constrain(rangedChance, 0.05, 0.95);
-		return GlobalRandom.nextUniform() < rangedChance;
+		return GlobalRandom.nextUniform() < rangedChance; // RANDOM (ONCE)
 	}
 
 

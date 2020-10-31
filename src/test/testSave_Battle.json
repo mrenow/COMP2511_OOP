@@ -1,9 +1,73 @@
 {
   "allProvinces" : [ {
     "name" : "P1",
-    "owner" : "ROME"
+    "owner" : "ROME",
     "units" : [
-    	
+	    {
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 0.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P1",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    },{
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P1",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    },
+	    {
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "isRanged" : true,
+	      "province" : "P1",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    },
+	    {
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "isRanged" : true,
+	      "province" : "P1",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    }
     ]
   }, {
     "name" : "P2",
@@ -13,7 +77,72 @@
     "owner" : "GAUL"
   }, {
     "name" : "P4",
-    "owner" : "GAUL"
+    "owner" : "GAUL",
+    "units" : [
+	    {
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P4",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    },{
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "province" : "P4",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    },{
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "isRanged" : true,
+	      "province" : "P4",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    },{
+	      "type" : "TEST_TROOP",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 2.0,
+	        "attackBase" : 2.0,
+	        "defenseSkill" : 2.0,
+	        "shieldDefense" : 0.0
+	      },
+	      "isRanged" : true,
+	      "province" : "P4",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 2,
+	      "speed" : 10.0,
+	      "morale" : 10.0
+	    }
+    ]
   }],  
   "factionOrder" : [ {
     "type" : "ROME",

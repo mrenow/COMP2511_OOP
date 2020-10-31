@@ -42,8 +42,10 @@ public class GlobalRandom {
 	public static <T> T removeRandom(List<T> list) {
 		return list.remove(nextInt(list.size()));		
 	}
-	
-	
+	/*
+	 * test area for getting seeds
+	 * 
+	 */
 	public static void main(String [] args) {
 		List<Condition<?>> randFuncs = new ArrayList<>();
 		randFuncs.add(C(GlobalRandom::nextUniform, 0.05, 0.1));
@@ -85,9 +87,9 @@ public class GlobalRandom {
 }
 
 class Condition<T extends Comparable<T>> {
-	Supplier<T> randFun;
-	T max;
-	T min;
+	private Supplier<T> randFun;
+	private T max;
+	private T min;
 	
 	public Condition(Supplier<T> randFun, T min, T max) {
 		super();

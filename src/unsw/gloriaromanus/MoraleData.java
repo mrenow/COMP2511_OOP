@@ -3,11 +3,12 @@ package unsw.gloriaromanus;
 import static unsw.gloriaromanus.BattleSide.*;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 
 
 class MoraleData {
-	EnumMap<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
+	Map<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
 	
 	private class SideData {
 		private List<Unit> army;
