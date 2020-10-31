@@ -84,6 +84,23 @@ public class InitTest {
 	    	assertEquals(FactionType.ROME, game.getCurrentTurn().getType());    	
     	}
     }
+    @Test
+    public void provinceAllocation() throws DataInitializationException {
+    	
+    	// Tested on 10000 runs without fail, so 50 will do for now.
+    	for (int i = 0; i < 50; i ++) {
+        	// make a new random game
+        	game = new GameController("src/unsw/ui/province_id_adjacent.json",
+        			"src/unsw/ui/landlocked_provinces.json",
+        			List.of(FactionType.ROME, FactionType.GAUL));
+        	Faction rome = game.getCurrentTurn();
+        	Faction gaul = game.getFactions().get(1);
+        	// each faction gets a quarter of the available provinces
+        	int numStartProvinces = (int)(GameController.STARTING_DENSITY*game.getNumProvinces()/2);
+        	assertEquals(numStartProvinces, rome.getNumProvinces());
+        	assertEquals(numStartProvinces, gaul.getNumProvinces());
+    	}
+    }
     
     
 }

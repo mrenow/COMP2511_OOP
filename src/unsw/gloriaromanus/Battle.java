@@ -189,6 +189,7 @@ class Battle {
 	}
 	
 	// Placeholder
+	// IF IMPLEMENTED: Battle Modifier system needs to expose the hasWalls attribute.
 	private boolean hasWalls = false;
 	public void setWalls(Boolean wall){
 		this.hasWalls = wall;
@@ -303,7 +304,7 @@ class Battle {
 		// And am I a better person for it?
 		// The worst part is I may never know.
 
-		if(aggressor.getType() == ItemType.ELEPHANTS && GlobalRandom.nextUniform() < 0.1){
+		if(aggressor.getType() == ItemType.ELEPHANTS && GlobalRandom.nextUniform() < 0.1 && armies.get(aggressorSide).size() != 1){
     		// Ensuring that dumb elephant does not attack itself
 			// (As much as I would like it to)
 			// This is fine right?
@@ -342,11 +343,10 @@ class Battle {
 			damage = beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed;
 		}
 			
-		double casualties = GlobalRandom.nextGaussian()*0.1*damage * victim.getHealth();
+		double casualties = GlobalRandom.nextGaussian() * 0.1 * damage * victim.getHealth();
 		
 		casualties = MathUtil.max(0, casualties);
 		victim.damage((int)Math.round(casualties));
-		// Kill unit by yeeting it out of the list
 		if(!victim.isAlive()) {
 			killUnit(victim);
 		}

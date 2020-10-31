@@ -7,7 +7,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class GlobalRandom {
-	public static Random generator;
+	public static Random generator = new Random();
 
 	public static void init(long seed) {
 		generator = new Random(seed);
@@ -35,6 +35,12 @@ public class GlobalRandom {
 
 	public static double nextGaussian() {
 		return generator.nextGaussian();
+	}
+	public static <T> T getRandom(List<T> list) {
+		return list.get(nextInt(list.size()));		
+	}
+	public static <T> T removeRandom(List<T> list) {
+		return list.remove(nextInt(list.size()));		
 	}
 	
 	

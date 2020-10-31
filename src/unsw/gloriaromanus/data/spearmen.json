@@ -1,9 +1,9 @@
 {
-	"maxLevel" : 2,
-	"names" : ["Test Troop Level 1", "Test TroopLevel 2"],
-	"descriptions" : "Excuse me, child soldiers are a warcrime.",
-	"costs" : [10,20],
-	"durations" : [1,2],
+	"maxLevel" : 1,
+	"names" : "Spearmen",
+	"descriptions" : "Who gave these pesants pointy sticks?",
+	"costs" : 10,
+	"durations" : 1,
 	
 	"movPoints" : 10,
 	
