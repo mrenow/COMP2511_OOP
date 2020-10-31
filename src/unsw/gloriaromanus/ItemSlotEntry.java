@@ -26,21 +26,11 @@ public abstract class ItemSlotEntry {
 	@JsonCreator
 	protected ItemSlotEntry() {}
 
-	public ItemSlotEntry(ItemType type, int level) {
-
+	public ItemSlotEntry(ItemType type, int level, Province p) {
+		this.name = type.getName(level);
+		this.cost = type.getCost(level);
+		this.province = p;
 	}
-	/*
-	protected ItemSlotEntry(@JsonProperty("type") ItemType newType,
-							@JsonProperty("level") int newLevel){
-		//this();
-		if (newType != null) {
-			this.type = newType;
-		}
-		if (newLevel != 0) {
-			this.level = newLevel;
-		}
-	}
-*/
 
 	/**
 	 * The type of item in progress
@@ -79,4 +69,6 @@ public abstract class ItemSlotEntry {
 	 * This could be spawning the troop in the province, or adding a new bulding.
 	 */
 	abstract void onFinish();
+
+
 }
