@@ -2,6 +2,7 @@ package unsw.gloriaromanus;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -17,13 +18,25 @@ public abstract class ItemSlotEntry {
 	protected ItemType type;
 	protected Province province;
 
+	protected int level;
 	protected int turnsRemaining;
 	
 	@JsonCreator
-	protected ItemSlotEntry(){}
+	protected ItemSlotEntry(@JsonProperty("type") ItemType newType,
+							@JsonProperty("level") int newLevel){
+		//this();
+		if (newType != null) {
+			this.type = newType;
+		}
+		if (newLevel != 0) {
+			this.level = newLevel;
+		}
+	}
 	
+
 	/**
 	 * The type of item in progress
+	 * 
 	 * @return
 	 */
 	public ItemType getType() {

@@ -5,8 +5,15 @@ package unsw.gloriaromanus;
  * @author ezra
  */
 public class TrainingSlotEntry extends ItemSlotEntry{
+	private String name;
+	private double cost;
 
-	public TrainingSlotEntry(ItemType type, int level) {}
+
+	public TrainingSlotEntry(ItemType type, int level) {
+		super(type, level);
+		//this.name = (String) getType().getAttribute("type", level);
+		//this.cost = (Integer) getType().getAttribute("level", level);
+	}
 
 	@Override
 	void onFinish() {

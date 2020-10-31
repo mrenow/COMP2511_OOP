@@ -6,7 +6,9 @@ package unsw.gloriaromanus;
  */
 public class BuildingSlotEntry extends ItemSlotEntry{
 
-	public BuildingSlotEntry(ItemType type, int level) {}
+	public BuildingSlotEntry(ItemType type, int level) {
+		super(type, level);
+	}
 
 	@Override
 	void onFinish() {

@@ -5,7 +5,10 @@
       "townWealth" : 10,
       "taxLevel" : "NORMAL_TAX",
       "buildingSlots" : [ ],
-      "trainingSlots" : [ ],
+      "trainingSlots" : [ {
+          "type": "",
+          "level": ""
+      } ],
       "trainingSlotNum": 3,
       "maxSlots": 3,
       "buildings" : [ {
