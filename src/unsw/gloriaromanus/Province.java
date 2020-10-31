@@ -43,6 +43,7 @@ public class Province{
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
  
 	private int trainingSlotNum = 1;
+	private int buildingSlotNum = 1;
 	private int maxSlots = 1;
 	private Faction player;
 	
@@ -95,11 +96,9 @@ public class Province{
 	
 	public TaxLevel getTaxLevel() {return null;}
 	
-	public int getTrainingSlots() {
-		return trainingSlotNum;
-	}
+	public int getTrainingSlots() {return trainingSlotNum;}
 	
-	public int getInfrastructureSlots() {return 0;}
+	public int getInfrastructureSlots() {return buildingSlotNum;}
 	
 	public int buildingWealth() {
 		return 0;
@@ -128,12 +127,10 @@ public class Province{
 		//TODO :add updateBuildingWealth
 	}
 //	Ordered list corresponding to training slots
-	public List<TrainingSlotEntry> getCurrentTraining() {
-		return this.trainingSlots;
-	}
+	public List<TrainingSlotEntry> getCurrentTraining() {return this.trainingSlots;}
 	
 //	As above. Only a single element list for milestone 2.
-	public List<BuildingSlotEntry> getCurrentConstruction(){return null;}
+	public List<BuildingSlotEntry> getCurrentConstruction(){return this.buildingSlots;}
 	
 //	Called when the unit selection menu of a province is opened, and used to select units to move.
 	public List<Unit> getUnits(){
@@ -216,6 +213,11 @@ public class Province{
 		// Start building
 		BuildingSlotEntry t = new BuildingSlotEntry(type, 1);
 		this.buildingSlots.add(t);
+		// Adjust gold values
+		int buildCost = type.getCost(1);
+		owner.adjustGold(buildCost);
+		// Adjust buildingslotnum
+		buildingSlotNum -= 1;
 	}
 
 	void trainUnit(ItemType unit) {
@@ -239,6 +241,17 @@ public class Province{
 
 	void adjustTraining() {
 		trainingSlotNum += 1;
+	}
+
+	void buildFinishInfrastructure(ItemType type) {
+		// Remove build from slot
+		BuildingSlotEntry b = new BuildingSlotEntry(type, 1);
+		this.buildingSlots.remove(b);
+		adjustBuilding();
+	}
+
+	void adjustBuilding() {
+		buildingSlotNum += 1;
 	}
 
 	void addUnit(ItemType type) {

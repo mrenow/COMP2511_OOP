@@ -57,8 +57,8 @@ public class Faction {
 	
 	public int getGold() {return gold;}
 
-	void adjustGold(int trainCost) {
-		gold -= trainCost;
+	void adjustGold(int cost) {
+		gold -= cost;
 	}
 	
 	public String getTitle() {return type.getTitle();}
