@@ -22,11 +22,11 @@ import util.MappingIterable;
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Faction {
 	public static final int STARTING_GOLD = 100;
+	// does not "own" provinces, so does not need a properly initialized province list
 	public static final Faction NO_ONE = new Faction(FactionType.NO_ONE);
 	
 	private FactionType type = FactionType.ROME;
 	private int gold = 0;
-	private int costs = 1;
 	
 	@JsonIdentityReference(alwaysAsId = true)
 	private Collection<Province> provinces = new ArrayList<Province>();
@@ -38,10 +38,11 @@ public class Faction {
 	@JsonCreator
 	private Faction() {}
 	
-	public Faction(	FactionType type,int gold,	List<Province> provinces) {
+	Faction(FactionType type, Collection<Province> provinces, int gold) {
 		this.type = type;
 		this.gold = gold;
 		this.provinces.addAll(provinces);
+		provinces.forEach((p)->p.loadOwner(this));
 	}
 	/**
 	 * Start constructor
@@ -54,6 +55,8 @@ public class Faction {
 	public FactionType getType() {return type;}
 
 	public Collection<Province> getProvinces(){return provinces;}
+	public int getNumProvinces(){return provinces.size();}
+	
 	
 	public int getGold() {return gold;}
 

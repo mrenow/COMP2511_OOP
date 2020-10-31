@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -51,10 +55,10 @@ public class Parsing {
 		return newMapper;
 	}
 	
-	public static <T extends Enum<T>> T getEnum(String name) {
+	public static <T extends Enum<T>> T getEnum(String name, Class<T> typeRef) {
 		try {
 			// Im lazy
-			return Parsing.mapper.readValue(name.toUpperCase(), new TypeReference<T>() {});
+			return Parsing.mapper.readValue("\"" + name.toUpperCase() + "\"", typeRef);
 		}catch(Exception e){
 			return null;
 		}
@@ -62,12 +66,12 @@ public class Parsing {
 	
 	
 	// Comma seprated enum fields.
-	public static <T extends Enum<T>> List<T> getEnums(String enumString) throws DataInitializationException{
+	public static <T extends Enum<T>> List<T> getEnums(String enumString, Class<T> typeRef) throws DataInitializationException{
 		List<T> out = new ArrayList<>();
 		Scanner sc = new Scanner(enumString);
 		try {
 			while(sc.hasNext()) {
-				T val = Parsing.mapper.readValue(sc.next().toUpperCase(), new TypeReference<T>() {});
+				T val = Parsing.mapper.readValue("\"" + sc.next().toUpperCase() + "\"", typeRef);
 				out.add(val);
 			}		
 		}catch(Exception e){
@@ -86,7 +90,6 @@ public class Parsing {
 		ObjectMapper om = mapper.copy();
 		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		List<Province> allProvinces = om.readValue(new File(provinceFile), new TypeReference<List<Province>>() {});
-		System.out.println(allProvinces);
 		for (Province p : allProvinces) {
 			for ( Unit u : p.getUnits()) {
 				u.loadProvince(p);
@@ -122,15 +125,69 @@ public class Parsing {
 		return factionOrder;
 	}
 	/**
-	 * Automatically allocates provinces to factions using some algorithm. TODO
+	 * Automatically allocates provinces to factions using some algorithm. 
+	 * Simply picks a random province and tries to expand in all directions.
+	 * makes sure that half of the existing provinces are not occupied.
 	 * @param types
 	 * @param provinceMap
 	 * @return
 	 */
-	public static List<Faction> allocateProvinces(List<FactionType> types, Map<String, Province> provinceMap){
-		// TODO
-		return null;
+	public static List<Faction> allocateProvinces(List<FactionType> types, Map<String, Province> provinceMap, double density){
+		List<Faction> allFactions = new ArrayList<>(types.size());
+		while(!tryAllocateProvinces(allFactions, types, provinceMap.values(), density));
+		return allFactions;
 	}
+	/**
+	 * Tries to allocate provinces and construct factions. Could fail if we get bad RNG.
+	 * 
+	 */
+	private static boolean tryAllocateProvinces(List<Faction> target, List<FactionType> types, Collection<Province> allProvinces, double density) {
+		
+		List<Province> freeProvinces = new ArrayList<>(allProvinces);
+		// Determine the number of provinces each faction should have/
+		int numStartProvinces = (int)(density*allProvinces.size()/types.size());
+		Queue<Province> candidates = new LinkedList<>();
+		Map<FactionType, Collection<Province>> selected = new HashMap<>();
+		for (FactionType type : types) {
+			// Find suitable seed province and reset selection
+			Province seed = GlobalRandom.getRandom(freeProvinces);
+			Set<Province> selection = new HashSet<>();
+			candidates.add(seed);
+			while (selection.size() < numStartProvinces) {
+
+				// Whoops, looks like rng does not look favourably on us today. Time to start over I guess
+				if(candidates.isEmpty()) {
+					// Time to give up, you cant win them all
+					target.clear();
+					return false;
+				}
+				// Get adjacent provinces to current and add them to candidates.
+				Province curr = candidates.poll();
+				// transfer from freeProvinces to selection.
+				selection.add(curr);
+				freeProvinces.remove(curr);
+				
+				for(Province adj : curr.getAdjacent()) {
+					// Ensure that we arent double counting and that this province is free.
+					if(selection.contains(adj) || !adj.getOwner().equals(Faction.NO_ONE)) {
+						continue;
+					}
+					// all clear. Add adj
+					candidates.add(adj);
+				}
+			}
+			// confirm selection
+			selected.put(type, selection);
+			candidates.clear();
+		}
+		// all clear, we have a valid arrangement
+		for (FactionType type : types) {
+			target.add(new Faction(type, selected.get(type), 50));
+
+		}
+		return true;
+	}
+
 	
 	
 	

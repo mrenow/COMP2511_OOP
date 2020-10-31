@@ -52,7 +52,7 @@ public enum ItemType{
 	TREBUCHET				(),
 	
 	//INFANTRY:
-	HEAVY_INFANTRY			(),
+	//HEAVY_INFANTRY			(),
 	ARCHER					(),
 	SPEARMEN				(),
 	PIKEMEN 				(),
@@ -65,7 +65,7 @@ public enum ItemType{
 	DRUID					(),
 	CHARIOTS				();
 	
-	private static final String SOURCE_DIR = "src/data";
+	private static final String SOURCE_DIR = "src/unsw/gloriaromanus/data";
 	
 	// Attributes
 	private int maxLevel;

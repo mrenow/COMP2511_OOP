@@ -49,12 +49,6 @@ public class LoadTest {
     	TestUtil.assertCollectionAttributeEquals(List.of("Rome", "Gaul"), game.getFactions(), Faction::getTitle);
 		
     }
-	@Test
-	public void loadDefaultGame() throws DataInitializationException, IOException {
-		game = GameController.loadFromSave("src/test/loadTestTemp.json");
-		game.saveGame("src/test/loadTestTempOutput.json");
-		
-	}
 	
 	@AfterEach
 	public void cleanUp() {

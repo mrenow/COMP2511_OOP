@@ -38,6 +38,7 @@ public class Unit {
 	@JsonIdentityReference(alwaysAsId = true)
 	private Province province;
 	
+	// Unused
 	private boolean isMercenary = false;
 
 	// Assigned based on type
@@ -48,11 +49,18 @@ public class Unit {
 	private double speed;
 	private double morale;
 	
+	private Unit() {
+		combatModifiers.put(ActiveType.SUPPORT, new ArrayList<>());
+		combatModifiers.put(ActiveType.ENGAGEMENT, new ArrayList<>());
+		moraleModifiers.put(ActiveType.SUPPORT, new ArrayList<>());
+		moraleModifiers.put(ActiveType.ENGAGEMENT, new ArrayList<>());
+	}
 	
 	@JsonCreator
 	public Unit(
 			@JsonProperty("type") ItemType newType,
 			@JsonProperty("level") int newLevel) {
+		this();
 		if(newType != null) {
 			this.type = newType;
 		}
@@ -69,11 +77,12 @@ public class Unit {
 		this.movPoints = this.maxMovPoints;
 		
 		// add modifiers
+		// Supports multiple modifiers
 		String combatString = (String)type.getAttribute("combatModifiers", level);
 		String moraleString = (String)type.getAttribute("moraleModifiers", level);
 		try {
-			Parsing.<CombatModifierMethod>getEnums(combatString).forEach(this::addCombatModifier);
-			Parsing.<MoraleModifierMethod>getEnums(moraleString).forEach(this::addMoraleModifier);
+			Parsing.<CombatModifierMethod>getEnums(combatString, CombatModifierMethod.class).forEach(this::addCombatModifier);
+			Parsing.<MoraleModifierMethod>getEnums(moraleString, MoraleModifierMethod.class).forEach(this::addMoraleModifier);
 		} catch (DataInitializationException e) {
 			e.printStackTrace();
 			// fatal

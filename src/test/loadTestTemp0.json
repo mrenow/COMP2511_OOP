@@ -1,0 +1,80 @@
+{
+  "allProvinces" : [ {
+    "name" : "P1",
+    "owner" : "ROME",
+    "adjacent" : [ "P2", "P4" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : true,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  }, {
+    "name" : "P2",
+    "owner" : "ROME",
+    "adjacent" : [ "P1", "P2" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  }, {
+    "name" : "P3",
+    "owner" : "GAUL",
+    "adjacent" : [ "P2", "P4" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : true,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  }, {
+    "name" : "P4",
+    "owner" : "GAUL",
+    "adjacent" : [ "P1", "P2" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  } ],
+  "factionOrder" : [ {
+    "type" : "ROME",
+    "gold" : 100,
+    "provinces" : [ "P1", "P2" ],
+    "lostEagles" : [ ]
+  }, {
+    "type" : "GAUL",
+    "gold" : 10,
+    "provinces" : [ "P3", "P4" ],
+    "lostEagles" : [ ]
+  } ],
+  "round" : 0,
+  "currentTurn" : 0
+}

@@ -1,0 +1,23 @@
+{
+	"maxLevel" : 1,
+	"names" : "Druid",
+	"descriptions" : "They say that druids conjure strange magic on the battlefield... But get up close and theyre harmless",
+	"costs" : 30,
+	"durations" : 1,
+	
+	"movPoints" : 10,
+	
+	"health" : 25,
+	"speed" : 5,
+	"morale" : 1,
+	"armour" : 2,
+	"defenseSkill" : 0,
+	"shieldDefense" : 0,
+	
+	"attack" : 0,
+	
+	"isRanged" : false,
+	
+	"combatModifiers" : "",
+	"moraleModifiers" : ""
+}

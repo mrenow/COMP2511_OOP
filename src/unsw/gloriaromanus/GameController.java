@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class GameController {
-
+	public static double STARTING_DENSITY = 0.5;
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;
 
@@ -104,7 +104,7 @@ public class GameController {
 			throw new DataInitializationException("Error while constructing provinces", e);
 		}
 		try {	
-			this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap);
+			this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap, STARTING_DENSITY);
 			this.allProvinces = provinceMap.values();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -320,7 +320,6 @@ public class GameController {
 // 	Modify later to return a path?s
 	public Collection<Province> getDestinations(List<Unit> unitGroup){
 		int distMax = MathUtil.min(new MappingIterable<>(unitGroup, Unit::getMovPoints));
-		System.out.println("distmax: " + distMax);
 		if(distMax == 0) {
 			return Collections.emptySet();
 		}

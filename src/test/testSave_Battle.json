@@ -1,0 +1,25 @@
+{
+  "allProvinces" : [ {
+    "name" : "P1",
+    "owner" : "ROME"
+    "units" : [
+    	
+    ]
+  }, {
+    "name" : "P2",
+    "owner" : "ROME"
+  }, {
+    "name" : "P3",
+    "owner" : "GAUL"
+  }, {
+    "name" : "P4",
+    "owner" : "GAUL"
+  }],  
+  "factionOrder" : [ {
+    "type" : "ROME",
+    "provinces" : [ "P1", "P2" , "P3", "P4"]
+  },{
+    "type" : "GAUL",
+    "provinces" : [ "P1", "P2" , "P3", "P4"]
+  } ]
+}

@@ -1,0 +1,24 @@
+{
+	"maxLevel" : 1,
+	"names" : "Light Cavalry",
+	"descriptions" : "Great for persuing breaking units.",
+	"costs" : 40,
+	"durations" : 1,
+	
+	"movPoints" : 10,
+	
+	"health" : 50,
+	"speed" : 9,
+	"morale" : 4,
+	"armour" : 2,
+	"defenseSkill" : 1,
+	"shieldDefense" : 1,
+	
+	"attack" : 2,
+	"charge" : 2,
+	
+	"isRanged" : false,
+	
+	"combatModifiers" : "HEROIC_CHARGE_COMBAT",
+	"moraleModifiers" : "HEROIC_CHARGE_MORALE"
+}
