@@ -2,7 +2,7 @@
 	"maxLevel" : 3,
 	"names" : ["Test Building Level 1", "Test Building Level 2", "Test Building Max Level"],
 	"descriptions" : "Its probably a house.",
-	"costs" : [10, 20, 30],
+	"costs" : [20, 30, 40],
 	"durations" : [2,2,3],
 	
 	// Optional attributes

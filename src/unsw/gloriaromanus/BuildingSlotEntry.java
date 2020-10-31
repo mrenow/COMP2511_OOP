@@ -12,6 +12,7 @@ public class BuildingSlotEntry extends ItemSlotEntry{
 	void onFinish() {
 		// Should construct and add the new building to the province's building list.
 		province.addBuilding(type);
+		province.buildFinishInfrastructure(type);
 	}
 
 }

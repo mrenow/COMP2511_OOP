@@ -1,0 +1,24 @@
+{
+    "allProvinces" : [ {
+      "name" : "P1",
+      "owner" : "ROME",
+      "townWealth" : 10,
+      "taxLevel" : "NORMAL_TAX",
+      "buildingSlots" : [ ],
+      "trainingSlots" : [ ],
+      "trainingSlotNum": 3,
+      "buildingSlotNum": 2,
+      "maxSlots": 3,
+      "buildings" : [ {
+          "type" : "TRAINING_BUILDING123",
+          "level" : 1,
+          "buildingWealth" : 30,
+          "wealthRate" : 20
+      } ]
+    }],
+    "factionOrder" : [ {
+      "type" : "ROME",
+      "gold" : 60,
+      "provinces" : [ "P1" ]
+    } ]
+  }
