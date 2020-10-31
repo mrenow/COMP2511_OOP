@@ -180,9 +180,18 @@ public class GameController {
 		province.adjustTraining();
 	}
 	
-//	Constraints: None
+	/**
+	 * change the taxRate of a province
+	 * faction must own this province to change tax
+	 * @param province
+	 * @param taxLevel
+	 */
 	public void setTax (Province province, TaxLevel taxLevel) {
-		province.setTaxLevel(taxLevel);
+		if (getCurrentTurn().getProvinces().contains(province)) {
+			province.setTaxLevel(taxLevel);
+		} else {
+			//do nothing or error do not own province
+		}
 	}
 	
 	// /**
@@ -221,7 +230,9 @@ public class GameController {
 	 * @return
 	 */
 	public AttackInfo invade(List<Unit>attackers,Province defender){
-
+		if (!getAttackable(attackers.get(0).getProvince()).contains(defender)) {
+			return null;//defender province is not attackable
+		}
 		Faction attackOwner = attackers.get(0).getProvince().getOwner();
 		Battle battle = new Battle(attackers,defender);
 		AttackInfo attackInfo = battle.getResult();
@@ -301,9 +312,16 @@ public class GameController {
 			this.currentTurn = this.currentTurn%this.factionOrder.size();	
 		}
 		getCurrentTurn().updateWealth();
+		updateVictoryInfo();
 		return checkVictory();
 	}
-	
+	public void updateVictoryInfo(){
+		Faction faction = getCurrentTurn();
+		VictoryInfo vic = faction.getVictoryInfo();
+		vic.setConquest((double)faction.getProvinces().size() /(double)this.allProvinces.size());
+		vic.setTreasury(faction.getGold() /100000.0);
+		vic.setWealth(faction.getTotalWealth()/400000.0);
+	}
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo checkVictory() {
 		VictoryInfo vInfo = getCurrentTurn().getVictoryInfo();

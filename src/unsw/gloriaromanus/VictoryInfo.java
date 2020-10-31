@@ -2,6 +2,8 @@ package unsw.gloriaromanus;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import unsw.gloriaromanus.VicCondition.*;
 
 public class VictoryInfo {
@@ -14,6 +16,7 @@ public class VictoryInfo {
 
     VicComponent vicConditions;
 
+    @JsonCreator
     public VictoryInfo(){}
 
     public VictoryInfo(VicComponent vic){this.vicConditions=vic;}
@@ -28,6 +31,10 @@ public class VictoryInfo {
     private boolean checkVic(VicComponent vic){
         List<VicComponent> subgoals;
         VicComposite vicCom;
+        if (vic==null) {
+            System.out.println("must have preset victory condition");
+            return true;
+        }
         switch (vic.getGoal()) {
             case "AND":
                 vicCom = (VicComposite)vic;
