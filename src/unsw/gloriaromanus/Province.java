@@ -183,6 +183,7 @@ public class Province{
 		trainingSlots.clear();
 		units.clear();
 		taxLevel = TaxLevel.NORMAL_TAX;
+		isConquered = true;
 	}
 
 	void setTaxLevel(TaxLevel taxLevel) {
@@ -194,6 +195,9 @@ public class Province{
 	 */
 	void addUnits(List<Unit> units) {
 		this.units.addAll(units);
+	}
+	void removeUnits(List<Unit> units) {
+		this.units.removeAll(units);
 	}
 	void removeUnit(Unit unit) {
 		this.units.remove(unit);

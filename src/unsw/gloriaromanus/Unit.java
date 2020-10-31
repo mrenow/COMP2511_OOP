@@ -1,6 +1,7 @@
 package unsw.gloriaromanus;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
@@ -89,7 +90,28 @@ public class Unit {
 			System.exit(1);
 		}
 	}
+	/**
+	 * Conditions : u.movPoints >= movPoints.
+	 * @param army
+	 * @param movPoints
+	 */
+	static void expendMovement(Collection<Unit> army, int movPoints) {
+		army.forEach(u-> u.movPoints -= movPoints);
+		
+	}
 	
+	static void expendMovement(Collection<Unit> army) {
+		army.forEach(u-> u.movPoints = 0);
+	}
+	
+	static void transferArmy(List<Unit> army, Province dest) {
+		if(army.size() == 0) {
+			return;
+		}
+		Province start = army.get(0).getProvince();
+		start.removeUnits(army);
+		dest.addUnits(army);
+	}
 
 	public ItemType getType() {
 		return type;
@@ -163,6 +185,10 @@ public class Unit {
 		return health > 0;
 	}
 	
+	
+	/**
+	 * Provinces are the only things that track units.
+	 */
 	public void kill() {
 		province.removeUnit(this);
 	}

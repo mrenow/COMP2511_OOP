@@ -1,0 +1,25 @@
+// CURRENTLY UNIMPLEMENTED, BUT PERHAPS AN OPTION. Default troops will use a random infrantry type.
+
+{
+	"maxLevel" : 1,
+	"names" : "Barbarian",
+	"descriptions" : "Look at these uncivilised barbaric people! They dont even want to take part in our war! ",
+	"costs" : 0,
+	"durations" : 1,
+	
+	"movPoints" : 10,
+	
+	"health" : 50,
+	"speed" : 5,
+	"morale" : 5,
+	"armour" :  4,
+	"defenseSkill" : 2,
+	"shieldDefense" : 0,
+	
+	"attack" : 1,
+	
+	"isRanged" : false,
+	
+	"combatModifiers" : "",
+	"moraleModifiers" : ""
+}

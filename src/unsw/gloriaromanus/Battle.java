@@ -54,16 +54,15 @@ class Battle {
 
 
 	// Passed lists should be copies from the province
-	Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
+	Battle(List<Unit> attackArmy, Province defendProvince) {
 		
 		
 		
 		armies.put(ATTACK, attackArmy);
-		armies.put(DEFEND, defendArmy);
+		armies.put(DEFEND, defendProvince.getUnits());
 		
 		attackProvince = attackArmy.get(0).getProvince();
 		attackFaction = attackProvince.getOwner();
-		defendProvince = defendArmy.get(0).getProvince();
 		defendFaction = defendProvince.getOwner();
 		
 

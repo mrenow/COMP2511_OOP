@@ -203,45 +203,50 @@ public class GameController {
 	// 		return false;//TODO return just keeping the compiler happy
 	// 	}
 	// }
-//	Constraints:
-//	attacker.faction != defender.faction
-//	Province.adjacent(attacker, defender)
+	/**	Constraints:
+	 * defender in getAttackable(attacker);
+	 */
 	public AttackInfo invade (Province attacker, Province defender) {
 		//check if adjency
-		if (!attacker.getAdjacent().contains(defender)) {
-			//TODO: return not adjancent
-			return null;
-		}
-		//for now we invade with everything
-		List<Unit> attackers = attacker.getUnits();
-		List<Unit> defenders = defender.getUnits();
-		//could invade with only selected units
-		Battle battle = new Battle(attackers,defenders);
-		AttackInfo attackInfo = battle.getResult();
-		if (attackInfo==AttackInfo.WIN) {
-			attacker.getOwner().takeProvince(defender);
-		}
-		return attackInfo;
+		return invade(attacker.getUnits(), defender);
 	}
-	
+	/**
+	 * 
+	 * Constraints:
+	 * There exists a province P such that:
+	 * defender in getAttackable(p)
+	 * for all u in attackers, u.getProvince() == p
+	 * @param attackers
+	 * @param defender
+	 * @return
+	 */
 	public AttackInfo invade(List<Unit>attackers,Province defender){
-		//check adjacent
-		if (!attackers.get(0).getProvince().getAdjacent().contains(defender)){
-			return null;
-		}
+
 		Faction attackOwner = attackers.get(0).getProvince().getOwner();
-		Battle battle = new Battle(attackers,defender.getUnits());
+		Battle battle = new Battle(attackers,defender);
 		AttackInfo attackInfo = battle.getResult();
 		//change owner
 		if (attackInfo==AttackInfo.WIN) {
 			attackOwner.takeProvince(defender);
+			Unit.transferArmy(attackers, defender);
+			Unit.expendMovement(attackers);
 		}
+
 		return attackInfo;
 	}
+	
 //	Constraints:
 //	destination from getDestinations()
-//	units.province is invariant
+//	all units have the same home province
 	public void move (List<Unit> unitGroup, Province destination) {
+		// units moving to a province conquered on this turn lose all movement points
+		Province start = unitGroup.get(0).getProvince();
+		if (destination.isConquered()) {
+			Unit.transferArmy(unitGroup, destination);
+			Unit.expendMovement(unitGroup);
+			return;
+		}
+		// Init seen list.
 		Map<Province, Integer> seen = new HashMap<>(allProvinces.size());
 		for(Province p : allProvinces) {
 			seen.put(p, Integer.MAX_VALUE);
@@ -250,14 +255,15 @@ public class GameController {
 		int movCost = -1;
 		Queue<Province> queued = new LinkedList<>();
 		
-		Province start = unitGroup.get(0).getProvince(); // 
 		Faction faction = start.getOwner();
 		
 		queued.add(start);
 		seen.put(start, 0);
 		while(!queued.isEmpty()) {
 			Province p = queued.poll();
+			// Mov point cost of all neighboring provinces.
 			int dist = seen.get(p) + p.getMovCost();
+			// For each adjacent province 
 			for (Province q : p.getAdjacent()) {
 				if(q.equals(destination)) {
 					movCost = dist;
@@ -274,13 +280,11 @@ public class GameController {
 		assert movCost != -1 : "either contract was breached or algorithm is buggy";
 		
 		// Move units between provinces and subtract mov points accordingly.
-		for (Unit unit : unitGroup) {
-			start.removeUnit(unit);
-			unit.setProvince(destination);
-			unit.expendMovement(movCost);
-		}
-		destination.addUnits(unitGroup);
+		Unit.transferArmy(unitGroup, destination);
+		Unit.expendMovement(unitGroup, movCost);
+		
 	}
+	
 	
 //	Increases the turn counter by 1 
 //	returns non-null VictoryInfo if the player ending their turn has won.
@@ -319,8 +323,10 @@ public class GameController {
 //  Does not return the province the units are in.
 // 	Modify later to return a path?s
 	public Collection<Province> getDestinations(List<Unit> unitGroup){
+		
 		int distMax = MathUtil.min(new MappingIterable<>(unitGroup, Unit::getMovPoints));
-		if(distMax == 0) {
+		// If there are no units in the group or the group cannot move, return nothing,
+		if(distMax == 0 || unitGroup.size() == 0) {
 			return Collections.emptySet();
 		}
 		Set<Province> out = new HashSet<Province>();
@@ -339,12 +345,13 @@ public class GameController {
 		seen.put(start, 0);
 		while(!queued.isEmpty()) {
 			Province curr = queued.poll();
-			// 
+			// Distance to neighbours
 			int distNext = seen.get(curr) + curr.getMovCost();
-			if(distNext > distMax) {
+			// Conquered provinces are impassable.
+			if(distNext > distMax || curr.isConquered()) {
 				continue;
 			}
-			// Distanc ok.
+			// Distance ok.
 			// for each neighbour:
 			for (Province next : curr.getAdjacent()) {
 				if(seen.get(next) <= distNext || !faction.equals(next.getOwner())) {
@@ -359,12 +366,26 @@ public class GameController {
 	}
 	
 //	Called when highlighting provinces to attack
-	public Collection<Province> getAttackable(Province province){return null;}
+	public Collection<Province> getAttackable(Province attacker){
+		// cannot attack out of a conquered province.
+		if (attacker.isConquered()) {
+			return Collections.emptyList();
+		}
+		Collection<Province> out = new ArrayList<>();
+		for (Province p : attacker.getAdjacent()) {
+			if(p.getOwner() != attacker.getOwner()) {
+				out.add(p);
+			}
+		}
+		return out;
+	}
 	
 //	Called when the mercenary hire menu is opened
 	public List<ItemType> getMercenaries(){return null;}
 	
-	public List<Faction> getFactions(){return new ArrayList<Faction>(factionOrder);}
+	public List<Faction> getFactions(){
+		return new ArrayList<Faction>(factionOrder);
+		}
 	
 //	returns provinces owned by a particular faction. Will return all provinces when Faction == null
 	public Collection<Province> getProvinces(Faction faction){
@@ -376,8 +397,11 @@ public class GameController {
 	}
 	
 //	returns the province under the specified location
-	public Province getProvince(Point location) {return null;}
-	
+/* 	To implement in M3
+	public Province getProvince(Point location) {
+		return null;
+	}
+	*/
 //	returns the province with this name (debug / testing only).
 	public Province getProvince(String name){
 		for(Province p : allProvinces) {
@@ -392,6 +416,8 @@ public class GameController {
 		return allProvinces.size();
 	}
 //	Displayed on UI
-	public int getYear() {return 200+round;}
+	public int getYear() {
+		return 200+round;
+	}
 	
 }
