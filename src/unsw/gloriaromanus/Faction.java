@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ser.std.CollectionSerializer;
 
+import util.DeserializableEntry;
 import util.MappingIterable;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="type")
@@ -35,6 +36,9 @@ public class Faction {
 	@JsonIgnore
 	private Map<Province, Integer> lostEagles = new HashMap<>();
 	
+	@JsonIgnore
+	private VictoryInfo vicInfo = new VictoryInfo();
+	
 	@JsonCreator
 	private Faction() {}
 	
@@ -43,6 +47,7 @@ public class Faction {
 		this.gold = gold;
 		this.provinces.addAll(provinces);
 		provinces.forEach((p)->p.loadOwner(this));
+		
 	}
 	/**
 	 * Start constructor
@@ -74,9 +79,10 @@ public class Faction {
 		}
 		return wealth;
 	}
-	public void updateWealth(){
+	public void update(){
 		for (Province province : provinces) {
 			this.gold += province.updateWealth();
+			province.update();
 		}
 	}
 	public Province getProvince(String name) {

@@ -23,7 +23,14 @@ import util.MathUtil;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
-
+/**
+ * Game controller class
+ * Exposes an API which has getter functions and action methods.
+ * The return value of a getter function is called "valid" as long as 
+ * no action methods have been called after the value has been retrieved.
+ * @author ezra
+ *
+ */
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class GameController {
 	public static double STARTING_DENSITY = 0.5;
@@ -112,7 +119,10 @@ public class GameController {
 		}
 	}
 
-	
+	/**
+	 * Returns the current faction's turn
+	 * @return
+	 */
 	public Faction getCurrentTurn() {
 		return this.factionOrder.get(this.currentTurn);
 	}
@@ -120,7 +130,7 @@ public class GameController {
 //	Constraints:
 //	UnitType must be in getMercenaries()
 //	NOW NOT NEEDED FOR MILESTONE 2
-	public void hireUnit(Province province, ItemType unitType) {
+/*	public void hireUnit(Province province, ItemType unitType) {
 		Faction currFaction = getCurrentTurn();
 		int level = 0;
 		//TODO need create a mercenaries
@@ -134,46 +144,54 @@ public class GameController {
 			// TODO create a hireFunc in province to complete here
 			// province.hireUnit(unit);
 		}
-	}
+	}*/
 	
-//	Constraints:
-//	ItemType must be in getTrainable()
+/**
+ * @pre province in getProvinces(getCurrentTurn())
+ * @pre	unitType contained in a valid return value of getTrainable()
+ * @pre province.getTrainingSlots() > 0
+ * @post province.getTrainingSlots() is reduced by 1
+ * @post province.getCurrentTraining() contains an new entry such that entry.getType() == unitType
+ * @param province
+ * @param unitType
+ */
 //	Free slots must be available
 	public void trainUnit (Province province, ItemType unitType) {
 		// Create a unit with unitType
 		//List<ItemType> trainable = province.getTrainable();
-		if (province.getTrainingSlots() > 0) {
-			province.trainUnit(unitType);
-		} else {
-			System.out.println("Failed to train unit");
-		}
+		province.trainUnit(unitType);
+		System.out.println("Failed to train unit");
 	}
 
 	// Constraints:
-//	ItemType must be in getBuildable()
-//	Free slots must be available
+	/**
+	 * @pre province in getProvinces(getCurrentTurn())
+	 * @pre infraType in province.getBuildable()
+	 * @pre province.getBuildingSlots() > 0
+	 * @post province.getBuildingSlots() is reduced by 1
+	 * @post entry such that entry.getType() == infraType contained within new call to province.getCurrentConstruction()
+	 * @param province
+	 * @param infraType
+	 */
 	public void buildInfrastructure(Province province, ItemType infraType) {
-		if (province.getBuildable().contains(infraType) && province.getInfrastructureSlots() > 0) {
-			//can be build
-			// add build to building queue #func in province
-			province.build(infraType);
-		} else {
-			//cannot build
-			//print to terminal cannot bulid
-			System.out.println("Unable to build infrastructure.");
-		}
+		// add build to building queue #func in province
+		province.build(infraType);
 		// should return the entry??
 	}
 	
-//	Constraints:
-//	InfrastructureEntity must be in getCurrentInfrastructure 
+	/**
+	 * @pre For some province in getProvinces(getCurrentTurn()), entry in province.getCurrentConstruction()
+	 * @post entry not in new call to province.getCurrentBuilding()
+	 * @param entry
+	 */
 	public void cancelInfrastructure(BuildingSlotEntry entry) {
 		Province province = entry.getProvince();
 		province.getCurrentConstruction().remove(entry);
 	}
-	
-//	Constraints:
-//	TrainingEntity must be in getCurrentTraining
+	/**
+	 * @pre For some province in getProvinces(getCurrentTurn()), entry in province.getCurrentTraining()
+	 * @param entry
+	 */
 	public void cancelTraining(TrainingSlotEntry entry) {
 		Province province = entry.getProvince();
 		province.getCurrentTraining().remove(entry);
@@ -181,17 +199,13 @@ public class GameController {
 	}
 	
 	/**
-	 * change the taxRate of a province
-	 * faction must own this province to change tax
+	 * @pre province is in getProvinces(getCurrentTurn())
+	 * @post province.getTaxLevel() == taxLevel
 	 * @param province
 	 * @param taxLevel
 	 */
 	public void setTax (Province province, TaxLevel taxLevel) {
-		if (getCurrentTurn().getProvinces().contains(province)) {
-			province.setTaxLevel(taxLevel);
-		} else {
-			//do nothing or error do not own province
-		}
+		province.setTaxLevel(taxLevel);
 	}
 	
 	// /**
@@ -212,27 +226,26 @@ public class GameController {
 	// 		return false;//TODO return just keeping the compiler happy
 	// 	}
 	// }
-	/**	Constraints:
-	 * defender in getAttackable(attacker);
+
+	/**
+	 * @pre attacker is in getProvinces(getCurrentTurn())
+	 * @param attacker
+	 * @param defender
+	 * @return
 	 */
 	public AttackInfo invade (Province attacker, Province defender) {
-		//check if adjency
 		return invade(attacker.getUnits(), defender);
 	}
 	/**
 	 * 
-	 * Constraints:
-	 * There exists a province P such that:
-	 * defender in getAttackable(p)
-	 * for all u in attackers, u.getProvince() == p
+	 * @pre For some province in getProvinces(getCurrentTurn()), attackers is a subset of province.getUnits()
+	 * @pre defender is in getAttackable(attackers)
+	 * @pre for each unit in attackers, unit.canAttack() == true
 	 * @param attackers
 	 * @param defender
 	 * @return
 	 */
 	public AttackInfo invade(List<Unit>attackers,Province defender){
-		if (!getAttackable(attackers.get(0).getProvince()).contains(defender)) {
-			return null;//defender province is not attackable
-		}
 		Faction attackOwner = attackers.get(0).getProvince().getOwner();
 		Battle battle = new Battle(attackers,defender);
 		AttackInfo attackInfo = battle.getResult();
@@ -246,9 +259,15 @@ public class GameController {
 		return attackInfo;
 	}
 	
-//	Constraints:
-//	destination from getDestinations()
-//	all units have the same home province
+	/**
+	 * @pre For some province in getProvinces(getCurrentTurn()), unitGroup is a subset of province.getUnits()
+	 * @pre destination in getDestinations(unitGroup)
+	 * @post unitGroup not a subset of a new call to province.getUnits()
+	 * @post unitGroup is now a subset of a new call to destination.getUnits()
+	 * @invariant province.getUnits() union destination.getUnits()
+	 * @param unitGroup
+	 * @param destination
+	 */
 	public void move (List<Unit> unitGroup, Province destination) {
 		// units moving to a province conquered on this turn lose all movement points
 		Province start = unitGroup.get(0).getProvince();
@@ -302,20 +321,23 @@ public class GameController {
 		
 	}
 	
-	
-//	Increases the turn counter by 1 
-//	returns non-null VictoryInfo if the player ending their turn has won.
+	/**
+	 * @return null if no one has won, otherwise returns a victory info object detailing who has won and by which victory.
+	 */
 	public VictoryInfo endTurn() {
+		Faction curr = getCurrentTurn();
+		curr.update();
+		
 		this.currentTurn++;
-		if (this.factionOrder.size()<=this.currentTurn) {
+		if (this.factionOrder.size() == this.currentTurn) {
 			this.round++;
-			this.currentTurn = this.currentTurn%this.factionOrder.size();	
+			this.currentTurn = 0;	
 		}
-		getCurrentTurn().updateWealth();
+		
 		updateVictoryInfo();
 		return checkVictory();
 	}
-	public void updateVictoryInfo(){
+	private void updateVictoryInfo(){
 		Faction faction = getCurrentTurn();
 		VictoryInfo vic = faction.getVictoryInfo();
 		vic.setConquest((double)faction.getProvinces().size() /(double)this.allProvinces.size());
@@ -325,7 +347,7 @@ public class GameController {
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo checkVictory() {
 		return getCurrentTurn().getVictoryInfo();
-		/*if (vInfo.isVictory()) {
+		/*(if (vInfo.isVictory()) {
 			return vInfo;
 		} else {
 			return null;
@@ -333,7 +355,11 @@ public class GameController {
 	}
 	
 /* Testing only (could become a game mechanic but doubt) */
-	
+	/**
+	 * @pre province in getProvinces(getCurrentTurn())
+	 * @post province not contained in new call to getProvinces(getCurrentTurn())
+	 * @param province
+	 */
 	public void disownProvince(Province province) {
 		assert(getCurrentTurn() == province.getOwner());
 		List<Unit> disownedUnits = new ArrayList<>(province.getUnits());
@@ -343,9 +369,14 @@ public class GameController {
 	
 /* Getters */
 	
-//	Called when a group of units is selected to determine which provinces to highlight
-//  Does not return the province the units are in.
-// 	Modify later to return a path?s
+	/**
+	 * Called when a group of units is selected to determine which provinces to highlight
+	 * Does not return the province the units are in.
+	 * Modify later to return a paths?	
+	 * @pre For some province in getProvinces(getCurrentTurn()) unitGroup subset of province.getUnits()
+	 * @param unitGroup
+	 * @return Collection of provinces which the specified unitGroup can move to on this turn.
+	 */
 	public Collection<Province> getDestinations(List<Unit> unitGroup){
 		
 		int distMax = MathUtil.min(new MappingIterable<>(unitGroup, Unit::getMovPoints));
@@ -389,29 +420,45 @@ public class GameController {
 		return out;
 	}
 	
-//	Called when highlighting provinces to attack
-	public Collection<Province> getAttackable(Province attacker){
+	/**
+	 * Called when highlighting provinces to attack, and picking provinces to attack
+	 * @pre For some province in getProvinces(getCurrentTurn()), attackers must be a subset of of province.getUnits(). 
+	 * @pre for each unit in attackers, unit.canAttack() == true
+	 * @param attackers
+	 * @return
+	 */
+	public Collection<Province> getAttackable(List<Unit> attackers){
 		// cannot attack out of a conquered province.
-		if (attacker.isConquered()) {
+		if(attackers.size() == 0) {
+			return Collections.emptyList();
+		}
+		Province sourceProvince = attackers.get(0).getProvince();
+		if (sourceProvince.isConquered()) {
 			return Collections.emptyList();
 		}
 		Collection<Province> out = new ArrayList<>();
-		for (Province p : attacker.getAdjacent()) {
-			if(p.getOwner() != attacker.getOwner()) {
+		for (Province p : sourceProvince.getAdjacent()) {
+			if(p.getOwner() != sourceProvince.getOwner()) {
 				out.add(p);
 			}
 		}
 		return out;
 	}
 	
-//	Called when the mercenary hire menu is opened
-	public List<ItemType> getMercenaries(){return null;}
+/**
+ * Called when the mercenary hire menu is opened
+ * @return
+ */
+//	public List<ItemType> getMercenaries(){return null;}
 	
 	public List<Faction> getFactions(){
 		return new ArrayList<Faction>(factionOrder);
-		}
-	
-//	returns provinces owned by a particular faction. Will return all provinces when Faction == null
+	}
+
+	/**
+	 * @param faction
+	 * @return provinces owned by a particular faction. Will return all provinces when Faction == null
+	 */
 	public Collection<Province> getProvinces(Faction faction){
 		if(faction != null) {
 			return faction.getProvinces();
@@ -426,7 +473,12 @@ public class GameController {
 		return null;
 	}
 	*/
-//	returns the province with this name (debug / testing only).
+	
+	
+	/**
+	 * @param name
+	 * @return the province with this name (debug / testing only).
+	 */
 	public Province getProvince(String name){
 		for(Province p : allProvinces) {
 			if(p.getName().equals(name)) {
@@ -439,7 +491,7 @@ public class GameController {
 	public int getNumProvinces() {
 		return allProvinces.size();
 	}
-//	Displayed on UI
+	
 	public int getYear() {
 		return 200+round;
 	}

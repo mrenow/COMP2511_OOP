@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import util.Concatenator;
+
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Province{
@@ -98,7 +100,7 @@ public class Province{
 	
 	public int getTrainingSlots() {return trainingSlotNum;}
 	
-	public int getInfrastructureSlots() {return buildingSlotNum;}
+	public int getBuildingSlots() {return buildingSlotNum;}
 	
 	public int buildingWealth() {
 		int bWealth=0;
@@ -142,10 +144,14 @@ public class Province{
 		//TODO :add updateBuildingWealth
 	}
 //	Ordered list corresponding to training slots
-	public List<TrainingSlotEntry> getCurrentTraining() {return this.trainingSlots;}
+	public List<TrainingSlotEntry> getCurrentTraining() {
+		return this.trainingSlots;
+	}
 	
 //	As above. Only a single element list for milestone 2.
-	public List<BuildingSlotEntry> getCurrentConstruction(){return this.buildingSlots;}
+	public List<BuildingSlotEntry> getCurrentConstruction(){
+		return this.buildingSlots;
+	}
 	
 //	Called when the unit selection menu of a province is opened, and used to select units to move.
 	public List<Unit> getUnits(){
@@ -153,10 +159,14 @@ public class Province{
 	}
 	
 //	Called when displaying infrastructure
-	public List<Infrastructure> getInfrastructure(){return buildings;}
+	public List<Infrastructure> getInfrastructure(){
+		return buildings;
+	}
 	
 //	Called when province building menu is opened
-	public List<ItemType> getBuildable(){return null;}
+	public List<ItemType> getBuildable(){
+		return null;
+	}
 	
 //	Called when province training menu is opened
 	public List<ItemType> getTrainable() {
@@ -194,13 +204,15 @@ public class Province{
 	 * IMPORTANT: New units entering a province must only enter *after* this method is called.
 	 */
 	private void onConquered() {
+		trainingSlotNum += trainingSlots.size();
+		buildingSlotNum += buildingSlots.size();
 		buildingSlots.clear();
 		trainingSlots.clear();
 		units.clear();
 		taxLevel = TaxLevel.NORMAL_TAX;
 		isConquered = true;
 	}
-
+	
 	void setTaxLevel(TaxLevel taxLevel) {
 		this.taxLevel = taxLevel;
 	}
@@ -222,6 +234,10 @@ public class Province{
 	void loadOwner(Faction owner) {
 		this.owner = owner;
 	}
+	
+	/*
+	 * INFRASTRUCTURE AND TRAINING
+	 */
 
 	void addBuilding(ItemType type) {
 		Infrastructure t = new Infrastructure(type, 1);
@@ -277,5 +293,9 @@ public class Province{
 		Unit u = new Unit(type, 1);
 		this.units.add(u);
 	}
-
+	void update() {
+		isConquered = false;
+		new Concatenator<ItemSlotEntry>(buildingSlots).and(trainingSlots).forEach(m -> m.update());
+		units.forEach(u -> u.update());
+	}
 }

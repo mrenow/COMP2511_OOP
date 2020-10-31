@@ -48,6 +48,7 @@ public class Unit {
 	private int health;
 	private int maxMovPoints;
 	private int movPoints;
+	private boolean canAttack;
 	private double speed;
 	private double morale;
 	
@@ -177,6 +178,9 @@ public class Unit {
 	public void setProvince(Province province) {
 		this.province = province;
 	}
+	public boolean canAttack() {
+		return canAttack;
+	}
 
 	public CombatStats getCombatStats() {
 		
@@ -210,7 +214,15 @@ public class Unit {
 	// Used in loading only
 	void loadProvince(Province p) {
 		this.province = p;
-	} 
+	}
+	/**
+	 * Update at the end of a turn
+	 * 
+	 */
+	void update() {
+		movPoints = maxMovPoints;
+		canAttack = true;
+	}
 }
 
 
