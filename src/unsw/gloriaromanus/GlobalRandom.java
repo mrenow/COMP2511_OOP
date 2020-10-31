@@ -1,40 +1,52 @@
 package unsw.gloriaromanus;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class GlobalRandom {
-	public static Random generator = new Random();
+import util.MathUtil;
 
+public class GlobalRandom {
+	private static long currentSeed = new Random().nextLong();
+	public static Random generator = new Random(currentSeed);
+	private static StringBuilder randomLog = new StringBuilder("Seed: " + currentSeed + "\n");
 	public static void init(long seed) {
+		currentSeed = seed;
+		randomLog = new StringBuilder("Seed: " + seed + "\n");
 		generator = new Random(seed);
 	}
 
 	public static void init() {
-		generator = new Random();
+		currentSeed = new Random().nextLong();
+		randomLog = new StringBuilder("Seed: " + currentSeed + "\n");
+		generator = new Random(currentSeed);
+	}
+	
+	public static long getSeed() {
+		return currentSeed;
 	}
 
 	public static int nextInt() {
-		return generator.nextInt();
+		return log(generator.nextInt(), "nextInt()");
 	}
 
 	public static int nextInt(int a) {
-		return generator.nextInt(a);
+		return log(generator.nextInt(a), "nextInt(" + a + ")");
 	}
 
 	public static int nextInt(int a, int b) {
-		return a + generator.nextInt(b - a);
+		return log(a + generator.nextInt(b - a), "nextInt(" + a + "," + b + ")");
 	}
 
 	public static double nextUniform() {
-		return generator.nextDouble();
+		return log(generator.nextDouble(), "nextUniform()");
 	}
 
 	public static double nextGaussian() {
-		return generator.nextGaussian();
+		return log(MathUtil.constrain(generator.nextGaussian(),-1, 1), "nextGaussian()");
 	}
 	public static <T> T getRandom(List<T> list) {
 		return list.get(nextInt(list.size()));		
@@ -42,8 +54,13 @@ public class GlobalRandom {
 	public static <T> T removeRandom(List<T> list) {
 		return list.remove(nextInt(list.size()));		
 	}
-	
-	
+	public static String getLog() {
+		return randomLog.toString();
+	}
+	/*
+	 * test area for getting seeds
+	 * 
+	 */
 	public static void main(String [] args) {
 		List<Condition<?>> randFuncs = new ArrayList<>();
 		randFuncs.add(C(GlobalRandom::nextUniform, 0.05, 0.1));
@@ -82,12 +99,20 @@ public class GlobalRandom {
 		}
 		return true;
 	}
+	private static int log(int val, String name) {
+		randomLog.append(name + "\t: " + val + "\n");
+		return val;
+	}
+	private static double log(double val, String name) {
+		randomLog.append(name + "\t: " + val + "\n");
+		return val;
+	}
 }
 
 class Condition<T extends Comparable<T>> {
-	Supplier<T> randFun;
-	T max;
-	T min;
+	private Supplier<T> randFun;
+	private T max;
+	private T min;
 	
 	public Condition(Supplier<T> randFun, T min, T max) {
 		super();

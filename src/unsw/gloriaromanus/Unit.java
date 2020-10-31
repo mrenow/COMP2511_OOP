@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -30,8 +31,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Unit {
 	private CombatStats baseCharacteristic;
-	private EnumMap<ActiveType, List<CombatModifierMethod>> combatModifiers = new EnumMap<>(ActiveType.class);
-	private EnumMap<ActiveType, List<MoraleModifierMethod>> moraleModifiers = new EnumMap<>(ActiveType.class);
+	private Map<ActiveType, List<CombatModifierMethod>> combatModifiers = new EnumMap<>(ActiveType.class);
+	private Map<ActiveType, List<MoraleModifierMethod>> moraleModifiers = new EnumMap<>(ActiveType.class);
 
 	private int level = 1;
 	private ItemType type = ItemType.TEST_TROOP;
@@ -179,7 +180,7 @@ public class Unit {
 
 	public CombatStats getCombatStats() {
 		
-		return null;
+		return new CombatStats(baseCharacteristic);
 	}
 	
 	public boolean isAlive() {
