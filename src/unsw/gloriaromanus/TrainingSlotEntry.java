@@ -11,8 +11,8 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 
 	public TrainingSlotEntry(ItemType type, int level) {
 		super(type, level);
-		//this.name = (String) getType().getAttribute("type", level);
-		//this.cost = (Integer) getType().getAttribute("level", level);
+		this.name = (String) getType().getAttribute("type", level);
+		this.cost = (Integer) getType().getAttribute("level", level);
 	}
 
 	@Override
