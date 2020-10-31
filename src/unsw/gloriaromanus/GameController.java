@@ -261,6 +261,12 @@ public class GameController {
 		seen.put(start, 0);
 		while(!queued.isEmpty()) {
 			Province p = queued.poll();
+			
+			// If province has been conquered on this turn, then do not add any neighbours.
+			if(p.isConquered()) {
+				continue;
+			}
+			
 			// Mov point cost of all neighboring provinces.
 			int dist = seen.get(p) + p.getMovCost();
 			// For each adjacent province 

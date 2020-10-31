@@ -111,6 +111,7 @@ public class Unit {
 		Province start = army.get(0).getProvince();
 		start.removeUnits(army);
 		dest.addUnits(army);
+		army.forEach(u->u.province = dest);
 	}
 
 	public ItemType getType() {
