@@ -16,39 +16,39 @@ import java.util.List;
  * @param <T>
  */
 public class Concatenator<T> implements Iterable<T>{	
-	protected final Iterable<Iterable<T>> iterables;
+	protected final Iterable<? extends Iterable<? extends T>> iterables;
 	@SafeVarargs
 	public Concatenator(T ... items) {
 		iterables = List.of(List.of(items));
 	}
-	public Concatenator(Iterable<T> i1, Iterable<T> i2) {
+	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2) {
 		this.iterables = List.of(i1, i2);
 	}
-	public Concatenator(Iterable<T> i1, Iterable<T> i2, Iterable<T> i3) {
+	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3) {
 		this.iterables = List.of(i1, i2, i3);
 	}
-	public Concatenator(Iterable<T> i1, Iterable<T> i2, Iterable<T> i3, Iterable<T> i4) {
+	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3, Iterable<? extends T> i4) {
 		this.iterables = List.of(i1, i2, i3, i4);
 	}
-	public Concatenator(Iterable<T> i1, Iterable<T> i2, Iterable<T> i3, Iterable<T> i4, Iterable<T> i5) {
+	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3, Iterable<? extends T> i4, Iterable<? extends T> i5) {
 		this.iterables = List.of(i1, i2, i3, i4, i5);
 	}
 	
 	@SafeVarargs
-	public Concatenator(Iterable<T> ... iterables) {
+	public Concatenator(Iterable<? extends T> ... iterables) {
 		this.iterables = List.of(iterables);
 	}
 	
-	public Concatenator(Iterable<Iterable<T>> iterables) {
+	public Concatenator(Iterable<? extends Iterable<? extends T>> iterables) {
 		this.iterables = iterables;
 	}
 	
-	public final Concatenator<T> and(Iterable<Iterable<T>> iterables) {
+	public final Concatenator<T> and(Iterable<? extends Iterable<? extends T>> iterables) {
 		return new Concatenator<T>(this, new Concatenator<T>(iterables)); 
 	}
 	
 	@SafeVarargs
-	public final Concatenator<T> and(Iterable<T> ... iterables) {
+	public final Concatenator<T> and(Iterable<? extends T> ... iterables) {
 		return new Concatenator<T>(this, new Concatenator<T>(iterables)); 
 	}
 	@SafeVarargs
@@ -59,18 +59,22 @@ public class Concatenator<T> implements Iterable<T>{
 	@Override
 	public Iterator<T> iterator() {
 		return new Iterator<T>() {
-			Iterator<Iterable<T>> parentIterator = iterables.iterator();
+			Iterator<? extends Iterable<? extends T>> parentIterator = iterables.iterator();
 			// Set to empty iterator to handle init.
-			Iterator<T> childIterator = Collections.emptyIterator();
+			Iterator<? extends T> childIterator = Collections.emptyIterator();
+			// Assumes that hasNext will always be called before next.
 			@Override
 			public boolean hasNext() {
-				return parentIterator.hasNext() || childIterator.hasNext();
+				while(!childIterator.hasNext()) {
+					if(!parentIterator.hasNext()) {
+						return false;
+					}
+					childIterator = parentIterator.next().iterator();
+				}
+				return true;
 			}
 			@Override
 			public T next() {
-				while(!childIterator.hasNext()) {
-					childIterator = parentIterator.next().iterator();
-				}
 				return childIterator.next();
 			}
 		};

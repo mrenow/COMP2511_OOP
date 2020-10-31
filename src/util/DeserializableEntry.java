@@ -1,19 +1,19 @@
-package unsw.gloriaromanus;
+package util;
 
 import java.util.Map;
 import java.util.Map.Entry;
 
-class DeserializableEntry<K,V> {
+public class DeserializableEntry<K,V> {
 	private K key;
 	private V value;
-	DeserializableEntry(Entry<K, V> entry){
+	public DeserializableEntry(Entry<K, V> entry){
 		this.key = entry.getKey();
 		this.value = entry.getValue();
 	}
-	K getKey() {
+	public K getKey() {
 		return key;
 	}
-	V getValue() {
+	public V getValue() {
 		return value;
 	}
 }

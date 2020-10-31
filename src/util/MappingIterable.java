@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.function.Function;
 
 public class MappingIterable<T, R> implements Iterable<R>{
-	private Function<T, R> method;
-	private Iterable<T> subject;
-	public MappingIterable(Iterable<T> subject , Function <T,R> method){
+	private Function<? super T, ? extends  R> method;
+	private Iterable<? extends T> subject;
+	public MappingIterable(Iterable<? extends T> subject , Function <? super T,? extends R> method){
 		this.method = method;
 		this.subject = subject;
 	}
@@ -14,7 +14,7 @@ public class MappingIterable<T, R> implements Iterable<R>{
 	@Override
 	public Iterator<R> iterator() {
 		return new Iterator<R>(){
-			Iterator<T> subjectIter = subject.iterator();
+			Iterator<? extends T> subjectIter = subject.iterator();
 			@Override
 			public boolean hasNext() {
 				return subjectIter.hasNext();
