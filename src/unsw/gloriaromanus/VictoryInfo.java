@@ -1,5 +1,9 @@
 package unsw.gloriaromanus;
 
+import java.util.List;
+
+import unsw.gloriaromanus.VicCondition.*;
+
 public class VictoryInfo {
     //winCondition;
     Double conquest;
@@ -7,11 +11,65 @@ public class VictoryInfo {
     Double infrastructure;
     Double wealth;
 
+
+    VicComponent vicConditions;
+
     public VictoryInfo(){}
 
+    public VictoryInfo(VicComponent vic){this.vicConditions=vic;}
+
     public Boolean isVictory(){
-        return false;
+        if (checkVic(this.vicConditions)) {
+            return true;
+        } else {
+            return false;
+        }
     }
+    private boolean checkVic(VicComponent vic){
+        List<VicComponent> subgoals;
+        VicComposite vicCom;
+        switch (vic.getGoal()) {
+            case "AND":
+                vicCom = (VicComposite)vic;
+                subgoals = vicCom.getSubgoals();
+                for (VicComponent vicComponent : subgoals) {
+                    if (!checkVic(vicComponent)) {
+                        return false;
+                    }
+                }
+                return true;
+            case "OR":
+                vicCom = (VicComposite)vic;
+                subgoals = vicCom.getSubgoals();
+                for (VicComponent vicComponent : subgoals) {
+                    if (checkVic(vicComponent)) {
+                        return true;
+                    }
+                }
+                return false;
+            case "CONQUEST":
+                if (conquest>=1.0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "TREASURY":
+                if (treasury>=1.0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case "WEALTH":
+                if (wealth>=1.0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            default:
+                return false;
+        }
+    }
+
     public Double getConquest() {
         return conquest;
     }
