@@ -10,6 +10,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -37,6 +38,9 @@ public class Unit {
 	private int level = 1;
 	private ItemType type = ItemType.TEST_TROOP;
 	
+	@JsonIgnore
+	private UnitClass unitClass; // Dependent on ItemType
+	
 	@JsonIdentityReference(alwaysAsId = true)
 	private Province province;
 	
@@ -44,7 +48,6 @@ public class Unit {
 	private boolean isMercenary = false;
 
 	// Assigned based on type
-	private boolean isRanged = false;
 	private int health;
 	private int maxMovPoints;
 	private int movPoints;
@@ -59,17 +62,12 @@ public class Unit {
 		moraleModifiers.put(ActiveType.ENGAGEMENT, new ArrayList<>());
 	}
 	
-	@JsonCreator
-	public Unit(
-			@JsonProperty("type") ItemType newType,
-			@JsonProperty("level") int newLevel) {
+	public Unit(ItemType type, UnitClass unitClass ,int level) {
 		this();
-		if(newType != null) {
-			this.type = newType;
-		}
-		if(newLevel != 0) {
-			this.level = newLevel;
-		}
+		
+		this.type = type;
+		this.level = level;
+		this.unitClass = unitClass;
 		// By default take typeinfo
 		this.maxMovPoints = (Integer)type.getAttribute("movPoints", level);
 		this.health = (Integer) type.getAttribute("health", level);
@@ -79,24 +77,68 @@ public class Unit {
 		this.baseCharacteristic = new CombatStats(this.type, this.level);
 		this.movPoints = this.maxMovPoints;
 		
-		// add modifiers
+		if(unitClass == UnitClass.MELEE_INFANTRY) {
+			addCombatModifier(CombatModifierMethod._SHIELD_CHARGE);
+		}
+
+		// add remaining modifiers
 		// Supports multiple modifiers
 		String combatString = (String)type.getAttribute("combatModifiers", level);
 		String moraleString = (String)type.getAttribute("moraleModifiers", level);
+
 		try {
-			Parsing.<CombatModifierMethod>getEnums(combatString, CombatModifierMethod.class).forEach(this::addCombatModifier);
-			Parsing.<MoraleModifierMethod>getEnums(moraleString, MoraleModifierMethod.class).forEach(this::addMoraleModifier);
+			Parsing.getEnums(combatString, CombatModifierMethod.class).forEach(this::addCombatModifier);
+			Parsing.getEnums(moraleString, MoraleModifierMethod.class).forEach(this::addMoraleModifier);
 		} catch (DataInitializationException e) {
 			e.printStackTrace();
 			// fatal
 			System.exit(1);
 		}
 	}
+	@JsonCreator
+	public static Unit newUnit(
+			@JsonProperty("type") ItemType type,
+			@JsonProperty("level") int level) {
+		if(type == null) {
+			type = ItemType.TEST_TROOP;
+		}
+		if(level <= 0) {
+			level = 1;
+		}
+		UnitClass unitClass = null;
+		try {
+			unitClass = Parsing.getEnum((String)type.getAttribute("class", level), UnitClass.class);
+		} catch (Exception e){
+			// Something has gone horribly wrong
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+		} 
+		switch(unitClass) {
+		case MELEE_INFANTRY:
+		case RANGED:
+			return new Unit(type, unitClass, level);
+		case MELEE_CAVALRY:
+			return new MeleeCavalry(type,level);
+		case ARTILLERY:
+			return new Artillery(type, level);
+//		case TOWER:
+//			return new Tower(type, level);
+		default:
+			return null;//should never run
+		}
+	}
+	
 	/**
 	 * Conditions : u.movPoints >= movPoints.
 	 * @param army
 	 * @param movPoints
 	 */
+	public static Collection<Unit> getCasualties(Collection<Unit> army){
+		Collection<Unit> out = new ArrayList<>();
+		army.forEach(u -> {if(u.isAlive()) { out.add(u);}});
+		return out;
+	}
 	static void expendMovement(Collection<Unit> army, int movPoints) {
 		army.forEach(u-> u.movPoints -= movPoints);
 		
@@ -121,6 +163,9 @@ public class Unit {
 
 	public ItemType getType() {
 		return type;
+	}
+	public UnitClass getUnitClass() {
+		return unitClass;
 	}
 	public int getLevel() {
 		return level;
@@ -159,7 +204,7 @@ public class Unit {
 		return isMercenary;
 	}
 	public boolean isRanged() {
-		return isRanged;
+		return unitClass == UnitClass.RANGED;
 	}
 
 	public int getHealth() {

@@ -1,0 +1,88 @@
+{
+  "allProvinces" : [ {
+    "name" : "P1",
+    "owner" : "ROME",
+    "adjacent" : ["P2", "P4"],
+    "units" : [
+	    {"type" : "ARCHER", "province" : "P1"}, 
+	    {"type" : "ARCHER", "province" : "P1"}, 
+	    {"type" : "BARBARIAN", "province" : "P1"}, 
+	    {"type" : "BARBARIAN", "province" : "P1"}, 
+	    {"type" : "BERSERKER", "province" : "P1"}, 
+	    {"type" : "CHARIOTS", "province" : "P1"}, 
+	    {"type" : "CHARIOTS", "province" : "P1"}, 
+	    {"type" : "DRUID", "province" : "P1"}, 
+	    {"type" : "DRUID", "province" : "P1"}, 
+	    {"type" : "ELEPHANTS", "province" : "P1"}, 
+	    {"type" : "ELEPHANTS", "province" : "P1"}, 
+	    {"type" : "HEAVY_CAVALRY", "province" : "P1"}, 
+	    {"type" : "HEAVY_CAVALRY", "province" : "P1"}, 
+	    {"type" : "HOPILITE", "province" : "P1"}, 
+	    {"type" : "HOPILITE", "province" : "P1"}, 
+	    {"type" : "HORSE_ARCHER", "province" : "P1"}, 
+	    {"type" : "HORSE_ARCHER", "province" : "P1"}, 
+	    {"type" : "JAVELIN_SKIRMISHER", "province" : "P1"}, 
+	    {"type" : "JAVELIN_SKIRMISHER", "province" : "P1"}, 
+	    {"type" : "LIGHT_CAVALRY", "province" : "P1"}, 
+	    {"type" : "LIGHT_CAVALRY", "province" : "P1"}, 
+	    {"type" : "PIKEMEN", "province" : "P1"}, 
+	    {"type" : "PIKEMEN", "province" : "P1"}, 
+	    {"type" : "ROMAN_LEGIONARY", "province" : "P1"}, 
+	    {"type" : "ROMAN_LEGIONARY", "province" : "P1"}, 
+	    {"type" : "SPEARMEN", "province" : "P1"}, 
+	    {"type" : "SPEARMEN", "province" : "P1"}, 
+	    {"type" : "TREBUCHET", "province" : "P1"}, 
+	    {"type" : "TREBUCHET", "province" : "P1"}
+    ]
+  }, {
+    "name" : "P2",
+    "owner" : "ROME",
+    "adjacent" : ["P3", "P1"]
+  }, {
+    "name" : "P3",
+    "owner" : "GAUL",
+    "adjacent" : ["P2", "P4"]
+  }, {
+    "name" : "P4",
+    "owner" : "GAUL",
+    "adjacent" : ["P3", "P1"],
+    "units" : [
+    	{"type" : "ARCHER", "province" : "P4"}, 
+	    {"type" : "ARCHER", "province" : "P4"}, 
+	    {"type" : "BARBARIAN", "province" : "P4"}, 
+	    {"type" : "BARBARIAN", "province" : "P4"}, 
+	    {"type" : "BERSERKER", "province" : "P4"}, 
+	    {"type" : "CHARIOTS", "province" : "P4"}, 
+	    {"type" : "CHARIOTS", "province" : "P4"}, 
+	    {"type" : "DRUID", "province" : "P4"}, 
+	    {"type" : "DRUID", "province" : "P4"}, 
+	    {"type" : "ELEPHANTS", "province" : "P4"}, 
+	    {"type" : "ELEPHANTS", "province" : "P4"}, 
+	    {"type" : "HEAVY_CAVALRY", "province" : "P4"}, 
+	    {"type" : "HEAVY_CAVALRY", "province" : "P4"}, 
+	    {"type" : "HOPILITE", "province" : "P4"}, 
+	    {"type" : "HOPILITE", "province" : "P4"}, 
+	    {"type" : "HORSE_ARCHER", "province" : "P4"}, 
+	    {"type" : "HORSE_ARCHER", "province" : "P4"}, 
+	    {"type" : "JAVELIN_SKIRMISHER", "province" : "P4"}, 
+	    {"type" : "JAVELIN_SKIRMISHER", "province" : "P4"}, 
+	    {"type" : "LIGHT_CAVALRY", "province" : "P4"}, 
+	    {"type" : "LIGHT_CAVALRY", "province" : "P4"}, 
+	    {"type" : "PIKEMEN", "province" : "P4"}, 
+	    {"type" : "PIKEMEN", "province" : "P4"}, 
+	    {"type" : "ROMAN_LEGIONARY", "province" : "P4"}, 
+	    {"type" : "ROMAN_LEGIONARY", "province" : "P4"}, 
+	    {"type" : "SPEARMEN", "province" : "P4"}, 
+	    {"type" : "SPEARMEN", "province" : "P4"}, 
+	    {"type" : "TREBUCHET", "province" : "P4"}, 
+	    {"type" : "TREBUCHET", "province" : "P4"}
+    ]
+  }],  
+  "factionOrder" : [ {
+    "type" : "ROME",
+    "provinces" : [ "P1", "P2"]
+  },{
+    "type" : "GAUL",
+    "provinces" : [ "P3", "P4"]
+  } ]
+}

@@ -22,6 +22,19 @@ class MoraleModifier{
 }
 
 enum MoraleModifierMethod {
+	_HEROIC_CHARGE_MORALE(ENGAGEMENT) {
+		@Override
+		void alterMorale(MoraleData data, BattleSide side) {
+			// When army has <50% of enemy units, apply this
+			// Double charge attack dmg, 50% inc morale
+			Unit enemy = data.getUnit(side.other());
+			Unit self = data.getUnit(side);
+
+			if (self.getHealth() * 2 < enemy.getHealth()) {
+				data.multMorale(side, 1.5);
+			}
+		}
+	},
 	DRUIDIC_FERVOUR(SUPPORT){
 		// This is really dumb but 2511 has forced my hand
 		@Override
@@ -58,19 +71,6 @@ enum MoraleModifierMethod {
 	LOST_EAGLE(SUPPORT){
 		void alterMorale(MoraleData data, BattleSide side) {
 			data.addMorale(side, -0.2);
-		}
-	},
-	HEROIC_CHARGE_MORALE(ENGAGEMENT) {
-		@Override
-		void alterMorale(MoraleData data, BattleSide side) {
-			// When army has <50% of enemy units, apply this
-			// Double charge attack dmg, 50% inc morale
-			Unit enemy = data.getUnit(side.other());
-			Unit self = data.getUnit(side);
-
-			if (self.getHealth() * 2 < enemy.getHealth()) {
-				data.multMorale(side, 1.5);
-			}
 		}
 	};
 	

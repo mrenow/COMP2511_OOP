@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -13,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import unsw.gloriaromanus.AttackInfo;
 import unsw.gloriaromanus.Battle;
+import unsw.gloriaromanus.DataInitializationException;
 import unsw.gloriaromanus.Faction;
 import unsw.gloriaromanus.GameController;
 import unsw.gloriaromanus.GlobalRandom;
@@ -41,6 +46,7 @@ public class BattleTest {
     	gallicUnits = P(4).getUnits();
     }
     
+    
     @Test
     public void invadeEmpty() {
     	// move romans to province 2 and invade province 3 (empty)
@@ -58,7 +64,6 @@ public class BattleTest {
     	assertEquals(oldHealth, RU(1).getHealth());
     	assertTrue(RU(1).isAlive());
     	assertIterableEquals(List.of(RU(1)), P(3).getUnits()); 
-    	
     }
 
     @Test
@@ -104,12 +109,13 @@ public class BattleTest {
     }
     
     @Test
-    public void basicRawBattle() {
+    public void basicRawBattle() throws FileNotFoundException {
     	GlobalRandom.init();
+    	// possibilites : 
     	Battle b  = new Battle(List.of(RU(0)), List.of(GU(4)));
     	
     	AttackInfo result = b.getResult();
-    	b.printLog(System.out);
+    	b.printLog(new PrintStream(new File("src/test/basicRawBattle.log")));
     	
     	
     	
@@ -129,6 +135,12 @@ public class BattleTest {
 	
 	@AfterEach
 	public void cleanUp() {
+		
+		
+	}
+	public static void main (String[] args) throws IOException, DataInitializationException {
+		// Generate from current values
+			GameController.loadFromSave("src/test/testLoad_BattleNormal.json").saveGame("src/test/testSave_BattleNormal.json");
 		
 		
 	}

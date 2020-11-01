@@ -5,6 +5,8 @@
 	"costs" : 40,
 	"durations" : 2,
 	
+	"class" : "RANGED",
+	
 	"movPoints" : 15,
 	
 	"health" : 25,
@@ -14,11 +16,8 @@
 	"defenseSkill" : 0,
 	"shieldDefense" : 0,
 	
-	"attack" : 1,
-	"charge" : 0,
+	"attack" : 3,
 	
-	"isRanged" : true,
-	
-	"combatModifiers" : "CANTABARIAN_CIRCLE",
+	"combatModifiers" : "CANTABRIAN_CIRCLE",
 	"moraleModifiers" : ""
 }

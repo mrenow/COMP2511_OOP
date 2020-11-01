@@ -5,6 +5,9 @@
 	"costs" : 80,
 	"durations" : 1,
 	
+	"class" : "MELEE_CAVALRY",
+	
+	
 	"movPoints" : 10,
 	
 	"health" : 50,
@@ -14,11 +17,9 @@
 	"defenseSkill" : 2,
 	"shieldDefense" : 0,
 	
-	"attack" : 2,
-	"charge" : 4,
+	"attack" : 8,
+	"charge" : 16,
 	
-	"isRanged" : false,
-	
-	"combatModifiers" : "HEROIC_CHARGE_COMBAT",
-	"moraleModifiers" : "HEROIC_CHARGE_MORALE"
+	"combatModifiers" : "",
+	"moraleModifiers" : ""
 }

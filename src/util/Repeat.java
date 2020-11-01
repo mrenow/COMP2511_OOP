@@ -16,6 +16,9 @@ public class Repeat<T> implements Iterable<T>{
 		this.element = element;
 		this.times = times;
 	}
+	public void setNum(int times) {
+		this.times = times;
+	}
 
 	@Override
 	public Iterator<T> iterator() {

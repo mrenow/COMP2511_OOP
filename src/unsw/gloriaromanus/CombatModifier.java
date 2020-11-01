@@ -36,7 +36,7 @@ class CombatModifier{
 enum CombatModifierMethod {
 	// ActiveType = null means an exception will be thrown when 
 	// unit.addCombatModifier(RANGED) is called.
-	RANGED(null){
+	_RANGED(null){
 		@Override
 		void alterEngagement(CombatData engagement, BattleSide side) {
 			if(!engagement.getUnit(ATTACK).isRanged()) {
@@ -49,27 +49,19 @@ enum CombatModifierMethod {
 			engagement.setDefenseSkill(ATTACK, Double.NEGATIVE_INFINITY);
 		}
 	},
-
-	// Guarantee: Source unit is ranged
-	FIRE_ARROWS_COMBAT(ENGAGEMENT){
-		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
-			engagement.multAttack(side, 0.9);
-		}
-	},
 	// Guarantee: Source unit is artillery
-	ARTILLERY(ENGAGEMENT){
+	_ARTILLERY(ENGAGEMENT){
 		@Override
 		void alterEngagement(CombatData engagement, BattleSide side) {
 			Unit enemy = engagement.getUnit(side.other());			
-			if(enemy instanceof Tower) {
-				Artillery self = (Artillery)engagement.getUnit(side);
-				engagement.setAttack(side, self.getSeigeAttack());
-			}
+//			if(enemy.getUnitClass() == UnitClass.TOWER) {
+//				Artillery self = (Artillery)engagement.getUnit(side);
+//				engagement.setAttack(side, self.getSeigeAttack());
+//			}
 		}
 	},
 	// Guarantee: Source unit is tower
-	TOWER(ENGAGEMENT){
+	_TOWER(ENGAGEMENT){
 		@Override
 		void alterEngagement(CombatData engagement, BattleSide side) {
 			Unit enemy = engagement.getUnit(side);
@@ -79,15 +71,39 @@ enum CombatModifierMethod {
 			}
 			// Engagement is given to be ranged. See RANGED(null)
 		}
-	},
-	SHIELD_CHARGE(ENGAGEMENT){
+	},	// Guarantee: unit is melee infantry
+	_SHIELD_CHARGE(ENGAGEMENT){
 		@Override
 		void alterEngagement(CombatData engagement, BattleSide side) {
 			if(GlobalRandom.nextUniform() < 0.25) {
 				engagement.addAttack(side, engagement.getShieldDefense(side));				
 			}
 		}
+	},	// Guarantee: Unit is cavalry and melee
+	_HEROIC_CHARGE_COMBAT(ENGAGEMENT) {
+		@Override
+		void alterEngagement(CombatData engagement, BattleSide side) {
+			// When army has <50% of enemy units, apply this
+			// Double attack dmg, 50% inc morale
+			Unit enemy = engagement.getUnit(side.other());
+			MeleeCavalry self = (MeleeCavalry) engagement.getUnit(side);
+
+			double chargeAttack = self.getChargeAttack();
+			if (self.getHealth() * 2 < enemy.getHealth()) {
+				chargeAttack *= 2;
+			}
+			engagement.addAttack(side, chargeAttack);
+			
+		}
 	},
+	// Guarantee: Source unit is ranged
+	FIRE_ARROWS_COMBAT(ENGAGEMENT){
+		@Override
+		void alterEngagement(CombatData engagement, BattleSide side) {
+			engagement.multAttack(side, 0.9);
+		}
+	},
+
 	SKIRMISHER_ANTI_ARMOUR(ENGAGEMENT) {
 		@Override
 		void alterEngagement(CombatData engagement, BattleSide side) {
@@ -124,24 +140,8 @@ enum CombatModifierMethod {
 				engagement.multAttack(side.other(), 0.5);
 			}
 		}
-	},
-	// Guarantee: Unit is cavalry and melee
-	HEROIC_CHARGE_COMBAT(ENGAGEMENT) {
-		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
-			// When army has <50% of enemy units, apply this
-			// Double attack dmg, 50% inc morale
-			Unit enemy = engagement.getUnit(side.other());
-			MeleeCavalry self = (MeleeCavalry) engagement.getUnit(side);
-
-			double chargeAttack = self.getChargeAttack();
-			if (self.getHealth() * 2 < enemy.getHealth()) {
-				chargeAttack *= 2;
-			}
-			engagement.addAttack(side, chargeAttack);
-			
-		}
 	};
+
 	
 	
 	private ActiveType active;

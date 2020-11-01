@@ -24,6 +24,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author ezra
  *
  */
+enum UnitClass {
+	MELEE_INFANTRY, MELEE_CAVALRY, RANGED, ARTILLERY
+//	,TOWER
+	;
+}
+
 public enum ItemType{
 	// enum potential values
 	// infrastructure
@@ -57,13 +63,20 @@ public enum ItemType{
 	SPEARMEN				(),
 	PIKEMEN 				(),
 	HOPILITE 				(),
+	BERSERKER				(),
 	
 	// CAVALRY:
 	HORSE_ARCHER			(),
 	HEAVY_CAVALRY			(),
 	LIGHT_CAVALRY			(),
 	DRUID					(),
-	CHARIOTS				();
+	CHARIOTS				(),
+	
+	// NO_ONE:
+	BARBARIAN				();
+	// ABSOLUTELY NO ONE:
+	
+	//
 	
 	private static final String SOURCE_DIR = "src/unsw/gloriaromanus/data";
 	

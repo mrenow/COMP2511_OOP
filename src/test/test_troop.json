@@ -6,6 +6,7 @@
 	"durations" : [1,2],
 	
 	"movPoints" : 10,
+	"class" : "MELEE_INFANTRY",
 	
 	"health" : 100,
 	"speed" : 4,
@@ -19,8 +20,6 @@
 	// 1
 	"attack" : 2,
 	
-	"isRanged" : false,
-	
-	"combatModifiers" : "SHIELD_CHARGE",
+	"combatModifiers" : "",
 	"moraleModifiers" : ""
 }

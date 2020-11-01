@@ -5,6 +5,8 @@
 	"costs" : 20,
 	"durations" : 1,
 	
+	"class" : "MELEE_INFANTRY",
+
 	"movPoints" : 10,
 	
 	"health" : 50,
@@ -14,10 +16,8 @@
 	"defenseSkill" : 4,
 	"shieldDefense" : 2,
 	
-	"attack" : 2,
+	"attack" : 8,
 	
-	"isRanged" : false,
-	
-	"combatModifiers" : "SHIELD_CHARGE",
+	"combatModifiers" : "",
 	"moraleModifiers" : ""
 }

@@ -17,9 +17,9 @@ import util.MathUtil;
 import util.Repeat;
 
 // Object is temporary. Do not attempt to store.
-class Battle {
+public class Battle {
 	// Ranged Modifier
-	private static final CombatModifier RANGED_MODIFIER = new CombatModifier(CombatModifierMethod.RANGED, null);
+	private static final CombatModifier RANGED_MODIFIER = new CombatModifier(CombatModifierMethod._RANGED, null);
 	private static final MoraleModifier ATTACKER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, ATTACK);
 	private static final MoraleModifier DEFENDER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, DEFEND);
 	
@@ -97,16 +97,22 @@ class Battle {
 
 	public AttackInfo getResult() {
 	
-
-		while (!isBattleEnd()) {
-			// setupengagement data for unit
-
-			// create skirmish
-			runSkirmish(pickUnit(ATTACK), pickUnit(DEFEND));
-			
-			// checkresult and do other stuff
-			//
-			
+		try {
+			while (!isBattleEnd()) {
+				// setupengagement data for unit
+	
+				// create skirmish
+				runSkirmish(pickUnit(ATTACK), pickUnit(DEFEND));
+				
+				// checkresult and do other stuff
+				//
+				
+			}
+		}catch(Exception e) {
+			logger.log(e.getMessage());
+			for (StackTraceElement ste: e.getStackTrace()) {
+				logger.log(ste.toString());
+			}
 		}
 		// default: attacker never wins
 		if (this.numEngagements >= 200) {
@@ -172,16 +178,21 @@ class Battle {
 	public void setWalls(Boolean wall){
 		this.hasWalls = wall;
 	}
+	/**
+	 * @pre attackUnit in armies.get(ATTACK), defendUnit in armies.get(DEFEND)
+	 * @param attackUnit
+	 * @param defendUnit
+	 */
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
 		logger.log("Skirmish Start with:");
 		logger.into();
-			logger.log("Attacker: ", attackUnit.getCombatStats());
-			logger.log("Defender: ", attackUnit.getCombatStats());
+			logger.log("Attacker", attackUnit.getType(), attackUnit.getCombatStats());
+			logger.log("Defender", defendUnit.getType(), defendUnit.getCombatStats());
 		logger.out();
 		// Begin engagement
 		while (tryEngagement()) {
 			
-			logger.log("Engagement:");
+			logger.log("Engagement", numEngagements);
 			logger.into();
 			int attOldHealth = attackUnit.getHealth();
 			int defOldHealth = defendUnit.getHealth();
@@ -197,11 +208,12 @@ class Battle {
 			}
 			
 			logger.log("Damage: ");
-			logger.into();
 			logger.log("Attacker:");
+			logger.into();
 			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged); // RANDOM 
-
+			logger.out();
 			logger.log("Defender:");
+			logger.into();
 			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
 			logger.out();
 			// Unit died, end engagement
@@ -211,7 +223,8 @@ class Battle {
 				logger.log("Skirmish end");
 				break;
 			}
-				
+	
+			
 			// Create morale data
 			MoraleData data = new MoraleData(attackUnit, defendUnit, armies.get(ATTACK), armies.get(DEFEND));
 
@@ -230,33 +243,43 @@ class Battle {
 			double defLoss = 1.0 - (double) defendUnit.getHealth() / defOldHealth;
 			logger.log(String.format("Losses: %.1f : %.1f", attLoss, defLoss) +
 					String.format("\t Morales: %.1f : %.1f", data.getEffectiveMorale(ATTACK), data.getEffectiveMorale(DEFEND)));
+			double defLossQuotient;
+			double attLossQuotient;
+			
 			if (attLoss == 0 && defLoss == 0) {
-				continue;
+				defLossQuotient = 0.0;
+				attLossQuotient = 0.0;
+			}else {
+				defLossQuotient = defLoss/attLoss;
+				attLossQuotient = attLoss/defLoss;
 			}
-			double attBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(ATTACK) + attLoss / defLoss), 0.05, 1);
-			double defBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(DEFEND) + defLoss / attLoss), 0.05, 1);
+			double attBreakChance = MathUtil.constrain(1.0 + 0.1 * (attLossQuotient - data.getEffectiveMorale(ATTACK)), 0.05, 1);
+			double defBreakChance = MathUtil.constrain(1.0 + 0.1 * (defLossQuotient - data.getEffectiveMorale(DEFEND)), 0.05, 1);
 
-			logger.log(String.format("Break chances: %.1f : %.1f", attBreakChance , defBreakChance));
+			logger.log(String.format("Break chances: %.2f : %.2f", attBreakChance , defBreakChance));
 			boolean defBreaks = GlobalRandom.nextUniform() < defBreakChance; // RANDOM (ONCE) 
 			boolean attBreaks = GlobalRandom.nextUniform() < attBreakChance; // RANDOM (ONCE)
 			
 			logger.out();
 			if (attBreaks && defBreaks) {
 				// end whole skirmish
+				logger.out();
 				logger.log("Both Break");
 				armies.get(ATTACK).remove(attackUnit);
 				armies.get(DEFEND).remove(defendUnit);
 				break;
 			} else if (attBreaks) {
-
-				logger.log("Defender Breaks");
+				logger.out();
+				logger.log("Attacker Breaks");
 				runBreaking(defendUnit, attackUnit, DEFEND);	// RANDOM (MANY)
 				break;
 			} else if (defBreaks) {
-				logger.log("Attacker Breaks");
+				logger.out();
+				logger.log("Defender Breaks");
 				runBreaking(attackUnit, defendUnit, ATTACK);	// RANDOM (MANY)
 				break;
 			}
+			logger.out();
 		}
 		// Skirmish end
 	}
@@ -279,24 +302,32 @@ class Battle {
 
 		// Try engagement
 		while(tryEngagement()) {
+			logger.log("Break Engagement", numEngagements);
+			logger.into();
 			boolean isRanged = tryRanged(chaseUnit, routeUnit); // RANDOM (ONCE)
 			
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 			if(isRanged){
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
+				logger.log("Ranged Engagement");
 			}
-			
+			logger.into();
 			inflictDamage(chaseUnit, routeUnit, chaseSide, combatModifiers, isRanged);
+			logger.out();
 			if(!routeUnit.isAlive()) {
 				// Unit death handled by inflict damage
+				logger.out();
 				return;
 			}
 			
 			double routeChance = MathUtil.max(0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed()), 0.1);
+			logger.out();
+			
 			// unit routes
 			if(GlobalRandom.nextUniform() < routeChance) { // RANDOM (ONCE)
 				// remove unit from army.
 				armies.get(chaseSide.other()).remove(routeUnit);
+				logger.log("Victim Escapes");
 				// TODO log route? ??? or dont
 				return;
 			}
@@ -322,9 +353,9 @@ class Battle {
 			// This is fine right?
 			do {
     			victim = pickUnit(aggressorSide);
-    		}while(!Objects.equals(victim,aggressor));
+    		}while(Objects.equals(victim,aggressor));
 
-			logger.log("\tElephants amok with " + victim.getType());
+			logger.log("Elephants amok with " + victim.getType());
     	}
 		// Create CombatData
 		CombatData data;
@@ -355,8 +386,9 @@ class Battle {
 		
 		// Caculate inflicted casualties
 		double effectiveArmour = data.getEffectiveArmour(aggressorSide.other());
-		
+		logger.log("Armour", effectiveArmour, "Attack:", data.getAttack(aggressorSide));
 		int beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed = 10;
+		
 		double damage;
 		if(effectiveArmour != 0) {
 			damage = data.getAttack(aggressorSide)/effectiveArmour;
@@ -364,7 +396,7 @@ class Battle {
 			damage = beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed;
 		}
 			
-		double casualties = GlobalRandom.nextGaussian() * 0.1 * damage * victim.getHealth(); // RANDOM (ONCE) (GAUSSIAN)
+		double casualties = logger.log("Multiplier:", (MathUtil.max(0, GlobalRandom.nextGaussian() + 1))) * 0.1 * damage * victim.getHealth(); // RANDOM (ONCE) (GAUSSIAN)
 		int oldHealth = victim.getHealth();
 		casualties = MathUtil.max(0, casualties);
 		
@@ -373,7 +405,7 @@ class Battle {
 		logger.log("Casualties: ", oldHealth + "->" +  victim.getHealth());
 		
 		if(!victim.isAlive()) {
-			logger.log("Victim died");
+			logger.log("Victim dies");
 			armies.get(aggressorSide.other()).remove(victim);
 		}
 	}
@@ -395,13 +427,14 @@ class Battle {
 	 * returns the input CombatModifier Concatenator otherwise.
 	 */
 	public boolean tryRanged(Unit u1, Unit u2) {
-		if (u1.isRanged() && u2.isRanged()) {
+		if (u1.isRanged() == u2.isRanged()) {
 			return u1.isRanged();
 		}
+		
 		// Not in spec anymore, but whatever man
-		if (u1 instanceof Tower || u2 instanceof Tower) {
-			return true;
-		}
+//		if (u1.getUnitClass() == UnitClass.TOWER || u2.getUnitClass() == UnitClass.TOWER ) {
+//			return true;
+//		}
 		
 		double baseChance = hasWalls? 0.9 : 0.5;
 		
@@ -442,14 +475,14 @@ class ProcessLogger{
 	public <T> T log(String name, T val) {
 		log.append("\t".repeat(depth));
 		log.append(name);
-		log.append(" : ");	
+		log.append(" ");
 		log.append(val);
 		log.append("\n");
 		return val;
 	}
-	public <T> void log(String name, T ... vals) {
-		log.append("\t".repeat(depth));
-		for (T val : vals) {
+	public <T> void log(Object ... vals) {
+		log.append("\t".repeat(depth));	
+		for (Object val : vals) {
 			log.append(val);
 			log.append(" ");
 		}
@@ -458,13 +491,19 @@ class ProcessLogger{
 	
 	public int log(String name, int val) {
 		log.append("\t".repeat(depth));
-		log.append(val);
+		log.append(name);
+		log.append(" ");
+		log.append(val);		
+		log.append("\n");
 		return val;
 	}
 	
 	public double log(String name, double val) {
 		log.append("\t".repeat(depth));
-		log.append(val);
+		log.append(name);
+		log.append(" ");	
+		log.append(val);		
+		log.append("\n");
 		return val;
 	}
 	

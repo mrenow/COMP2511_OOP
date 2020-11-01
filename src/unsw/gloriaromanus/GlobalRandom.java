@@ -46,7 +46,7 @@ public class GlobalRandom {
 	}
 
 	public static double nextGaussian() {
-		return log(MathUtil.constrain(generator.nextGaussian(),-1, 1), "nextGaussian()");
+		return log(generator.nextGaussian(), "nextGaussian()");
 	}
 	public static <T> T getRandom(List<T> list) {
 		return list.get(nextInt(list.size()));		

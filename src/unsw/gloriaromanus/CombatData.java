@@ -15,7 +15,8 @@ import java.util.Map;
  * @author ezra
  */
 class CombatData {
-	
+
+	private boolean hasWalls;
 	private boolean isRanged;
 	private Map<BattleSide, SideData> data = new EnumMap<>(BattleSide.class);
 
@@ -32,9 +33,11 @@ class CombatData {
 		}
 	}
 	 
-	CombatData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy, boolean isRanged) {
+	CombatData(Unit attackerUnit, Unit defenderUnit, List<Unit> attackerArmy, List<Unit> defenderArmy, boolean isRanged, boolean hasWalls) {
 		data.put(ATTACK, new SideData(attackerUnit, attackerArmy));
 		data.put(DEFEND, new SideData(defenderUnit, defenderArmy));
+		this.isRanged = isRanged;
+		this.hasWalls = hasWalls;
 	}
 
 	List<Unit> getArmy(BattleSide side) {
@@ -48,6 +51,9 @@ class CombatData {
 	/* Curse you demeter!!!!! */
 	boolean isRanged() {
 		return isRanged;
+	}
+	boolean hasWalls() {
+		return hasWalls;
 	}
 	
 	double getAttack(BattleSide side) {

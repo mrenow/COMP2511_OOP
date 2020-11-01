@@ -52,6 +52,7 @@ public class InitTest {
 	    	assertNotNull(P3);
 	    	assertNotNull(P4);
 	    	
+	    	
 	    	assertEquals(4, game.getProvinces(null).size());
 	
 	    	// Provinces are correctly connected

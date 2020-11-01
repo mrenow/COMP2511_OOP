@@ -55,12 +55,12 @@ public class Parsing {
 		return newMapper;
 	}
 	
-	public static <T extends Enum<T>> T getEnum(String name, Class<T> typeRef) {
+	public static <T extends Enum<T>> T getEnum(String name, Class<T> typeRef) throws DataInitializationException {
 		try {
 			// Im lazy
 			return Parsing.mapper.readValue("\"" + name.toUpperCase() + "\"", typeRef);
-		}catch(Exception e){
-			return null;
+		}catch(Exception e) {
+			throw new DataInitializationException("unit class " + name.toUpperCase() + " not recognized.");
 		}
 	}
 	
@@ -69,13 +69,15 @@ public class Parsing {
 	public static <T extends Enum<T>> List<T> getEnums(String enumString, Class<T> typeRef) throws DataInitializationException{
 		List<T> out = new ArrayList<>();
 		Scanner sc = new Scanner(enumString);
+		String name = "";
 		try {
 			while(sc.hasNext()) {
-				T val = Parsing.mapper.readValue("\"" + sc.next().toUpperCase() + "\"", typeRef);
+				name = sc.next();
+				T val = Parsing.mapper.readValue("\"" + name.toUpperCase() + "\"", typeRef);
 				out.add(val);
 			}		
-		}catch(Exception e){
-			throw new DataInitializationException("Error while parsing enum list",e);
+		}catch(JsonProcessingException e){
+			throw new DataInitializationException("Error while parsing enum list: " + name + " not recognized",e);
 		}
 		return out;
 	}

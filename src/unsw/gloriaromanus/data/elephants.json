@@ -9,6 +9,8 @@
 	"costs" : 100,
 	"durations" : 3,
 	
+	"class" : "MELEE_CAVALRY",
+	
 	"movPoints" : 15,
 	
 	"health" : 100,
@@ -18,11 +20,9 @@
 	"defenseSkill" : 1,
 	"shieldDefense" : 0,
 	
-	"attack" : 4,
-	"charge" : 4,
+	"attack" : 16,
+	"charge" : 16,
 	
-	"isRanged" : false,
-	
-	"combatModifiers" : "HEROIC_CHARGE_COMBAT", // Amok implmented in the system
-	"moraleModifiers" : "HEROIC_CHARGE_MORALE"
+	"combatModifiers" : "", // Amok implmented in the system
+	"moraleModifiers" : ""
 }

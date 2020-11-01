@@ -8,9 +8,9 @@
 	      "type" : "TEST_TROOP",
 	      "level" : 1,
 	      "baseCharacteristic" : {
-	        "armourBase" : 0.0, // cannot die
+	        "armourBase" : 0.0,  // will take min value 1
 	        "attackBase" : 99.0, // kills enemy eventually 
-	        "defenseSkill" : 99999.0,
+	        "defenseSkill" : 99999.0,// cannot die
 	        "shieldDefense" : 0.0
 	      },
 	      "province" : "P1",
@@ -193,11 +193,25 @@
 	      "level" : 1,
 	      "baseCharacteristic" : {
 	        "armourBase" : 99999.0,
-	        "attackBase" : 4.0,
+	        "attackBase" : 10.0,
 	        "defenseSkill" : 0.0,
 	        "shieldDefense" : 0.0
 	      },
-	      "isRanged" : true,
+	      "province" : "P4",
+	      "health" : 10,
+	      "maxMovPoints" : 10,
+	      "movPoints" : 10,
+	      "speed" : 999999999.0,
+	      "morale" : 9999.0
+	    },{ // 4 : Elephant
+	      "type" : "ELEPHANTS",
+	      "level" : 1,
+	      "baseCharacteristic" : {
+	        "armourBase" : 99999.0,
+	        "attackBase" : 10.0,
+	        "defenseSkill" : 0.0,
+	        "shieldDefense" : 0.0
+	      },
 	      "province" : "P4",
 	      "health" : 10,
 	      "maxMovPoints" : 10,

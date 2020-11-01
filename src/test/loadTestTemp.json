@@ -37,7 +37,7 @@
       },
       "combatModifiers" : {
         "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "SHIELD_CHARGE" ]
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
       },
       "moraleModifiers" : {
         "SUPPORT" : [ ],
@@ -45,7 +45,6 @@
       },
       "province" : "P1",
       "isMercenary" : false,
-      "isRanged" : false,
       "health" : 1,
       "maxMovPoints" : 1,
       "movPoints" : 1,
@@ -63,7 +62,7 @@
       },
       "combatModifiers" : {
         "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "SHIELD_CHARGE" ]
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
       },
       "moraleModifiers" : {
         "SUPPORT" : [ ],
@@ -71,7 +70,6 @@
       },
       "province" : "P1",
       "isMercenary" : false,
-      "isRanged" : false,
       "health" : 2,
       "maxMovPoints" : 2,
       "movPoints" : 2,
@@ -89,7 +87,7 @@
       },
       "combatModifiers" : {
         "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "SHIELD_CHARGE" ]
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
       },
       "moraleModifiers" : {
         "SUPPORT" : [ ],
@@ -97,7 +95,6 @@
       },
       "province" : "P1",
       "isMercenary" : false,
-      "isRanged" : false,
       "health" : 3,
       "maxMovPoints" : 3,
       "movPoints" : 3,
@@ -115,7 +112,7 @@
       },
       "combatModifiers" : {
         "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "SHIELD_CHARGE" ]
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
       },
       "moraleModifiers" : {
         "SUPPORT" : [ ],
@@ -123,7 +120,6 @@
       },
       "province" : "P1",
       "isMercenary" : false,
-      "isRanged" : false,
       "health" : 4,
       "maxMovPoints" : 4,
       "movPoints" : 4,
