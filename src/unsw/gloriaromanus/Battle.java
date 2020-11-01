@@ -208,11 +208,11 @@ public class Battle {
 			}
 			
 			logger.log("Damage: ");
-			logger.log("Attacker:");
+			logger.log("Attacker", attackUnit.getType(), ":");
 			logger.into();
 			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged); // RANDOM 
 			logger.out();
-			logger.log("Defender:");
+			logger.log("Defender", defendUnit.getType(), ":");
 			logger.into();
 			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
 			logger.out();
@@ -265,18 +265,21 @@ public class Battle {
 				// end whole skirmish
 				logger.out();
 				logger.log("Both Break");
+				logger.log("Skirmish end");
 				armies.get(ATTACK).remove(attackUnit);
 				armies.get(DEFEND).remove(defendUnit);
 				break;
 			} else if (attBreaks) {
 				logger.out();
-				logger.log("Attacker Breaks");
+				logger.log("Attacker", attackUnit.getType(), "Breaks");
 				runBreaking(defendUnit, attackUnit, DEFEND);	// RANDOM (MANY)
+				logger.log("Skirmish end");
 				break;
 			} else if (defBreaks) {
 				logger.out();
-				logger.log("Defender Breaks");
+				logger.log("Defender", defendUnit.getType(), "Breaks");
 				runBreaking(attackUnit, defendUnit, ATTACK);	// RANDOM (MANY)
+				logger.log("Skirmish end");
 				break;
 			}
 			logger.out();
@@ -361,10 +364,10 @@ public class Battle {
 		CombatData data;
 		switch(aggressorSide) {
 		case ATTACK:
-			data = new CombatData(aggressor, victim, armies.get(ATTACK), armies.get(DEFEND), isRanged);
+			data = new CombatData(aggressor, victim, armies.get(ATTACK), armies.get(DEFEND), isRanged, hasWalls);
 			break;
 		case DEFEND:
-			data = new CombatData(victim, aggressor, armies.get(ATTACK), armies.get(DEFEND), isRanged);
+			data = new CombatData(victim, aggressor, armies.get(ATTACK), armies.get(DEFEND), isRanged, hasWalls);
 			break;
 		default:
 			throw new NullPointerException("aggressorSide was null you dumbass");
