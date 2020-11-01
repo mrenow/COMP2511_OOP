@@ -15,10 +15,15 @@ class MoraleModifier{
 		this.side = side;
 		this.method = method;
 	}
+	@Override
+	public String toString() {
+		return method.toString();
+	}
 	
 	void modify(MoraleData data) {
 		method.alterMorale(data, side);
 	}
+	
 }
 
 enum MoraleModifierMethod {
