@@ -7,9 +7,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * @author ezra
  */
 public class TrainingSlotEntry extends ItemSlotEntry{
-	//private String name = "";
-	//private double cost = 1;
-	//private Province province;
 
 	@JsonCreator
 	private TrainingSlotEntry() {}

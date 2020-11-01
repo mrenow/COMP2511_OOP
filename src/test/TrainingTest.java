@@ -55,7 +55,6 @@ public class TrainingTest {
         assertEquals(50, player.getGold());
         assertEquals(2, p1.getTrainingSlots());
 
-        //
         game.trainUnit(p1, cavalry);
 
         assertEquals(40, player.getGold());
