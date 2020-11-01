@@ -8,10 +8,10 @@ import unsw.gloriaromanus.VicCondition.*;
 
 public class VictoryInfo {
     //winCondition;
-    Double conquest;
-    Double treasury;
-    Double infrastructure;
-    Double wealth;
+    Double conquest=0.0;
+    Double treasury=0.0;
+    Double infrastructure=0.0;
+    Double wealth=0.0;
 
 
     VicComponent vicConditions;
