@@ -142,7 +142,7 @@ public class Faction {
 	}
 
 	public VictoryInfo getVictoryInfo() {
-		return null;
+		return vicInfo;
 	}
 
 	void putLostEagles(Province lostProvince, int numEagles) {

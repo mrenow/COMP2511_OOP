@@ -32,8 +32,8 @@ public class VictoryInfo {
         List<VicComponent> subgoals;
         VicComposite vicCom;
         if (vic==null) {
-            System.out.println("must have preset victory condition");
-            return true;
+            //System.out.println("must have preset victory condition");
+            return false;
         }
         switch (vic.getGoal()) {
             case "AND":

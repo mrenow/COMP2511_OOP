@@ -349,32 +349,36 @@ public class GameController {
 	 */
 	public VictoryInfo endTurn() {
 		Faction curr = getCurrentTurn();
-		curr.update();
-		
-		this.currentTurn++;
-		if (this.factionOrder.size() == this.currentTurn) {
-			this.round++;
-			this.currentTurn = 0;	
+		curr.update();//update faction's gold and province wealth
+		updateVictoryInfo();
+		VictoryInfo vic = checkVictory();
+		if(vic==null){	
+			this.currentTurn++;
+			if (this.factionOrder.size() == this.currentTurn) {
+				this.round++;
+				this.currentTurn = 0;	
+			}
 		}
-		
-		// updateVictoryInfo(); // VictoryInfo not properly completed yet
-		return checkVictory();
+		return vic;
 	}
 	private void updateVictoryInfo(){
 		Faction faction = getCurrentTurn();
 		VictoryInfo vic = faction.getVictoryInfo();
-		vic.setConquest((double)faction.getProvinces().size() /(double)this.allProvinces.size());
+		double ownpro = faction.getProvinces().size();
+		double allpro = this.getNumProvinces();
+		vic.setConquest(ownpro/allpro);
 		vic.setTreasury(faction.getGold() /100000.0);
 		vic.setWealth(faction.getTotalWealth()/400000.0);
 	}
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VictoryInfo checkVictory() {
-		return getCurrentTurn().getVictoryInfo();
-		/*(if (vInfo.isVictory()) {
+		//return getCurrentTurn().getVictoryInfo();
+		VictoryInfo vInfo = getCurrentTurn().getVictoryInfo();
+		if (vInfo.isVictory()) {
 			return vInfo;
 		} else {
 			return null;
-		}*/
+		}
 	}
 	
 /* Testing only (could become a game mechanic but doubt) */
