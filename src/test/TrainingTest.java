@@ -83,7 +83,7 @@ public class TrainingTest {
     public void cancelTraining() throws DataInitializationException {
         game = GameController.loadFromSave("src/test/testTraining_troop.json");
         player = game.getCurrentTurn();
-        ItemType calvary = ItemType.HEAVY_CAVALRY;
+        ItemType calvary = ItemType.TEST_TROOP;
         Province p1 = game.getProvince("P1");
 
         // Check for full training slots
@@ -93,16 +93,16 @@ public class TrainingTest {
 
         // Check -1 on max training slots
         assertEquals(2, p1.getTrainingSlots());
-
+        System.out.println(p1.getUnits());
         TrainingSlotEntry u = new TrainingSlotEntry(calvary, 1, p1);
         game.cancelTraining(u);
-
+        System.out.println(p1.getUnits());
         // Check training slot back to full
         assertEquals(3, p1.getTrainingSlots());
         // Check that troop does not train
         game.endTurn();
+        System.out.println(p1.getUnits());
         assertEquals(0, p1.getUnits().size());
-
 
     }
 

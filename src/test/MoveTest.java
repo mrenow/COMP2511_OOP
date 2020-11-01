@@ -16,7 +16,14 @@ public class MoveTest {
     private GameController game;
     private Faction player;
     private List<Unit> allUnits;
-    
+	
+	/**
+	 * #US65:
+	 * AC: The players should have a way to see the movement points available for units in the province.
+	 * 
+	 * @throws DataInitializationException
+	 * @throws IOException
+	 */
     @BeforeEach
     public void setup() throws DataInitializationException, IOException {
     	game = new GameController("src/test/testAdjacency_movement.json", null, "src/test/testOwnership_movement.json");

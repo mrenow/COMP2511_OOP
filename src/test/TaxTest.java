@@ -27,7 +27,7 @@ public class TaxTest {
     /**
      * one player with 100 gold, four provinces each with 100 wealth and different tax levels.
      * See file for more detailed starting conditions.
-     * #86
+     * #US86
      * AC: Players should be able to select the following tax levels:
      * 	Low tax:
      * 		+10 town-wealth growth per turn for the province, tax rate = 10%
@@ -78,8 +78,9 @@ public class TaxTest {
 	
 	/**
 	 * Testing that tax levels can be set many times on one turn.
-	 * #86
-	 * AC: Players should be able to select the following tax levels: low tax, normal tax, high tax and very high tax
+	 * #US86:
+	 * AC: Players should be able to select and change tax levels.
+	 * @throws DataInitializationException
 	 */
 	@Test
 	public void changeTaxRate() throws DataInitializationException {
@@ -100,10 +101,12 @@ public class TaxTest {
 	}
 	
 	/**
-	 * #85
+	 * #US85
 	 * AC: Provinces should have a base wealth equal to the contributions from buildings.
 	 * AC: Wealth growth should add / subtract from / to the province’s wealth every turn.
 	 * Negative town wealth growth should never reduce a province’s wealth below its building wealth.
+	 * AC: At the start of their turn, before town wealth growth is applied and any wealth increases from
+	 * built buildings are applied, Players should receive round(tax rate * province wealth) in gold.
 	 * @throws DataInitializationExceptio
 	 */
 	public void wealthBuildings() throws DataInitializationException {

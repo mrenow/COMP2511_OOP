@@ -190,7 +190,6 @@ public class GameController {
 //	Free slots must be available
 	public void trainUnit (Province province, ItemType unitType) {
 		// Create a unit with unitType
-		//List<ItemType> trainable = province.getTrainable();
 		province.trainUnit(unitType);
 	}
 
