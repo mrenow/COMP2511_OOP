@@ -27,6 +27,9 @@ public class Battle {
 	// Units participating in battle that have not died/routed.
 	// Get each army by doing armies.get(ATTACK) or armies.get(DEFEND)
 	private Map<BattleSide, List<Unit>> armies = new EnumMap<>(BattleSide.class);
+	private Map<BattleSide, List<Unit>> deadUnits = new EnumMap<>(BattleSide.class);
+	private Map<BattleSide, List<Unit>> routedUnits = new EnumMap<>(BattleSide.class);
+	
 	/* number of times an engagement tried to occur.
 	 * This distinction is important as there is an edge case if an army is defeated on the 200th
 	 * engagement - another engagement will not be attempted, and so it is not a draw.
@@ -37,6 +40,7 @@ public class Battle {
 	
 	private ProcessLogger logger = new ProcessLogger("Battle:") ;
 	private int numEngagements = 0;
+	private Map<BattleSide, Integer> numCasualties = new EnumMap<>(BattleSide.class);
 	// record in attackinfo
 	private AttackInfo attackInfo;
 
@@ -50,12 +54,17 @@ public class Battle {
 	// Passed lists should be copies from the province
 	public Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
 		
-		
-		
+
+		numCasualties.put(ATTACK, 0);
+		numCasualties.put(DEFEND, 0);
 		armies.put(ATTACK, new ArrayList<>(attackArmy));
 		armies.put(DEFEND, new ArrayList<>(defendArmy));
-	
-
+		deadUnits.put(ATTACK, new ArrayList<>());
+		deadUnits.put(DEFEND, new ArrayList<>());
+		routedUnits.put(ATTACK, new ArrayList<>());
+		routedUnits.put(DEFEND, new ArrayList<>());
+		
+		
 		//this.attackInfo = new AttackInfo();
 		// Get support modifies from both armies
 		// IMPORTANT: Iterables will update as the army and the unit update.
@@ -96,7 +105,6 @@ public class Battle {
 	}
 
 	public AttackInfo getResult() {
-	
 		try {
 			while (!isBattleEnd()) {
 				// setupengagement data for unit
@@ -113,26 +121,43 @@ public class Battle {
 			for (StackTraceElement ste: e.getStackTrace()) {
 				logger.log(ste.toString());
 			}
+			System.err.println("An error occured. see log for details");
+		}finally {
+			logger.log("Run complete.");
 		}
-		// default: attacker never wins
-		if (this.numEngagements >= 200) {
-			this.attackInfo = AttackInfo.DRAW;
-		}
+		logger.log("Attacker:");
+		logger.into();
+			logger.log("Result:", attackInfo);
+			logger.log("Number of Casualties:", getNumCasualties(ATTACK));
+			logger.log("Dead Units:", getDeadUnits(ATTACK));
+		logger.out();
 		
-
+		logger.log("Defender:");
+		logger.into();
+			logger.log("Result:", attackInfo.defenderView());
+			logger.log("Number of Casualties:", getNumCasualties(DEFEND));
+			logger.log("Dead Units:", getDeadUnits(DEFEND));
+		logger.out();
+		
+		
 		
 		return this.attackInfo;
 	}
 	public void printLog(PrintStream out) {
 		out.println(logger);
 	}
+	public int getNumCasualties(BattleSide side) {
+		return numCasualties.get(side);
+	}
+	public List<Unit> getDeadUnits(BattleSide side) {
+		return deadUnits.get(side);
+	}
+	
 
 
 	/**
 	 * pick a unit from Unit lists
-	 * 
-	 * @param units
-	 * @return unit choosed from list
+	 * @param side
 	 */
 	private Unit pickUnit(BattleSide side) {
 
@@ -184,11 +209,10 @@ public class Battle {
 	 * @param defendUnit
 	 */
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
-		logger.log("Skirmish Start with:");
+		logger.log("Try Skirmish with:");
 		logger.into();
 			logger.log("Attacker", attackUnit.getType(), attackUnit.getCombatStats());
 			logger.log("Defender", defendUnit.getType(), defendUnit.getCombatStats());
-		logger.out();
 		// Begin engagement
 		while (tryEngagement()) {
 			
@@ -210,11 +234,11 @@ public class Battle {
 			logger.log("Damage: ");
 			logger.log("Attacker", attackUnit.getType(), ":");
 			logger.into();
-			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged); // RANDOM 
+				inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged); // RANDOM 
 			logger.out();
 			logger.log("Defender", defendUnit.getType(), ":");
 			logger.into();
-			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
+				inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
 			logger.out();
 			// Unit died, end engagement
 			// Removal from armies is handled by inflictDamage
@@ -224,6 +248,9 @@ public class Battle {
 				break;
 			}
 	
+
+			logger.log("Morale Calculations");
+			logger.into();
 			
 			// Create morale data
 			MoraleData data = new MoraleData(attackUnit, defendUnit, armies.get(ATTACK), armies.get(DEFEND));
@@ -235,8 +262,12 @@ public class Battle {
 					attackUnit.getMoraleModifiers(ENGAGEMENT, ATTACK));
 			moraleModifiers.forEach(m->m.modify(data));
 			
-			logger.log("Morale Calculations");
-			logger.into();
+			StringBuilder modifierString = new StringBuilder();
+			for (MoraleModifier m : moraleModifiers) {
+				modifierString.append(m.toString());
+				modifierString.append(" ");
+			}
+			logger.log("Final Modifiers:", modifierString);
 			
 			// Check for breaking
 			double attLoss = 1.0 - (double) attackUnit.getHealth() / attOldHealth;
@@ -266,8 +297,8 @@ public class Battle {
 				logger.out();
 				logger.log("Both Break");
 				logger.log("Skirmish end");
-				armies.get(ATTACK).remove(attackUnit);
-				armies.get(DEFEND).remove(defendUnit);
+				route(attackUnit, ATTACK);
+				route(defendUnit, DEFEND);
 				break;
 			} else if (attBreaks) {
 				logger.out();
@@ -284,6 +315,7 @@ public class Battle {
 			}
 			logger.out();
 		}
+		logger.out();
 		// Skirmish end
 	}
 	
@@ -329,7 +361,7 @@ public class Battle {
 			// unit routes
 			if(GlobalRandom.nextUniform() < routeChance) { // RANDOM (ONCE)
 				// remove unit from army.
-				armies.get(chaseSide.other()).remove(routeUnit);
+				route(routeUnit, chaseSide.other());
 				logger.log("Victim Escapes");
 				// TODO log route? ??? or dont
 				return;
@@ -389,27 +421,30 @@ public class Battle {
 		
 		// Caculate inflicted casualties
 		double effectiveArmour = data.getEffectiveArmour(aggressorSide.other());
-		logger.log("Armour", effectiveArmour, "Attack:", data.getAttack(aggressorSide));
-		int beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed = 10;
 		
+		logger.log("Armour", effectiveArmour, "Attack:", data.getAttack(aggressorSide));
+		
+		
+		double beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed = 1.0;
 		double damage;
 		if(effectiveArmour != 0) {
-			damage = data.getAttack(aggressorSide)/effectiveArmour;
+			damage = 0.1 * data.getAttack(aggressorSide)/effectiveArmour;
 		}else {
 			damage = beserkerIgnoreRangedUnitDamageAndUseThisDamageNumberInsteadAlsoCanYouTellThatImAnnoyed;
 		}
-			
-		double casualties = logger.log("Multiplier:", (MathUtil.max(0, GlobalRandom.nextGaussian() + 1))) * 0.1 * damage * victim.getHealth(); // RANDOM (ONCE) (GAUSSIAN)
+		double multiplier = MathUtil.max(0, GlobalRandom.nextGaussian() + 1);	
+		logger.log("Multiplier:", multiplier);
+		
+		int casualties = (int)Math.round(MathUtil.max(0, multiplier * damage * victim.getHealth())); // RANDOM (ONCE) (GAUSSIAN)
+		
 		int oldHealth = victim.getHealth();
-		casualties = MathUtil.max(0, casualties);
 		
-		victim.damage((int)Math.round(casualties));
-		
+		victim.damage(casualties);
+		addCasualties(aggressorSide.other(), oldHealth-victim.getHealth());
 		logger.log("Casualties: ", oldHealth + "->" +  victim.getHealth());
 		
 		if(!victim.isAlive()) {
-			logger.log("Victim dies");
-			armies.get(aggressorSide.other()).remove(victim);
+			kill(victim, aggressorSide.other());
 		}
 	}
 	
@@ -423,7 +458,19 @@ public class Battle {
 		numEngagements ++;
 		return out;
 	}
-	
+	private void addCasualties(BattleSide side, int num) {
+		numCasualties.put(side, numCasualties.get(side) + num);		
+	}
+	private void kill(Unit u, BattleSide side) {
+		logger.log("Victim", u.getType(), "dies");
+		deadUnits.get(side).add(u);
+		armies.get(side).remove(u);
+	}
+	private void route(Unit u, BattleSide side) {
+		logger.log(u.getType(), "Routes");
+		routedUnits.get(side).add(u);
+		armies.get(side).remove(u);
+	}
 	/**
 	 * Uses the given parameters (and RNG) to decide whether an engagement is ranged, and 
 	 * @returns returns the input and with a ranged modifier if the engagment is ranged. 
