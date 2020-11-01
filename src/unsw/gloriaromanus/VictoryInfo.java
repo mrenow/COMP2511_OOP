@@ -8,10 +8,10 @@ import unsw.gloriaromanus.VicCondition.*;
 
 public class VictoryInfo {
     //winCondition;
-    Double conquest;
-    Double treasury;
-    Double infrastructure;
-    Double wealth;
+    Double conquest=0.0;
+    Double treasury=0.0;
+    Double infrastructure=0.0;
+    Double wealth=0.0;
 
 
     VicComponent vicConditions;
@@ -32,8 +32,8 @@ public class VictoryInfo {
         List<VicComponent> subgoals;
         VicComposite vicCom;
         if (vic==null) {
-            System.out.println("must have preset victory condition");
-            return true;
+            //System.out.println("must have preset victory condition");
+            return false;
         }
         switch (vic.getGoal()) {
             case "AND":

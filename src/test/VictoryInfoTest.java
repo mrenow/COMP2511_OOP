@@ -64,4 +64,32 @@ public class VictoryInfoTest {
         vic.setConquest(0.5);
         assertEquals(true, vic.isVictory());
     }
+
+    @Test
+    public void badCondition() {
+        VicLeaf l2 = new VicLeaf("CONQUEST");
+        VicLeaf l3 = new VicLeaf("WEALTH");
+        VicLeaf l1 = new VicLeaf("BADCONDITION");
+        VicComposite c1 = new VicComposite("AND");
+        VicComposite c2 = new VicComposite("OR");
+        c2.addSubVic(l1);
+        c2.addSubVic(l2);
+        c1.addSubVic(l3);
+        c1.addSubVic(c2);
+        //{"goal":"AND","subgoals":[{"goal":"WEALTH"},{"goal":"OR","subgoals":[{"goal":"TREASURY"},{"goal":"CONQUEST"}]]}
+        VictoryInfo vic = new VictoryInfo(c1);
+        assertEquals(false, vic.isVictory());
+        vic.setWealth(1.0);
+        assertEquals(false, vic.isVictory());
+        vic.setConquest(1.0);
+        assertEquals(true, vic.isVictory());
+        vic.setWealth(0.5);
+        assertEquals(false, vic.isVictory());
+        vic.setTreasury(1.0);
+        assertEquals(false, vic.isVictory());
+        vic.setWealth(1.0);
+        assertEquals(true, vic.isVictory());
+        vic.setConquest(0.5);
+        assertEquals(false, vic.isVictory());
+    }
 }

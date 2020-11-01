@@ -44,13 +44,24 @@ public class BigBattleTest {
     }
     
     @Test
-    public void bigEngagement() throws FileNotFoundException {
-    	GlobalRandom.init();
+    public void bigEngagementGaulsWin() throws FileNotFoundException {
+    	GlobalRandom.init(-5826966330945702263L);
     	Battle b = new Battle(romanUnits, gallicUnits);
     	AttackInfo result = b.getResult();
-    	b.printLog(new PrintStream(new File("src/test/bigEngagement.log")));
-    	System.out.println(result);
+    	assertEquals(AttackInfo.LOSE, result);
+    	assertEquals(AttackInfo.WIN, result.defenderView());
+    	b.printLog(new PrintStream(new File("src/test/bigEngagementGaulsWin.log")));
     	
     }
+    @Test
+    public void bigEngagementRomansWin() throws FileNotFoundException {
+    	GlobalRandom.init(-7558078402375791967L);
+    	Battle b = new Battle(romanUnits, gallicUnits);
+    	AttackInfo result = b.getResult();
+    	assertEquals(AttackInfo.WIN, result);
+    	assertEquals(AttackInfo.LOSE, result.defenderView());
+    	b.printLog(new PrintStream(new File("src/test/bigEngagementRomansWin.log")));
+    }
+
     
 }
