@@ -53,32 +53,6 @@ public class Province {
 	private Province() {
 	}
 
-	/*
-	 * Used for init only.
-	 */
-	void assignName(String name) {
-		if (this.name == null) {
-			this.name = name;
-		}
-	}
-
-	/**
-	 * Called during game initialization.
-	 * 
-	 * @return
-	 */
-	public Province(Faction owner, Collection<Province> adjacent, boolean isLandlocked) {
-		this.isLandlocked = isLandlocked;
-		this.owner = owner;
-		this.adjacent.addAll(adjacent);
-	}
-
-	/**
-	 * Should not be used outside setup
-	 */
-	void addConnection(Province p) {
-		this.adjacent.add(p);
-	}
 
 	/**
 	 * Should not be used outside setup
@@ -91,6 +65,7 @@ public class Province {
 		return owner;
 	}
 
+	// Used for ports, which arent in the game >.<
 	public boolean isLandlocked() {
 		return isLandlocked;
 	}
