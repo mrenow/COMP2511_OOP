@@ -33,15 +33,16 @@ public class BuildTest {
 		Province p1 = game.getProvince("P1");
 		
 		// Check faction gold and buildingslots
+		
 		assertEquals(60, player.getGold());
-		assertEquals(2, p1.getInfrastructureSlots());
+		assertEquals(2, p1.getBuildingSlots());
 
 		// Build Infrastructure
 		game.buildInfrastructure(p1, infras);
 
 		// Check remaining gold and slot
 		assertEquals(40, player.getGold());
-		assertEquals(1, p1.getInfrastructureSlots());
+		assertEquals(1, p1.getBuildingSlots());
 
 	}
 
@@ -52,17 +53,17 @@ public class BuildTest {
 		Province p1 = game.getProvince("P1");
 		
 		// build -> cancel
-		assertEquals(2, p1.getInfrastructureSlots());
+		assertEquals(2, p1.getBuildingSlots());
 
 		game.buildInfrastructure(p1, infras);
-		assertEquals(1, p1.getInfrastructureSlots());
+		assertEquals(1, p1.getBuildingSlots());
 
 		// Cancel
 		BuildingSlotEntry u = new BuildingSlotEntry(infras, 1);
 		game.cancelInfrastructure(u);
 
 		// Check slots again
-		assertEquals(2, p1.getInfrastructureSlots());
+		assertEquals(2, p1.getBuildingSlots());
 
 	}
 

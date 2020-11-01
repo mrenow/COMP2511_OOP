@@ -19,7 +19,7 @@
   }, {
     "name" : "P2",
     "owner" : "ROME",
-    "adjacent" : [ "P1", "P2" ],
+    "adjacent" : [ "P1", "P3" ],
     "buildings" : [ ],
     "townWealth" : 0,
     "taxLevel" : "NORMAL_TAX",
@@ -53,7 +53,7 @@
   }, {
     "name" : "P4",
     "owner" : "GAUL",
-    "adjacent" : [ "P1", "P2" ],
+    "adjacent" : [ "P1", "P3" ],
     "buildings" : [ ],
     "townWealth" : 0,
     "taxLevel" : "NORMAL_TAX",

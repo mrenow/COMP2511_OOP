@@ -47,8 +47,9 @@
       "isMercenary" : false,
       "isRanged" : false,
       "health" : 1,
-      "maxMovPoints" : 10,
+      "maxMovPoints" : 1,
       "movPoints" : 1,
+      "canAttack" : false,
       "speed" : 4.0,
       "morale" : 1000.0
     }, {
@@ -72,8 +73,9 @@
       "isMercenary" : false,
       "isRanged" : false,
       "health" : 2,
-      "maxMovPoints" : 10,
+      "maxMovPoints" : 2,
       "movPoints" : 2,
+      "canAttack" : false,
       "speed" : 4.0,
       "morale" : 1000.0
     }, {
@@ -97,8 +99,9 @@
       "isMercenary" : false,
       "isRanged" : false,
       "health" : 3,
-      "maxMovPoints" : 10,
+      "maxMovPoints" : 3,
       "movPoints" : 3,
+      "canAttack" : false,
       "speed" : 4.0,
       "morale" : 1000.0
     }, {
@@ -122,8 +125,9 @@
       "isMercenary" : false,
       "isRanged" : false,
       "health" : 4,
-      "maxMovPoints" : 10,
+      "maxMovPoints" : 4,
       "movPoints" : 4,
+      "canAttack" : false,
       "speed" : 4.0,
       "morale" : 1000.0
     } ],

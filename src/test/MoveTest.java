@@ -128,7 +128,8 @@ public class MoveTest {
 		
 		game.move(List.of(U(2)), P(7));
 		// Ensure that 2 can now move out ot 7.
-		TestUtil.assertCollectionEquals(List.of(U(1), U(2), U(6), U(4), U(5), U(3), U(8)), game.getDestinations(List.of(U(2))));
+		assertEquals(2, U(2).getMovPoints());
+		TestUtil.assertCollectionEquals(List.of(P(1), P(2), P(6), P(4), P(5), P(3), P(8)), game.getDestinations(List.of(U(2))));
 		// Movement points should be noramlly calculated.
 		assertEquals(4, U(3).getMovPoints());
 	}
