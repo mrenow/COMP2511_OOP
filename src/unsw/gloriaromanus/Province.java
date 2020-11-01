@@ -257,6 +257,10 @@ public class Province {
 	}
 
 	void trainUnit(ItemType unit) {
+		// Check if unit is trainable
+		//System.out.println(unit);
+		//System.out.println(getTrainable());
+		//if (getTrainable().contains(unit)) {
 		// Train Unit
 		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
 		this.trainingSlots.add(u);
@@ -265,8 +269,7 @@ public class Province {
 		owner.adjustGold(trainCost);
 		// Adjust trainingslotnum
 		trainingSlotNum -= 1;
-		//int dura = unit.getDuration(1);
-		//System.out.println(dura);
+		//}
 	}
 
 	void trainFinishUnit(TrainingSlotEntry entry) {
@@ -299,7 +302,9 @@ public class Province {
 
 	void update() {
 		isConquered = false;
-		new Concatenator<ItemSlotEntry>(buildingSlots).and(trainingSlots).forEach(m -> m.update());
+		List<ItemSlotEntry> copyTrainingSlots = new ArrayList<>(trainingSlots);
+		List<ItemSlotEntry> copyBuildingSlots = new ArrayList<>(buildingSlots);
+		new Concatenator<ItemSlotEntry>(copyBuildingSlots).and(copyTrainingSlots).forEach(m -> m.update());
 		units.forEach(u -> u.update());
 	}
 

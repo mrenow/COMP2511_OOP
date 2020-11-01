@@ -62,6 +62,13 @@ public class TaxTest {
 		}
     }
 	
+	/**
+	 * #US86:
+	 * AC: Players should be able to select and change tax levels.
+	 * AC: At the start of their turn, before town wealth growth is applied and any wealth increases from built buildings are applied, Players should receive round(tax rate * province wealth) in gold.
+	 * 
+	 * @throws DataInitializationException
+	 */
 	@Test
 	public void changeTaxRate() throws DataInitializationException {
     	game = GameController.loadFromSave("src/test/testSave_wealthGen.json");
