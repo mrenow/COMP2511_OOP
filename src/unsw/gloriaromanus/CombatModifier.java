@@ -19,6 +19,10 @@ class CombatModifier{
 	void modify(CombatData engagement) {
 		method.alterEngagement(engagement, side);
 	}
+	@Override
+	public String toString() {
+		return method.toString();
+	}
 }
 
 

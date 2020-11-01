@@ -160,7 +160,6 @@ public class GameController {
 		// Create a unit with unitType
 		//List<ItemType> trainable = province.getTrainable();
 		province.trainUnit(unitType);
-		System.out.println("Failed to train unit");
 	}
 
 	// Constraints:
@@ -246,16 +245,16 @@ public class GameController {
 	 * @return
 	 */
 	public AttackInfo invade(List<Unit>attackers,Province defender){
-		Faction attackOwner = attackers.get(0).getProvince().getOwner();
+		Faction attackOwner = attackers.get(0).getOwner();
 		Battle battle = new Battle(attackers,defender);
 		AttackInfo attackInfo = battle.getResult();
 		//change owner
 		if (attackInfo==AttackInfo.WIN) {
 			attackOwner.takeProvince(defender);
 			Unit.transferArmy(attackers, defender);
-			Unit.expendMovement(attackers);
 		}
-
+		Unit.expendInvade(attackers);
+		Unit.expendMovement(attackers); // could get the province's updated list, but like ceebs, it shouldnt break anything
 		return attackInfo;
 	}
 	
@@ -334,7 +333,7 @@ public class GameController {
 			this.currentTurn = 0;	
 		}
 		
-		updateVictoryInfo();
+		// updateVictoryInfo(); // VictoryInfo not properly completed yet
 		return checkVictory();
 	}
 	private void updateVictoryInfo(){

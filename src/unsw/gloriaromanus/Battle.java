@@ -51,7 +51,7 @@ class Battle {
 
 
 	// Passed lists should be copies from the province
-	Battle(List<Unit> attackArmy, Province defendProvince) {
+	public Battle(List<Unit> attackArmy, Province defendProvince) {
 		
 		
 		
@@ -191,26 +191,38 @@ class Battle {
 		this.hasWalls = wall;
 	}
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
+		System.out.println("Skirmish Start with: ");
+		System.out.println(attackUnit.getCombatStats());
+		System.out.println(attackUnit.getCombatStats());
+		
 		// Begin engagement
 		while (tryEngagement()) {
 			
 			int attOldHealth = attackUnit.getHealth();
 			int defOldHealth = defendUnit.getHealth();
-			
+
+			System.out.println("Healths are " + attOldHealth + ", " + defOldHealth);
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 			
 			// Decide engagement type
 			boolean isRanged = tryRanged(attackUnit, defendUnit); // RANDOM (ONCE)
 			if(isRanged){
+				System.out.println("Engagement is Ranged");
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 			}
 			
+			System.out.println("Damage: ");
+			System.out.println("Attacker:");
 			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged); // RANDOM 
+
+			System.out.println("Defender:");
 			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
 			
 			// Unit died, end engagement
 			// Removal from armies is handled by inflictDamage
 			if(!(attackUnit.isAlive() && defendUnit.isAlive())) {
+
+				System.out.println("Skirmish end");
 				break;
 			}
 				
@@ -228,19 +240,32 @@ class Battle {
 			// Check for breaking
 			double attLoss = 1.0 - (double) attackUnit.getHealth() / attOldHealth;
 			double defLoss = 1.0 - (double) defendUnit.getHealth() / defOldHealth;
+			System.out.println(String.format("Losses: %.1f : %.1f", attLoss, defLoss));
+			System.out.println(String.format("Morales: %.1f : %.1f", data.getEffectiveMorale(ATTACK), data.getEffectiveMorale(DEFEND)));
+			System.out.println(String.format("Quotients: %.1f : %.1f", attLoss / defLoss,  defLoss / attLoss));
+			if (attLoss == 0 && defLoss == 0) {
+				continue;
+			}
 			double attBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(ATTACK) + attLoss / defLoss), 0.05, 1);
 			double defBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(DEFEND) + defLoss / attLoss), 0.05, 1);
 
+			System.out.println(String.format("Break chances: %.1f : %.1f", attBreakChance , defBreakChance));
 			boolean defBreaks = GlobalRandom.nextUniform() < defBreakChance; // RANDOM (ONCE) 
 			boolean attBreaks = GlobalRandom.nextUniform() < attBreakChance; // RANDOM (ONCE)
-			
+
 			if (attBreaks && defBreaks) {
 				// end whole skirmish
+				System.out.println("Both Break");
+				armies.get(ATTACK).remove(attackUnit);
+				armies.get(DEFEND).remove(defendUnit);
 				break;
 			} else if (attBreaks) {
+
+				System.out.println("Defender Breaks");
 				runBreaking(defendUnit, attackUnit, DEFEND);	// RANDOM (MANY)
 				break;
 			} else if (defBreaks) {
+				System.out.println("Attacker Breaks");
 				runBreaking(attackUnit, defendUnit, ATTACK);	// RANDOM (MANY)
 				break;
 			}
@@ -262,7 +287,7 @@ class Battle {
 	/**
 	 * Runs breaking process
 	 */
-	private void runBreaking(Unit chaseUnit, Unit routeUnit, BattleSide chaseSide) {
+	public void runBreaking(Unit chaseUnit, Unit routeUnit, BattleSide chaseSide) {
 		Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 
 		// Try engagement
@@ -291,7 +316,7 @@ class Battle {
 	/**
 	 * Handles picking units in elephants amok, CombatModifiers, damage, and killing units 
 	 */
-	private void inflictDamage(Unit aggressor, Unit victim, BattleSide aggressorSide, Concatenator<CombatModifier> combatModifiers, boolean isRanged) {
+	public void inflictDamage(Unit aggressor, Unit victim, BattleSide aggressorSide, Concatenator<CombatModifier> combatModifiers, boolean isRanged) {
     	// Elephants running amok:
 		// Late nights and a dim screen are all I've known,
 		// Every new day bringing new incorrect solution.
@@ -309,6 +334,8 @@ class Battle {
 			do {
     			victim = pickUnit(aggressorSide);
     		}while(!Objects.equals(victim,aggressor));
+
+			System.out.println("\tElephants amok with " + victim.getType());
     	}
 		// Create CombatData
 		CombatData data;
@@ -327,6 +354,13 @@ class Battle {
 		combatModifiers = combatModifiers
 			.and(aggressor.getCombatModifiers(ENGAGEMENT, aggressorSide))
 			.and(victim.getCombatModifiers(ENGAGEMENT, aggressorSide.other()));
+		System.out.print("Final modifiers: ");
+		for (CombatModifier m : combatModifiers) {
+			System.out.print(m.toString());
+			System.out.print(" ");
+		}
+		System.out.println();
+		
 		
 		combatModifiers.forEach((m) -> m.modify(data));
 		
@@ -342,15 +376,19 @@ class Battle {
 		}
 			
 		double casualties = GlobalRandom.nextGaussian() * 0.1 * damage * victim.getHealth(); // RANDOM (ONCE) (GAUSSIAN)
+		System.out.print("\tVictim " + victim.getHealth() + "->");
 		
 		casualties = MathUtil.max(0, casualties);
+		System.out.println(victim.getHealth());
+		
 		victim.damage((int)Math.round(casualties));
 		if(!victim.isAlive()) {
+			System.out.println("\tVictim died");
 			killUnit(victim);
 		}
 	}
 	
-	private void killUnit(Unit u) {
+	public void killUnit(Unit u) {
 		u.kill();
 		// Remove from armies participaing in battle
 		armies.get(ATTACK).remove(u);
@@ -374,7 +412,7 @@ class Battle {
 	 * @returns returns the input and with a ranged modifier if the engagment is ranged. 
 	 * returns the input CombatModifier Concatenator otherwise.
 	 */
-	private boolean tryRanged(Unit u1, Unit u2) {
+	public boolean tryRanged(Unit u1, Unit u2) {
 		if (u1.isRanged() && u2.isRanged()) {
 			return u1.isRanged();
 		}

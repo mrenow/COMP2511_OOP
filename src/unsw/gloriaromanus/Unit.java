@@ -115,6 +115,9 @@ public class Unit {
 		dest.addUnits(army);
 		army.forEach(u->u.province = dest);
 	}
+	static void expendInvade(Collection<Unit> army) {
+		army.forEach(u->u.canAttack = false);
+	}
 
 	public ItemType getType() {
 		return type;
@@ -173,6 +176,9 @@ public class Unit {
 
 	public Province getProvince() {
 		return province;
+	}
+	public Faction getOwner() {
+		return province.getOwner();
 	}
 	
 	public void setProvince(Province province) {

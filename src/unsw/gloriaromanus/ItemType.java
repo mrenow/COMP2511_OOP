@@ -208,7 +208,7 @@ public enum ItemType{
 		if (list == null) {
 			throw new NoSuchElementException(this.name() + " has no attribute " + name);
 		}
-		if(level >= maxLevel) {
+		if(level > maxLevel) {
 			throw new NoSuchElementException(
 					String.format("%s has max level %d, tried to access level %d",
 							this.name(),

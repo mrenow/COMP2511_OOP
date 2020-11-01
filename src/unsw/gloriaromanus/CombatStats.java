@@ -102,13 +102,13 @@ public class CombatStats {
 		this.attackBase = attack;
 	}
 	void setShieldDefense(double shieldDefense) {
-		if (shieldDefense == Double.NEGATIVE_INFINITY) {
+		if (this.shieldDefense == Double.NEGATIVE_INFINITY) {
 			return;
 		}
 		this.shieldDefense = shieldDefense;
 	}
 	void setDefenseSkill(double defenseSkill) {
-		if (defenseSkill == Double.NEGATIVE_INFINITY) {
+		if (this.defenseSkill == Double.NEGATIVE_INFINITY) {
 			return;
 		}
 		this.defenseSkill = defenseSkill;
@@ -139,4 +139,9 @@ public class CombatStats {
 	void multShieldDefense(double shieldDefense) {
 		this.shieldDefense *= shieldDefense;
 	}
+	@Override
+	public String toString() {
+		return String.format("A %.1f : A %.1f S %.1f D %.1f ", getAttack(), getArmour(), shieldDefense, defenseSkill);
+	}
+	
 }

@@ -18,67 +18,68 @@ import util.Concatenator;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
-public class Province{
+public class Province {
 	// Required
-	private String name; 
-	
+	private String name;
+
 	// Optional
 	@JsonIdentityReference(alwaysAsId = true)
-	private Faction owner = Faction.NO_ONE; 
+	private Faction owner = Faction.NO_ONE;
 
 	@JsonIdentityReference(alwaysAsId = true)
 	private Collection<Province> adjacent = new ArrayList<>();
-	
+
 	private List<Infrastructure> buildings = new ArrayList<>();
-	
+
 	// Generated every turn
 	private int townWealth = 0;
 	private TaxLevel taxLevel = TaxLevel.NORMAL_TAX;
-	
+
 	private int movCost = 4;
 	private boolean isLandlocked = false;
 	private boolean isConquered = false;
-	
+
 	private List<Unit> units = new ArrayList<>();
-	
+
 	private List<BuildingSlotEntry> buildingSlots = new ArrayList<>();
 	private List<TrainingSlotEntry> trainingSlots = new ArrayList<>();
- 
+
 	private int trainingSlotNum = 1;
 	private int buildingSlotNum = 1;
 	private int maxSlots = 1;
 	private Faction player;
-	
+
 	@JsonCreator
-	private Province(){
+	private Province() {
 	}
 
 	/*
 	 * Used for init only.
 	 */
-	void assignName(String name){
-		if(this.name == null) {
+	void assignName(String name) {
+		if (this.name == null) {
 			this.name = name;
 		}
 	}
-	
+
 	/**
 	 * Called during game initialization.
+	 * 
 	 * @return
 	 */
 	public Province(Faction owner, Collection<Province> adjacent, boolean isLandlocked) {
 		this.isLandlocked = isLandlocked;
-		this.owner = owner;	
+		this.owner = owner;
 		this.adjacent.addAll(adjacent);
 	}
-	
+
 	/**
 	 * Should not be used outside setup
 	 */
 	void addConnection(Province p) {
 		this.adjacent.add(p);
 	}
-	
+
 	/**
 	 * Should not be used outside setup
 	 */
@@ -86,122 +87,144 @@ public class Province{
 		isLandlocked = state;
 	}
 
-	public Faction getOwner() {return owner;}
-	
-	public boolean isLandlocked() {return isLandlocked;}
-	
-	public List<Province> getAdjacent() {return new ArrayList<>(adjacent);}
-	
-	public int getWealth() {return getTotalWealth();}
-	
-	public String getName() {return name;}
-	
-	public TaxLevel getTaxLevel() {return taxLevel;}
-	
-	public int getTrainingSlots() {return trainingSlotNum;}
-	
-	public int getBuildingSlots() {return buildingSlotNum;}
-	
+	public Faction getOwner() {
+		return owner;
+	}
+
+	public boolean isLandlocked() {
+		return isLandlocked;
+	}
+
+	public List<Province> getAdjacent() {
+		return new ArrayList<>(adjacent);
+	}
+
+	public int getWealth() {
+		return getTotalWealth();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public TaxLevel getTaxLevel() {
+		return taxLevel;
+	}
+
+	public int getTrainingSlots() {
+		return trainingSlotNum;
+	}
+
+	public int getBuildingSlots() {
+		return buildingSlotNum;
+	}
+
 	public int buildingWealth() {
-		int bWealth=0;
+		int bWealth = 0;
 		for (Infrastructure building : buildings) {
-			bWealth+=building.getBuildingWealth();
+			bWealth += building.getBuildingWealth();
 		}
 		return bWealth;
 	}
-	
+
 	public int getTownWealth() {
 		return townWealth;
 	}
+
 	public int getTotalWealth() {
-		return getTownWealth()+buildingWealth();
+		return getTownWealth() + buildingWealth();
 	}
 
 	/**
 	 * updateWealth of province
+	 * 
 	 * @return how much gold generated
 	 */
-	public int updateWealth(){
+	public int updateWealth() {
 		double gold = (this.townWealth + this.buildingWealth()) * this.taxLevel.getTaxRate();
 		this.townWealth += getWealthGrowth() + taxLevel.getwealthgen();
 		this.townWealth = Integer.max(townWealth, 0);
 		updateBuildingWealth();
-		int g = (int)gold;
+		int g = (int) gold;
 		double remain = gold % g;
-		if (remain>=0.5) {
-			return g+1;
+		if (remain >= 0.5) {
+			return g + 1;
 		}
 		return g;
 	}
-	private int getWealthGrowth(){
-		int wealthGrowth=0;
+
+	private int getWealthGrowth() {
+		int wealthGrowth = 0;
 		for (Infrastructure building : buildings) {
 			wealthGrowth += building.getWealthRate();
 		}
 		return wealthGrowth;
 	}
-	private void updateBuildingWealth(){
-		//TODO :add updateBuildingWealth
+
+	private void updateBuildingWealth() {
+		// TODO :add updateBuildingWealth
 	}
+
 //	Ordered list corresponding to training slots
 	public List<TrainingSlotEntry> getCurrentTraining() {
 		return this.trainingSlots;
 	}
-	
+
 //	As above. Only a single element list for milestone 2.
-	public List<BuildingSlotEntry> getCurrentConstruction(){
+	public List<BuildingSlotEntry> getCurrentConstruction() {
 		return this.buildingSlots;
 	}
-	
+
 //	Called when the unit selection menu of a province is opened, and used to select units to move.
-	public List<Unit> getUnits(){
+	public List<Unit> getUnits() {
 		return new ArrayList<>(units);
 	}
-	
+
 //	Called when displaying infrastructure
-	public List<Infrastructure> getInfrastructure(){
+	public List<Infrastructure> getInfrastructure() {
 		return buildings;
 	}
-	
+
 //	Called when province building menu is opened
-	public List<ItemType> getBuildable(){
+	public List<ItemType> getBuildable() {
 		return null;
 	}
-	
+
 //	Called when province training menu is opened
 	public List<ItemType> getTrainable() {
 		List<ItemType> trainableList = new ArrayList<>();
 		trainableList.add(ItemType.TEST_TROOP);
 		return trainableList;
 	}
-	
+
 	public int getMovCost() {
 		return movCost;
 	}
+
 	public boolean isConquered() {
 		return isConquered;
 	}
-	//public void moveUnits(List<Unit> units){this.units.add(units);}
-	
+	// public void moveUnits(List<Unit> units){this.units.add(units);}
+
 	@Override
 	public String toString() {
 		return name;
 	}
-	
+
 	/**
 	 * Sets owner. If owner is different to previous, Item slots are cleared.
 	 */
 	void changeOwner(Faction owner) {
 		System.out.println("Change owner");
-		if(owner != this.owner) {
+		if (owner != this.owner) {
 			this.owner = owner;
 			onConquered();
 		}
 	}
-	
+
 	/**
-	 * All state changes when province switches hands.
-	 * IMPORTANT: New units entering a province must only enter *after* this method is called.
+	 * All state changes when province switches hands. IMPORTANT: New units entering
+	 * a province must only enter *after* this method is called.
 	 */
 	private void onConquered() {
 		trainingSlotNum += trainingSlots.size();
@@ -212,10 +235,11 @@ public class Province{
 		taxLevel = TaxLevel.NORMAL_TAX;
 		isConquered = true;
 	}
-	
+
 	void setTaxLevel(TaxLevel taxLevel) {
 		this.taxLevel = taxLevel;
 	}
+
 	/*
 	 * Helper method. Directly adds units onto this province.
 	 * 
@@ -223,9 +247,11 @@ public class Province{
 	void addUnits(List<Unit> units) {
 		this.units.addAll(units);
 	}
+
 	void removeUnits(List<Unit> units) {
 		this.units.removeAll(units);
 	}
+
 	void removeUnit(Unit unit) {
 		this.units.remove(unit);
 	}
@@ -234,7 +260,7 @@ public class Province{
 	void loadOwner(Faction owner) {
 		this.owner = owner;
 	}
-	
+
 	/*
 	 * INFRASTRUCTURE AND TRAINING
 	 */
@@ -243,7 +269,7 @@ public class Province{
 		Infrastructure t = new Infrastructure(type, 1);
 		this.buildings.add(t);
 	}
-	
+
 	void build(ItemType type) {
 		// Start building
 		BuildingSlotEntry t = new BuildingSlotEntry(type, 1);
@@ -293,6 +319,7 @@ public class Province{
 		Unit u = new Unit(type, 1);
 		this.units.add(u);
 	}
+
 	void update() {
 		isConquered = false;
 		new Concatenator<ItemSlotEntry>(buildingSlots).and(trainingSlots).forEach(m -> m.update());
