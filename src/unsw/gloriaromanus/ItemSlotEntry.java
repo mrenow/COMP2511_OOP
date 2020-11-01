@@ -30,6 +30,7 @@ public abstract class ItemSlotEntry {
 		this.name = type.getName(level);
 		this.cost = type.getCost(level);
 		this.province = p;
+		this.turnsRemaining = type.getDuration(level);
 	}
 
 	/**
@@ -59,6 +60,7 @@ public abstract class ItemSlotEntry {
 	 * Reduces the number of turns remaining, and triggers event if remaining turns is zero.
 	 */
 	void update() {
+
 		turnsRemaining--;
 		if(turnsRemaining == 0) {
 			onFinish();

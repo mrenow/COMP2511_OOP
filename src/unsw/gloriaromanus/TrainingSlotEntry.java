@@ -18,13 +18,14 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 		super();
 		this.name = type.getName(level);
 		this.cost = type.getCost(level);
-		this.province = p;
+		this.province = p;	
+		this.turnsRemaining = type.getDuration(level);
 	}
 
 	@Override
 	void onFinish() {
 		// Spawn relevant troop in provinces
 		province.addUnit(type);
-		province.trainFinishUnit(type);
+		province.trainFinishUnit(this);
 	}
 }

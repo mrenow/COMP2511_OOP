@@ -25,7 +25,10 @@ public class TrainingTest {
     private Faction player;
 
     /**
-     * Player starting with x provinces owned, move units to adjacent province
+     * #US82:
+     * AC: This troop should be deployed in the province they were trained in.
+     * AC: Troops trained should take <Training time> turns to train.
+     * AC: Players should see the gold price for the troop subtracted from their treasury when the command to train is made.
      * 
      * @throws DataInitializationException
      * @throws Exception 
@@ -64,21 +67,26 @@ public class TrainingTest {
         assertEquals(0, p1.getTrainingSlots());
         
         // progress and ensure cavalry unit is trained.
-
         game.endTurn();
         TestUtil.assertCollectionAttributeEquals(List.of(cavalry, cavalry, cavalry), p1.getUnits(), Unit::getType);
         
         
     }
 
+    /**
+     * #US83
+     * AC: Upon cancelling, players should see the cancelled unit removed from the list of unit in production.
+     * AC: Cancelling should free up a training slot.
+     * AC: Players should be able to train a new unit on the turn that they cancel.
+     * 
+     * @throws DataInitializationException
+     */
     @Test
     public void cancelTraining() throws DataInitializationException {
         game = GameController.loadFromSave("src/test/testTraining_troop.json");
         player = game.getCurrentTurn();
         ItemType calvary = ItemType.HEAVY_CAVALRY;
         Province p1 = game.getProvince("P1");
-        // TBD
-        //TrainingSlotEntry one = TrainingSlotEntry somethingTBD;
 
         // Check for full training slots
         assertEquals(3, p1.getTrainingSlots());

@@ -204,7 +204,7 @@ public enum ItemType{
 	 * @return
 	 */
 	public int getDuration(int level) {
-		return durations.get(level);
+		return durations.get(level - 1);
 	}
 
 	/**

@@ -290,12 +290,14 @@ public class Province {
 		owner.adjustGold(trainCost);
 		// Adjust trainingslotnum
 		trainingSlotNum -= 1;
+		//int dura = unit.getDuration(1);
+		//System.out.println(dura);
 	}
 
-	void trainFinishUnit(ItemType unit) {
+	void trainFinishUnit(TrainingSlotEntry entry) {
 		// Remove unit from slot
-		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
-		this.trainingSlots.remove(u);
+		//TrainingSlotEntry u = new TrainingSlotEntry(trainingSlotEntry, 1, this);
+		this.trainingSlots.remove(entry);
 		// Adjust trainingslotnum
 		adjustTraining();
 	}
