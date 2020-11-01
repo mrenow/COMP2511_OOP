@@ -74,7 +74,7 @@ public class InitTest {
     }
     @Test
     public void testTurns() {
-    	for (int i = 0; i < 10; i ++) {
+    	for (int i = 200; i < 210; i ++) {
 	     	assertEquals(i, game.getYear());
     		assertNull(game.endTurn());
 	    	assertEquals(FactionType.GAUL, game.getCurrentTurn().getType());

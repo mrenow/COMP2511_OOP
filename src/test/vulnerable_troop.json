@@ -12,7 +12,7 @@
 	"morale" : 1000, // never routes
 	// Ranged Armour: 4
 	// Melee Armour 7
-	"armour" : 2,
+	"armour" : 0,
 	"defenseSkill" : 0,
 	"shieldDefense" : 0,
 	

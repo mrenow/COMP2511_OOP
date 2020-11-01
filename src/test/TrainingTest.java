@@ -34,7 +34,7 @@ public class TrainingTest {
     public void basicTraining() throws DataInitializationException {
         game = GameController.loadFromSave("src/test/testTraining_troop.json");
         player = game.getCurrentTurn();
-        ItemType calvary = ItemType.TEST_TROOP;
+        ItemType cavalry = ItemType.TEST_TROOP;
         Province p1 = game.getProvince("P1");
 
         
@@ -44,7 +44,7 @@ public class TrainingTest {
         assertEquals(3, p1.getTrainingSlots());
 
         // Now, train calvary
-        game.trainUnit(p1, calvary);
+        game.trainUnit(p1, cavalry);
         //System.out.println("im here");
         
 
@@ -53,16 +53,22 @@ public class TrainingTest {
         assertEquals(2, p1.getTrainingSlots());
 
         //
-        game.trainUnit(p1, calvary);
+        game.trainUnit(p1, cavalry);
 
         assertEquals(40, player.getGold());
         assertEquals(1, p1.getTrainingSlots());
 
-        game.trainUnit(p1, calvary);
+        game.trainUnit(p1, cavalry);
 
         assertEquals(30, player.getGold());
         assertEquals(0, p1.getTrainingSlots());
+        
+        // progress and ensure cavalry unit is trained.
 
+        game.endTurn();
+        TestUtil.assertCollectionAttributeEquals(List.of(cavalry, cavalry, cavalry), p1.getUnits(), Unit::getType);
+        
+        
     }
 
     @Test
@@ -87,6 +93,9 @@ public class TrainingTest {
 
         // Check training slot back to full
         assertEquals(3, p1.getTrainingSlots());
+        // Check that troop does not train
+        game.endTurn();
+        assertEquals(0, p1.getUnits().size());
 
 
     }

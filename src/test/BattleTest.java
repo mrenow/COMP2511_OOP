@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unsw.gloriaromanus.AttackInfo;
+import unsw.gloriaromanus.Battle;
 import unsw.gloriaromanus.Faction;
 import unsw.gloriaromanus.GameController;
 import unsw.gloriaromanus.GlobalRandom;
@@ -23,15 +24,21 @@ public class BattleTest {
     private Faction rome;
     private Faction gaul;
 
-    private List<Unit> allUnits;
-    // P1, P4 have 4 default units each
+    private List<Unit> romanUnits;
+    private List<Unit> gallicUnits;
+    
+    /*
+     * GU(0), RU(0) : invincible troops, should always win, but should draw against each other.
+     * 
+     * 
+     */
     @BeforeEach
     public void setupGame() throws Exception{
     	game = GameController.loadFromSave("src/test/testSave_Battle.json");
     	rome = game.getFactions().get(0);
     	gaul = game.getFactions().get(1);
-    	allUnits = P(1).getUnits();
-    	allUnits.addAll(P(4).getUnits());
+    	romanUnits = P(1).getUnits();
+    	gallicUnits = P(4).getUnits();
     }
     
     @Test
@@ -53,7 +60,6 @@ public class BattleTest {
     	assertIterableEquals(List.of(RU(1)), P(3).getUnits()); 
     	
     }
-    
 
     @Test
     public void basicEngagement() {
@@ -71,31 +77,54 @@ public class BattleTest {
     	assertIterableEquals(List.of(RU(0)), P(2).getUnits());
     	
     	game.move(List.of(GU(0)), P(3));
-    	assertIterableEquals(List.of(P(2)),  game.getAttackable(P(3)));
+    	//assertIterableEquals(List.of(P(2)),  game.getAttackable(P(3)));
     	assertEquals(AttackInfo.DRAW, game.invade(List.of(GU(0)), P(2)));
     	assertTrue(RU(0).isAlive());
     	assertTrue(GU(0).isAlive());
     	assertIterableEquals(List.of(GU(0)), P(3).getUnits());
     	assertIterableEquals(List.of(RU(0)), P(2).getUnits());
-    	
+    	//System.out.println(GlobalRandom.getLog());
     	// Movement points of G0 should be 0.
     	assertEquals(0,GU(0).getMovPoints());
     	
+    	game.endTurn();
+
+    	game.move(List.of(RU(0)), P(1));
+    	// get ready to curbstomp two eagle units
+    	game.move(List.of(RU(4),RU(5)), P(2));
+    	game.endTurn();
+   
+    	assertEquals(AttackInfo.WIN, game.invade(List.of(GU(0)), P(2)));
+
+    	assertFalse(RU(4).isAlive());
+    	assertFalse(RU(5).isAlive());
+    	assertIterableEquals(List.of(P(2)),rome.getLostEagleProvinces());
+    	assertEquals(2, rome.getNumLostEagles());
     	
+    }
+    
+    @Test
+    public void basicRawBattle() {
+    	GlobalRandom.init();
+    	Battle b  = new Battle(List.of(RU(0)), List.of(GU(4)));
+    	
+    	AttackInfo result = b.getResult();
+    	b.printLog(System.out);
     	
     	
     	
     }
+    
 
 	private Province P(int index) {
 		return game.getProvince("P" + index);
 	}	
 	
 	private Unit RU(int index) {
-		return allUnits.get(index);
+		return romanUnits.get(index);
 	}
 	private Unit GU(int index) {
-		return allUnits.get(index + 4);
+		return gallicUnits.get(index);
 	}
 	
 	@AfterEach
