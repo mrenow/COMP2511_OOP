@@ -27,6 +27,20 @@ public class TaxTest {
     /**
      * one player with 100 gold, four provinces each with 100 wealth and different tax levels.
      * See file for more detailed starting conditions.
+     * #86
+     * AC: Players should be able to select the following tax levels:
+     * 	Low tax:
+     * 		+10 town-wealth growth per turn for the province, tax rate = 10%
+     * 	Normal tax:
+     * 		No effect on per turn town-wealth growth, tax rate = 15%
+	 * 	High tax:
+	 * 		-10 town-wealth growth per turn for the province (i.e. 10 gold loss to wealth per turn), tax rate = 20%
+	 * 	Very high tax:
+	 * 		-30 town-wealth growth per turn for the province, tax rate = 25%, -1 morale for all soldiers residing in the province
+	 * AC: At the start of their turn, before town wealth growth is applied and any wealth increases from built buildings are applied, Players should receive round(tax rate * province wealth) in gold.
+     * #
+     * AC: Wealth growth should add / subtract from / to the province’s wealth every turn.
+     * AC: Negative town wealth growth should never reduce a province’s wealth below its building wealth.
      * @throws DataInitializationException 
      * @throws Exception
      */
@@ -62,6 +76,11 @@ public class TaxTest {
 		}
     }
 	
+	/**
+	 * Testing that tax levels can be set many times on one turn.
+	 * #86
+	 * AC: Players should be able to select the following tax levels: low tax, normal tax, high tax and very high tax
+	 */
 	@Test
 	public void changeTaxRate() throws DataInitializationException {
     	game = GameController.loadFromSave("src/test/testSave_wealthGen.json");
@@ -79,6 +98,14 @@ public class TaxTest {
 		game.endTurn();
 		assertEquals(50, pVeryHigh.getWealth());
 	}
+	
+	/**
+	 * #85
+	 * AC: Provinces should have a base wealth equal to the contributions from buildings.
+	 * AC: Wealth growth should add / subtract from / to the province’s wealth every turn.
+	 * Negative town wealth growth should never reduce a province’s wealth below its building wealth.
+	 * @throws DataInitializationExceptio
+	 */
 	public void wealthBuildings() throws DataInitializationException {
     	game = GameController.loadFromSave("src/test/testSave_wealthGen2.json");
     	player = game.getCurrentTurn(); 

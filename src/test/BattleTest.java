@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -31,7 +33,7 @@ public class BattleTest {
 
     private List<Unit> romanUnits;
     private List<Unit> gallicUnits;
-    
+    private String tempPath = "src/test/tempFile.json";
     /*
      * GU(0), RU(0) : invincible troops, should always win, but should draw against each other.
      * 
@@ -73,7 +75,8 @@ public class BattleTest {
     	game.move(List.of(RU(0)), P(2));
     	game.endTurn();
     	game.move(List.of(GU(1)), P(3));
-    	
+    	assertTrue(GU(1).canAttack());
+    	assertIterableEquals(game.getAttackable(List.of(GU(1))), List.of(P(2)));
     	// Face off:
     	assertEquals(AttackInfo.LOSE, game.invade(List.of(GU(1)), P(2)));
     	assertFalse(GU(1).isAlive());
@@ -86,6 +89,10 @@ public class BattleTest {
     	assertEquals(AttackInfo.DRAW, game.invade(List.of(GU(0)), P(2)));
     	assertTrue(RU(0).isAlive());
     	assertTrue(GU(0).isAlive());
+    	// Unit which has attacked cannot attack again.
+    	assertFalse(GU(0).canAttack());
+    	assertIterableEquals(game.getAttackable(List.of(GU(0))), List.of());
+    	
     	assertIterableEquals(List.of(GU(0)), P(3).getUnits());
     	assertIterableEquals(List.of(RU(0)), P(2).getUnits());
     	//System.out.println(GlobalRandom.getLog());
@@ -95,7 +102,7 @@ public class BattleTest {
     	game.endTurn();    	
     }
     @Test 
-    public void legionaryEagleDebuff() {
+    public void legionaryEagleDebuff() throws IOException, DataInitializationException {
     	GlobalRandom.init(1088668973864283015L);
     	// get ready to curbstomp two eagle units
     	game.move(List.of(RU(4),RU(5)), P(2));
@@ -103,12 +110,20 @@ public class BattleTest {
     	game.move(List.of(GU(0)), P(3));
    
     	assertEquals(AttackInfo.WIN, game.invade(List.of(GU(0)), P(2)));
-
+    
+    	// eagles are lost
     	assertFalse(RU(4).isAlive());
     	assertFalse(RU(5).isAlive());
     	assertIterableEquals(List.of(P(2)),rome.getLostEagleProvinces());
     	assertEquals(2, rome.getNumLostEagles());
     	
+    	// test that saving can handle eagles
+    	game.saveGame(tempPath);
+    	
+    	GameController game2 = GameController.loadFromSave(tempPath);
+    	Faction rome2 = game2.getFactions().get(0);
+    	assertIterableEquals(List.of(game2.getProvince("P2")),rome2.getLostEagleProvinces());
+    	assertEquals(2, rome2.getNumLostEagles());
     	
     	game.endTurn();
     	
@@ -147,8 +162,8 @@ public class BattleTest {
 	}
 	
 	@AfterEach
-	public void cleanUp() {
-		
+	public void cleanUp() throws IOException {
+		//Files.delete(Path.of(tempPath));
 		
 	}
 	// used to set up load files

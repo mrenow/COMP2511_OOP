@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -100,8 +101,12 @@ public class InitTest {
         	int numStartProvinces = (int)(GameController.STARTING_DENSITY*game.getNumProvinces()/2);
         	assertEquals(numStartProvinces, rome.getNumProvinces());
         	assertEquals(numStartProvinces, gaul.getNumProvinces());
+        	for (Province p : game.getProvinces(null)) {
+        		if(p.getOwner() != Faction.NO_ONE) {
+        			continue;
+        		}
+        		assertFalse(p.getUnits().isEmpty());
+        	}
     	}
     }
-    
-    
 }
