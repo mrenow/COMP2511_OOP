@@ -42,7 +42,6 @@ public class CombatStats {
 	
 	public CombatStats(double armour, double attack, double defenseSkill,
 			double shieldDefense) {
-		super();
 		this.armourBase = armour;
 		this.attackBase = attack;
 		this.defenseSkill = defenseSkill;
@@ -52,13 +51,6 @@ public class CombatStats {
 	public CombatStats(CombatStats c) {
 		this(c.armourBase, c.attackBase, c.defenseSkill, c.shieldDefense);
 	}
-	public CombatStats(ItemType type, int level) {
-		this.armourBase = ((Integer)type.getAttribute("armour", level)).doubleValue();
-		this.attackBase = ((Integer)type.getAttribute("attack", level)).doubleValue();
-		this.defenseSkill = ((Integer)type.getAttribute("defenseSkill", level)).doubleValue();
-		this.shieldDefense = ((Integer)type.getAttribute("shieldDefense", level)).doubleValue();
-	}
-	
 	
 	
 	public double getArmour() {

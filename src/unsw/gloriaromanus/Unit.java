@@ -74,12 +74,39 @@ public class Unit {
 		this.morale = ((Integer) type.getAttribute("morale", level)).doubleValue();
 		this.speed = ((Integer) type.getAttribute("speed", level)).doubleValue();
 		
-		this.baseCharacteristic = new CombatStats(this.type, this.level);
 		this.movPoints = this.maxMovPoints;
 		
-		if(unitClass == UnitClass.MELEE_INFANTRY) {
-			addCombatModifier(CombatModifierMethod._SHIELD_CHARGE);
+		double armour = ((Integer)type.getAttribute("armour", level)).doubleValue();
+		double attack = ((Integer)type.getAttribute("attack", level)).doubleValue();
+		double defenseSkill = ((Integer)type.getAttribute("defenseSkill", level)).doubleValue();
+		double shieldDefense = ((Integer)type.getAttribute("shieldDefense", level)).doubleValue();
+		
+		
+		switch(type) {
+		case BERSERKER:
+			armour = Double.NEGATIVE_INFINITY;
+			this.morale = Double.POSITIVE_INFINITY;
+			break;
+		default:
+			break;
 		}
+		
+		switch(unitClass) {
+		case MELEE_INFANTRY:
+			addCombatModifier(CombatModifierMethod._SHIELD_CHARGE);
+			break;
+		case MELEE_CAVALRY:
+			addCombatModifier(CombatModifierMethod._HEROIC_CHARGE_COMBAT);
+			addMoraleModifier(MoraleModifierMethod._HEROIC_CHARGE_MORALE);
+			break;
+		case ARTILLERY:
+			addCombatModifier(CombatModifierMethod._ARTILLERY);
+			break;
+		default:
+			break;
+		}
+		
+		this.baseCharacteristic = new CombatStats(armour, attack, defenseSkill, shieldDefense);
 
 		// add remaining modifiers
 		// Supports multiple modifiers

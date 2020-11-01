@@ -3,6 +3,8 @@ package unsw.gloriaromanus;
 import static unsw.gloriaromanus.ActiveType.*;
 import static unsw.gloriaromanus.BattleSide.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -38,7 +40,8 @@ public class Battle {
 	 * See Battle.tryEngagement().
 	 */
 	
-	private ProcessLogger logger = new ProcessLogger("Battle:") ;
+	private ProcessLogger logger = new ProcessLogger("Battle:");
+	
 	private int numEngagements = 0;
 	private Map<BattleSide, Integer> numCasualties = new EnumMap<>(BattleSide.class);
 	// record in attackinfo
@@ -52,6 +55,7 @@ public class Battle {
 
 
 	// Passed lists should be copies from the province
+	// System is designed to modify units only. Any province access should occur at a higher level.
 	public Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
 		
 
@@ -122,6 +126,13 @@ public class Battle {
 				logger.log(ste.toString());
 			}
 			System.err.println("An error occured. see log for details");
+			try {
+				printLog(new PrintStream(new File("src/test/battle_error.log")));
+			} catch (FileNotFoundException e1) {
+				System.err.println("Couldnt write to error file.");
+				printLog(System.out);
+				e1.printStackTrace();
+			}
 		}finally {
 			logger.log("Run complete.");
 		}
@@ -151,6 +162,10 @@ public class Battle {
 	}
 	public List<Unit> getDeadUnits(BattleSide side) {
 		return deadUnits.get(side);
+	}
+	
+	public int getNumAttemptedEngagements() {
+		return numEngagements;
 	}
 	
 
@@ -358,11 +373,11 @@ public class Battle {
 			double routeChance = MathUtil.max(0.5 + 0.1 * (routeUnit.getSpeed() - chaseUnit.getSpeed()), 0.1);
 			logger.out();
 			
+			
 			// unit routes
 			if(GlobalRandom.nextUniform() < routeChance) { // RANDOM (ONCE)
 				// remove unit from army.
 				route(routeUnit, chaseSide.other());
-				logger.log("Victim Escapes");
 				// TODO log route? ??? or dont
 				return;
 			}
@@ -382,7 +397,7 @@ public class Battle {
 		// And am I a better person for it?
 		// The worst part is I may never know.
 
-		if(aggressor.getType() == ItemType.ELEPHANTS && GlobalRandom.nextUniform() < 0.1 && armies.get(aggressorSide).size() != 1){ // RANDOM (ONCE)
+		if(aggressor.getType() == ItemType.ELEPHANTS && GlobalRandom.nextUniform() < 0.1 && armies.get(aggressorSide).size() > 1){ // RANDOM (ONCE)
     		// Ensuring that dumb elephant does not attack itself
 			// (As much as I would like it to)
 			// This is fine right?

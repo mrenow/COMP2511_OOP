@@ -122,7 +122,7 @@ public class Faction {
 	void takeProvince(Province p) {
 		p.getOwner().removeProvince(p);
 		p.changeOwner(this);
-		this.redeemProvince(p);
+		redeemProvince(p);
 		provinces.add(p);
 	}
 
