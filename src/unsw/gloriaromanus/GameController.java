@@ -1,5 +1,7 @@
 package unsw.gloriaromanus;
 
+import static unsw.gloriaromanus.BattleSide.DEFEND;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import org.geojson.Point;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+import util.Concatenator;
 import util.MappingIterable;
 import util.MathUtil;
 
@@ -246,10 +249,31 @@ public class GameController {
 	 */
 	public AttackInfo invade(List<Unit>attackers,Province defender){
 		Faction attackOwner = attackers.get(0).getOwner();
-		Battle battle = new Battle(attackers,defender);
+		Faction defendOwner = defender.getOwner();
+		Battle battle = new Battle(attackers, defender.getUnits());
+		battle.setNumEagles(BattleSide.ATTACK, attackOwner.getNumLostEagles());
+		battle.setNumEagles(BattleSide.DEFEND, defendOwner.getNumLostEagles());
+		int defNumEagles = 0;
+		for (Unit u  : defender.getUnits()) {
+			if(u.getType() == ItemType.ROMAN_LEGIONARY) {
+				defNumEagles++;
+			}
+		}
+		
 		AttackInfo attackInfo = battle.getResult();
-		//change owner
-		if (attackInfo==AttackInfo.WIN) {
+		
+		// done after the battle so battle can function without province information.
+		for (Unit u : new Concatenator<>(attackers,defender.getUnits())) {
+			if(!u.isAlive()) {
+				u.kill();		
+			}
+		}
+		
+		// After attackinfo is assigned
+		// if the current province is taken, lost eagles are assigned to this province
+		if(attackInfo == AttackInfo.WIN) {
+			defender.putLostEagles(defNumEagles);
+			// Finally, change owner and move armies
 			attackOwner.takeProvince(defender);
 			Unit.transferArmy(attackers, defender);
 		}

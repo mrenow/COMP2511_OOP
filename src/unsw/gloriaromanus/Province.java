@@ -325,4 +325,9 @@ public class Province {
 		new Concatenator<ItemSlotEntry>(buildingSlots).and(trainingSlots).forEach(m -> m.update());
 		units.forEach(u -> u.update());
 	}
+
+	public void putLostEagles(int numEagles) {
+		owner.putLostEagles(this, numEagles);
+		
+	}
 }

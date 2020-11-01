@@ -3,6 +3,7 @@ package unsw.gloriaromanus;
 import static unsw.gloriaromanus.ActiveType.*;
 import static unsw.gloriaromanus.BattleSide.*;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -33,35 +34,27 @@ class Battle {
 	 * this number to 201 and resulting in a draw.
 	 * See Battle.tryEngagement().
 	 */
+	
+	private ProcessLogger logger = new ProcessLogger("Battle:") ;
 	private int numEngagements = 0;
 	// record in attackinfo
 	private AttackInfo attackInfo;
 
-	// data for setup a engagement
-	private Unit attackUnit;
-	private Unit defendUnit;
-	
-	private Faction attackFaction;
-	private Faction defendFaction;
-	private Province attackProvince;
-	private Province defendProvince;
-	
 	private Iterable<MoraleModifier> moraleSupport;
 	private Iterable<CombatModifier> combatSupport;
+	private Repeat<MoraleModifier> attEagleDebuff;
+	private Repeat<MoraleModifier> defEagleDebuff;
+	
 
 
 	// Passed lists should be copies from the province
-	public Battle(List<Unit> attackArmy, Province defendProvince) {
+	public Battle(List<Unit> attackArmy, List<Unit> defendArmy) {
 		
 		
 		
 		armies.put(ATTACK, new ArrayList<>(attackArmy));
-		armies.put(DEFEND, new ArrayList<>(defendProvince.getUnits()));
-		
-		attackProvince = attackArmy.get(0).getProvince();
-		attackFaction = attackProvince.getOwner();
-		defendFaction = defendProvince.getOwner();
-		
+		armies.put(DEFEND, new ArrayList<>(defendArmy));
+	
 
 		//this.attackInfo = new AttackInfo();
 		// Get support modifies from both armies
@@ -78,11 +71,10 @@ class Battle {
 		Iterable<Iterable<MoraleModifier>> defMoraleSupport = 
 				new MappingIterable<>(armies.get(DEFEND), (Unit u) -> u.getMoraleModifiers(SUPPORT, DEFEND));
 		
-		// Lost eagles will be constant
-		Iterable<MoraleModifier> attEagleDebuff =
-				new Repeat<>(ATTACKER_LOST_EAGLE, attackFaction.getNumLostEagles());
-		Iterable<MoraleModifier> defEagleDebuff =
-				new Repeat<>(DEFENDER_LOST_EAGLE, defendFaction.getNumLostEagles());  
+		
+		// init to zero for now.
+		attEagleDebuff = new Repeat<>(ATTACKER_LOST_EAGLE, 0);
+		defEagleDebuff = new Repeat<>(DEFENDER_LOST_EAGLE, 0);  
 		
 		this.moraleSupport = new Concatenator<MoraleModifier>(
 					attMoraleSupport)
@@ -91,23 +83,26 @@ class Battle {
 				.and(defEagleDebuff);
 		
 	}
+	
+	public void setNumEagles(BattleSide side, int val) {
+		switch(side) {
+		case ATTACK:
+			attEagleDebuff.setNum(val);
+			break;
+		case DEFEND:
+			defEagleDebuff.setNum(val);
+			break;
+		}
+	}
 
 	public AttackInfo getResult() {
 	
-		int defNumEagles = 0;
-		for (Unit u  : armies.get(DEFEND)) {
-			if(u.getType() == ItemType.ROMAN_LEGIONARY) {
-				defNumEagles++;
-			}
-		}
-	
+
 		while (!isBattleEnd()) {
 			// setupengagement data for unit
-			setUp();
-			
-			
+
 			// create skirmish
-			runSkirmish(attackUnit, defendUnit);
+			runSkirmish(pickUnit(ATTACK), pickUnit(DEFEND));
 			
 			// checkresult and do other stuff
 			//
@@ -118,27 +113,14 @@ class Battle {
 			this.attackInfo = AttackInfo.DRAW;
 		}
 		
-		// After attackinfo is assigned
-		// if the current province is taken
-		if(this.attackInfo == AttackInfo.WIN) {
-			defendFaction.putLostEagles(defendProvince, defNumEagles);
-		}
+
 		
 		return this.attackInfo;
 	}
-
-	private void setUp() {
-		// read in buffs
-		// TODO
-		// random choose two units
-		this.attackUnit = pickUnit(ATTACK); // RANDOM (ONCE)
-		this.defendUnit = pickUnit(DEFEND); // RANDOM (ONCE)
-//        this.aData = new CombatData();
-//        this.dData = new CombatData();
-		// setupdata
-
-		// do some change to data
+	public void printLog(PrintStream out) {
+		out.println(logger);
 	}
+
 
 	/**
 	 * pick a unit from Unit lists
@@ -191,38 +173,42 @@ class Battle {
 		this.hasWalls = wall;
 	}
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
-		System.out.println("Skirmish Start with: ");
-		System.out.println(attackUnit.getCombatStats());
-		System.out.println(attackUnit.getCombatStats());
-		
+		logger.log("Skirmish Start with:");
+		logger.into();
+			logger.log("Attacker: ", attackUnit.getCombatStats());
+			logger.log("Defender: ", attackUnit.getCombatStats());
+		logger.out();
 		// Begin engagement
 		while (tryEngagement()) {
 			
+			logger.log("Engagement:");
+			logger.into();
 			int attOldHealth = attackUnit.getHealth();
 			int defOldHealth = defendUnit.getHealth();
 
-			System.out.println("Healths are " + attOldHealth + ", " + defOldHealth);
+			logger.log("Healths are " + attOldHealth + " : " + defOldHealth);
 			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 			
 			// Decide engagement type
 			boolean isRanged = tryRanged(attackUnit, defendUnit); // RANDOM (ONCE)
 			if(isRanged){
-				System.out.println("Engagement is Ranged");
+				logger.log("Ranged Engagment");
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 			}
 			
-			System.out.println("Damage: ");
-			System.out.println("Attacker:");
+			logger.log("Damage: ");
+			logger.into();
+			logger.log("Attacker:");
 			inflictDamage(attackUnit, defendUnit, ATTACK, combatModifiers, isRanged); // RANDOM 
 
-			System.out.println("Defender:");
+			logger.log("Defender:");
 			inflictDamage(defendUnit, attackUnit, DEFEND, combatModifiers, isRanged);
-			
+			logger.out();
 			// Unit died, end engagement
 			// Removal from armies is handled by inflictDamage
 			if(!(attackUnit.isAlive() && defendUnit.isAlive())) {
-
-				System.out.println("Skirmish end");
+				logger.out();
+				logger.log("Skirmish end");
 				break;
 			}
 				
@@ -236,36 +222,38 @@ class Battle {
 					attackUnit.getMoraleModifiers(ENGAGEMENT, ATTACK));
 			moraleModifiers.forEach(m->m.modify(data));
 			
+			logger.log("Morale Calculations");
+			logger.into();
 			
 			// Check for breaking
 			double attLoss = 1.0 - (double) attackUnit.getHealth() / attOldHealth;
 			double defLoss = 1.0 - (double) defendUnit.getHealth() / defOldHealth;
-			System.out.println(String.format("Losses: %.1f : %.1f", attLoss, defLoss));
-			System.out.println(String.format("Morales: %.1f : %.1f", data.getEffectiveMorale(ATTACK), data.getEffectiveMorale(DEFEND)));
-			System.out.println(String.format("Quotients: %.1f : %.1f", attLoss / defLoss,  defLoss / attLoss));
+			logger.log(String.format("Losses: %.1f : %.1f", attLoss, defLoss) +
+					String.format("\t Morales: %.1f : %.1f", data.getEffectiveMorale(ATTACK), data.getEffectiveMorale(DEFEND)));
 			if (attLoss == 0 && defLoss == 0) {
 				continue;
 			}
 			double attBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(ATTACK) + attLoss / defLoss), 0.05, 1);
 			double defBreakChance = MathUtil.constrain(1.0 - 0.1 * (data.getEffectiveMorale(DEFEND) + defLoss / attLoss), 0.05, 1);
 
-			System.out.println(String.format("Break chances: %.1f : %.1f", attBreakChance , defBreakChance));
+			logger.log(String.format("Break chances: %.1f : %.1f", attBreakChance , defBreakChance));
 			boolean defBreaks = GlobalRandom.nextUniform() < defBreakChance; // RANDOM (ONCE) 
 			boolean attBreaks = GlobalRandom.nextUniform() < attBreakChance; // RANDOM (ONCE)
-
+			
+			logger.out();
 			if (attBreaks && defBreaks) {
 				// end whole skirmish
-				System.out.println("Both Break");
+				logger.log("Both Break");
 				armies.get(ATTACK).remove(attackUnit);
 				armies.get(DEFEND).remove(defendUnit);
 				break;
 			} else if (attBreaks) {
 
-				System.out.println("Defender Breaks");
+				logger.log("Defender Breaks");
 				runBreaking(defendUnit, attackUnit, DEFEND);	// RANDOM (MANY)
 				break;
 			} else if (defBreaks) {
-				System.out.println("Attacker Breaks");
+				logger.log("Attacker Breaks");
 				runBreaking(attackUnit, defendUnit, ATTACK);	// RANDOM (MANY)
 				break;
 			}
@@ -288,11 +276,12 @@ class Battle {
 	 * Runs breaking process
 	 */
 	public void runBreaking(Unit chaseUnit, Unit routeUnit, BattleSide chaseSide) {
-		Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 
 		// Try engagement
 		while(tryEngagement()) {
 			boolean isRanged = tryRanged(chaseUnit, routeUnit); // RANDOM (ONCE)
+			
+			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
 			if(isRanged){
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 			}
@@ -335,7 +324,7 @@ class Battle {
     			victim = pickUnit(aggressorSide);
     		}while(!Objects.equals(victim,aggressor));
 
-			System.out.println("\tElephants amok with " + victim.getType());
+			logger.log("\tElephants amok with " + victim.getType());
     	}
 		// Create CombatData
 		CombatData data;
@@ -354,12 +343,12 @@ class Battle {
 		combatModifiers = combatModifiers
 			.and(aggressor.getCombatModifiers(ENGAGEMENT, aggressorSide))
 			.and(victim.getCombatModifiers(ENGAGEMENT, aggressorSide.other()));
-		System.out.print("Final modifiers: ");
+		StringBuilder modifierString = new StringBuilder();
 		for (CombatModifier m : combatModifiers) {
-			System.out.print(m.toString());
-			System.out.print(" ");
+			modifierString.append(m.toString());
+			modifierString.append(" ");
 		}
-		System.out.println();
+		logger.log("Final Modifiers: ", modifierString);
 		
 		
 		combatModifiers.forEach((m) -> m.modify(data));
@@ -376,26 +365,19 @@ class Battle {
 		}
 			
 		double casualties = GlobalRandom.nextGaussian() * 0.1 * damage * victim.getHealth(); // RANDOM (ONCE) (GAUSSIAN)
-		System.out.print("\tVictim " + victim.getHealth() + "->");
-		
+		int oldHealth = victim.getHealth();
 		casualties = MathUtil.max(0, casualties);
-		System.out.println(victim.getHealth());
 		
 		victim.damage((int)Math.round(casualties));
+		
+		logger.log("Casualties: ", oldHealth + "->" +  victim.getHealth());
+		
 		if(!victim.isAlive()) {
-			System.out.println("\tVictim died");
-			killUnit(victim);
+			logger.log("Victim died");
+			armies.get(aggressorSide.other()).remove(victim);
 		}
 	}
 	
-	public void killUnit(Unit u) {
-		u.kill();
-		// Remove from armies participaing in battle
-		armies.get(ATTACK).remove(u);
-		armies.get(DEFEND).remove(u);
-		// TODO log casualty
-
-	}
 	/**
 	 * Decide whether we have exceeded the engagement quota
 	 * @return
@@ -429,6 +411,66 @@ class Battle {
 		rangedChance = MathUtil.constrain(rangedChance, 0.05, 0.95);
 		return GlobalRandom.nextUniform() < rangedChance; // RANDOM (ONCE)
 	}
+	
 
+}
 
+class ProcessLogger{
+	private StringBuilder log;
+	private int depth = 0;
+	ProcessLogger(String s){
+		log = new StringBuilder(s);
+		log.append("\n\n");
+	}
+	public void into() {
+		depth ++;
+		
+	}
+	public void out() {
+		depth --;	
+	}
+	
+	
+	
+	public <T> T log(T val) {
+		log.append("\t".repeat(depth));
+		log.append(val);
+		log.append("\n");
+		return val;
+	}
+	
+	public <T> T log(String name, T val) {
+		log.append("\t".repeat(depth));
+		log.append(name);
+		log.append(" : ");	
+		log.append(val);
+		log.append("\n");
+		return val;
+	}
+	public <T> void log(String name, T ... vals) {
+		log.append("\t".repeat(depth));
+		for (T val : vals) {
+			log.append(val);
+			log.append(" ");
+		}
+		log.append("\n");
+	}
+	
+	public int log(String name, int val) {
+		log.append("\t".repeat(depth));
+		log.append(val);
+		return val;
+	}
+	
+	public double log(String name, double val) {
+		log.append("\t".repeat(depth));
+		log.append(val);
+		return val;
+	}
+	
+	@Override
+	public String toString() {
+		return log.toString();
+	}
+	
 }
