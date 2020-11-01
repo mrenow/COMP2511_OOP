@@ -91,7 +91,6 @@ public class BattleTest {
     	assertTrue(GU(0).isAlive());
     	// Unit which has attacked cannot attack again.
     	assertFalse(GU(0).canAttack());
-    	assertIterableEquals(game.getAttackable(List.of(GU(0))), List.of());
     	
     	assertIterableEquals(List.of(GU(0)), P(3).getUnits());
     	assertIterableEquals(List.of(RU(0)), P(2).getUnits());

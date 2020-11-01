@@ -38,7 +38,7 @@ public class TaxTest {
 	 * 	Very high tax:
 	 * 		-30 town-wealth growth per turn for the province, tax rate = 25%, -1 morale for all soldiers residing in the province
 	 * AC: At the start of their turn, before town wealth growth is applied and any wealth increases from built buildings are applied, Players should receive round(tax rate * province wealth) in gold.
-     * #
+     * #US85
      * AC: Wealth growth should add / subtract from / to the province’s wealth every turn.
      * AC: Negative town wealth growth should never reduce a province’s wealth below its building wealth.
      * @throws DataInitializationException 

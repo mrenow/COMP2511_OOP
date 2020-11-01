@@ -48,7 +48,7 @@
       "health" : 1,
       "maxMovPoints" : 1,
       "movPoints" : 1,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
       "morale" : 1000.0
     }, {
@@ -73,7 +73,7 @@
       "health" : 2,
       "maxMovPoints" : 2,
       "movPoints" : 2,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
       "morale" : 1000.0
     }, {
@@ -98,7 +98,7 @@
       "health" : 3,
       "maxMovPoints" : 3,
       "movPoints" : 3,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
       "morale" : 1000.0
     }, {
@@ -123,7 +123,7 @@
       "health" : 4,
       "maxMovPoints" : 4,
       "movPoints" : 4,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
       "morale" : 1000.0
     } ],

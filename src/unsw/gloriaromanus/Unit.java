@@ -51,7 +51,7 @@ public class Unit {
 	private int health;
 	private int maxMovPoints;
 	private int movPoints;
-	private boolean canAttack;
+	private boolean canAttack = true;
 	private double speed;
 	private double morale;
 	
