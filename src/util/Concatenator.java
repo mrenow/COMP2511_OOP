@@ -27,12 +27,12 @@ public class Concatenator<T> implements Iterable<T>{
 	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3) {
 		this.iterables = List.of(i1, i2, i3);
 	}
-	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3, Iterable<? extends T> i4) {
-		this.iterables = List.of(i1, i2, i3, i4);
-	}
-	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3, Iterable<? extends T> i4, Iterable<? extends T> i5) {
-		this.iterables = List.of(i1, i2, i3, i4, i5);
-	}
+//	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3, Iterable<? extends T> i4) {
+//		this.iterables = List.of(i1, i2, i3, i4);
+//	}
+//	public Concatenator(Iterable<? extends T> i1, Iterable<? extends T> i2, Iterable<? extends T> i3, Iterable<? extends T> i4, Iterable<? extends T> i5) {
+//		this.iterables = List.of(i1, i2, i3, i4, i5);
+//	}
 	
 	@SafeVarargs
 	public Concatenator(Iterable<? extends T> ... iterables) {
@@ -79,18 +79,19 @@ public class Concatenator<T> implements Iterable<T>{
 			}
 		};
 	}
-	public static void main(String[] args) {
-		List<String> a = List.of("1", "2", "3");
-		List<String> b = List.of("1", "2", "adsf");
-		List<String> c = List.of("1", "dd", "3");
-		List<String> d = List.of("1", "asdf", "3");
-		List<String> e = List.of("32", "2", "yee", "haw");
-		
-		for (String s : new Concatenator<>(a,b,c).and(new Concatenator<>(d), new Concatenator<>(e))) {
-			System.out.println(s);
-		}
-		for (Integer num: new Concatenator<>(1).and(2,3,4).and(5,6).and(7).and(8).and(9,10)) {
-			System.out.println(num);
-		}		
-	}
+	
+//	public static void main(String[] args) {
+//		List<String> a = List.of("1", "2", "3");
+//		List<String> b = List.of("1", "2", "adsf");
+//		List<String> c = List.of("1", "dd", "3");
+//		List<String> d = List.of("1", "asdf", "3");
+//		List<String> e = List.of("32", "2", "yee", "haw");
+//		
+//		for (String s : new Concatenator<>(a,b,c).and(new Concatenator<>(d), new Concatenator<>(e))) {
+//			System.out.println(s);
+//		}
+//		for (Integer num: new Concatenator<>(1).and(2,3,4).and(5,6).and(7).and(8).and(9,10)) {
+//			System.out.println(num);
+//		}		
+//	}
 }
