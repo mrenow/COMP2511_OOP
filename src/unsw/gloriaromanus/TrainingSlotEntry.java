@@ -13,6 +13,7 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 
 	public TrainingSlotEntry(ItemType type, int level, Province p) {
 		super();
+		this.type = type;
 		this.name = type.getName(level);
 		this.cost = type.getCost(level);
 		this.province = p;	
@@ -23,6 +24,6 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 	void onFinish() {
 		// Spawn relevant troop in provinces
 		province.addUnit(type);
-		province.trainFinishUnit(this);
+		province.trainAdjustUnit(this);
 	}
 }

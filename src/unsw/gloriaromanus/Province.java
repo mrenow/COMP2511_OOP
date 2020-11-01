@@ -142,7 +142,8 @@ public class Province {
 
 //	Ordered list corresponding to training slots
 	public List<TrainingSlotEntry> getCurrentTraining() {
-		return this.trainingSlots;
+		List<TrainingSlotEntry> copy = new ArrayList<>(trainingSlots);
+		return copy;
 	}
 
 //	As above. Only a single element list for milestone 2.
@@ -169,6 +170,7 @@ public class Province {
 	public List<ItemType> getTrainable() {
 		List<ItemType> trainableList = new ArrayList<>();
 		trainableList.add(ItemType.TEST_TROOP);
+		trainableList.add(ItemType.HEAVY_CAVALRY);
 		return trainableList;
 	}
 
@@ -258,23 +260,20 @@ public class Province {
 
 	void trainUnit(ItemType unit) {
 		// Check if unit is trainable
-		//System.out.println(unit);
-		//System.out.println(getTrainable());
-		//if (getTrainable().contains(unit)) {
-		// Train Unit
-		TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
-		this.trainingSlots.add(u);
-		// Adjust gold values
-		int trainCost = unit.getCost(1);
-		owner.adjustGold(trainCost);
-		// Adjust trainingslotnum
-		trainingSlotNum -= 1;
-		//}
+		if (getTrainable().contains(unit)) {
+			// Train Unit
+			TrainingSlotEntry u = new TrainingSlotEntry(unit, 1, this);
+			this.trainingSlots.add(u);
+			// Adjust gold values
+			int trainCost = unit.getCost(1);
+			owner.adjustGold(trainCost);
+			// Adjust trainingslotnum
+			trainingSlotNum -= 1;
+		}
 	}
 
-	void trainFinishUnit(TrainingSlotEntry entry) {
+	void trainAdjustUnit(TrainingSlotEntry entry) {
 		// Remove unit from slot
-		//TrainingSlotEntry u = new TrainingSlotEntry(trainingSlotEntry, 1, this);
 		this.trainingSlots.remove(entry);
 		// Adjust trainingslotnum
 		adjustTraining();
