@@ -187,6 +187,13 @@ public class Unit {
 	static void expendInvade(Collection<Unit> army) {
 		army.forEach(u->u.canAttack = false);
 	}
+	public String getName() {
+		return type.getName(level);
+		
+	}
+	public String getDescription() {
+		return type.getDescription(level);
+	}
 
 	public ItemType getType() {
 		return type;

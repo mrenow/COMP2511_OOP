@@ -84,6 +84,12 @@ public class Faction {
 	public String getTitle() {
 		return type.getTitle();
 	}
+	public String asPlural() {
+		return type.getPlural();
+	}
+	public String asAdjective() {
+		return type.getAdjective();
+	}
 
 	public int getTotalWealth() {
 		// calculation for total wealth
