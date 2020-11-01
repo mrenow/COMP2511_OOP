@@ -3,13 +3,16 @@ package unsw.gloriaromanus.VicCondition;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VicComposite implements VicComponent{
-    private String goal;
-    List<VicComponent> subgoals;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
+public class VicComposite implements VicComponent{
+    private String goal=null;
+    List<VicComponent> subgoals=new ArrayList<>();
+
+    @JsonCreator
+    public VicComposite(){}
     public VicComposite(String goal) {
         this.goal = goal;
-        this.subgoals = new ArrayList<>();
     }
     public void addSubVic(VicComponent vic){
         this.subgoals.add(vic);

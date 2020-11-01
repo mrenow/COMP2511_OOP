@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -8,15 +10,6 @@ import unsw.gloriaromanus.VictoryInfo;
 import unsw.gloriaromanus.VicCondition.*;
 
 public class VictoryInfoTest {
-    private GameController game;
-
-    @BeforeEach
-    public void setupGame()throws Exception{
-        game = new GameController(
-    			"src/test/test1adjacency.json",
-    			"src/test/test1landlocked.json",
-    			"src/test/test1ownership.json");
-    }
 
     @Test
     public void victoryInfo() {
@@ -27,8 +20,26 @@ public class VictoryInfoTest {
         VicComposite c2 = new VicComposite("OR");
         c2.addSubVic(l1);
         c2.addSubVic(l2);
-        c1.addSubVic(l1);
+        c1.addSubVic(l3);
         c1.addSubVic(c2);
-        VictoryInfo vic = new VictoryInfo();
+        VictoryInfo vic = new VictoryInfo(c1);
+        assertEquals(false, vic.isVictory());
+        vic.setWealth(1.0);
+        assertEquals(false, vic.isVictory());
+        vic.setConquest(1.0);
+        assertEquals(true, vic.isVictory());
+        vic.setWealth(0.5);
+        assertEquals(false, vic.isVictory());
+        vic.setTreasury(1.0);
+        assertEquals(false, vic.isVictory());
+        vic.setWealth(1.0);
+        assertEquals(true, vic.isVictory());
+        vic.setConquest(0.5);
+        assertEquals(true, vic.isVictory());
+    }
+    
+    @Test
+    public void updateVictoryInfo(){
+        
     }
 }
