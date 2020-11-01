@@ -3,8 +3,11 @@ package unsw.gloriaromanus.VicCondition;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class VicComposite implements VicComponent{
     private String goal="UNSETED";
     List<VicComponent> subgoals=new ArrayList<>();
