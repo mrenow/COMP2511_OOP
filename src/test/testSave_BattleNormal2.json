@@ -1,0 +1,3384 @@
+{
+  "allProvinces" : [ {
+    "name" : "P1",
+    "owner" : "ROME",
+    "adjacent" : [ "P2", "P4" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : "-Infinity",
+        "attackBase" : 6.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity"
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P1",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    } ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  }, {
+    "name" : "P2",
+    "owner" : "ROME",
+    "adjacent" : [ "P3", "P1" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  }, {
+    "name" : "P3",
+    "owner" : "GAUL",
+    "adjacent" : [ "P2", "P4" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  }, {
+    "name" : "P4",
+    "owner" : "GAUL",
+    "adjacent" : [ "P3", "P1" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "ARCHER",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 4.0,
+        "attackBase" : 4.0,
+        "defenseSkill" : 2.0,
+        "shieldDefense" : 0.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    }, {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "baseCharacteristic" : {
+        "armourBase" : 6.0,
+        "attackBase" : 8.0,
+        "defenseSkill" : 4.0,
+        "shieldDefense" : 2.0
+      },
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "P4",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : false,
+      "speed" : 2.0,
+      "morale" : 7.0
+    } ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxSlots" : 1,
+    "player" : null
+  } ],
+  "factionOrder" : [ {
+    "type" : "ROME",
+    "gold" : 0,
+    "provinces" : [ "P1", "P2" ],
+    "lostEagles" : [ ]
+  }, {
+    "type" : "GAUL",
+    "gold" : 0,
+    "provinces" : [ "P3", "P4" ],
+    "lostEagles" : [ ]
+  } ],
+  "round" : 0,
+  "currentTurn" : 0
+}

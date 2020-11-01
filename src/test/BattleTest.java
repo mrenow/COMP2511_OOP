@@ -69,7 +69,7 @@ public class BattleTest {
     @Test
     public void basicEngagement() {
     	// move troops to 1v1
-    	GlobalRandom.init();
+    	GlobalRandom.init(1462456408965413558L);
     	game.move(List.of(RU(0)), P(2));
     	game.endTurn();
     	game.move(List.of(GU(1)), P(3));
@@ -92,12 +92,15 @@ public class BattleTest {
     	// Movement points of G0 should be 0.
     	assertEquals(0,GU(0).getMovPoints());
     	
-    	game.endTurn();
-
-    	game.move(List.of(RU(0)), P(1));
+    	game.endTurn();    	
+    }
+    @Test 
+    public void legionaryEagleDebuff() {
+    	GlobalRandom.init(1088668973864283015L);
     	// get ready to curbstomp two eagle units
     	game.move(List.of(RU(4),RU(5)), P(2));
     	game.endTurn();
+    	game.move(List.of(GU(0)), P(3));
    
     	assertEquals(AttackInfo.WIN, game.invade(List.of(GU(0)), P(2)));
 
@@ -106,7 +109,17 @@ public class BattleTest {
     	assertIterableEquals(List.of(P(2)),rome.getLostEagleProvinces());
     	assertEquals(2, rome.getNumLostEagles());
     	
+    	
+    	game.endTurn();
+    	
+    	List<Unit> romanArmy = P(1).getUnits();
+    	
+    	// Check that eagles return once the settlement is recaptured.
+    	assertEquals(AttackInfo.WIN, game.invade(romanArmy, P(2)));
+    	assertIterableEquals(List.of(), rome.getLostEagleProvinces());
+    	assertEquals(0, rome.getNumLostEagles());	
     }
+    
     
     @Test
     public void basicRawBattle() throws FileNotFoundException {
@@ -138,10 +151,10 @@ public class BattleTest {
 		
 		
 	}
-	public static void main (String[] args) throws IOException, DataInitializationException {
-		// Generate from current values
-			GameController.loadFromSave("src/test/testLoad_BattleNormal.json").saveGame("src/test/testSave_BattleNormal.json");
-		
-		
+	// used to set up load files
+    public static void main(String[] args) throws Exception {
+    	GameController.loadFromSave("src/test/testLoad_BattleNormal.json").saveGame("src/test/testSave_BattleNormal.json");;
+    	GameController.loadFromSave("src/test/testLoad_BattleNormal2.json").saveGame("src/test/testSave_BattleNormal2.json");
+    	GameController.loadFromSave("src/test/testLoad_BattleElephants.json").saveGame("src/test/testSave_BattleElephants.json");
 	}
 }
