@@ -270,7 +270,7 @@ public class Unit {
 	}
 	
 	public String toString() {
-		return String.format("(%s : %d)", unitClass, health);
+		return String.format("(%s : %d)", type, health);
 	}
 	/**
 	 * Provinces are the only things that track units.

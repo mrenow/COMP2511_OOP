@@ -37,6 +37,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class GameController {
 	public static double STARTING_DENSITY = 0.5;
+	public static int AVERAGE_BARBARIANS = 4;
+	
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;
 
@@ -95,7 +97,9 @@ public class GameController {
 			e.printStackTrace();
 			throw new DataInitializationException("Error while constructing game from files", e);
 		}
+		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
+
 
 	/**
 	 * Uses default province allocation algorithm to decide ownership
@@ -120,7 +124,32 @@ public class GameController {
 			e.printStackTrace();
 			throw new DataInitializationException("Error while constructing game from automatic allocation", e);
 		}
+		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
+	/**
+	 * Helper method for init
+	 * Current algorithm just uses a gaussian distribution around N units.
+	 * @pre allProvinces list is properly populated
+	 * @pre provinces have been assigned to factions
+	 * @post unowned provinced have units.
+	 */
+	private void spawnBarbarianUnits(int mean) {
+		for (Province p : allProvinces) {
+			if(p.getOwner() != Faction.NO_ONE) {
+				continue;
+			}
+			int numUnits = (int)Math.round(Math.max(1, mean + GlobalRandom.nextGaussian() * mean));
+			while(numUnits-- > 0) {
+				p.addUnit(ItemType.BARBARIAN);
+			}
+		}
+	}
+	
+/*
+ * 
+ * API
+ * 
+ */
 
 	/**
 	 * Returns the current faction's turn
@@ -394,7 +423,11 @@ public class GameController {
 		province.addUnits(disownedUnits);
 	}
 	
-/* Getters */
+/*
+ * 
+ * GETTERS
+ * 
+ */
 	
 	/**
 	 * Called when a group of units is selected to determine which provinces to highlight
@@ -484,7 +517,8 @@ public class GameController {
 
 	/**
 	 * @param faction
-	 * @return provinces owned by a particular faction. Will return all provinces when Faction == null
+	 * @return provinces owned by a particular faction. Will return all provinces when Faction == null.
+	 * Will return nothing if faction == NO_ONE.
 	 */
 	public Collection<Province> getProvinces(Faction faction){
 		if(faction != null) {
