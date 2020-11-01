@@ -1,6 +1,6 @@
 package unsw.gloriaromanus.VicCondition;
 
 public interface VicComponent {
-    String getGoal();
+	VictoryCondition getGoal();
     boolean isLogic();
 }

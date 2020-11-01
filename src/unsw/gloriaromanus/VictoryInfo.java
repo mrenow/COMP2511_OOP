@@ -36,7 +36,7 @@ public class VictoryInfo {
             return false;
         }
         switch (vic.getGoal()) {
-            case "AND":
+            case AND:
                 vicCom = (VicComposite)vic;
                 subgoals = vicCom.getSubgoals();
                 for (VicComponent vicComponent : subgoals) {
@@ -45,7 +45,7 @@ public class VictoryInfo {
                     }
                 }
                 return true;
-            case "OR":
+            case OR:
                 vicCom = (VicComposite)vic;
                 subgoals = vicCom.getSubgoals();
                 for (VicComponent vicComponent : subgoals) {
@@ -54,19 +54,19 @@ public class VictoryInfo {
                     }
                 }
                 return false;
-            case "CONQUEST":
+            case CONQUEST:
                 if (conquest>=1.0) {
                     return true;
                 } else {
                     return false;
                 }
-            case "TREASURY":
+            case TREASURY:
                 if (treasury>=1.0) {
                     return true;
                 } else {
                     return false;
                 }
-            case "WEALTH":
+            case WEALTH:
                 if (wealth>=1.0) {
                     return true;
                 } else {

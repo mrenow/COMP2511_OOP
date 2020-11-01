@@ -162,8 +162,9 @@ public class BattleTest {
 	
 	@AfterEach
 	public void cleanUp() throws IOException {
-		//Files.delete(Path.of(tempPath));
-		
+		if(Files.exists(Path.of(tempPath))){
+			Files.delete(Path.of(tempPath));
+		}
 	}
 	// used to set up load files
     public static void main(String[] args) throws Exception {

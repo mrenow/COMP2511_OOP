@@ -12,12 +12,7 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 	private TrainingSlotEntry() {}
 
 	public TrainingSlotEntry(ItemType type, int level, Province p) {
-		super();
-		this.type = type;
-		this.name = type.getName(level);
-		this.cost = type.getCost(level);
-		this.province = p;	
-		this.turnsRemaining = type.getDuration(level);
+		super(type, level, p);
 	}
 
 	@Override

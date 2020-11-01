@@ -9,12 +9,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class VicComposite implements VicComponent{
-    private String goal="UNSETED";
+    private VictoryCondition goal=null;
     List<VicComponent> subgoals=new ArrayList<>();
 
     @JsonCreator
     public VicComposite(){}
-    public VicComposite(String goal) {
+    public VicComposite(VictoryCondition goal) {
         this.goal = goal;
     }
     public void addSubVic(VicComponent vic){
@@ -22,7 +22,7 @@ public class VicComposite implements VicComponent{
     }
 
     @Override
-    public String getGoal(){
+    public VictoryCondition getGoal(){
         return goal;
     }
     @Override

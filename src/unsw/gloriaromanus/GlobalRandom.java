@@ -51,79 +51,84 @@ public class GlobalRandom {
 	public static <T> T getRandom(List<T> list) {
 		return list.get(nextInt(list.size()));		
 	}
+	
 	public static <T> T removeRandom(List<T> list) {
 		return list.remove(nextInt(list.size()));		
 	}
+	
 	public static String getLog() {
 		return randomLog.toString();
+	}
+	
+	private static int log(int val, String name) {
+		randomLog.append(name + "\t: " + val + "\n");
+		return val;
+	}
+	
+	private static double log(double val, String name) {
+		randomLog.append(name + "\t: " + val + "\n");
+		return val;
 	}
 	/*
 	 * test area for getting seeds
 	 * 
 	 */
-	public static void main(String [] args) {
-		List<Condition<?>> randFuncs = new ArrayList<>();
-		randFuncs.add(C(GlobalRandom::nextUniform, 0.05, 0.1));
-		randFuncs.add(C(GlobalRandom::nextUniform, 0.1, 0.15));
-		randFuncs.add(C(GlobalRandom::nextUniform, 0.15, 0.2));
-		randFuncs.add(C(GlobalRandom::nextGaussian, 0.2, 0.25));
-		randFuncs.add(C(GlobalRandom::nextUniform, 0.25, 0.3));
-		randFuncs.add(C(GlobalRandom::nextUniform, 0.3, 0.35));
-		init(getSeedSatisfying(randFuncs));
-		// forces the random things to satisfy given constraints
-		System.out.println(nextUniform());
-		System.out.println(nextUniform());
-		System.out.println(nextUniform());
-		System.out.println(nextGaussian());
-		System.out.println(nextUniform());
-		System.out.println(nextUniform());
-	}
-	
-	
-	private static <T extends Comparable<T>> Condition<T> C(Supplier<T> randFun, T min, T max) {
-		return new Condition<T>(randFun, min, max);
-	}
-	
-	private static  long getSeedSatisfying(List<Condition<?>> conditions) {
-		Random r = new Random();
-		long seed; 
-		while(!trySeed(conditions, seed = r.nextLong()));
-		return seed;
-	}
-	private static boolean trySeed(List<Condition<?>> conditions, long seed) {
-		init(seed);
-		for (Condition<?> c : conditions) {
-			if(!c.verify()) {
-				return false;		
-			}
-		}
-		return true;
-	}
-	private static int log(int val, String name) {
-		randomLog.append(name + "\t: " + val + "\n");
-		return val;
-	}
-	private static double log(double val, String name) {
-		randomLog.append(name + "\t: " + val + "\n");
-		return val;
-	}
-}
+//	public static void main(String [] args) {
+//		List<Condition<?>> randFuncs = new ArrayList<>();
+//		randFuncs.add(C(GlobalRandom::nextUniform, 0.05, 0.1));
+//		randFuncs.add(C(GlobalRandom::nextUniform, 0.1, 0.15));
+//		randFuncs.add(C(GlobalRandom::nextUniform, 0.15, 0.2));
+//		randFuncs.add(C(GlobalRandom::nextGaussian, 0.2, 0.25));
+//		randFuncs.add(C(GlobalRandom::nextUniform, 0.25, 0.3));
+//		randFuncs.add(C(GlobalRandom::nextUniform, 0.3, 0.35));
+//		init(getSeedSatisfying(randFuncs));
+//		// forces the random things to satisfy given constraints
+//		System.out.println(nextUniform());
+//		System.out.println(nextUniform());
+//		System.out.println(nextUniform());
+//		System.out.println(nextGaussian());
+//		System.out.println(nextUniform());
+//		System.out.println(nextUniform());
+//	}
+//	
+//	
+//	private static <T extends Comparable<T>> Condition<T> C(Supplier<T> randFun, T min, T max) {
+//		return new Condition<T>(randFun, min, max);
+//	}
+//	
+//	private static  long getSeedSatisfying(List<Condition<?>> conditions) {
+//		Random r = new Random();
+//		long seed; 
+//		while(!trySeed(conditions, seed = r.nextLong()));
+//		return seed;
+//	}
+//	private static boolean trySeed(List<Condition<?>> conditions, long seed) {
+//		init(seed);
+//		for (Condition<?> c : conditions) {
+//			if(!c.verify()) {
+//				return false;		
+//			}
+//		}
+//		return true;
+//	}
 
-class Condition<T extends Comparable<T>> {
-	private Supplier<T> randFun;
-	private T max;
-	private T min;
-	
-	public Condition(Supplier<T> randFun, T min, T max) {
-		super();
-		this.randFun = randFun;
-		this.max = max;
-		this.min = min;
-	}
-	
-	public boolean verify() {
-		T result = randFun.get();
-		return min.compareTo(result) <= 0 &&  result.compareTo(max) <= 0;
-	}
-	
 }
+//
+//class Condition<T extends Comparable<T>> {
+//	private Supplier<T> randFun;
+//	private T max;
+//	private T min;
+//	
+//	public Condition(Supplier<T> randFun, T min, T max) {
+//		super();
+//		this.randFun = randFun;
+//		this.max = max;
+//		this.min = min;
+//	}
+//	
+//	public boolean verify() {
+//		T result = randFun.get();
+//		return min.compareTo(result) <= 0 &&  result.compareTo(max) <= 0;
+//	}
+//	
+//}

@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class VicLeaf implements VicComponent{
-    private String goal="UNSETED";
+    private VictoryCondition goal=null;
 
     @JsonCreator
     public VicLeaf(){}
-    public VicLeaf(String goal) {
+    public VicLeaf(VictoryCondition goal) {
         this.goal = goal;
     }
     @Override
-    public String getGoal(){
+    public VictoryCondition getGoal(){
         return goal;
     }
     @Override
