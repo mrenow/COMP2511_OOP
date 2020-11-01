@@ -14,7 +14,7 @@ public class VictoryInfoTest {
 
     /**
      * #US63:
-     * AC: Players should see an overlay at the end of the winner’s turn, which says VICTORY or DEFEAT as appropriate.
+     * AC: Players should see an overlay at the end of the winner's turn, which says VICTORY or DEFEAT as appropriate.
      * AC: If the player has not won, the player should see who has won.
      * AC: The player should see and what victory conditions the winner achieved.
      * 
