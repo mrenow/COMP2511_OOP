@@ -224,8 +224,9 @@ public class GameController {
 	 */
 	public void cancelTraining(TrainingSlotEntry entry) {
 		Province province = entry.getProvince();
-		province.getCurrentTraining().remove(entry);
-		province.adjustTraining();
+		//System.out.println(province.getCurrentTraining());
+		province.trainAdjustUnit(entry);
+		//System.out.println(province.getCurrentTraining());
 	}
 	
 	/**
