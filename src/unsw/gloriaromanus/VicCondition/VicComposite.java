@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class VicComposite implements VicComponent{
-    private String goal=null;
+    private String goal="UNSETED";
     List<VicComponent> subgoals=new ArrayList<>();
 
     @JsonCreator
