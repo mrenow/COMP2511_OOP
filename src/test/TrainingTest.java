@@ -77,7 +77,6 @@ public class TrainingTest {
      * #US83
      * AC: Upon cancelling, players should see the cancelled unit removed from the list of unit in production.
      * AC: Cancelling should free up a training slot.
-     * AC: Players should be able to train a new unit on the turn that they cancel.
      * 
      * @throws DataInitializationException
      */
