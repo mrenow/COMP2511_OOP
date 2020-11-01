@@ -1,8 +1,12 @@
 package unsw.gloriaromanus.VicCondition;
 
-public class VicLeaf implements VicComponent{
-    private String goal;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
+public class VicLeaf implements VicComponent{
+    private String goal="UNSETED";
+
+    @JsonCreator
+    public VicLeaf(){}
     public VicLeaf(String goal) {
         this.goal = goal;
     }
