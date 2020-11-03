@@ -6,6 +6,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * An intermediate state belonging to the battle system. Not serialized.
@@ -24,12 +26,29 @@ class CombatData {
 	private class SideData {
 		private List<Unit> army;
 		private Unit unit;
-		private CombatStats stats;
+		//private CombatStats stats;	// Should not change 
+		private double armourBase = 1; 
+		private double attackBase = 1; 
+		private double defenseSkill = 0;
+		private double shieldDefense = 0;
+		
+		@JsonIgnore
+		private double armourMult = 1;
+		@JsonIgnore
+		private double attackMult = 1;
+		@JsonIgnore
+		private double armourAdd = 0;
+		@JsonIgnore
+		private double attackAdd = 0;  
+
 
 		SideData(Unit unit, List<Unit> army) {
 			this.unit = unit;
 			this.army = army;
-			this.stats = unit.getCombatStats();
+			this.armourBase = unit.getArmour();
+			this.attackBase = unit.getAttack();
+			this.defenseSkill = unit.getDefenseSkill();
+			this.shieldDefense = unit.getShieldDefense();
 		}
 	}
 	 
@@ -41,11 +60,11 @@ class CombatData {
 	}
 
 	List<Unit> getArmy(BattleSide side) {
-		return data.get(side).army;
+		return data(side).army;
 	}
 
 	Unit getUnit(BattleSide side) {
-		return data.get(side).unit;
+		return data(side).unit;
 	}
 
 	/* Curse you demeter!!!!! */
@@ -55,67 +74,92 @@ class CombatData {
 	boolean hasWalls() {
 		return hasWalls;
 	}
-	
-	double getAttack(BattleSide side) {
-		return data.get(side).stats.getAttack();
-	}
-	
-	double getArmour(BattleSide side) {
-		return data.get(side).stats.getArmour();
-	}
-	double getDefenseSkill(BattleSide side) {
-		return data.get(side).stats.getDefenseSkill();
-	}
 
-	double getShieldDefense(BattleSide side) {
-		return data.get(side).stats.getShieldDefense();
-	}
-	double getEffectiveArmour(BattleSide side) {
+	public double getEffectiveArmour(BattleSide side) {
 		return getShieldDefense(side) + getDefenseSkill(side) + getArmour(side);
 	}
+	
+	public double getArmour(BattleSide side) {
+		if (data(side).armourBase == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
+		if (data(side).armourBase == Double.POSITIVE_INFINITY) {
+			return data(side).armourBase;
+		}
+		return Math.max(1, (data(side).armourBase + data(side).armourAdd) * data(side).armourMult);
+	}
+	
+	public double getAttack(BattleSide side) {
+		if (data(side).attackBase == Double.NEGATIVE_INFINITY) {
+			return 0;
+		}
+		if (data(side).attackBase == Double.POSITIVE_INFINITY) {
+			return data(side).attackBase;
+		}
+		return Math.max(1, (data(side).attackBase + data(side).attackAdd) * data(side).attackMult);
+	}
+	
+	public double getDefenseSkill(BattleSide side) {
 
+		return Math.max(0, data(side).defenseSkill);
+	}
+	
+	public double getShieldDefense(BattleSide side) {
+		return Math.max(0, data(side).shieldDefense);
+	}
+	
 	void setArmour(BattleSide side, double armour) {
-		data.get(side).stats.setArmour(armour);
+		if (data(side).armourBase == Double.NEGATIVE_INFINITY) {
+			return;
+		}
+		data(side).armourBase = armour;
 	}
-
 	void setAttack(BattleSide side, double attack) {
-		data.get(side).stats.setAttack(attack);
+		if (data(side).attackBase == Double.NEGATIVE_INFINITY) {
+			return;
+		}
+		data(side).attackBase = attack;
 	}
-
 	void setShieldDefense(BattleSide side, double shieldDefense) {
-		data.get(side).stats.setShieldDefense(shieldDefense);
+		if (data(side).shieldDefense == Double.NEGATIVE_INFINITY) {
+			return;
+		}
+		data(side).shieldDefense = shieldDefense;
 	}
-
 	void setDefenseSkill(BattleSide side, double defenseSkill) {
-		data.get(side).stats.setDefenseSkill(defenseSkill);
+		if (data(side).defenseSkill == Double.NEGATIVE_INFINITY) {
+			return;
+		}
+		data(side).defenseSkill = defenseSkill;
 	}
-
+	
 	void addArmour(BattleSide side, double armour) {
-		data.get(side).stats.addArmour(armour);
+		data(side).armourAdd += armour;
 	}
-
 	void addAttack(BattleSide side, double attack) {
-		data.get(side).stats.addAttack(attack);
+		data(side).attackAdd += attack;
 	}
-
+	
 	void addDefenseSkill(BattleSide side, double defenseSkill) {
-		data.get(side).stats.addDefenseSkill(defenseSkill);
+		data(side).defenseSkill += defenseSkill;
 	}
-
 	void addShieldDefense(BattleSide side, double shieldDefense) {
-		data.get(side).stats.addShieldDefense(shieldDefense);
+		data(side).shieldDefense += shieldDefense;
 	}
-
+	
 	void multArmour(BattleSide side, double armourMult) {
-		data.get(side).stats.multArmour(armourMult);
+		data(side).armourMult *= armourMult;
 	}
 
-	void multAttack(BattleSide side, double attackMult) {
-		data.get(side).stats.multAttack(attackMult);
+	void multAttack(BattleSide side,double attackMult) {
+		data(side).attackMult *= attackMult;
 	}
-
-	void multShieldDefense(BattleSide side, double shieldDefense) {
-		data.get(side).stats.multShieldDefense(shieldDefense);
+	
+	void multShieldDefense(BattleSide side,double shieldDefense) {
+		data(side).shieldDefense *= shieldDefense;
+	}
+	private SideData data(BattleSide side) {
+		return data.get(side);
 	}
 
 }

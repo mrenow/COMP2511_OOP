@@ -226,8 +226,8 @@ public class Battle {
 	public void runSkirmish(Unit attackUnit, Unit defendUnit) {
 		logger.log("Try Skirmish with:");
 		logger.into();
-			logger.log("Attacker", attackUnit.getType(), attackUnit.getCombatStats());
-			logger.log("Defender", defendUnit.getType(), defendUnit.getCombatStats());
+			logger.log("Attacker", attackUnit.getType(), attackUnit.statRep());
+			logger.log("Defender", defendUnit.getType(), defendUnit.statRep());
 		// Begin engagement
 		while (tryEngagement()) {
 			

@@ -126,6 +126,7 @@ public class Parsing {
 		
 		return factionOrder;
 	}
+	
 	/**
 	 * Automatically allocates provinces to factions using some algorithm. 
 	 * Simply picks a random province and tries to expand in all directions.

@@ -31,7 +31,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Unit {
-	private CombatStats baseCharacteristic;
 	private Map<ActiveType, List<CombatModifierMethod>> combatModifiers = new EnumMap<>(ActiveType.class);
 	private Map<ActiveType, List<MoraleModifierMethod>> moraleModifiers = new EnumMap<>(ActiveType.class);
 
@@ -52,8 +51,13 @@ public class Unit {
 	private int maxMovPoints;
 	private int movPoints;
 	private boolean canAttack = true;
+	
 	private double speed;
 	private double morale;
+	private double armour; 
+	private double attack; 
+	private double defenseSkill;
+	private double shieldDefense;
 	
 	private Unit() {
 		combatModifiers.put(ActiveType.SUPPORT, new ArrayList<>());
@@ -76,10 +80,10 @@ public class Unit {
 		
 		this.movPoints = this.maxMovPoints;
 		
-		double armour = ((Integer)type.getAttribute("armour", level)).doubleValue();
-		double attack = ((Integer)type.getAttribute("attack", level)).doubleValue();
-		double defenseSkill = ((Integer)type.getAttribute("defenseSkill", level)).doubleValue();
-		double shieldDefense = ((Integer)type.getAttribute("shieldDefense", level)).doubleValue();
+		this.armour = ((Integer)type.getAttribute("armour", level)).doubleValue();
+		this.attack = ((Integer)type.getAttribute("attack", level)).doubleValue();
+		this.defenseSkill = ((Integer)type.getAttribute("defenseSkill", level)).doubleValue();
+		this.shieldDefense = ((Integer)type.getAttribute("shieldDefense", level)).doubleValue();
 		
 		
 		switch(type) {
@@ -105,9 +109,6 @@ public class Unit {
 		default:
 			break;
 		}
-		
-		this.baseCharacteristic = new CombatStats(armour, attack, defenseSkill, shieldDefense);
-
 		// add remaining modifiers
 		// Supports multiple modifiers
 		String combatString = (String)type.getAttribute("combatModifiers", level);
@@ -194,6 +195,10 @@ public class Unit {
 	public String getDescription() {
 		return type.getDescription(level);
 	}
+	
+	public String statRep() {
+		return String.format("ATTK %.2f | ARMR %.2f | SKIL : %.2f | SHLD %.2f | MORL %.2f | SPED : %.2f", attack, armour, defenseSkill, shieldDefense, morale, speed);
+	}
 
 	public ItemType getType() {
 		return type;
@@ -205,10 +210,6 @@ public class Unit {
 		return level;
 	}
 
-	public CombatStats getBaseCharacteristic() {
-		return baseCharacteristic;
-	}
-
 	/**
 	 * This function will be called a Gazillion times each battle. Iterators are used here
 	 * to reduce the amount of processes spent packaging the methods.
@@ -216,14 +217,14 @@ public class Unit {
 	 * Returns an Iterable so no lists need to be copied.
 	 */
 	public Iterable<CombatModifier> getCombatModifiers(ActiveType type, BattleSide side) {
-		return new MappingIterable<>(combatModifiers.get(type), (m) -> new CombatModifier(m, side));
+		return new MappingIterable<>(combatModifiers.get(type), m -> new CombatModifier(m, side));
 	}
 	/**
 	 * Packages the desired morale modifier methods into their morale modifier objects.
 	 * @see Unit.getCombatModifiers
 	 */
 	public Iterable<MoraleModifier> getMoraleModifiers(ActiveType type, BattleSide side) {
-		return new MappingIterable<>(moraleModifiers.get(type), (m) -> new MoraleModifier(m, side));
+		return new MappingIterable<>(moraleModifiers.get(type), m -> new MoraleModifier(m, side));
 	}
 
 	public int getMaxMovPoints() {
@@ -252,6 +253,21 @@ public class Unit {
 	public double getSpeed() {
 		return speed;
 	}
+	public double getArmour() {
+		return armour;
+	}
+
+	public double getAttack() {
+		return attack;
+	}
+
+	public double getDefenseSkill() {
+		return defenseSkill;
+	}
+
+	public double getShieldDefense() {
+		return shieldDefense;
+	}
 
 	public Province getProvince() {
 		return province;
@@ -265,11 +281,6 @@ public class Unit {
 	}
 	public boolean canAttack() {
 		return canAttack;
-	}
-
-	public CombatStats getCombatStats() {
-		
-		return new CombatStats(baseCharacteristic);
 	}
 	
 	public boolean isAlive() {
