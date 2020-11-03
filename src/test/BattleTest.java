@@ -143,9 +143,6 @@ public class BattleTest {
     	
     	AttackInfo result = b.getResult();
     	b.printLog(new PrintStream(new File("src/test/basicRawBattle.log")));
-    	
-    	
-    	
     }
     
 

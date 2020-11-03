@@ -10,6 +10,7 @@ public class MeleeCavalry extends Unit{
 		super(newType, UNIT_CLASS, newLevel);
 		this.charge = ((Integer) getType().getAttribute("charge", getLevel())).doubleValue();
 	}
+	
 	public double getChargeAttack() {
 		return charge;
 	}

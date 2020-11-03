@@ -33,7 +33,6 @@ public class ElephantBattleTest {
     	gaul = game.getFactions().get(1);
     	romanUnits = game.getProvince("P1").getUnits();
     	gallicUnits = game.getProvince("P4").getUnits();
-    	
     }
     
 	// Covers a case where elephants try to attack themselves but instead choose a different opponent
@@ -64,7 +63,6 @@ public class ElephantBattleTest {
 	}
 
     public static void main(String[] args) throws Exception {
-    	
     	while(true) {
     		GlobalRandom.init();
 	    	try {

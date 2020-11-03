@@ -141,8 +141,6 @@ enum CombatModifierMethod {
 			}
 		}
 	};
-
-	
 	
 	private ActiveType active;
 	private CombatModifierMethod(ActiveType active) {

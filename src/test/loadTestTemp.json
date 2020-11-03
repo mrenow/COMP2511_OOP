@@ -29,12 +29,6 @@
     "units" : [ {
       "type" : "TEST_TROOP",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -50,16 +44,14 @@
       "movPoints" : 1,
       "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 1000.0
+      "morale" : 1000.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "TEST_TROOP",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -75,16 +67,14 @@
       "movPoints" : 2,
       "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 1000.0
+      "morale" : 1000.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "TEST_TROOP",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -100,16 +90,14 @@
       "movPoints" : 3,
       "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 1000.0
+      "morale" : 1000.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "TEST_TROOP",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -125,7 +113,11 @@
       "movPoints" : 4,
       "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 1000.0
+      "morale" : 1000.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],

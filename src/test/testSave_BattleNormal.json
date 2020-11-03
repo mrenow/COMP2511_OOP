@@ -12,12 +12,6 @@
     "units" : [ {
       "type" : "ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
@@ -31,18 +25,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 6.0
+      "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 4.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
@@ -56,18 +48,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 6.0
+      "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 4.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "BARBARIAN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 6.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -81,18 +71,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 5.0
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "BARBARIAN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 6.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -106,18 +94,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 5.0
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "BERSERKER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : "-Infinity",
-        "attackBase" : 6.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -131,16 +117,14 @@
       "health" : 100,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : "Infinity"
+      "morale" : "Infinity",
+      "armour" : "-Infinity",
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -156,17 +140,15 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 8.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -182,19 +164,17 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 8.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
       "type" : "DRUID",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -208,18 +188,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 1.0
+      "morale" : 1.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "DRUID",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -233,16 +211,14 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 1.0
+      "morale" : 1.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 16.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -258,17 +234,15 @@
       "health" : 100,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 6.0,
       "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 16.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 16.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -284,17 +258,15 @@
       "health" : 100,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 6.0,
       "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 16.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 10.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -310,17 +282,15 @@
       "health" : 50,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 10.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 3.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 10.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -336,19 +306,17 @@
       "health" : 50,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 10.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 3.0
     }, {
       "type" : "HOPILITE",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 6.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 4.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -362,18 +330,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 2.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 6.0,
+      "attack" : 8.0,
+      "defenseSkill" : 4.0,
+      "shieldDefense" : 2.0
     }, {
       "type" : "HOPILITE",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 6.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 4.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -387,18 +353,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 2.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 6.0,
+      "attack" : 8.0,
+      "defenseSkill" : 4.0,
+      "shieldDefense" : 2.0
     }, {
       "type" : "HORSE_ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "CANTABRIAN_CIRCLE" ]
@@ -412,18 +376,16 @@
       "health" : 25,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 10.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 4.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "HORSE_ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "CANTABRIAN_CIRCLE" ]
@@ -437,18 +399,16 @@
       "health" : 25,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 10.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 4.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "JAVELIN_SKIRMISHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "SKIRMISHER_ANTI_ARMOUR" ]
@@ -462,18 +422,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 2.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 2.0
     }, {
       "type" : "JAVELIN_SKIRMISHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "SKIRMISHER_ANTI_ARMOUR" ]
@@ -487,16 +445,14 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 2.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 2.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -512,17 +468,15 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 9.0,
       "morale" : 4.0,
+      "armour" : 2.0,
+      "attack" : 8.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 1.0,
       "charge" : 3.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -538,19 +492,17 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 9.0,
       "morale" : 4.0,
+      "armour" : 2.0,
+      "attack" : 8.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 1.0,
       "charge" : 3.0
     }, {
       "type" : "PIKEMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 5.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -564,18 +516,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 9.0
+      "morale" : 9.0,
+      "armour" : 5.0,
+      "attack" : 8.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 5.0
     }, {
       "type" : "PIKEMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 5.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -589,18 +539,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 9.0
+      "morale" : 9.0,
+      "armour" : 5.0,
+      "attack" : 8.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 5.0
     }, {
       "type" : "ROMAN_LEGIONARY",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 14.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 4.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -614,18 +562,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 5.0,
+      "attack" : 14.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 4.0
     }, {
       "type" : "ROMAN_LEGIONARY",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 14.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 4.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -639,18 +585,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 5.0,
+      "attack" : 14.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 4.0
     }, {
       "type" : "SPEARMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 3.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -664,18 +608,16 @@
       "health" : 100,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 4.0
+      "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 4.0,
+      "defenseSkill" : 3.0,
+      "shieldDefense" : 1.0
     }, {
       "type" : "SPEARMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 3.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -689,16 +631,14 @@
       "health" : 100,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 4.0
+      "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 4.0,
+      "defenseSkill" : 3.0,
+      "shieldDefense" : 1.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 100.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_ARTILLERY" ]
@@ -714,17 +654,15 @@
       "health" : 25,
       "maxMovPoints" : 4,
       "movPoints" : 4,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
       "morale" : 5.0,
+      "armour" : 5.0,
+      "attack" : 100.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0,
       "seige" : 200.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 100.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_ARTILLERY" ]
@@ -740,9 +678,13 @@
       "health" : 25,
       "maxMovPoints" : 4,
       "movPoints" : 4,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
       "morale" : 5.0,
+      "armour" : 5.0,
+      "attack" : 100.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0,
       "seige" : 200.0
     } ],
     "buildingSlots" : [ ],
@@ -798,12 +740,6 @@
     "units" : [ {
       "type" : "ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
@@ -817,18 +753,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 6.0
+      "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 4.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
@@ -842,18 +776,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 6.0
+      "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 4.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "BARBARIAN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 6.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -867,18 +799,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 5.0
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "BARBARIAN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 6.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -892,18 +822,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 5.0
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "BERSERKER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : "-Infinity",
-        "attackBase" : 6.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -917,16 +845,14 @@
       "health" : 100,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : "Infinity"
+      "morale" : "Infinity",
+      "armour" : "-Infinity",
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -942,17 +868,15 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 8.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 2.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -968,19 +892,17 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 8.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
       "type" : "DRUID",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -994,18 +916,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 1.0
+      "morale" : 1.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "DRUID",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 2.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1019,16 +939,14 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 5.0,
-      "morale" : 1.0
+      "morale" : 1.0,
+      "armour" : 2.0,
+      "attack" : 2.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 16.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -1044,17 +962,15 @@
       "health" : 100,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 6.0,
       "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 16.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 16.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -1070,17 +986,15 @@
       "health" : 100,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 6.0,
       "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 16.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 16.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 10.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -1096,17 +1010,15 @@
       "health" : 50,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 10.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 3.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 10.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -1122,19 +1034,17 @@
       "health" : 50,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 7.0,
       "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 10.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 0.0,
       "charge" : 3.0
     }, {
       "type" : "HOPILITE",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 6.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 4.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1148,18 +1058,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 2.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 6.0,
+      "attack" : 8.0,
+      "defenseSkill" : 4.0,
+      "shieldDefense" : 2.0
     }, {
       "type" : "HOPILITE",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 6.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 4.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1173,18 +1081,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 2.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 6.0,
+      "attack" : 8.0,
+      "defenseSkill" : 4.0,
+      "shieldDefense" : 2.0
     }, {
       "type" : "HORSE_ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "CANTABRIAN_CIRCLE" ]
@@ -1198,18 +1104,16 @@
       "health" : 25,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 10.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 4.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "HORSE_ARCHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 4.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "CANTABRIAN_CIRCLE" ]
@@ -1223,18 +1127,16 @@
       "health" : 25,
       "maxMovPoints" : 15,
       "movPoints" : 15,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 10.0,
-      "morale" : 7.0
+      "morale" : 7.0,
+      "armour" : 4.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0
     }, {
       "type" : "JAVELIN_SKIRMISHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "SKIRMISHER_ANTI_ARMOUR" ]
@@ -1248,18 +1150,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 2.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 2.0
     }, {
       "type" : "JAVELIN_SKIRMISHER",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 3.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 2.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "SKIRMISHER_ANTI_ARMOUR" ]
@@ -1273,16 +1173,14 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 2.0,
+      "attack" : 3.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 2.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -1298,17 +1196,15 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 9.0,
       "morale" : 4.0,
+      "armour" : 2.0,
+      "attack" : 8.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 1.0,
       "charge" : 3.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 2.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 1.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
@@ -1324,19 +1220,17 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 9.0,
       "morale" : 4.0,
+      "armour" : 2.0,
+      "attack" : 8.0,
+      "defenseSkill" : 1.0,
+      "shieldDefense" : 1.0,
       "charge" : 3.0
     }, {
       "type" : "PIKEMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 5.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1350,18 +1244,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 9.0
+      "morale" : 9.0,
+      "armour" : 5.0,
+      "attack" : 8.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 5.0
     }, {
       "type" : "PIKEMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 8.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 5.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1375,18 +1267,16 @@
       "health" : 25,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 4.0,
-      "morale" : 9.0
+      "morale" : 9.0,
+      "armour" : 5.0,
+      "attack" : 8.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 5.0
     }, {
       "type" : "ROMAN_LEGIONARY",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 14.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 4.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1400,18 +1290,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 5.0,
+      "attack" : 14.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 4.0
     }, {
       "type" : "ROMAN_LEGIONARY",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 14.0,
-        "defenseSkill" : 5.0,
-        "shieldDefense" : 4.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1425,18 +1313,16 @@
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 10.0
+      "morale" : 10.0,
+      "armour" : 5.0,
+      "attack" : 14.0,
+      "defenseSkill" : 5.0,
+      "shieldDefense" : 4.0
     }, {
       "type" : "SPEARMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 3.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1450,18 +1336,16 @@
       "health" : 100,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 4.0
+      "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 4.0,
+      "defenseSkill" : 3.0,
+      "shieldDefense" : 1.0
     }, {
       "type" : "SPEARMEN",
       "level" : 1,
-      "baseCharacteristic" : {
-        "armourBase" : 3.0,
-        "attackBase" : 4.0,
-        "defenseSkill" : 3.0,
-        "shieldDefense" : 1.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
@@ -1475,16 +1359,14 @@
       "health" : 100,
       "maxMovPoints" : 10,
       "movPoints" : 10,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 3.0,
-      "morale" : 4.0
+      "morale" : 4.0,
+      "armour" : 3.0,
+      "attack" : 4.0,
+      "defenseSkill" : 3.0,
+      "shieldDefense" : 1.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 100.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_ARTILLERY" ]
@@ -1500,17 +1382,15 @@
       "health" : 25,
       "maxMovPoints" : 4,
       "movPoints" : 4,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
       "morale" : 5.0,
+      "armour" : 5.0,
+      "attack" : 100.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0,
       "seige" : 200.0
     }, {
-      "baseCharacteristic" : {
-        "armourBase" : 5.0,
-        "attackBase" : 100.0,
-        "defenseSkill" : 0.0,
-        "shieldDefense" : 0.0
-      },
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_ARTILLERY" ]
@@ -1526,9 +1406,13 @@
       "health" : 25,
       "maxMovPoints" : 4,
       "movPoints" : 4,
-      "canAttack" : false,
+      "canAttack" : true,
       "speed" : 1.0,
       "morale" : 5.0,
+      "armour" : 5.0,
+      "attack" : 100.0,
+      "defenseSkill" : 0.0,
+      "shieldDefense" : 0.0,
       "seige" : 200.0
     } ],
     "buildingSlots" : [ ],
