@@ -21,9 +21,9 @@ import util.Repeat;
 // Object is temporary. Do not attempt to store.
 public class Battle {
 	// Ranged Modifier
-	private static final CombatModifier RANGED_MODIFIER = new CombatModifier(CombatModifierMethod._RANGED, null);
-	private static final MoraleModifier ATTACKER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, ATTACK);
-	private static final MoraleModifier DEFENDER_LOST_EAGLE = new MoraleModifier(MoraleModifierMethod.LOST_EAGLE, DEFEND);
+	private static final Modifier<CombatData> RANGED_MODIFIER = new Modifier<>(CombatModifierMethod._RANGED, null);
+	private static final Modifier<MoraleData> ATTACKER_LOST_EAGLE = new Modifier<>(MoraleModifierMethod.LOST_EAGLE, ATTACK);
+	private static final Modifier<MoraleData> DEFENDER_LOST_EAGLE = new Modifier<>(MoraleModifierMethod.LOST_EAGLE, DEFEND);
 	
 	// basic info of a battle
 	// Units participating in battle that have not died/routed.
@@ -47,10 +47,10 @@ public class Battle {
 	// record in attackinfo
 	private AttackInfo attackInfo;
 
-	private Iterable<MoraleModifier> moraleSupport;
-	private Iterable<CombatModifier> combatSupport;
-	private Repeat<MoraleModifier> attEagleDebuff;
-	private Repeat<MoraleModifier> defEagleDebuff;
+	private Iterable<Modifier<MoraleData>> moraleSupport;
+	private Iterable<Modifier<CombatData>> combatSupport;
+	private Repeat<Modifier<MoraleData>> attEagleDebuff;
+	private Repeat<Modifier<MoraleData>> defEagleDebuff;
 	
 
 
@@ -72,16 +72,16 @@ public class Battle {
 		//this.attackInfo = new AttackInfo();
 		// Get support modifies from both armies
 		// IMPORTANT: Iterables will update as the army and the unit update.
-		Iterable<Iterable<CombatModifier>> attCombatSupport = 
+		Iterable<Iterable<Modifier<CombatData>>> attCombatSupport = 
 				new MappingIterable<>(armies.get(ATTACK), (Unit u) -> u.getCombatModifiers(SUPPORT, ATTACK));
-		Iterable<Iterable<CombatModifier>> defCombatSupport = 
+		Iterable<Iterable<Modifier<CombatData>>> defCombatSupport = 
 				new MappingIterable<>(armies.get(DEFEND), (Unit u) -> u.getCombatModifiers(SUPPORT, DEFEND));
 		
-		this.combatSupport = new Concatenator<CombatModifier>(attCombatSupport).and(defCombatSupport);
+		this.combatSupport = new Concatenator<Modifier<CombatData>>(attCombatSupport).and(defCombatSupport);
 
-		Iterable<Iterable<MoraleModifier>> attMoraleSupport = 
+		Iterable<Iterable<Modifier<MoraleData>>> attMoraleSupport = 
 				new MappingIterable<>(armies.get(ATTACK), (Unit u) -> u.getMoraleModifiers(SUPPORT, ATTACK));
-		Iterable<Iterable<MoraleModifier>> defMoraleSupport = 
+		Iterable<Iterable<Modifier<MoraleData>>> defMoraleSupport = 
 				new MappingIterable<>(armies.get(DEFEND), (Unit u) -> u.getMoraleModifiers(SUPPORT, DEFEND));
 		
 		
@@ -89,7 +89,7 @@ public class Battle {
 		attEagleDebuff = new Repeat<>(ATTACKER_LOST_EAGLE, 0);
 		defEagleDebuff = new Repeat<>(DEFENDER_LOST_EAGLE, 0);  
 		
-		this.moraleSupport = new Concatenator<MoraleModifier>(
+		this.moraleSupport = new Concatenator<Modifier<MoraleData>>(
 					attMoraleSupport)
 				.and(attEagleDebuff)
 				.and(defMoraleSupport)
@@ -237,7 +237,7 @@ public class Battle {
 			int defOldHealth = defendUnit.getHealth();
 
 			logger.log("Healths are " + attOldHealth + " : " + defOldHealth);
-			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
+			Concatenator<Modifier<CombatData>> combatModifiers = new Concatenator<>(combatSupport);
 			
 			// Decide engagement type
 			boolean isRanged = tryRanged(attackUnit, defendUnit); // RANDOM (ONCE)
@@ -271,14 +271,14 @@ public class Battle {
 			MoraleData data = new MoraleData(attackUnit, defendUnit, armies.get(ATTACK), armies.get(DEFEND));
 
 			// Modify morale
-			Concatenator<MoraleModifier> moraleModifiers = new Concatenator<MoraleModifier>(
+			Concatenator<Modifier<MoraleData>> moraleModifiers = new Concatenator<Modifier<MoraleData>>(
 					moraleSupport,
 					defendUnit.getMoraleModifiers(ENGAGEMENT, DEFEND),
 					attackUnit.getMoraleModifiers(ENGAGEMENT, ATTACK));
 			moraleModifiers.forEach(m->m.modify(data));
 			
 			StringBuilder modifierString = new StringBuilder();
-			for (MoraleModifier m : moraleModifiers) {
+			for (Modifier<MoraleData> m : moraleModifiers) {
 				modifierString.append(m.toString());
 				modifierString.append(" ");
 			}
@@ -356,7 +356,7 @@ public class Battle {
 			logger.into();
 			boolean isRanged = tryRanged(chaseUnit, routeUnit); // RANDOM (ONCE)
 			
-			Concatenator<CombatModifier> combatModifiers = new Concatenator<>(combatSupport);
+			Concatenator<Modifier<CombatData>> combatModifiers = new Concatenator<>(combatSupport);
 			if(isRanged){
 				combatModifiers = combatModifiers.and(RANGED_MODIFIER);
 				logger.log("Ranged Engagement");
@@ -386,7 +386,7 @@ public class Battle {
 	/**
 	 * Handles picking units in elephants amok, CombatModifiers, damage, and killing units 
 	 */
-	public void inflictDamage(Unit aggressor, Unit victim, BattleSide aggressorSide, Concatenator<CombatModifier> combatModifiers, boolean isRanged) {
+	public void inflictDamage(Unit aggressor, Unit victim, BattleSide aggressorSide, Concatenator<Modifier<CombatData>> combatModifiers, boolean isRanged) {
     	// Elephants running amok:
 		// Late nights and a dim screen are all I've known,
 		// Every new day bringing new incorrect solution.
@@ -425,7 +425,7 @@ public class Battle {
 			.and(aggressor.getCombatModifiers(ENGAGEMENT, aggressorSide))
 			.and(victim.getCombatModifiers(ENGAGEMENT, aggressorSide.other()));
 		StringBuilder modifierString = new StringBuilder();
-		for (CombatModifier m : combatModifiers) {
+		for (Modifier<CombatData> m : combatModifiers) {
 			modifierString.append(m.toString());
 			modifierString.append(" ");
 		}

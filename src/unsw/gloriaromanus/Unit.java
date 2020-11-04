@@ -229,15 +229,15 @@ public class Unit {
 	 * Packages the desired combat modifier methods into their morale modifier objects.
 	 * Returns an Iterable so no lists need to be copied.
 	 */
-	public Iterable<CombatModifier> getCombatModifiers(ActiveType type, BattleSide side) {
-		return new MappingIterable<>(combatModifiers.get(type), m -> new CombatModifier(m, side));
+	public Iterable<Modifier<CombatData>> getCombatModifiers(ActiveType type, BattleSide side) {
+		return new MappingIterable<>(combatModifiers.get(type), m -> new Modifier<>(m, side));
 	}
 	/**
 	 * Packages the desired morale modifier methods into their morale modifier objects.
 	 * @see Unit.getCombatModifiers
 	 */
-	public Iterable<MoraleModifier> getMoraleModifiers(ActiveType type, BattleSide side) {
-		return new MappingIterable<>(moraleModifiers.get(type), m -> new MoraleModifier(m, side));
+	public Iterable<Modifier<MoraleData>> getMoraleModifiers(ActiveType type, BattleSide side) {
+		return new MappingIterable<>(moraleModifiers.get(type), m -> new Modifier<>(m, side));
 	}
 
 	public int getMaxMovPoints() {

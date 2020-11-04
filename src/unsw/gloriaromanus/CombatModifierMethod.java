@@ -3,27 +3,7 @@ package unsw.gloriaromanus;
 import static unsw.gloriaromanus.ActiveType.*;
 import static unsw.gloriaromanus.BattleSide.*;
 
-/**
- * A Strategy used to modify combatStats before casualties are 
- * inflicted according to some ability or special rule.
- */
-class CombatModifier{
-	private CombatModifierMethod method;
-	private BattleSide side;
-	
-	CombatModifier(CombatModifierMethod method, BattleSide side) {
-		this.side = side;
-		this.method = method;
-	}
-	
-	public void modify(CombatData data) {
-		method.modify(data, side);
-	}
-	@Override
-	public String toString() {
-		return method.toString();
-	}
-}
+
 
 
 /**

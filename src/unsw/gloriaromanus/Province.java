@@ -201,7 +201,7 @@ public class Province {
 
 	/**
 	 * All state changes when province switches hands. IMPORTANT: New units entering
-	 * a province must only enter *after* this method is called.
+	 * a province must only enter *after* this method is called. (Or they will be deleted)
 	 */
 	private void onConquered() {
 		trainingSlotNum += trainingSlots.size();
@@ -303,7 +303,7 @@ public class Province {
 		isConquered = false;
 		List<ItemSlotEntry> copyTrainingSlots = new ArrayList<>(trainingSlots);
 		List<ItemSlotEntry> copyBuildingSlots = new ArrayList<>(buildingSlots);
-		new Concatenator<ItemSlotEntry>(copyBuildingSlots).and(copyTrainingSlots).forEach(m -> m.update());
+		new Concatenator<>(copyBuildingSlots).and(copyTrainingSlots).forEach(m -> m.update());
 		units.forEach(u -> u.update());
 	}
 

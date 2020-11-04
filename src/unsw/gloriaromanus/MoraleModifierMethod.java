@@ -2,29 +2,7 @@ package unsw.gloriaromanus;
 import static unsw.gloriaromanus.ActiveType.*;
 
 import java.util.List;
-/**
- * Storage struct to pair a side and method
- * 
- */
-class MoraleModifier{
-	
-	private MoraleModifierMethod method;
-	private BattleSide side;
-	
-	MoraleModifier(MoraleModifierMethod method, BattleSide side) {
-		this.side = side;
-		this.method = method;
-	}
-	@Override
-	public String toString() {
-		return method.toString();
-	}
-	
-	public void modify(MoraleData data) {
-		method.modify(data, side);
-	}
-	
-}
+
 
 enum MoraleModifierMethod implements ModifierMethod<MoraleData> {
 	_HEROIC_CHARGE_MORALE(ENGAGEMENT) {
