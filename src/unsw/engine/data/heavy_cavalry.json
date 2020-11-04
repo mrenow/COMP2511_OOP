@@ -1,0 +1,26 @@
+// Pretty decent units, top teir stuff
+
+{
+	"maxLevel" : 1,
+	"names" : "Heavy Cavalry",
+	"descriptions" : "Very powerful units all round",
+	"costs" : 80,
+	"durations" : 2,
+	
+	"class" : "MELEE_CAVALRY",
+	
+	"movPoints" : 15,
+	
+	"health" : 50,
+	"speed" : 7,
+	"morale" : 6,
+	"armour" : 4,
+	"defenseSkill" : 1,
+	"shieldDefense" : 0,
+	
+	"attack" : 10,
+	"charge" : 3,
+	
+	"combatModifiers" : "",
+	"moraleModifiers" : ""
+}

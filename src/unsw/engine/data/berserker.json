@@ -1,0 +1,24 @@
+{
+	"maxLevel" : 1,
+	"names" : "Berserker",
+	"descriptions" : "Reckless warriors. Dont get too attatched: they WILL die.",
+	"costs" : 10,
+	"durations" : 1,
+	
+	"class" : "MELEE_INFANTRY",
+	
+	
+	"movPoints" : 10,
+	
+	"health" : 100,
+	"speed" : 5,
+	"morale" : 0, // Infinity in post processing
+	"armour" : 0,  // neg Infinity in post processing
+	"defenseSkill" : 2,
+	"shieldDefense" : 0,
+	
+	"attack" : 6,
+	
+	"combatModifiers" : "",
+	"moraleModifiers" : ""
+}

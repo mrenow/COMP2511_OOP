@@ -1,0 +1,18 @@
+{
+// Morale
+"_HEROIC_CHARGE_MORALE" : "description",
+"VERY_HIGH_TAX" : "description",
+"DRUIDIC_FERVOUR" : "description",
+"FIRE_ARROWS_MORALE" : "description",
+"LEGIONARY_EAGLE" : "description",
+"LOST_EAGLE" : "description",
+// Combat
+"_RANGED" : "description",
+"_ARTILLERY" : "description",
+"_TOWER" : "description",
+"_SHIELD_CHARGE" : "description",
+"_HEROIC_CHARGE_COMBAT" : "description",
+"FIRE_ARROWS_COMBAT" : "description",
+"SKIRMISHER_ANTI_ARMOUR" : "description",
+"CANTABRIAN_CIRCLE" : "description"
+}
