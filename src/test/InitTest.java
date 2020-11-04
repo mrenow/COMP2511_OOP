@@ -87,7 +87,7 @@ public class InitTest {
     	}
     }
     @Test
-    public void provinceAllocation() throws DataInitializationException {
+    public void provinceAllocation() throws DataInitializationError {
     	
     	// Tested on 10000 runs without fail, so 50 will do for now.
     	for (int i = 0; i < 50; i ++) {

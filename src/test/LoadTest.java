@@ -34,7 +34,7 @@ public class LoadTest {
     	 
     }
 	@Test
-    public void loadSaveGame() throws DataInitializationException, IOException{
+    public void loadSaveGame() throws DataInitializationError, IOException{
 		TestUtil.assertCollectionAttributeEquals(List.of("P1","P2","P3","P4"), game.getProvinces(null), Province::getName);
     	TestUtil.assertCollectionAttributeEquals(List.of("Rome", "Gaul"), game.getFactions(), Faction::getTitle);
 		game.saveGame(filename);

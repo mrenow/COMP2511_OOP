@@ -26,7 +26,7 @@ public class BuildTest {
 	private GameController game;
 	private Faction player;
 
-	public void basicBuildTest() throws DataInitializationException {
+	public void basicBuildTest() throws DataInitializationError {
 		game = GameController.loadFromSave("src/test/testBuildInfras.json");
 		player = game.getCurrentTurn();
 		ItemType infras = ItemType.TEST_BUILDING;
@@ -46,7 +46,7 @@ public class BuildTest {
 
 	}
 
-	public void cancelBuildTest() throws DataInitializationException {
+	public void cancelBuildTest() throws DataInitializationError {
 		game = GameController.loadFromSave("src/test/testBuildInfras.json");
 		player = game.getCurrentTurn();
 		ItemType infras = ItemType.TEST_BUILDING;

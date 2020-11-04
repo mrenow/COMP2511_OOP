@@ -21,11 +21,11 @@ public class MoveTest {
 	 * #US65:
 	 * AC: The players should have a way to see the movement points available for units in the province.
 	 * 
-	 * @throws DataInitializationException
+	 * @throws DataInitializationError
 	 * @throws IOException
 	 */
     @BeforeEach
-    public void setup() throws DataInitializationException, IOException {
+    public void setup() throws IOException {
     	game = new GameController("src/test/testAdjacency_movement.json", null, "src/test/testOwnership_movement.json");
 		player = game.getCurrentTurn();
 		allUnits = P(1).getUnits();
@@ -163,7 +163,7 @@ public class MoveTest {
     /*
      * Player starting with x provinces owned, move units to adjacent province
      * 
-     * @throws Exception
+     * @throws Exceptgit ion
      
     @BeforeEach
     public void setupGame() throws Exception{

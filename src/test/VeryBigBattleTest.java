@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import unsw.gloriaromanus.AttackInfo;
 import unsw.gloriaromanus.Battle;
-import unsw.gloriaromanus.DataInitializationException;
+import unsw.gloriaromanus.DataInitializationError;
 import unsw.gloriaromanus.Faction;
 import unsw.gloriaromanus.GameController;
 import unsw.gloriaromanus.GlobalRandom;
@@ -36,7 +36,7 @@ public class VeryBigBattleTest {
     }
     // Checks that a battle that goes on for more than 200 engagements fails.
     @Test
-    public void bigEngagementTimeout() throws FileNotFoundException, DataInitializationException {
+    public void bigEngagementTimeout() throws FileNotFoundException, DataInitializationError {
     	GlobalRandom.init(-8182561916007065045L);
     	
     	Battle b = new Battle(romanUnits, gallicUnits);

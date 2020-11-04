@@ -30,11 +30,11 @@ public class TrainingTest {
      * AC: Troops trained should take <Training time> turns to train.
      * AC: Players should see the gold price for the troop subtracted from their treasury when the command to train is made.
      * 
-     * @throws DataInitializationException
+     * @throws DataInitializationError
      * @throws Exception 
      */
     @Test
-    public void basicTraining() throws DataInitializationException {
+    public void basicTraining() throws DataInitializationError {
         game = GameController.loadFromSave("src/test/testTraining_troop.json");
         player = game.getCurrentTurn();
         ItemType cavalry = ItemType.TEST_TROOP;
@@ -75,10 +75,10 @@ public class TrainingTest {
      * AC: Upon cancelling, players should see the cancelled unit removed from the list of unit in production.
      * AC: Cancelling should free up a training slot.
      * 
-     * @throws DataInitializationException
+     * @throws DataInitializationError
      */
     @Test
-    public void cancelTraining() throws DataInitializationException {
+    public void cancelTraining() throws DataInitializationError {
         game = GameController.loadFromSave("src/test/testTraining_troop.json");
         player = game.getCurrentTurn();
         ItemType calvary = ItemType.HEAVY_CAVALRY;
@@ -111,7 +111,7 @@ public class TrainingTest {
 
     }
     
-    public static void main(String[] args) throws DataInitializationException {
+    public static void main(String[] args) throws DataInitializationError {
         GameController game;
         Faction player;
         game = GameController.loadFromSave("src/test/testTraining_troop.json");

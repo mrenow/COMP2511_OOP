@@ -41,12 +41,12 @@ public class TaxTest {
      * #US85
      * AC: Wealth growth should add / subtract from / to the province's wealth every turn.
      * AC: Negative town wealth growth should never reduce a province's wealth below its building wealth.
-     * @throws DataInitializationException 
+     * @throws DataInitializationError 
      * @throws Exception
      */
 
 	@Test
-    public void testTaxIncome() throws DataInitializationException{
+    public void testTaxIncome() throws DataInitializationError{
     	game = GameController.loadFromSave("src/test/testSave_wealthGen.json");
     	player = game.getCurrentTurn(); 
 		assertEquals(100, player.getGold());
@@ -80,10 +80,10 @@ public class TaxTest {
 	 * Testing that tax levels can be set many times on one turn.
 	 * #US86:
 	 * AC: Players should be able to select and change tax levels.
-	 * @throws DataInitializationException
+	 * @throws DataInitializationError
 	 */
 	@Test
-	public void changeTaxRate() throws DataInitializationException {
+	public void changeTaxRate() throws DataInitializationError {
     	game = GameController.loadFromSave("src/test/testSave_wealthGen.json");
     	player = game.getCurrentTurn(); 
 		Province pVeryHigh = game.getProvince("P4");
@@ -109,7 +109,7 @@ public class TaxTest {
 	 * built buildings are applied, Players should receive round(tax rate * province wealth) in gold.
 	 * @throws DataInitializationExceptio
 	 */
-	public void wealthBuildings() throws DataInitializationException {
+	public void wealthBuildings() throws DataInitializationError {
     	game = GameController.loadFromSave("src/test/testSave_wealthGen2.json");
     	player = game.getCurrentTurn(); 
 		// test that base wealth is added properly

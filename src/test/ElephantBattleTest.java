@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import unsw.gloriaromanus.AttackInfo;
 import unsw.gloriaromanus.Battle;
-import unsw.gloriaromanus.DataInitializationException;
+import unsw.gloriaromanus.DataInitializationError;
 import unsw.gloriaromanus.Faction;
 import unsw.gloriaromanus.GameController;
 import unsw.gloriaromanus.GlobalRandom;
@@ -37,7 +37,7 @@ public class ElephantBattleTest {
     
 	// Covers a case where elephants try to attack themselves but instead choose a different opponent
 	@Test
-	public void elephantsAmok1() throws FileNotFoundException, DataInitializationException {
+	public void elephantsAmok1() throws FileNotFoundException, DataInitializationError {
 
 		GlobalRandom.init(-1272667509544333134L);
 		Battle b = new Battle(romanUnits, gallicUnits);
@@ -47,7 +47,7 @@ public class ElephantBattleTest {
 	}
 	// Covers a case where elephants attack any allies
 	@Test
-	public void elephantsAmok() throws FileNotFoundException, DataInitializationException {
+	public void elephantsAmok() throws FileNotFoundException, DataInitializationError {
 
 		GlobalRandom.init(-5216799251492405668L);
 		Battle b = new Battle(List.of(RU(0), RU(1)), List.of(GU(0), GU(1)));

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import unsw.gloriaromanus.AttackInfo;
 import unsw.gloriaromanus.Battle;
-import unsw.gloriaromanus.DataInitializationException;
+import unsw.gloriaromanus.DataInitializationError;
 import unsw.gloriaromanus.Faction;
 import unsw.gloriaromanus.GameController;
 import unsw.gloriaromanus.GlobalRandom;
@@ -101,7 +101,7 @@ public class BattleTest {
     	game.endTurn();    	
     }
     @Test 
-    public void legionaryEagleDebuff() throws IOException, DataInitializationException {
+    public void legionaryEagleDebuff() throws IOException, DataInitializationError {
     	GlobalRandom.init(1088668973864283015L);
     	// get ready to curbstomp two eagle units
     	game.move(List.of(RU(4),RU(5)), P(2));
