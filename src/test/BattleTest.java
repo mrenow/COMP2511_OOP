@@ -17,14 +17,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unsw.gloriaromanus.AttackInfo;
-import unsw.gloriaromanus.Battle;
-import unsw.gloriaromanus.DataInitializationError;
-import unsw.gloriaromanus.Faction;
-import unsw.gloriaromanus.GameController;
-import unsw.gloriaromanus.GlobalRandom;
-import unsw.gloriaromanus.Province;
-import unsw.gloriaromanus.Unit;
+import unsw.engine.AttackInfo;
+import unsw.engine.Battle;
+import unsw.engine.DataInitializationError;
+import unsw.engine.Faction;
+import unsw.engine.GameController;
+import unsw.engine.GlobalRandom;
+import unsw.engine.Province;
+import unsw.engine.Unit;
 
 public class BattleTest {
     private GameController game;

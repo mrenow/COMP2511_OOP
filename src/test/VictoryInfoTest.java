@@ -1,14 +1,14 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static unsw.engine.VicCondition.VictoryCondition.*;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import unsw.gloriaromanus.GameController;
-import unsw.gloriaromanus.VictoryInfo;
-import unsw.gloriaromanus.VicCondition.*;
-import static unsw.gloriaromanus.VicCondition.VictoryCondition.*;
+import unsw.engine.GameController;
+import unsw.engine.VictoryInfo;
+import unsw.engine.VicCondition.*;
 
 public class VictoryInfoTest {
 
