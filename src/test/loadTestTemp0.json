@@ -72,25 +72,11 @@
     "type" : "ROME",
     "gold" : 100,
     "provinces" : [ "P1", "P2" ],
-    "vicInfo" : {
-      "conquest" : 0.0,
-      "treasury" : 0.0,
-      "infrastructure" : 0.0,
-      "wealth" : 0.0,
-      "vicConditions" : null
-    },
     "lostEagles" : [ ]
   }, {
     "type" : "GAUL",
     "gold" : 10,
     "provinces" : [ "P3", "P4" ],
-    "vicInfo" : {
-      "conquest" : 0.0,
-      "treasury" : 0.0,
-      "infrastructure" : 0.0,
-      "wealth" : 0.0,
-      "vicConditions" : null
-    },
     "lostEagles" : [ ]
   } ],
   "round" : 0,
