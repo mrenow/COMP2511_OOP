@@ -32,13 +32,9 @@ class CombatData {
 		private double defenseSkill = 0;
 		private double shieldDefense = 0;
 		
-		@JsonIgnore
 		private double armourMult = 1;
-		@JsonIgnore
 		private double attackMult = 1;
-		@JsonIgnore
 		private double armourAdd = 0;
-		@JsonIgnore
 		private double attackAdd = 0;  
 
 

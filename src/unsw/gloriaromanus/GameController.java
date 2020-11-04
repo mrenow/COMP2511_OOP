@@ -55,12 +55,12 @@ public class GameController {
 	 * @param saveFilename
 	 * @return Game from save file
 	 */
-	public static GameController loadFromSave(String saveFilename) throws DataInitializationException {
+	public static GameController loadFromSave(String saveFilename) throws DataInitializationError {
 		try{
-			return Parsing.mapper.readValue(new File(saveFilename), GameController.class);
+			return Parsing.readValue(new File(saveFilename), GameController.class);
 		}catch(Exception e) {
 			e.printStackTrace(); 
-			throw new DataInitializationException("Error while loading game", e);
+			throw new DataInitializationError("Error while loading game", e);
 		}
 		
 	}
@@ -68,7 +68,7 @@ public class GameController {
 	 * Saves game in human readable json
 	 */
 	public void saveGame(String saveFilename) throws IOException {
-		Parsing.mapper.writerWithDefaultPrettyPrinter().writeValue(new File(saveFilename), this);
+		Parsing.writeValue(new File(saveFilename), this);
 	}
 		
 	/**
@@ -77,26 +77,16 @@ public class GameController {
 	 * primarily used for testing backend.
 	 */
 	public GameController(String adjacencyFile,
-			String landlockedFile, String factionFile) throws DataInitializationException{
+			String landlockedFile, String factionFile) throws DataInitializationError{
 		Map<String, Province> provinceMap;
 		
 		
-		try {
-			provinceMap = Parsing.readAdjacency(adjacencyFile);
-			if(landlockedFile != null) {
-				Parsing.readLandlocked(landlockedFile, provinceMap);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			throw new DataInitializationException("Error while constructing provinces", e);
+		provinceMap = Parsing.readAdjacency(adjacencyFile);
+		if(landlockedFile != null) {
+			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}
-		try {
-			this.factionOrder = Parsing.readFactions(factionFile, provinceMap);
-			this.allProvinces = provinceMap.values();
-		}catch(Exception e){
-			e.printStackTrace();
-			throw new DataInitializationException("Error while constructing game from files", e);
-		}
+		this.factionOrder = Parsing.readFactions(factionFile, provinceMap);
+		this.allProvinces = provinceMap.values();
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
 
@@ -106,7 +96,7 @@ public class GameController {
 	 * Uses factionTypes list order to determine turn order.
 	 */
 	public GameController(String adjacencyFile, String landlockedFile,
-			List<FactionType> factionTypes) throws DataInitializationException{
+			List<FactionType> factionTypes) throws DataInitializationError{
 		Map<String, Province> provinceMap;
 		try {
 			provinceMap = Parsing.readAdjacency(adjacencyFile);
@@ -115,14 +105,14 @@ public class GameController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new DataInitializationException("Error while constructing provinces", e);
+			throw new DataInitializationError("Error while constructing provinces", e);
 		}
 		try {	
 			this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap, STARTING_DENSITY);
 			this.allProvinces = provinceMap.values();
 		}catch(Exception e){
 			e.printStackTrace();
-			throw new DataInitializationException("Error while constructing game from automatic allocation", e);
+			throw new DataInitializationError("Error while constructing game from automatic allocation", e);
 		}
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}

@@ -16,8 +16,8 @@ class CombatModifier{
 		this.method = method;
 	}
 	
-	void modify(CombatData engagement) {
-		method.alterEngagement(engagement, side);
+	public void modify(CombatData data) {
+		method.modify(data, side);
 	}
 	@Override
 	public String toString() {
@@ -30,128 +30,140 @@ class CombatModifier{
  * Identifies a battle modifying strategy
  * Probably going to change this a lot yikes
  * Update: DID
- * @param engagement,
+ * @param data,
  * @return
  */
-enum CombatModifierMethod {
+enum CombatModifierMethod implements ModifierMethod<CombatData>{
 	// ActiveType = null means an exception will be thrown when 
 	// unit.addCombatModifier(RANGED) is called.
 	_RANGED(null){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
-			if(!engagement.getUnit(ATTACK).isRanged()) {
-				engagement.setAttack(ATTACK, Double.NEGATIVE_INFINITY);	
+		public void modify(CombatData data, BattleSide side) {
+			if(!data.getUnit(ATTACK).isRanged()) {
+				data.setAttack(ATTACK, Double.NEGATIVE_INFINITY);	
 			}
-			if(!engagement.getUnit(DEFEND).isRanged()) {
-				engagement.setAttack(DEFEND, Double.NEGATIVE_INFINITY);		
+			if(!data.getUnit(DEFEND).isRanged()) {
+				data.setAttack(DEFEND, Double.NEGATIVE_INFINITY);		
 			}
-			engagement.setDefenseSkill(DEFEND, Double.NEGATIVE_INFINITY);
-			engagement.setDefenseSkill(ATTACK, Double.NEGATIVE_INFINITY);
+			data.setDefenseSkill(DEFEND, Double.NEGATIVE_INFINITY);
+			data.setDefenseSkill(ATTACK, Double.NEGATIVE_INFINITY);
 		}
+
 	},
 	// Guarantee: Source unit is artillery
 	_ARTILLERY(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
-			Unit enemy = engagement.getUnit(side.other());			
+		public void modify(CombatData data, BattleSide side) {
+			Unit enemy = data.getUnit(side.other());			
 //			if(enemy.getUnitClass() == UnitClass.TOWER) {
-//				Artillery self = (Artillery)engagement.getUnit(side);
-//				engagement.setAttack(side, self.getSeigeAttack());
+//				Artillery self = (Artillery)data.getUnit(side);
+//				data.setAttack(side, self.getSeigeAttack());
 //			}
 		}
 	},
 	// Guarantee: Source unit is tower
 	_TOWER(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
-			Unit enemy = engagement.getUnit(side);
+		public void modify(CombatData data, BattleSide side) {
+			Unit enemy = data.getUnit(side);
 			if(!(enemy instanceof Artillery)) {
 				// non-artillery units cannot damage towers
-				engagement.setAttack(side.other(), Double.NEGATIVE_INFINITY);
+				data.setAttack(side.other(), Double.NEGATIVE_INFINITY);
 			}
-			// Engagement is given to be ranged. See RANGED(null)
+			// data is given to be ranged. See RANGED(null)
 		}
 	},	// Guarantee: unit is melee infantry
 	_SHIELD_CHARGE(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
+		public void modify(CombatData data, BattleSide side) {
 			if(GlobalRandom.nextUniform() < 0.25) {
-				engagement.addAttack(side, engagement.getShieldDefense(side));				
+				data.addAttack(side, data.getShieldDefense(side));				
 			}
 		}
 	},	// Guarantee: Unit is cavalry and melee
-	_HEROIC_CHARGE_COMBAT(ENGAGEMENT) {
+	_HEROIC_CHARGE_COMBAT(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
+		public void modify(CombatData data, BattleSide side) {
 			// When army has <50% of enemy units, apply this
 			// Double attack dmg, 50% inc morale
-			Unit enemy = engagement.getUnit(side.other());
-			MeleeCavalry self = (MeleeCavalry) engagement.getUnit(side);
+			Unit enemy = data.getUnit(side.other());
+			MeleeCavalry self = (MeleeCavalry) data.getUnit(side);
 
 			double chargeAttack = self.getChargeAttack();
 			if (self.getHealth() * 2 < enemy.getHealth()) {
 				chargeAttack *= 2;
 			}
-			engagement.addAttack(side, chargeAttack);
+			data.addAttack(side, chargeAttack);
 			
 		}
 	},
+	
 	// Guarantee: Source unit is ranged
 	FIRE_ARROWS_COMBAT(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
-			engagement.multAttack(side, 0.9);
+		public void modify(CombatData data, BattleSide side) {
+			data.multAttack(side, 0.9);
 		}
 	},
 
-	SKIRMISHER_ANTI_ARMOUR(ENGAGEMENT) {
+	SKIRMISHER_ANTI_ARMOUR(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
-			if (engagement.isRanged()) {
+		public void modify(CombatData data, BattleSide side) {
+			if (data.isRanged()) {
 				// Enemy only has half armour value
-				engagement.multArmour(side.other(), 0.5);
+				data.multArmour(side.other(), 0.5);
 			}
 		}
 	},
 	/* Done in Unit Creation instead
-	BERSERKER_RAGE(ENGAGEMENT) {
+	BERSERKER_RAGE(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side){
+		public void modify(CombatData data, BattleSide side){
 			// Unit has infinite morale, double meleeATK, no armour, no shield
-			engagement.multAttack(side, 2);
-			engagement.multArmour(side, Double.NEGATIVE_INFINITY);
-			engagement.setDefenseSkill(side, Double.NEGATIVE_INFINITY);
+			data.multAttack(side, 2);
+			data.multArmour(side, Double.NEGATIVE_INFINITY);
+			data.setDefenseSkill(side, Double.NEGATIVE_INFINITY);
 		}
 	},
-	PHALANX(ENGAGEMENT) {
+	PHALANX(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
+		public void modify(CombatData data, BattleSide side) {
 			// TODO Unit has double meleeDEF, half speed
-			engagement.multShieldDefense(side, 2);
+			data.multShieldDefense(side, 2);
 		}
 	},
 	*/
-	CANTABRIAN_CIRCLE(ENGAGEMENT) {
+	CANTABRIAN_CIRCLE(ENGAGEMENT){
 		@Override
-		void alterEngagement(CombatData engagement, BattleSide side) {
+		public void modify(CombatData data, BattleSide side) {
 			// TODO Enemy missile units 50% loss missileatkDMG
-			Unit enemy = engagement.getUnit(side.other());
+			Unit enemy = data.getUnit(side.other());
 			if (enemy.isRanged()) {
-				engagement.multAttack(side.other(), 0.5);
+				data.multAttack(side.other(), 0.5);
 			}
 		}
 	};
 	
 	private ActiveType active;
+	private String description;
+	
 	private CombatModifierMethod(ActiveType active) {
 		this.active = active;
+		this.description = ModifierMethod.DESCRIPTIONS.get(super.toString());
 	}
-
-	ActiveType getActiveType(){
+	
+	
+	public ActiveType getActiveType(){
 		return active;
 	}
 	
-	
-	abstract void alterEngagement(CombatData engagement, BattleSide side);
+	public String getDescription() {
+		return description;
+	}
+
+	public String toString() {
+		return super.toString();
+		
+	}
 	
 }

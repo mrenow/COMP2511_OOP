@@ -295,7 +295,7 @@ public class Province {
 	}
 
 	void addUnit(ItemType type) {
-		Unit u = Unit.newUnit(type, 1);
+		Unit u = Unit.newUnit(type, 1, this);
 		this.units.add(u);
 	}
 

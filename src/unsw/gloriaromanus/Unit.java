@@ -6,6 +6,7 @@ import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -117,16 +118,17 @@ public class Unit {
 		try {
 			Parsing.getEnums(combatString, CombatModifierMethod.class).forEach(this::addCombatModifier);
 			Parsing.getEnums(moraleString, MoraleModifierMethod.class).forEach(this::addMoraleModifier);
-		} catch (DataInitializationException e) {
+		} catch (NoSuchElementException e){
+			System.err.println(e);
 			e.printStackTrace();
-			// fatal
 			System.exit(1);
-		}
+		} 
 	}
 	@JsonCreator
 	public static Unit newUnit(
 			@JsonProperty("type") ItemType type,
-			@JsonProperty("level") int level) {
+			@JsonProperty("level") int level,
+			@JsonProperty("home") Province home) {
 		if(type == null) {
 			type = ItemType.TEST_TROOP;
 		}
@@ -136,25 +138,36 @@ public class Unit {
 		UnitClass unitClass = null;
 		try {
 			unitClass = Parsing.getEnum((String)type.getAttribute("class", level), UnitClass.class);
-		} catch (Exception e){
-			// Something has gone horribly wrong
+		} catch (NoSuchElementException e){
 			System.err.println(e);
 			e.printStackTrace();
 			System.exit(1);
 		} 
+		Unit out;
 		switch(unitClass) {
 		case MELEE_INFANTRY:
 		case RANGED:
-			return new Unit(type, unitClass, level);
+			out = new Unit(type, unitClass, level);
+			break;
 		case MELEE_CAVALRY:
-			return new MeleeCavalry(type,level);
+			out = new MeleeCavalry(type,level);
+			break;
 		case ARTILLERY:
-			return new Artillery(type, level);
-//		case TOWER:
-//			return new Tower(type, level);
+			out = new Artillery(type, level);
+			break;
+// 		case TOWER:
+//			out = new Tower(type, level);
+//			break;
 		default:
-			return null;//should never run
+			out = null;//should never run
+			break;
 		}
+		
+		if(home != null && home.getTaxLevel() == TaxLevel.VERY_HIGH_TAX) {
+			out.addMoraleModifier(MoraleModifierMethod.VERY_HIGH_TAX);
+		}
+		
+		return out;
 	}
 	
 	/**

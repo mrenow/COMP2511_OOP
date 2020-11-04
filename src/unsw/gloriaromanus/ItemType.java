@@ -106,26 +106,18 @@ public enum ItemType{
 		}
 	}
 	private ItemType(String filename) {
-		try {
-			constructFromFile(filename);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-			System.exit(1);
-		}
-		
-		
+		constructFromFile(filename);
 	}
 	/**
 	 * Fills in the enum attributes and attributes list.
 	 * @param filename
+	 * @throws DataInitializationError 
 	 * @throws Exception 
 	 * @throws ExceptionInInitializerError if name, desc, cost,
 	 * duration or maxlvl is missing frParsing.OM the file
 	 */
-	private void constructFromFile(String filename) throws Exception{
-		JsonNode root = Parsing.mapper.readTree(new File(filename));
+	private void constructFromFile(String filename) {
+		JsonNode root = Parsing.readTree(new File(filename));
 		// Needed to determine list size
 		this.maxLevel = root.get("maxLevel").asInt();
 		
@@ -141,9 +133,8 @@ public enum ItemType{
 		while(nodeNames.hasNext() ) {
 			String nodeName = nodeNames.next();
 			attributes.put(nodeName, generateLevelList(root.get(nodeName)));
-			if(attributes.get(nodeName).size() != maxLevel) {
-				throw new IOException(String.format("%s of %s had wrong number of elements.", nodeName, this.name()));
-			}
+			assert attributes.get(nodeName).size() == maxLevel :
+				String.format("%s of %s had wrong number of elements.", nodeName, this.name());
 		}
 	}
 	private <T> List<T> makeConstantList(T data, int size){
@@ -154,20 +145,14 @@ public enum ItemType{
  		return out;
 	}
 	
-	private <T> List<T> generateLevelList(JsonNode node) throws Exception{
+	private <T> List<T> generateLevelList(JsonNode node) {
 		if(node.isArray()) {
-			List<T> out = Parsing.mapper.readValue(node.toString(), new TypeReference<List<T>>(){});
-			if (out.size() != maxLevel) {
-				throw new DataInitializationException(
-						String.format("Error while parsing %s, too many elements in Json String: %s",
-								this.name(),
-								node.toString()
-								)
-						);
-			}
+			List<T> out = Parsing.readValue(node.toString());
+			assert out.size() == maxLevel :
+				String.format("Error while parsing %s, too many elements in Json String: %s", this.name(), node.toString());
 			return out;
-		}else {
-			return makeConstantList(Parsing.mapper.readValue(node.toString(), new TypeReference<T>() {}), this.maxLevel);
+		} else {
+			return makeConstantList(Parsing.readValue(node.toString()), this.maxLevel);
 		}
 	}
 	/**

@@ -20,16 +20,16 @@ class MoraleModifier{
 		return method.toString();
 	}
 	
-	void modify(MoraleData data) {
-		method.alterMorale(data, side);
+	public void modify(MoraleData data) {
+		method.modify(data, side);
 	}
 	
 }
 
-enum MoraleModifierMethod {
+enum MoraleModifierMethod implements ModifierMethod<MoraleData> {
 	_HEROIC_CHARGE_MORALE(ENGAGEMENT) {
 		@Override
-		void alterMorale(MoraleData data, BattleSide side) {
+		public void modify(MoraleData data, BattleSide side) {
 			// When army has <50% of enemy units, apply this
 			// Double charge attack dmg, 50% inc morale
 			Unit enemy = data.getUnit(side.other());
@@ -40,10 +40,16 @@ enum MoraleModifierMethod {
 			}
 		}
 	},
+	VERY_HIGH_TAX(ENGAGEMENT){
+		@Override
+		public void modify(MoraleData data, BattleSide side) {
+			data.addMorale(side, -1);
+		}
+	},
 	DRUIDIC_FERVOUR(SUPPORT){
 		// This is really dumb but 2511 has forced my hand
 		@Override
-		void alterMorale(MoraleData data, BattleSide side) {
+		public void modify(MoraleData data, BattleSide side) {
 			List<Unit> allies = data.getArmy(side);
 			// search allies for druids
 			int numDruids = 0;
@@ -61,37 +67,48 @@ enum MoraleModifierMethod {
 			data.multMorale(side.other(), moraleDebuff);
 		}
 	},
+	
 	FIRE_ARROWS_MORALE(ENGAGEMENT){
 		@Override
-		void alterMorale(MoraleData data, BattleSide side) {
+		public void modify(MoraleData data, BattleSide side) {
 			data.multMorale(side.other(), 0.8);
 		}
 	},
+	
 	LEGIONARY_EAGLE(SUPPORT) {
 		@Override
-		void alterMorale(MoraleData data, BattleSide side) {
+		public void modify(MoraleData data, BattleSide side) {
 			data.addMorale(side, 1);
 		}
 	},
+	
 	LOST_EAGLE(SUPPORT){
-		void alterMorale(MoraleData data, BattleSide side) {
+		@Override
+		public void modify(MoraleData data, BattleSide side) {
 			data.addMorale(side, -0.2);
 		}
 	};
 	
 
 	private ActiveType active;
+	private String description;
 	
 	private MoraleModifierMethod(ActiveType active) {
 		this.active = active;
+		this.description = ModifierMethod.DESCRIPTIONS.get(super.toString());
 	}
 	
-	ActiveType getActiveType(){
+	
+	public ActiveType getActiveType(){
 		return active;
 	}
-
-	abstract void alterMorale(MoraleData e, BattleSide side);
-
 	
-	
+	public String getDescription() {
+		return description;
+	}
+
+	public String toString() {
+		return super.toString();
+		
+	}
 }

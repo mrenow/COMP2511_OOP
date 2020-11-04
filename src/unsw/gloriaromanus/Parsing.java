@@ -2,6 +2,7 @@ package unsw.gloriaromanus;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Set;
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -33,12 +36,11 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
  * 
  */
 public class Parsing {
-	public static final ObjectMapper mapper = configuredObjectMapper();
+	private static final ObjectMapper mapper;
 	
-	
-	
-	private static ObjectMapper configuredObjectMapper() {
-		ObjectMapper newMapper = JsonMapper.builder()
+	// Code is run on class initialization
+	static {
+		mapper = JsonMapper.builder()
 				.enable(
 					JsonReadFeature.ALLOW_JAVA_COMMENTS,
 					JsonReadFeature.ALLOW_TRAILING_COMMA,
@@ -51,33 +53,123 @@ public class Parsing {
 					MapperFeature.AUTO_DETECT_IS_GETTERS
 					)
 				.build();
-				
-		return newMapper;
 	}
 	
-	public static <T extends Enum<T>> T getEnum(String name, Class<T> typeRef) throws DataInitializationException {
+	/*
+	 * Wrapper functions to handle errors and handle generic inference
+	 */
+	
+	// Wrapper to handle error internally.
+	
+	// Oh god why cant we have pythion decorators all I wanted to do was handle errors internally
+	public static <T> T readValue(File file, Class<T> typeRef) {
+		try{
+			T val = mapper.readValue(file, typeRef);
+			return val;
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
+		}
+	}
+	
+	// MakE IT STOp
+	public static <T> T readValue(String jsonString, Class<T> typeRef) {
+		try {
+			return mapper.readValue(jsonString, typeRef);
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
+		}
+	}
+
+	// I DONt WANT TO REfACTOR ANYMORE
+	public static <T> T readValue(String jsonString) {
+		try {
+			return mapper.readValue(jsonString, new TypeReference<T>() {});
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
+		}
+	}	
+	// WHERE Are MY C #DEFINEs
+	public static <T> T readValue(File file) {
+		try {
+			return mapper.readValue(file, new TypeReference<T>() {});
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
+		}
+	}
+	
+	public static JsonNode readTree(File file) {
+		try {
+			return mapper.readTree(file);
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
+		}
+	}
+	
+	public static void writeValue(File file, Object o) {
+		try {
+			mapper.writeValue(file, o);
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+	
+	public static JsonNode readTree(String jsonString) {
+		try {
+			return mapper.readTree(jsonString);
+		}catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
+		}
+	}
+		
+	
+	public static <T extends Enum<T>> T getEnum(String name, Class<T> typeRef) throws NoSuchElementException {
+
+		// Handle exception differently
 		try {
 			// Im lazy
-			return Parsing.mapper.readValue("\"" + name.toUpperCase() + "\"", typeRef);
+			return mapper.readValue("\"" + name.toUpperCase() + "\"", typeRef);
 		}catch(Exception e) {
-			throw new DataInitializationException("unit class " + name.toUpperCase() + " not recognized.");
+			e.printStackTrace();
+			throw new NoSuchElementException("unit class " + name.toUpperCase() + " not recognized.");
 		}
 	}
 	
 	
 	// Comma seprated enum fields.
-	public static <T extends Enum<T>> List<T> getEnums(String enumString, Class<T> typeRef) throws DataInitializationException{
+	public static <T extends Enum<T>> List<T> getEnums(String enumString, Class<T> typeRef) throws NoSuchElementException{
 		List<T> out = new ArrayList<>();
 		Scanner sc = new Scanner(enumString);
 		String name = "";
+		// Handle exception differently
 		try {
 			while(sc.hasNext()) {
 				name = sc.next();
-				T val = Parsing.mapper.readValue("\"" + name.toUpperCase() + "\"", typeRef);
+				T val = mapper.readValue("\"" + name.toUpperCase() + "\"", typeRef);
 				out.add(val);
 			}		
 		}catch(JsonProcessingException e){
-			throw new DataInitializationException("Error while parsing enum list: " + name + " not recognized",e);
+			e.printStackTrace();
+			throw new NoSuchElementException("Error while parsing enum list: " + name + " not recognized");
 		}
 		return out;
 	}
@@ -86,45 +178,59 @@ public class Parsing {
 	
 	
 	// Constructs provinces
-	public static Map<String, Province> readAdjacency(String provinceFile) throws Exception {
-		Map<String, Province> provinceMap= new HashMap<>();
-		// MUST COPY BEFORE EDITING MAPPER CONFIG
-		ObjectMapper om = mapper.copy();
-		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		List<Province> allProvinces = om.readValue(new File(provinceFile), new TypeReference<List<Province>>() {});
-		for (Province p : allProvinces) {
-			for ( Unit u : p.getUnits()) {
-				u.loadProvince(p);
+	public static Map<String, Province> readAdjacency(String provinceFile) {
+		try {
+			Map<String, Province> provinceMap= new HashMap<>();
+			// MUST COPY BEFORE EDITING MAPPER CONFIG
+			ObjectMapper om = mapper.copy();
+			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			List<Province> allProvinces = om.readValue(new File(provinceFile), new TypeReference<List<Province>>() {});
+			for (Province p : allProvinces) {
+				for ( Unit u : p.getUnits()) {
+					u.loadProvince(p);
+				}
+				provinceMap.put(p.getName(), p);
 			}
-			provinceMap.put(p.getName(), p);
+			return provinceMap;
+		}catch(Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
 		}
-		return provinceMap;
 	}
-	public static void readLandlocked(String landlockedFile, Map<String, Province> allProvinces) throws Exception {
-		JsonNode root = mapper.readTree(new File(landlockedFile));
+	public static void readLandlocked(String landlockedFile, Map<String, Province> allProvinces) {
+		JsonNode root = Parsing.readTree(new File(landlockedFile));
 		for (JsonNode name : root) {
 			allProvinces.get(name.asText()).setLandlocked(true);
 		}
 	}
 	
-	public static List<Faction> readFactions(String factionFile, Map<String, Province> allProvinces) throws Exception {
-		// MUST COPY BEFORE EDITING MAPPER CONFIG
-		ObjectMapper om = mapper.copy();
-		JsonNode root = om.readTree(new File(factionFile));
-		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		// Construct factions without provinces
-		List<Faction> factionOrder = om.readValue(new File(factionFile), new TypeReference<List<Faction>>() {});
-		// Province stuff
-		int factionIndex = 0;
-		for (JsonNode node : root) {
-			List<String> provinceNames = om.readValue(node.get("provinceNames").toString(), new TypeReference<List<String>>(){});
-			for (String name: provinceNames) {
-				factionOrder.get(factionIndex).loadProvince(allProvinces.get(name));
+	public static List<Faction> readFactions(String factionFile, Map<String, Province> allProvinces) {
+		try {
+			// MUST COPY BEFORE EDITING MAPPER CONFIG
+			ObjectMapper om = mapper.copy();
+			JsonNode root = om.readTree(new File(factionFile));
+			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			// Construct factions without provinces
+			List<Faction> factionOrder = om.readValue(new File(factionFile), new TypeReference<List<Faction>>() {});
+			// Province stuff
+			int factionIndex = 0;
+			for (JsonNode node : root) {
+				List<String> provinceNames = om.readValue(node.get("provinceNames").toString(), new TypeReference<List<String>>(){});
+				for (String name: provinceNames) {
+					factionOrder.get(factionIndex).loadProvince(allProvinces.get(name));
+				}
+				factionIndex ++;
 			}
-			factionIndex ++;
+			
+			return factionOrder;
+		}catch(Exception e) {
+			System.err.println(e);
+			e.printStackTrace();
+			System.exit(1);
+			return null; // Never runs
 		}
-		
-		return factionOrder;
 	}
 	
 	/**
