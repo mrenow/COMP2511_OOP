@@ -33,12 +33,12 @@ public class Faction {
 	@JsonIdentityReference(alwaysAsId = true)
 	private Collection<Province> provinces = new ArrayList<Province>();
 
+
+	private VictoryInfo vicInfo = new VictoryInfo();
+	
 	// Non-string key Maps arent serializable
 	@JsonIgnore
 	private Map<Province, Integer> lostEagles = new HashMap<>();
-
-	@JsonIgnore
-	private VictoryInfo vicInfo = new VictoryInfo();
 
 	@JsonCreator
 	private Faction() {

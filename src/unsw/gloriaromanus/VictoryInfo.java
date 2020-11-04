@@ -2,10 +2,15 @@ package unsw.gloriaromanus;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 import unsw.gloriaromanus.VicCondition.*;
 
+
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class VictoryInfo {
     //winCondition;
     Double conquest=0.0;
@@ -13,7 +18,7 @@ public class VictoryInfo {
     Double infrastructure=0.0;
     Double wealth=0.0;
 
-
+    @JsonIdentityReference(alwaysAsId = true)
     VicComponent vicConditions;
 
     @JsonCreator

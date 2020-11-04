@@ -98,22 +98,12 @@ public class GameController {
 	public GameController(String adjacencyFile, String landlockedFile,
 			List<FactionType> factionTypes) throws DataInitializationError{
 		Map<String, Province> provinceMap;
-		try {
-			provinceMap = Parsing.readAdjacency(adjacencyFile);
-			if(landlockedFile != null) {
-				Parsing.readLandlocked(landlockedFile, provinceMap);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			throw new DataInitializationError("Error while constructing provinces", e);
+		provinceMap = Parsing.readAdjacency(adjacencyFile);
+		if(landlockedFile != null) {
+			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}
-		try {	
-			this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap, STARTING_DENSITY);
-			this.allProvinces = provinceMap.values();
-		}catch(Exception e){
-			e.printStackTrace();
-			throw new DataInitializationError("Error while constructing game from automatic allocation", e);
-		}
+		this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap, STARTING_DENSITY);
+		this.allProvinces = provinceMap.values();
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
 	/**
