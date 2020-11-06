@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class VicLeaf implements VicComponent{
     private VictoryCondition goal=null;
+    private Double progress = 0.0;
 
     @JsonCreator
     public VicLeaf(){}
@@ -18,7 +19,18 @@ public class VicLeaf implements VicComponent{
         return goal;
     }
     @Override
-    public boolean isLogic(){
-        return false;
+    public boolean checkVic(){
+        return (progress>=1.0)?(true):(false);
+    }
+    void update(Double progress){
+        this.progress = progress;
+    }
+
+    @Override
+    public double getProgress(VictoryCondition vCondition) {
+        if (vCondition==goal) {
+            return progress;
+        }
+        return -1;
     }
 }

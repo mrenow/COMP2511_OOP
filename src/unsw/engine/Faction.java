@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.databind.ser.std.CollectionSerializer;
 
+import unsw.engine.VicCondition.VicComposite;
 import util.DeserializableEntry;
 import util.MappingIterable;
 
@@ -34,7 +35,7 @@ public class Faction {
 	private Collection<Province> provinces = new ArrayList<Province>();
 
 
-	private VictoryInfo vicInfo = new VictoryInfo();
+	private VicComposite vicComposite = new VicComposite();
 	
 	// Non-string key Maps arent serializable
 	@JsonIgnore
@@ -147,9 +148,6 @@ public class Faction {
 		return getTitle();
 	}
 
-	public VictoryInfo getVictoryInfo() {
-		return vicInfo;
-	}
 
 	void putLostEagles(Province lostProvince, int numEagles) {
 		int oldNumEagles = lostEagles.getOrDefault(lostProvince, 0);
@@ -168,6 +166,14 @@ public class Faction {
 	@JsonGetter("lostEagles")
 	private List<DeserializableEntry<Province, Integer>> saveLostEagles() {
 		return lostEagles.entrySet().stream().map(DeserializableEntry::new).collect(Collectors.toList());
+	}
+
+	public VicComposite getVicComposite() {
+		return vicComposite;
+	}
+
+	public void setVicComposite(VicComposite vicComposite) {
+		this.vicComposite = vicComposite;
 	}
 
 	/*
