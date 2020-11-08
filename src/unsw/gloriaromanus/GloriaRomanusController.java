@@ -92,6 +92,11 @@ public class GloriaRomanusController {
 	private final double X_MIN = -3E6;
 	private final double Y_MAX = 8E6;
 	private final double Y_MIN = 2E6;
+	private final double PIXELS_PER_UNIT_X = 3778;
+	private final double PIXELS_PER_UNIT_Y = 3842;
+
+	// Used for custom panning algorithm
+	private Point mouseAnchor = null;
 
 	@FXML
 	private void initialize() throws JsonParseException, JsonMappingException, IOException {
@@ -164,15 +169,22 @@ public class GloriaRomanusController {
 		if (visArea.getYMin() < Y_MIN) {
 			deltaY = Y_MIN - visArea.getYMin();
 		}
+		// Shift mouse anchor appropriately if it exists.
+		if(mouseAnchor != null && (deltaX != 0 || deltaY != 0)) {
+			mouseAnchor = new Point(mouseAnchor.getX() + deltaX, mouseAnchor.getY() + deltaY , mouseAnchor.getSpatialReference());
+		}
 //      deltaX = 0;
 //      deltaY = 0;
 		System.out.println(deltaX + " " + deltaY);
-		System.out.println(visArea.getCenter());
+		System.out.println(mapView.getWidth()+ " " + mapView.getHeight());
+		
+		System.out.println(visArea.getXMin() + " " + visArea.getXMax() + " " + visArea.getYMin() + " " + visArea.getYMax());
 		Point oldCentre = visArea.getCenter();
 		Point newCentre = new Point(oldCentre.getX() + deltaX, oldCentre.getY() + deltaY,
 				oldCentre.getSpatialReference());
 		System.out.println(mapScale);
 		mapView.setViewpoint(new Viewpoint(newCentre, mapScale));
+		System.out.println(newCentre);
 	}
 
 	private void zoomAtPoint(Point centre, double factor) {
@@ -185,11 +197,18 @@ public class GloriaRomanusController {
 		Envelope viewArea = mapView.getVisibleArea().getExtent();
 		Point viewCentre = viewArea.getCenter();
 		assert centre.getSpatialReference().equals(viewCentre.getSpatialReference());
-		Point newViewCentre = new Point(viewCentre.getX() * (factor) + centre.getX() * (1 - factor),
+		// newViewCentre = lerp (centre, viewCentre, factor)
+		Point newViewCentre = new Point(
+				viewCentre.getX() * (factor) + centre.getX() * (1 - factor),
 				viewCentre.getY() * (factor) + centre.getY() * (1 - factor), viewCentre.getSpatialReference());
 		Envelope newViewArea = new Envelope(newViewCentre, viewArea.getWidth() * factor, viewArea.getHeight() * factor);
 		// mapView.setViewpointAsync(new Viewpoint(newViewCentre, newScale));
 		setConstrainedViewpoint(newViewArea, newScale);
+	}
+	
+	private void updateMinScale() {
+
+		map.setMinScale(MathUtil.min(PIXELS_PER_UNIT_X*(X_MAX-X_MIN)/mapView.getWidth(), PIXELS_PER_UNIT_Y*(Y_MAX-Y_MIN)/mapView.getHeight()));
 	}
 
 	/**
@@ -197,8 +216,6 @@ public class GloriaRomanusController {
 	 * FeatureLayer to be visible/invisible depending on owner. Can also update
 	 * graphics initially
 	 */
-	private Point mouseAnchor = null;
-	
 	private void initializeProvinceLayers() throws JsonParseException, JsonMappingException, IOException {
 		map = new ArcGISMap(Basemap.Type.OCEANS, 41.883333, 12.5, 0);
 		//map.getLoadSettings().setFeatureRequestMode(FeatureRequestMode.MANUAL_CACHE);
@@ -210,7 +227,10 @@ public class GloriaRomanusController {
 		mapView.setOnMousePressed((e)->{
 			mouseAnchor = mapView.screenToLocation(new Point2D(e.getX(), e.getY()));
 		});
-	
+
+		mapView.widthProperty().addListener((e, prev, next) -> updateMinScale());
+		
+		mapView.heightProperty().addListener((e, prev, next) -> updateMinScale());
 		
 		mapView.setOnMouseDragged(e -> {
 			if(mouseAnchor != null) {
@@ -230,7 +250,7 @@ public class GloriaRomanusController {
 		mapView.setOnScroll(e -> {
 			Point mapPos = mapView.screenToLocation(new Point2D(e.getX(), e.getY()));
 
-			zoomAtPoint(mapPos, 1 - 0.01 * e.getDeltaY());
+			zoomAtPoint(mapPos, 1 - 0.001 * e.getDeltaY());
 		});
 		mapView.addViewpointChangedListener((e)->setConstrainedViewpoint(mapView.getVisibleArea().getExtent(), mapView.getMapScale()));
 
