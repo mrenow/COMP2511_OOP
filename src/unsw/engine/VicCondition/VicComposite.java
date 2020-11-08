@@ -25,20 +25,48 @@ public class VicComposite implements VicComponent{
     public VictoryCondition getGoal(){
         return goal;
     }
-//    public boolean checkvictory() {
-//    	// check that conditions are satisfied here by checking victory on children
-//    	// logic depends on AND or OR
-//    	for (goal : subgoals) {
-//  
-//    		
-//    	}
-//    }
     @Override
-    public boolean isLogic(){
-        return true;
+    public boolean checkVic() {
+        switch (goal) {
+            case AND:
+                for (VicComponent vicComponent : subgoals) {
+                    if (!vicComponent.checkVic()) {
+                        return false;
+                    }
+                }
+                return true;
+            case OR:
+                for (VicComponent vicComponent : subgoals) {
+                    if (vicComponent.checkVic()) {
+                        return true;
+                    }
+                }
+                return false;
+            default:
+                return false;
+        }
     }
 
     public List<VicComponent> getSubgoals(){
         return subgoals;
+    }
+
+    public void update(VictoryCondition vCondition, Double progress){
+        for (VicComponent vicComponent : subgoals) {
+            if (vicComponent.getGoal()==vCondition) {
+                VicLeaf vl =(VicLeaf)vicComponent;
+                vl.update(progress);
+            }
+        }
+    }
+
+    @Override
+    public double getProgress(VictoryCondition vCondition) {
+        for (VicComponent vicComponent : subgoals) {
+            if (vicComponent.getGoal()==vCondition) {
+                return vicComponent.getProgress(vCondition);
+            }
+        }
+        return -1;
     }
 }

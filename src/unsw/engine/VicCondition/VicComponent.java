@@ -14,5 +14,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public interface VicComponent {
 	VictoryCondition getGoal();
-    boolean isLogic();
+    boolean checkVic();
+    double getProgress(VictoryCondition vCondition);
 }

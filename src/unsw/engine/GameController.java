@@ -17,6 +17,9 @@ import java.util.Set;
 
 import org.geojson.Point;
 
+import unsw.engine.VicCondition.VicComposite;
+import unsw.engine.VicCondition.VictoryCondition;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
@@ -356,11 +359,11 @@ public class GameController {
 	/**
 	 * @return null if no one has won, otherwise returns a victory info object detailing who has won and by which victory.
 	 */
-	public VictoryInfo endTurn() {
+	public VicComposite endTurn() {
 		Faction curr = getCurrentTurn();
 		curr.update();//update faction's gold and province wealth
 		updateVictoryInfo();
-		VictoryInfo vic = checkVictory();
+		VicComposite vic = checkVictory();
 		if(vic==null){	
 			this.currentTurn++;
 			if (this.factionOrder.size() == this.currentTurn) {
@@ -372,19 +375,19 @@ public class GameController {
 	}
 	private void updateVictoryInfo(){
 		Faction faction = getCurrentTurn();
-		VictoryInfo vic = faction.getVictoryInfo();
+		VicComposite vic = faction.getVicComposite();
 		double ownpro = faction.getProvinces().size();
 		double allpro = this.getNumProvinces();
-		vic.setConquest(ownpro/allpro);
-		vic.setTreasury(faction.getGold() /100000.0);
-		vic.setWealth(faction.getTotalWealth()/400000.0);
+		vic.update(VictoryCondition.CONQUEST, ownpro/allpro);
+		vic.update(VictoryCondition.TREASURY, faction.getGold() /100000.0);
+		vic.update(VictoryCondition.WEALTH, faction.getTotalWealth()/400000.0);
 	}
 //	returns non-null VictoryInfo if the player ending their turn has won.
-	public VictoryInfo checkVictory() {
+	public VicComposite checkVictory() {
 		//return getCurrentTurn().getVictoryInfo();
-		VictoryInfo vInfo = getCurrentTurn().getVictoryInfo();
-		if (vInfo.isVictory()) {
-			return vInfo;
+		VicComposite vicComposite = getCurrentTurn().getVicComposite();
+		if (vicComposite.checkVic()) {
+			return vicComposite;
 		} else {
 			return null;
 		}
