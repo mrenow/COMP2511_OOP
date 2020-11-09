@@ -271,12 +271,7 @@ public class GloriaRomanusController {
 		// Basically unit bashing
 		map.setMinScale(MathUtil.min(PIXELS_PER_UNIT_X*(X_MAX-X_MIN)/mapView.getWidth(), PIXELS_PER_UNIT_Y*(Y_MAX-Y_MIN)/mapView.getHeight()));
 	}
-	
-	private void setHighlight() {
-		
-		
-		
-	}
+
 
 	/**
 	 * run this initially to update province owner, change feature in each
@@ -321,8 +316,9 @@ public class GloriaRomanusController {
 		});
 		mapView.addViewpointChangedListener((e)->setConstrainedViewpoint(mapView.getVisibleArea().getExtent(), mapView.getMapScale()));
 
-		// testing
+		// TODO REMOVE:
 		mapView.setOnKeyTyped(this::debugActions);
+		
 		// Overlays
 		
 		for(int i = 0; i < overlays.length; i ++) {
@@ -456,6 +452,8 @@ public class GloriaRomanusController {
 							System.out.println("hey listen");
 							Feature f = (Feature) identifyLayerResult.getElements().get(0);
 							String province = (String) f.getAttributes().get("name");
+
+							// TODO : Better highlights
 							setUniqueMarker(uniqueHoverMarker, province, ATTACK_ICON);
 							setUniqueShape(uniqueHoverOutline, province, ON_HOVER_SYMBOL);
 							
@@ -504,6 +502,7 @@ public class GloriaRomanusController {
 							Feature f = features.get(0);
 							String province = (String) f.getAttributes().get("name");
 							
+							// TODO : Sets patterns for testing only
 							if(e.getButton() == MouseButton.PRIMARY) {
 								setNamedProvinceSymbols(List.of(province), PATTERN_LAYER, CAN_MOVE_SYMBOL);
 							}else {
