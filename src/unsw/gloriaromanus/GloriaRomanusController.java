@@ -214,6 +214,10 @@ public class GloriaRomanusController {
 		}
 	}
 
+
+
+
+	
 	private void setConstrainedViewpoint(Envelope visArea, double mapScale) {
 
 		double deltaX = 0, deltaY = 0;
