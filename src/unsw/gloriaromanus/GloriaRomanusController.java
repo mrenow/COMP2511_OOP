@@ -28,6 +28,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -40,6 +41,7 @@ import com.esri.arcgisruntime.data.GeoPackage;
 import com.esri.arcgisruntime.data.QueryParameters;
 import com.esri.arcgisruntime.data.ServiceFeatureTable.FeatureRequestMode;
 import com.esri.arcgisruntime.geometry.Envelope;
+import com.esri.arcgisruntime.geometry.Geometry;
 import com.esri.arcgisruntime.geometry.GeometryEngine;
 import com.esri.arcgisruntime.geometry.Point;
 import com.esri.arcgisruntime.geometry.Polygon;
@@ -109,14 +111,14 @@ public class GloriaRomanusController {
 	
 	
 	private Map<FactionType, SimpleFillSymbol> factionSymbolMap = new EnumMap<>(FactionType.class);
-	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xA000A0F0, null);
+	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
 	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
 	
-	private static final FillSymbol IS_HOVERED = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));
+	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));
 
-	private static final FillSymbol NO_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , null);
+	private static final Symbol NO_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , null);
 	
-	
+	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol("images/legionary.png");
 	private GameController game;
 	 
 	// Allowable highlight
@@ -131,14 +133,17 @@ public class GloriaRomanusController {
 	// Faction highlight
 	private static final int FACTION_COLOUR_LAYER = 0;
 	private static final int ACTION_PATTERN_LAYER = 1; 
-	private static final int MARKER_LAYER = 2; 
-	private static final int LABEL_LAYER = 3; 
-	private static final int NUM_LAYERS = 4; 
+	private static final int HIGHLIGHT_LAYER = 2; 
+	private static final int MARKER_LAYER = 3; 
+	private static final int LABEL_LAYER = 4; 
+	private static final int NUM_LAYERS = 5; 
 	
 	
 	
 	private GraphicsOverlay[] overlays = new GraphicsOverlay[NUM_LAYERS];	
-		
+	private Graphic uniqueHoverMarker = new Graphic(new Point(0,0), NO_SYMBOL);
+	private Graphic uniqueHoverOutline = new Graphic(new Point(0,0), NO_SYMBOL);
+	
 	// Map constraints
 	private final double X_MAX = 5E6;
 	private final double X_MIN = -3E6;
@@ -325,7 +330,8 @@ public class GloriaRomanusController {
 		});
 		mapView.addViewpointChangedListener((e)->setConstrainedViewpoint(mapView.getVisibleArea().getExtent(), mapView.getMapScale()));
 
-
+		// testing
+		mapView.setOnKeyTyped(this::debugActions);
 		// Overlays
 		
 		for(int i = 0; i < overlays.length; i ++) {
@@ -356,7 +362,77 @@ public class GloriaRomanusController {
 		initProvinceCentres(fc);
 		
 	}
+	private void initProvinceShapes(FeatureLayer provinceShapeLayer) {
+		QueryParameters provinceParams = new QueryParameters();
+		provinceParams.setWhereClause("");
+		ListenableFuture<FeatureQueryResult> result = provinceShapeLayer.getFeatureTable().queryFeaturesAsync(provinceParams);
+		result.addDoneListener(()->{
+			// TODO : find out whether not done case actually matters
+			try {
+				for(Feature f: result.get()) {
+					String name = (String)f.getAttributes().get("name");
+					provinceFeatureMap.get(name).setShape((Polygon)f.getGeometry());		
+				}
+				// All set up to initialize graphics
+				List<ProvinceFeatureInfo> provinceFeatures = new ArrayList<>(provinceFeatureMap.values());
+				Collections.sort(provinceFeatures);
+				
+				for(ProvinceFeatureInfo pfi : provinceFeatures) {
+					Graphic g;
+					// for other potential layer initializations.
+					g = new Graphic(pfi.getShape(), factionSymbolMap.get(pfi.getOwner().getType()));
+					overlays[FACTION_COLOUR_LAYER].getGraphics().add(g);
 
+					g = new Graphic(pfi.getShape(), NO_SYMBOL);
+					overlays[ACTION_PATTERN_LAYER].getGraphics().add(g);
+					
+					g = new Graphic(pfi.getShape(), NO_SYMBOL);
+					overlays[HIGHLIGHT_LAYER].getGraphics().add(g);
+				}
+				overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueHoverOutline);
+				
+						
+			} catch (InterruptedException | ExecutionException e) {
+				System.out.print("Async was interrupted");
+				e.printStackTrace();
+			}
+		});
+	}
+	private void initProvinceCentres(FeatureCollection provincePointCollection) {
+		GraphicsOverlay graphicsOverlay = new GraphicsOverlay();
+	
+		for (org.geojson.Feature f : provincePointCollection.getFeatures()) {
+			if (f.getGeometry() instanceof org.geojson.Point) {
+				org.geojson.Point p = (org.geojson.Point) f.getGeometry();
+				LngLatAlt coor = p.getCoordinates();
+				Point centre = new Point(coor.getLongitude(), coor.getLatitude(), SpatialReferences.getWgs84());
+				String name = (String) f.getProperty("name");
+				provinceFeatureMap.get(name).setCentre(centre);
+			} else {
+				// badlyness
+				System.out.println("Non-point geo json object in file");
+			}
+		}
+		// All ready to set up point graphics
+		List<ProvinceFeatureInfo> provinceFeatures = new ArrayList<>(provinceFeatureMap.values());
+		Collections.sort(provinceFeatures);
+		for(ProvinceFeatureInfo pfi : provinceFeatures) {
+			Graphic g;
+			// for other potential layer initializations.
+			g = new Graphic(pfi.getCentre(), NO_SYMBOL);
+			overlays[MARKER_LAYER].getGraphics().add(g);
+			
+			TextSymbol ts = new TextSymbol(10, pfi.getName(), 0xFFFF0000,
+					HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+			ts.setHaloColor(0xFFFFFFFF);
+			ts.setHaloWidth(2);
+			g = new Graphic(pfi.getCentre(), ts);
+			overlays[LABEL_LAYER].getGraphics().add(g);
+			
+		}
+		overlays[LABEL_LAYER].setMinScale(1.5E7);
+		overlays[MARKER_LAYER].getGraphics().add(uniqueHoverMarker);
+	}
 	private FeatureLayer createFeatureLayer(GeoPackage gpkg_provinces) {
 		// Ez: ?? taking a random feature table?
 		FeatureTable geoPackageTable_provinces = gpkg_provinces.getGeoPackageFeatureTables().get(0);
@@ -373,67 +449,103 @@ public class GloriaRomanusController {
 		
 		// https://developers.arcgis.com/java/latest/guide/identify-features.htm
 		// listen to the mouse clicked event on the map view
-		mapView.setOnMouseClicked(e -> {
-			// was the main button pressed?
-			if (e.getButton() == MouseButton.PRIMARY) {
-				// get the screen point where the user clicked or tapped
-				Point2D screenPoint = new Point2D(e.getX(), e.getY());
-				// specifying the layer to identify, where to identify, tolerance around point,
-				// to return pop-ups only, and
-				// maximum results
-				// note - if select right on border, even with 0 tolerance, can select multiple
-				// features - so have to check length of result when handling it
-				final ListenableFuture<IdentifyLayerResult> identifyFuture = mapView.identifyLayerAsync(flp,
-						screenPoint, 0, false, 25);
+		
+		mapView.setOnMouseMoved(e -> {
+			final ListenableFuture<IdentifyLayerResult> identifyFuture = mapView.identifyLayerAsync(flp,
+					new Point2D(e.getX(), e.getY()), 0, false, 25);
 
-				// add a listener to the future
-				identifyFuture.addDoneListener(() -> {
-					try {
-						// get the identify results from the future - returns when the operation is
-						// complete
-						IdentifyLayerResult identifyLayerResult = identifyFuture.get();
-						// a reference to the feature layer can be used, for example, to select
-						// identified features
-						if (identifyLayerResult.getLayerContent() instanceof FeatureLayer) {
-							FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
-							// select all features that were identified
-							List<Feature> features = identifyLayerResult.getElements().stream().map(f -> (Feature) f)
-									.collect(Collectors.toList());
-
-							if (features.size() > 1) {
-								printMessageToTerminal(
-										"Have more than 1 element - you might have clicked on boundary!");
-							} else if (features.size() == 1) {
-								// note maybe best to track whether selected...
-								Feature f = features.get(0);
-								String province = (String) f.getAttributes().get("name");
-
-								if (provinceToOwningFactionMap.get(province).equals(humanFaction)) {
-									// province owned by human
-									if (currentlySelectedHumanProvince != null) {
-										featureLayer.unselectFeature(currentlySelectedHumanProvince);
-									}
-									currentlySelectedHumanProvince = f;
-									invading_province.setText(province);
-								} else {
-									if (currentlySelectedEnemyProvince != null) {
-										featureLayer.unselectFeature(currentlySelectedEnemyProvince);
-									}
-									currentlySelectedEnemyProvince = f;
-									opponent_province.setText(province);
-								}
-
-								featureLayer.selectFeature(f);
-							}
+			// add a listener to the future
+			identifyFuture.addDoneListener(() -> {
+				try {
+					IdentifyLayerResult identifyLayerResult = identifyFuture.get();
+					if (identifyLayerResult.getLayerContent() instanceof FeatureLayer) {
+						FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
+						if(identifyLayerResult.getElements().size()==1) {
+							// note maybe best to track whether selected...
+							System.out.println("hey listen");
+							Feature f = (Feature) identifyLayerResult.getElements().get(0);
+							String province = (String) f.getAttributes().get("name");
+							setUniqueMarker(uniqueHoverMarker, province, ATTACK_ICON);
+							setUniqueShape(uniqueHoverOutline, province, ON_HOVER_SYMBOL);
+							
+							//setNamedProvinceSymbols(List.of(province), MARKER_LAYER, ATTACK_ICON);
 						}
-					} catch (InterruptedException | ExecutionException ex) {
-						// ... must deal with checked exceptions thrown from the async identify
-						// operation
-						ex.printStackTrace();
-						System.out.println("InterruptedException occurred");
+
 					}
-				});
-			}
+				} catch (InterruptedException | ExecutionException ex) {
+					// ... must deal with checked exceptions thrown from the async identify
+					// operation
+					ex.printStackTrace();
+					System.out.println("InterruptedException occurred");
+				}
+			});
+		});
+		mapView.setOnMouseClicked(e -> {
+			// get the screen point where the user clicked or tapped
+			Point2D screenPoint = new Point2D(e.getX(), e.getY());
+			// specifying the layer to identify, where to identify, tolerance around point,
+			// to return pop-ups only, and
+			// maximum results
+			// note - if select right on border, even with 0 tolerance, can select multiple
+			// features - so have to check length of result when handling it
+			final ListenableFuture<IdentifyLayerResult> identifyFuture = mapView.identifyLayerAsync(flp,
+					screenPoint, 0, false, 25);
+
+			// add a listener to the future
+			identifyFuture.addDoneListener(() -> {
+				try {
+					// get the identify results from the future - returns when the operation is
+					// complete
+					IdentifyLayerResult identifyLayerResult = identifyFuture.get();
+					// a reference to the feature layer can be used, for example, to select
+					// identified features
+					if (identifyLayerResult.getLayerContent() instanceof FeatureLayer) {
+						FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
+						// select all features that were identified
+						List<Feature> features = identifyLayerResult.getElements().stream().map(f -> (Feature) f)
+								.collect(Collectors.toList());
+
+						if (features.size() > 1) {
+							printMessageToTerminal(
+									"Have more than 1 element - you might have clicked on boundary!");
+						} else if (features.size() == 1) {
+							// note maybe best to track whether selected...
+							Feature f = features.get(0);
+							String province = (String) f.getAttributes().get("name");
+							
+							if(e.getButton() == MouseButton.PRIMARY) {
+								setNamedProvinceSymbols(List.of(province), ACTION_PATTERN_LAYER, CAN_MOVE_SYMBOL);
+							}else {
+								setNamedProvinceSymbols(List.of(province), ACTION_PATTERN_LAYER, CAN_ATTACK_SYMBOL);
+									
+							}
+							
+							if (provinceToOwningFactionMap.get(province).equals(humanFaction)) {
+								// province owned by human
+								if (currentlySelectedHumanProvince != null) {
+									featureLayer.unselectFeature(currentlySelectedHumanProvince);
+								}
+								currentlySelectedHumanProvince = f;
+								invading_province.setText(province);
+							} else {
+								if (currentlySelectedEnemyProvince != null) {
+									featureLayer.unselectFeature(currentlySelectedEnemyProvince);
+								}
+								currentlySelectedEnemyProvince = f;
+								opponent_province.setText(province);
+							}
+
+							featureLayer.selectFeature(f);
+						}
+					}
+				} catch (InterruptedException | ExecutionException ex) {
+					// ... must deal with checked exceptions thrown from the async identify
+					// operation
+					ex.printStackTrace();
+					System.out.println("InterruptedException occurred");
+				}
+			});
+			
 		});
 		return flp;
 	}
@@ -475,92 +587,41 @@ public class GloriaRomanusController {
 	private void printMessageToTerminal(String message) {
 		output_terminal.appendText(message + "\n");
 	}
-
-	private ListenableFuture<FeatureQueryResult> getProvinceFeaturesAsync(Collection<Province> targetProvinces) {
-		StringBuilder nameQuery = new StringBuilder("name IN (");
-		targetProvinces.forEach((p)-> nameQuery.append(String.format("'%s',", p.getName())));
-		nameQuery.append(')');
-		QueryParameters provinceParams = new QueryParameters();
-		provinceParams.setWhereClause(nameQuery.toString());
-		ListenableFuture<FeatureQueryResult> resultFuture = featureLayer_provinces.getFeatureTable().queryFeaturesAsync(provinceParams);
-		
-		return resultFuture;
-	}
-	//private void setProvinceSymbols(Collection<Province>, Symbol)
-	
-	
-	private void initProvinceShapes(FeatureLayer provinceShapeLayer) {
-		QueryParameters provinceParams = new QueryParameters();
-		provinceParams.setWhereClause("");
-		ListenableFuture<FeatureQueryResult> result = provinceShapeLayer.getFeatureTable().queryFeaturesAsync(provinceParams);
-		result.addDoneListener(()->{
-			// TODO : find out whether not done case actually matters
-			try {
-				for(Feature f: result.get()) {
-					String name = (String)f.getAttributes().get("name");
-					provinceFeatureMap.get(name).setShape((Polygon)f.getGeometry());		
-				}
-				// All set up to initialize graphics
-				List<ProvinceFeatureInfo> provinceFeatures = new ArrayList<>(provinceFeatureMap.values());
-				Collections.sort(provinceFeatures);
-				
-				for(ProvinceFeatureInfo pfi : provinceFeatures) {
-					Graphic g;
-					// for other potential layer initializations.
-					g = new Graphic(pfi.getShape(), factionSymbolMap.get(pfi.getOwner().getType()));
-					overlays[FACTION_COLOUR_LAYER].getGraphics().add(g);
-						
-					g = new Graphic(pfi.getShape(), NO_SYMBOL);
-					overlays[ACTION_PATTERN_LAYER].getGraphics().add(g);
-				}
-						
-			} catch (InterruptedException | ExecutionException e) {
-				System.out.print("Async was interrupted");
-				e.printStackTrace();
-			}
-		});
-	}
-	private void initProvinceCentres(FeatureCollection provincePointCollection) {
-		GraphicsOverlay graphicsOverlay = new GraphicsOverlay();
-	
-		for (org.geojson.Feature f : provincePointCollection.getFeatures()) {
-			if (f.getGeometry() instanceof org.geojson.Point) {
-				org.geojson.Point p = (org.geojson.Point) f.getGeometry();
-				LngLatAlt coor = p.getCoordinates();
-				Point centre = new Point(coor.getLongitude(), coor.getLatitude(), SpatialReferences.getWgs84());
-				String name = (String) f.getProperty("name");
-				provinceFeatureMap.get(name).setCentre(centre);
-			} else {
-				// badlyness
-				System.out.println("Non-point geo json object in file");
-			}
-		}
-		// Set up point graphics
-		List<ProvinceFeatureInfo> provinceFeatures = new ArrayList<>(provinceFeatureMap.values());
-		Collections.sort(provinceFeatures);
-		for(ProvinceFeatureInfo pfi : provinceFeatures) {
-			Graphic g;
-			// for other potential layer initializations.
-			g = new Graphic(pfi.getCentre(), NO_SYMBOL);
-			overlays[MARKER_LAYER].getGraphics().add(g);
-			
-			TextSymbol ts = new TextSymbol(10, pfi.getName(), 0xFFFF0000,
-					HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
-			ts.setHaloColor(0xFFFFFFFF);
-			ts.setHaloWidth(2);
-			g = new Graphic(pfi.getCentre(), ts);
-			overlays[LABEL_LAYER].getGraphics().add(g);
-			overlays[LABEL_LAYER].setMinScale(1.5E7);
-			
-		}
-		
-	}
 	
 	private void setProvinceSymbols(Collection<Province> provinces, int layer, Symbol symb) {
 		for(Province p : provinces) {
 			ProvinceFeatureInfo pfi = provinceFeatureMap.get(p.getName());
 			overlays[layer].getGraphics().get(pfi.getId()).setSymbol(symb);	
 		}
+	}
+	private void setNamedProvinceSymbols(Collection<String> provinceNames, int layer, Symbol symb) {
+		for(String name : provinceNames) {
+			ProvinceFeatureInfo pfi = provinceFeatureMap.get(name);
+			overlays[layer].getGraphics().get(pfi.getId()).setSymbol(symb);	
+		}
+	}
+	private void setUniqueMarker(Graphic g, Province p, Symbol symb) {
+		g.setGeometry(provinceFeatureMap.get(p.getName()).getCentre());
+		g.setSymbol(symb);
+	}
+	private void setUniqueMarker(Graphic g, String s, Symbol symb) {
+		g.setGeometry(provinceFeatureMap.get(s).getCentre());
+		g.setSymbol(symb);
+	}
+	private void setUniqueShape(Graphic g, Province p, Symbol symb) {
+		g.setGeometry(provinceFeatureMap.get(p.getName()).getShape());
+		g.setSymbol(symb);
+	}
+	private void setUniqueShape(Graphic g, String s, Symbol symb) {
+		g.setGeometry(provinceFeatureMap.get(s).getShape());
+		g.setSymbol(symb);
+	}
+	
+	private void clearProvinceSymbols(int layer) {
+		for(Graphic g : overlays[layer].getGraphics()) {
+			g.setSymbol(NO_SYMBOL);
+		}
+		
 	}
 	
 	/**
@@ -571,5 +632,19 @@ public class GloriaRomanusController {
 		if (mapView != null) {
 			mapView.dispose();
 		}
+	}
+	private void debugActions(KeyEvent e) {
+		switch(e.getCharacter()) {
+		case "1":
+			
+			break;
+		case "2":
+			
+			break;
+		case "c":
+			clearProvinceSymbols(ACTION_PATTERN_LAYER);
+			break;
+		}
+		
 	}
 }
