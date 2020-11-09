@@ -86,6 +86,8 @@ import unsw.engine.*;
 
 public class GloriaRomanusController {
 
+	private GameController game;
+	
 	@FXML
 	private MapView mapView;
 	@FXML
@@ -110,37 +112,26 @@ public class GloriaRomanusController {
 	private Map<String, ProvinceFeatureInfo> provinceFeatureMap = new HashMap<>();
 	
 	
+
+	// Symbols
 	private Map<FactionType, SimpleFillSymbol> factionSymbolMap = new EnumMap<>(FactionType.class);
 	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
 	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
-	
-	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));
+	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));	
+	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol("images/legionary.png");
 
 	private static final Symbol NO_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , null);
 	
-	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol("images/legionary.png");
-	private GameController game;
-	 
-	// Allowable highlight
-	
-	
-	// Move highlight
-	
-	
-	// Hovered highlight 
-	
-	
 	// Faction highlight
-	private static final int FACTION_COLOUR_LAYER = 0;
-	private static final int ACTION_PATTERN_LAYER = 1; 
+	private static final int COLOUR_LAYER = 0;
+	private static final int PATTERN_LAYER = 1; 
 	private static final int HIGHLIGHT_LAYER = 2; 
 	private static final int MARKER_LAYER = 3; 
 	private static final int LABEL_LAYER = 4; 
 	private static final int NUM_LAYERS = 5; 
 	
-	
-	
 	private GraphicsOverlay[] overlays = new GraphicsOverlay[NUM_LAYERS];	
+	
 	private Graphic uniqueHoverMarker = new Graphic(new Point(0,0), NO_SYMBOL);
 	private Graphic uniqueHoverOutline = new Graphic(new Point(0,0), NO_SYMBOL);
 	
@@ -381,10 +372,10 @@ public class GloriaRomanusController {
 					Graphic g;
 					// for other potential layer initializations.
 					g = new Graphic(pfi.getShape(), factionSymbolMap.get(pfi.getOwner().getType()));
-					overlays[FACTION_COLOUR_LAYER].getGraphics().add(g);
+					overlays[COLOUR_LAYER].getGraphics().add(g);
 
 					g = new Graphic(pfi.getShape(), NO_SYMBOL);
-					overlays[ACTION_PATTERN_LAYER].getGraphics().add(g);
+					overlays[PATTERN_LAYER].getGraphics().add(g);
 					
 					g = new Graphic(pfi.getShape(), NO_SYMBOL);
 					overlays[HIGHLIGHT_LAYER].getGraphics().add(g);
@@ -514,9 +505,9 @@ public class GloriaRomanusController {
 							String province = (String) f.getAttributes().get("name");
 							
 							if(e.getButton() == MouseButton.PRIMARY) {
-								setNamedProvinceSymbols(List.of(province), ACTION_PATTERN_LAYER, CAN_MOVE_SYMBOL);
+								setNamedProvinceSymbols(List.of(province), PATTERN_LAYER, CAN_MOVE_SYMBOL);
 							}else {
-								setNamedProvinceSymbols(List.of(province), ACTION_PATTERN_LAYER, CAN_ATTACK_SYMBOL);
+								setNamedProvinceSymbols(List.of(province), PATTERN_LAYER, CAN_ATTACK_SYMBOL);
 									
 							}
 							
@@ -617,7 +608,7 @@ public class GloriaRomanusController {
 		g.setSymbol(symb);
 	}
 	
-	private void clearProvinceSymbols(int layer) {
+	private void clearGraphicLayer(int layer) {
 		for(Graphic g : overlays[layer].getGraphics()) {
 			g.setSymbol(NO_SYMBOL);
 		}
@@ -642,7 +633,7 @@ public class GloriaRomanusController {
 			
 			break;
 		case "c":
-			clearProvinceSymbols(ACTION_PATTERN_LAYER);
+			clearGraphicLayer(PATTERN_LAYER);
 			break;
 		}
 		
