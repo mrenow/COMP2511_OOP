@@ -9,6 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,10 +37,12 @@ import util.MathUtil;
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
 import com.esri.arcgisruntime.data.FeatureTable;
 import com.esri.arcgisruntime.data.GeoPackage;
+import com.esri.arcgisruntime.data.QueryParameters;
 import com.esri.arcgisruntime.data.ServiceFeatureTable.FeatureRequestMode;
 import com.esri.arcgisruntime.geometry.Envelope;
 import com.esri.arcgisruntime.geometry.GeometryEngine;
 import com.esri.arcgisruntime.geometry.Point;
+import com.esri.arcgisruntime.geometry.Polygon;
 import com.esri.arcgisruntime.geometry.SpatialReference;
 import com.esri.arcgisruntime.geometry.SpatialReferences;
 import com.esri.arcgisruntime.layers.FeatureLayer;
@@ -49,12 +54,18 @@ import com.esri.arcgisruntime.mapping.view.Graphic;
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
 import com.esri.arcgisruntime.mapping.view.IdentifyLayerResult;
 import com.esri.arcgisruntime.mapping.view.MapView;
+import com.esri.arcgisruntime.symbology.FillSymbol;
+import com.esri.arcgisruntime.symbology.MarkerSymbol;
 import com.esri.arcgisruntime.symbology.PictureMarkerSymbol;
+import com.esri.arcgisruntime.symbology.SimpleFillSymbol;
+import com.esri.arcgisruntime.symbology.SimpleFillSymbol.Style;
+import com.esri.arcgisruntime.symbology.SimpleLineSymbol;
+import com.esri.arcgisruntime.symbology.Symbol;
 import com.esri.arcgisruntime.symbology.TextSymbol;
 import com.esri.arcgisruntime.symbology.TextSymbol.HorizontalAlignment;
 import com.esri.arcgisruntime.symbology.TextSymbol.VerticalAlignment;
 import com.esri.arcgisruntime.data.Feature;
-
+import com.esri.arcgisruntime.data.FeatureQueryResult;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -64,6 +75,12 @@ import org.geojson.LngLatAlt;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import unsw.engine.*;
+
+
+
+
 
 public class GloriaRomanusController {
 
@@ -88,7 +105,40 @@ public class GloriaRomanusController {
 	private Feature currentlySelectedEnemyProvince;
 
 	private FeatureLayer featureLayer_provinces;
+	private Map<String, ProvinceFeatureInfo> provinceFeatureMap = new HashMap<>();
 	
+	
+	private Map<FactionType, SimpleFillSymbol> factionSymbolMap = new EnumMap<>(FactionType.class);
+	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xA000A0F0, null);
+	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
+	
+	private static final FillSymbol IS_HOVERED = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));
+
+	private static final FillSymbol NO_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , null);
+	
+	
+	private GameController game;
+	 
+	// Allowable highlight
+	
+	
+	// Move highlight
+	
+	
+	// Hovered highlight 
+	
+	
+	// Faction highlight
+	private static final int FACTION_COLOUR_LAYER = 0;
+	private static final int ACTION_PATTERN_LAYER = 1; 
+	private static final int MARKER_LAYER = 2; 
+	private static final int LABEL_LAYER = 3; 
+	private static final int NUM_LAYERS = 4; 
+	
+	
+	
+	private GraphicsOverlay[] overlays = new GraphicsOverlay[NUM_LAYERS];	
+		
 	// Map constraints
 	private final double X_MAX = 5E6;
 	private final double X_MIN = -3E6;
@@ -103,6 +153,20 @@ public class GloriaRomanusController {
 	@FXML
 	private void initialize() throws JsonParseException, JsonMappingException, IOException {
 		// TODO = you should rely on an object oriented design to determine ownership
+		game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json", "src/unsw/gloriaromanus/landlocked_provinces.json", List.of(FactionType.ROME, FactionType.GAUL)); // TODO NUM FACTINOS
+		
+		
+		// Initialize feature map. Still Shape and Point fields remaining.
+		int id = 0;
+		for(Province p : game.getProvinces(null)) {
+			provinceFeatureMap.put(p.getName(), new ProvinceFeatureInfo(id, p));
+			id++;
+		}
+		// TODO: better algorithm than just randomly generating colours
+		for (Faction f : game.getFactions()) {
+			factionSymbolMap.put(f.getType(), new SimpleFillSymbol(Style.SOLID, 0x88000000 + new Random().nextInt(0x1000000), null));
+		}
+		factionSymbolMap.put(FactionType.NO_ONE, new SimpleFillSymbol(Style.SOLID, 0x88000000 + new Random().nextInt(0x1000000), null));
 		provinceToOwningFactionMap = getProvinceToOwningFactionMap();
 
 		provinceToNumberTroopsMap = new HashMap<String, Integer>();
@@ -121,6 +185,7 @@ public class GloriaRomanusController {
 		initializeProvinceLayers();
 	}
 
+	// RUBBISH
 	@FXML
 	public void clickedInvadeButton(ActionEvent e) throws IOException {
 		if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null) {
@@ -147,7 +212,6 @@ public class GloriaRomanusController {
 					printMessageToTerminal("Lost battle!");
 				}
 				resetSelections(); // reset selections in UI
-				addAllPointGraphics(); // reset graphics
 			} else {
 				printMessageToTerminal("Provinces not adjacent, cannot invade!");
 			}
@@ -256,11 +320,19 @@ public class GloriaRomanusController {
 		// mapView.on
 		mapView.setOnScroll(e -> {
 			Point mapPos = mapView.screenToLocation(new Point2D(e.getX(), e.getY()));
-
+			
 			zoomAtPoint(mapPos, 1 - 0.001 * e.getDeltaY());
 		});
 		mapView.addViewpointChangedListener((e)->setConstrainedViewpoint(mapView.getVisibleArea().getExtent(), mapView.getMapScale()));
 
+
+		// Overlays
+		
+		for(int i = 0; i < overlays.length; i ++) {
+			overlays[i] = new GraphicsOverlay();
+			mapView.getGraphicsOverlays().add(overlays[i]);
+		}
+		
 		// note - tried having different FeatureLayers for AI and human provinces to
 		// allow different selection colors, but deprecated setSelectionColor method
 		// does nothing
@@ -273,62 +345,16 @@ public class GloriaRomanusController {
 				// create province border feature
 				featureLayer_provinces = createFeatureLayer(gpkg_provinces);
 				map.getOperationalLayers().add(featureLayer_provinces);
+				System.out.println(featureLayer_provinces.getFeatureTable().getTotalFeatureCount());
 
+				initProvinceShapes(featureLayer_provinces);
 			} else {
 				System.out.println("load failure");
 			}
 		});
-
-		addAllPointGraphics();
-	}
-
-	// Called during init time.
-	private void addAllPointGraphics() throws JsonParseException, JsonMappingException, IOException {
-		mapView.getGraphicsOverlays().clear();
-
-		InputStream inputStream = new FileInputStream(new File("src/unsw/gloriaromanus/provinces_label.geojson"));
-
-		// Contains all of the locations and labels for provinces.
-		FeatureCollection fc = new ObjectMapper().readValue(inputStream, FeatureCollection.class);
-
-		GraphicsOverlay graphicsOverlay = new GraphicsOverlay();
-
-		for (org.geojson.Feature f : fc.getFeatures()) {
-			if (f.getGeometry() instanceof org.geojson.Point) {
-				org.geojson.Point p = (org.geojson.Point) f.getGeometry();
-				LngLatAlt coor = p.getCoordinates();
-				Point curPoint = new Point(coor.getLongitude(), coor.getLatitude(), SpatialReferences.getWgs84());
-				PictureMarkerSymbol s = null;
-				String province = (String) f.getProperty("name");
-				String faction = provinceToOwningFactionMap.get(province);
-
-				TextSymbol t = new TextSymbol(10,
-						faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
-						HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
-
-				switch (faction) {
-				case "Gaul":
-					s = new PictureMarkerSymbol("images/Celtic_Druid.png");
-					break;
-				case "Rome":
-					s = new PictureMarkerSymbol("images/legionary.png");
-					break;
-				}
-				t.setHaloColor(0xFFFFFFFF);
-				t.setHaloWidth(2);
-				Graphic gPic = new Graphic(curPoint, s);
-				Graphic gText = new Graphic(curPoint, t);
-				//graphicsOverlay.getGraphics().add(gPic);
-				graphicsOverlay.getGraphics().add(gText);
-				graphicsOverlay.setMinScale(1.5E7);
-			} else {
-				// badlyness
-				System.out.println("Non-point geo json object in file");
-			}
-		}
-
-		inputStream.close();
-		mapView.getGraphicsOverlays().add(graphicsOverlay);
+		FeatureCollection fc = new ObjectMapper().readValue(new File("src/unsw/gloriaromanus/provinces_label.geojson"), FeatureCollection.class);
+		initProvinceCentres(fc);
+		
 	}
 
 	private FeatureLayer createFeatureLayer(GeoPackage gpkg_provinces) {
@@ -344,7 +370,7 @@ public class GloriaRomanusController {
 
 		// Create a layer to show the feature table
 		FeatureLayer flp = new FeatureLayer(geoPackageTable_provinces);
-
+		
 		// https://developers.arcgis.com/java/latest/guide/identify-features.htm
 		// listen to the mouse clicked event on the map view
 		mapView.setOnMouseClicked(e -> {
@@ -403,6 +429,7 @@ public class GloriaRomanusController {
 					} catch (InterruptedException | ExecutionException ex) {
 						// ... must deal with checked exceptions thrown from the async identify
 						// operation
+						ex.printStackTrace();
 						System.out.println("InterruptedException occurred");
 					}
 				});
@@ -427,13 +454,6 @@ public class GloriaRomanusController {
 		return m;
 	}
 
-	private ArrayList<String> getHumanProvincesList() throws IOException {
-		// https://developers.arcgis.com/labs/java/query-a-feature-layer/
-
-		String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
-		JSONObject ownership = new JSONObject(content);
-		return ArrayUtil.convert(ownership.getJSONArray(humanFaction));
-	}
 
 	private boolean confirmIfProvincesConnected(String province1, String province2) throws IOException {
 		String content = Files
@@ -441,6 +461,7 @@ public class GloriaRomanusController {
 		JSONObject provinceAdjacencyMatrix = new JSONObject(content);
 		return provinceAdjacencyMatrix.getJSONObject(province1).getBoolean(province2);
 	}
+
 
 	private void resetSelections() {
 		featureLayer_provinces
@@ -455,6 +476,93 @@ public class GloriaRomanusController {
 		output_terminal.appendText(message + "\n");
 	}
 
+	private ListenableFuture<FeatureQueryResult> getProvinceFeaturesAsync(Collection<Province> targetProvinces) {
+		StringBuilder nameQuery = new StringBuilder("name IN (");
+		targetProvinces.forEach((p)-> nameQuery.append(String.format("'%s',", p.getName())));
+		nameQuery.append(')');
+		QueryParameters provinceParams = new QueryParameters();
+		provinceParams.setWhereClause(nameQuery.toString());
+		ListenableFuture<FeatureQueryResult> resultFuture = featureLayer_provinces.getFeatureTable().queryFeaturesAsync(provinceParams);
+		
+		return resultFuture;
+	}
+	//private void setProvinceSymbols(Collection<Province>, Symbol)
+	
+	
+	private void initProvinceShapes(FeatureLayer provinceShapeLayer) {
+		QueryParameters provinceParams = new QueryParameters();
+		provinceParams.setWhereClause("");
+		ListenableFuture<FeatureQueryResult> result = provinceShapeLayer.getFeatureTable().queryFeaturesAsync(provinceParams);
+		result.addDoneListener(()->{
+			// TODO : find out whether not done case actually matters
+			try {
+				for(Feature f: result.get()) {
+					String name = (String)f.getAttributes().get("name");
+					provinceFeatureMap.get(name).setShape((Polygon)f.getGeometry());		
+				}
+				// All set up to initialize graphics
+				List<ProvinceFeatureInfo> provinceFeatures = new ArrayList<>(provinceFeatureMap.values());
+				Collections.sort(provinceFeatures);
+				
+				for(ProvinceFeatureInfo pfi : provinceFeatures) {
+					Graphic g;
+					// for other potential layer initializations.
+					g = new Graphic(pfi.getShape(), factionSymbolMap.get(pfi.getOwner().getType()));
+					overlays[FACTION_COLOUR_LAYER].getGraphics().add(g);
+						
+					g = new Graphic(pfi.getShape(), NO_SYMBOL);
+					overlays[ACTION_PATTERN_LAYER].getGraphics().add(g);
+				}
+						
+			} catch (InterruptedException | ExecutionException e) {
+				System.out.print("Async was interrupted");
+				e.printStackTrace();
+			}
+		});
+	}
+	private void initProvinceCentres(FeatureCollection provincePointCollection) {
+		GraphicsOverlay graphicsOverlay = new GraphicsOverlay();
+	
+		for (org.geojson.Feature f : provincePointCollection.getFeatures()) {
+			if (f.getGeometry() instanceof org.geojson.Point) {
+				org.geojson.Point p = (org.geojson.Point) f.getGeometry();
+				LngLatAlt coor = p.getCoordinates();
+				Point centre = new Point(coor.getLongitude(), coor.getLatitude(), SpatialReferences.getWgs84());
+				String name = (String) f.getProperty("name");
+				provinceFeatureMap.get(name).setCentre(centre);
+			} else {
+				// badlyness
+				System.out.println("Non-point geo json object in file");
+			}
+		}
+		// Set up point graphics
+		List<ProvinceFeatureInfo> provinceFeatures = new ArrayList<>(provinceFeatureMap.values());
+		Collections.sort(provinceFeatures);
+		for(ProvinceFeatureInfo pfi : provinceFeatures) {
+			Graphic g;
+			// for other potential layer initializations.
+			g = new Graphic(pfi.getCentre(), NO_SYMBOL);
+			overlays[MARKER_LAYER].getGraphics().add(g);
+			
+			TextSymbol ts = new TextSymbol(10, pfi.getName(), 0xFFFF0000,
+					HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+			ts.setHaloColor(0xFFFFFFFF);
+			ts.setHaloWidth(2);
+			g = new Graphic(pfi.getCentre(), ts);
+			overlays[LABEL_LAYER].getGraphics().add(g);
+			overlays[LABEL_LAYER].setMinScale(1.5E7);
+			
+		}
+		
+	}
+	
+	private void setProvinceSymbols(Collection<Province> provinces, int layer, Symbol symb) {
+		for(Province p : provinces) {
+			ProvinceFeatureInfo pfi = provinceFeatureMap.get(p.getName());
+			overlays[layer].getGraphics().get(pfi.getId()).setSymbol(symb);	
+		}
+	}
+	
 	/**
 	 * Stops and releases all resources used in application.
 	 */
