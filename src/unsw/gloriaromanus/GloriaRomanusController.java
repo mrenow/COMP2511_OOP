@@ -88,6 +88,8 @@ public class GloriaRomanusController {
 	private Feature currentlySelectedEnemyProvince;
 
 	private FeatureLayer featureLayer_provinces;
+	
+	// Map constraints
 	private final double X_MAX = 5E6;
 	private final double X_MIN = -3E6;
 	private final double Y_MAX = 8E6;
@@ -149,7 +151,6 @@ public class GloriaRomanusController {
 			} else {
 				printMessageToTerminal("Provinces not adjacent, cannot invade!");
 			}
-
 		}
 	}
 
@@ -207,8 +208,14 @@ public class GloriaRomanusController {
 	}
 	
 	private void updateMinScale() {
-
+		// Basically unit bashing
 		map.setMinScale(MathUtil.min(PIXELS_PER_UNIT_X*(X_MAX-X_MIN)/mapView.getWidth(), PIXELS_PER_UNIT_Y*(Y_MAX-Y_MIN)/mapView.getHeight()));
+	}
+	
+	private void setHighlight() {
+		
+		
+		
 	}
 
 	/**
@@ -297,34 +304,25 @@ public class GloriaRomanusController {
 
 				TextSymbol t = new TextSymbol(10,
 						faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
-						HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+						HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
 
 				switch (faction) {
 				case "Gaul":
-					// note can instantiate a PictureMarkerSymbol using the JavaFX Image class - so
-					// could
-					// construct it with custom-produced BufferedImages stored in Ram
-					// http://jens-na.github.io/2013/11/06/java-how-to-concat-buffered-images/
-					// then you could convert it to JavaFX image
-					// https://stackoverflow.com/a/30970114
-
-					// you can pass in a filename to create a PictureMarkerSymbol...
 					s = new PictureMarkerSymbol("images/Celtic_Druid.png");
 					break;
 				case "Rome":
-					// you can also pass in a javafx Image to create a PictureMarkerSymbol
-					// (different to BufferedImage)
 					s = new PictureMarkerSymbol("images/legionary.png");
 					break;
-				// TODO = handle all faction names, and find a better structure...
 				}
 				t.setHaloColor(0xFFFFFFFF);
 				t.setHaloWidth(2);
 				Graphic gPic = new Graphic(curPoint, s);
 				Graphic gText = new Graphic(curPoint, t);
-				graphicsOverlay.getGraphics().add(gPic);
+				//graphicsOverlay.getGraphics().add(gPic);
 				graphicsOverlay.getGraphics().add(gText);
+				graphicsOverlay.setMinScale(1.5E7);
 			} else {
+				// badlyness
 				System.out.println("Non-point geo json object in file");
 			}
 		}
@@ -401,7 +399,6 @@ public class GloriaRomanusController {
 
 								featureLayer.selectFeature(f);
 							}
-
 						}
 					} catch (InterruptedException | ExecutionException ex) {
 						// ... must deal with checked exceptions thrown from the async identify
@@ -436,19 +433,6 @@ public class GloriaRomanusController {
 		String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
 		JSONObject ownership = new JSONObject(content);
 		return ArrayUtil.convert(ownership.getJSONArray(humanFaction));
-	}
-
-	/**
-	 * returns query for arcgis to get features representing human provinces can
-	 * apply this to FeatureTable.queryFeaturesAsync() pass string to
-	 * QueryParameters.setWhereClause() as the query string
-	 */
-	private String getHumanProvincesQuery() throws IOException {
-		LinkedList<String> l = new LinkedList<String>();
-		for (String hp : getHumanProvincesList()) {
-			l.add("name='" + hp + "'");
-		}
-		return "(" + String.join(" OR ", l) + ")";
 	}
 
 	private boolean confirmIfProvincesConnected(String province1, String province2) throws IOException {
