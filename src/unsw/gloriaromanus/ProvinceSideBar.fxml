@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -37,6 +38,7 @@
                               <Label fx:id="provinceUnitLabel" layoutX="14.0" layoutY="63.0" text="Label" />
                               <Button fx:id="moveBtn" layoutX="124.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" />
                               <Button fx:id="selectTarget" layoutX="16.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleSelectTarget" text="SELECT" />
+                              <ToggleButton fx:id="toggleSelect" layoutX="26.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleToggleSelect" text="SELECT_TOGGLE" />
                            </children>
                         </AnchorPane>
                   </content>

@@ -6,13 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 
 /**
  * 
  * @author Derek
  */
 public class ProvinceSideBarController {
-    
+
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> choiceBox;
     @FXML private Label choiceBoxLabel;
@@ -21,6 +22,7 @@ public class ProvinceSideBarController {
     @FXML private Button moveBtn;
     @FXML private Button selectTarget;
     @FXML private TextField textField;
+    @FXML private ToggleButton toggleSelect;
 
     private String selectedTargetthing;
 
@@ -48,6 +50,16 @@ public class ProvinceSideBarController {
             moveBtn.setText("Invade");
             // TODO Call Attack/Invade method
 
+        }
+
+    }
+
+    // This might be better to handle selecting a target province vs basic button
+    public void handleToggleSelect() {
+        boolean isSelected = toggleSelect.isSelected();
+        // TODO SELECT A SECOND TARGET PROVINCE AND STORE
+        if (isSelected) {
+            // TODO do select target province
         }
 
     }
