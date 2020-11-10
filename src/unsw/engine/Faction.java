@@ -24,8 +24,8 @@ import util.MappingIterable;
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
 public class Faction {
 	public static final int STARTING_GOLD = 100;
+	
 	// does not "own" provinces, so does not need a properly initialized province
-	// list
 	public static final Faction NO_ONE = new Faction(FactionType.NO_ONE);
 
 	private FactionType type = FactionType.ROME;
@@ -46,6 +46,7 @@ public class Faction {
 	}
 
 	Faction(FactionType type, Collection<Province> provinces, int gold) {
+		assert type != FactionType.NO_ONE;
 		this.type = type;
 		this.gold = gold;
 		this.provinces.addAll(provinces);

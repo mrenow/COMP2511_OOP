@@ -114,7 +114,7 @@ public class GloriaRomanusController {
 	
 
 	// Symbols
-	private Map<FactionType, SimpleFillSymbol> factionSymbolMap = new EnumMap<>(FactionType.class);
+	private Map<FactionType, Symbol> factionSymbolMap = new EnumMap<>(FactionType.class);
 	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
 	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
 	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));	
@@ -149,7 +149,7 @@ public class GloriaRomanusController {
 	@FXML
 	private void initialize() throws JsonParseException, JsonMappingException, IOException {
 		// TODO = you should rely on an object oriented design to determine ownership
-		game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json", "src/unsw/gloriaromanus/landlocked_provinces.json", List.of(FactionType.ROME, FactionType.GAUL)); // TODO NUM FACTINOS
+		game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json", "src/unsw/gloriaromanus/landlocked_provinces.json", List.of(FactionType.ROME, FactionType.GAUL, FactionType.CARTHAGE, FactionType.PARTHIA, FactionType.BRITAIN)); // TODO NUM FACTINOS
 		
 		
 		// Initialize feature map. Still Shape and Point fields remaining.
@@ -162,7 +162,7 @@ public class GloriaRomanusController {
 		for (Faction f : game.getFactions()) {
 			factionSymbolMap.put(f.getType(), new SimpleFillSymbol(Style.SOLID, 0x88000000 + new Random().nextInt(0x1000000), null));
 		}
-		factionSymbolMap.put(FactionType.NO_ONE, new SimpleFillSymbol(Style.SOLID, 0x88000000 + new Random().nextInt(0x1000000), null));
+		factionSymbolMap.put(FactionType.NO_ONE, NO_SYMBOL);
 		provinceToOwningFactionMap = getProvinceToOwningFactionMap();
 
 		provinceToNumberTroopsMap = new HashMap<String, Integer>();
@@ -448,8 +448,6 @@ public class GloriaRomanusController {
 					if (identifyLayerResult.getLayerContent() instanceof FeatureLayer) {
 						FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
 						if(identifyLayerResult.getElements().size()==1) {
-							// note maybe best to track whether selected...
-							System.out.println("hey listen");
 							Feature f = (Feature) identifyLayerResult.getElements().get(0);
 							String province = (String) f.getAttributes().get("name");
 
@@ -509,23 +507,6 @@ public class GloriaRomanusController {
 								setNamedProvinceSymbols(List.of(province), PATTERN_LAYER, CAN_ATTACK_SYMBOL);
 									
 							}
-							
-							if (provinceToOwningFactionMap.get(province).equals(humanFaction)) {
-								// province owned by human
-								if (currentlySelectedHumanProvince != null) {
-									featureLayer.unselectFeature(currentlySelectedHumanProvince);
-								}
-								currentlySelectedHumanProvince = f;
-								invading_province.setText(province);
-							} else {
-								if (currentlySelectedEnemyProvince != null) {
-									featureLayer.unselectFeature(currentlySelectedEnemyProvince);
-								}
-								currentlySelectedEnemyProvince = f;
-								opponent_province.setText(province);
-							}
-
-							featureLayer.selectFeature(f);
 						}
 					}
 				} catch (InterruptedException | ExecutionException ex) {

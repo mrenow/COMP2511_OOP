@@ -141,7 +141,7 @@
     },
     {
         "name" : "Macedonia",
-        "adjacent" : ["Dalmatia", "Moesia Superior", "Thracia", "Belgica"]
+        "adjacent" : ["Dalmatia", "Moesia Superior", "Thracia", "Achaia"]
     },
     {
         "name" : "Achaia",

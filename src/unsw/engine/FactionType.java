@@ -8,7 +8,23 @@ public enum FactionType {
 	// Placeholders
 	NO_ONE		("Barbarian", "Barbarians"),
 	ROME		("Roman", "Romans"),
-	GAUL		("Gallic", "Gauls");
+	GAUL		("Gallic", "Gauls"),
+	EGYPT		("Egyptian", "Egyptians"),
+	CARTHAGE	("Carthaginian", "Carthaginians"),
+	GREECE		("Hellenic", "Hellenes"),
+	SELEUCID_EMPIRE	("Seleucid", "Seleucids"),
+	MACEDONIA	("Macedonian", "Macedonians"),
+	NUMIDIA		("Numidian", "Numidians"),
+	BRITAIN		("Briton", "Britons"),
+	PARTHIA		("Parthian", "Parthians"),
+	THRACE		("Thracian", "Thracians"),
+	SPAIN		("Spanish", "Spaniards"),
+	DACIA		("Dacian", "Dacians"),
+	PONTUS		("Pontian", "Pontians"),
+	ARMENIA		("Armenian", "Armenians"),
+	GERMANY		("Germanic", "Germanics");
+	
+	
 	
 	public String title;
 	private String adjective;
