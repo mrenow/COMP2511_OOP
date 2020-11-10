@@ -453,7 +453,6 @@ public class GloriaRomanusController {
 						FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
 						if(identifyLayerResult.getElements().size()==1) {
 							// note maybe best to track whether selected...
-							System.out.println("hey listen");
 							Feature f = (Feature) identifyLayerResult.getElements().get(0);
 							String province = (String) f.getAttributes().get("name");
 
