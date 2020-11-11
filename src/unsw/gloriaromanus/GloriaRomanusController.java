@@ -23,9 +23,14 @@ import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
@@ -33,6 +38,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import util.ArrayUtil;
 import util.MathUtil;
 
@@ -89,7 +96,7 @@ import unsw.ui.TopBar;
 public class GloriaRomanusController {
 
 	private GameController game;
-	
+
 	@FXML
 	private MapView mapView;
 	@FXML
@@ -98,6 +105,8 @@ public class GloriaRomanusController {
 	private TextField opponent_province;
 	@FXML
 	private TextArea output_terminal;
+	@FXML
+  	private StackPane stackPaneMain;
 
 	private ArcGISMap map;
 
@@ -179,6 +188,14 @@ public class GloriaRomanusController {
 
 		currentlySelectedHumanProvince = null;
 		currentlySelectedEnemyProvince = null;
+
+		String []menus = {"ProvinceSideBar.fxml"};
+		for (String fxmlName: menus) {
+			System.out.println(fxmlName);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName));
+			VBox root = (VBox)loader.load();
+			stackPaneMain.getChildren().add(root);
+		}
 
 		initializeProvinceLayers();
 		displayInfo();
@@ -531,6 +548,7 @@ public class GloriaRomanusController {
 								}
 								currentlySelectedHumanProvince = f;
 								invading_province.setText(province);
+								p_list.add(0, province);
 							} else {
 								if (currentlySelectedEnemyProvince != null) {
 									featureLayer.unselectFeature(currentlySelectedEnemyProvince);

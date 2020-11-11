@@ -15,21 +15,23 @@ import javafx.scene.control.ToggleButton;
 public class ProvinceSideBarController {
 
     @FXML private ChoiceBox<String> provinceUnitCB;
-    @FXML private ChoiceBox<String> choiceBox;
+    @FXML private ChoiceBox<String> trainChoiceBox;
     @FXML private Label choiceBoxLabel;
     @FXML private Label provinceUnitLabel;
     @FXML private Button trainBtn;
     @FXML private Button moveBtn;
     @FXML private Button selectTarget;
-    @FXML private TextField textField;
+    @FXML private TextField trainTextField;
     @FXML private ToggleButton toggleSelect;
+    @FXML private TextField invading_province;
+    @FXML private TextField opponent_province;
 
     private String selectedTargetthing;
 
     //@FXML
     public void handleTrainBtn() {
-        choiceBoxLabel.setText(choiceBox.getValue().toString());
-        textField.setText(choiceBox.getValue());
+        choiceBoxLabel.setText(trainChoiceBox.getValue().toString());
+        trainTextField.setText(trainChoiceBox.getValue());
         // TODO Call train method
         
     }
@@ -80,9 +82,9 @@ public class ProvinceSideBarController {
         // This items are for configuring the ChoiceBox (To Train)
         choiceBoxLabel.setText("");
         //choiceBox.setValue("SAMPLE");
-        choiceBox.getItems().add("Heavy Calvary");
-        choiceBox.getItems().add("Archer");
-        choiceBox.getItems().add("Elephants");
+        trainChoiceBox.getItems().add("Heavy Calvary");
+        trainChoiceBox.getItems().add("Archer");
+        trainChoiceBox.getItems().add("Elephants");
 
         // These items are for configuring the choicebox for units in province
         provinceUnitLabel.setText("");
