@@ -1,6 +1,7 @@
 package unsw.gloriaromanus;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,7 @@ public class GloriaRomanusApplication extends Application {
   public void start(Stage stage) throws IOException {
     // set up the scene
     FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-
+    
     
     Parent root = loader.load();
 
