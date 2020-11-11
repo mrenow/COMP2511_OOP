@@ -181,6 +181,7 @@ public class GloriaRomanusController {
 		currentlySelectedEnemyProvince = null;
 
 		initializeProvinceLayers();
+		displayInfo();
 	}
 
 	// RUBBISH
