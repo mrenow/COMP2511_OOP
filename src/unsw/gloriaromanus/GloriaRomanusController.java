@@ -32,6 +32,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.HBox;
 import util.ArrayUtil;
 import util.MathUtil;
 
@@ -79,6 +80,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import unsw.engine.*;
+import unsw.ui.TopBar;
 
 
 
@@ -212,6 +214,13 @@ public class GloriaRomanusController {
 				printMessageToTerminal("Provinces not adjacent, cannot invade!");
 			}
 		}
+	}
+
+	@FXML
+	private HBox topbox;
+	private TopBar topBar;
+	private void displayInfo(){
+		this.topBar=new TopBar(topbox, game);
 	}
 
 

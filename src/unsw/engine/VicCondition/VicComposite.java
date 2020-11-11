@@ -69,4 +69,10 @@ public class VicComposite implements VicComponent{
         }
         return -1;
     }
+    public double getMainProgress(){
+        for (VicComponent vicComponent : subgoals) {
+            
+        }
+        return -1;
+    }
 }
