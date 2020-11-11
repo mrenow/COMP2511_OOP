@@ -60,6 +60,7 @@ public class ProvinceSideBarController {
         // TODO SELECT A SECOND TARGET PROVINCE AND STORE
         if (isSelected) {
             // TODO do select target province
+            
         }
 
     }
