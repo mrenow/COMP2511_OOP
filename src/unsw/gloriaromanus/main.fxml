@@ -49,7 +49,4 @@
             <TextArea fx:id="output_terminal" text="" editable="false"/>
         </VBox>
     </VBox>
-    <HBox fx:id="topbox" layoutX="32.0" layoutY="8.0">
-            
-    </HBox>
 </StackPane>
