@@ -9,4 +9,14 @@ public class Message {
     String action;
     Province province;
     GameController game;
+
+    public GameController getGame() {
+        return game;
+    }
+
+    public void setGame(GameController game) {
+        this.game = game;
+    }
+
+    
 }
