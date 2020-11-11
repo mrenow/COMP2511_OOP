@@ -16,39 +16,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.geometry.Insets?>
 <StackPane fx:controller="unsw.gloriaromanus.GloriaRomanusController" xmlns:fx="http://javafx.com/fxml"
-           stylesheets="/unsw/gloriaromanus/style.css">
-    <MapView fx:id="mapView"/>
-    <VBox StackPane.alignment="TOP_LEFT" spacing="10" maxWidth="250" styleClass="panel-region">
-        <padding>
-            <Insets topRightBottomLeft="10"/>
-        </padding>
-        <background>
-            <Background>
-                <fills>
-                    <BackgroundFill>
-                        <fill>
-                            <Color opacity="0.3"/>
-                        </fill>
-                    </BackgroundFill>
-                </fills>
-            </Background>
-        </background>
-        <HBox>
-            <VBox>
-                <Label text="Your province"/>
-                <TextField fx:id="invading_province" text="" editable="false"/>
-            </VBox>
-            <VBox>
-                <Label text="Enemy province"/>
-                <TextField fx:id="opponent_province" text="" editable="false"/>
-            </VBox>
-        </HBox>
-        <Button text="Invade" onAction="#clickedInvadeButton"/>
-        <VBox>
-            <Label text="Output from interactions"/>
-            <TextArea fx:id="output_terminal" text="" editable="false"/>
-        </VBox>
-    </VBox>
+           stylesheets="/unsw/gloriaromanus/style.css" fx:id="root">
     <HBox fx:id="topbox" maxHeight="20" StackPane.alignment="TOP_CENTER">
 
     </HBox>
