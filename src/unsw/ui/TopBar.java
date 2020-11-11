@@ -32,6 +32,7 @@ public class TopBar implements MsgObserver{
     private List<VictoryCondition> vConditions = new ArrayList<>();
     private Button endTurn = new Button("EndTurn");
 
+    private Menu goalname1 = new Menu("VicInfo");
     
     private DoubleProperty p = new SimpleDoubleProperty();
     private DoubleProperty p1 = new SimpleDoubleProperty();
@@ -60,7 +61,10 @@ public class TopBar implements MsgObserver{
     }
 
     private void progressVicInfo(VicComposite vic){
-
+        p1.set(vic.getProgress(VictoryCondition.CONQUEST));
+        p2.set(vic.getProgress(VictoryCondition.TREASURY));
+        p3.set(vic.getProgress(VictoryCondition.WEALTH));
+        
     }
     private void infoMenuSetup(){
         //set 1st entry
@@ -80,7 +84,6 @@ public class TopBar implements MsgObserver{
         //set main entry
         ProgressBar gn = new ProgressBar();
         gn.progressProperty().bind(p);
-        Menu goalname1 = new Menu("VicInfo");
         goalname1.getItems().addAll(item1,item2,item3);
         goalname1.graphicProperty().set(gn);
         infoMenu.getMenus().add(goalname1);
