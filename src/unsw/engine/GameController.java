@@ -19,6 +19,8 @@ import org.geojson.Point;
 
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
+import unsw.ui.Observer.Observable;
+import unsw.ui.Observer.Observer;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -41,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 public class GameController {
 	public static double STARTING_DENSITY = 0.5;
 	public static int AVERAGE_BARBARIANS = 4;
+	public static int START_YEAR = 200;
 	
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;
@@ -49,6 +52,48 @@ public class GameController {
 	private int round = 0;
 	private int currentTurn = 0; // Must always be less than factionTurnOrder.size()
 	
+	
+	// Observable events
+	private Observable<GameController> triggerTurnChanged = new Observable<>();
+	private Observable<Province> triggerProvinceChanged = new Observable<>();
+	private Observable<Province> triggerTrainingChanged = new Observable<>();
+	private Observable<Province> triggerBuildingChanged = new Observable<>();
+	private Observable<Province> triggerUnitsChanged = new Observable<>();
+	
+	/**
+	 * called on endTurn()
+	 */
+	public void attatchTurnChangedObserver(Observer<GameController> o) {
+		triggerTurnChanged.attach(o);
+	}
+	/**
+	 * Observer called whenever a game method caused a province to change.
+	 */
+	public void attatchProvinceChangedObserver(Observer<Province> o) {
+		triggerProvinceChanged.attach(o);
+	}
+	/**
+	 * Observer called whenever the training list in a particular province is changed
+	 */
+	public void attatchTrainingChangedObserver(Observer<Province> o) {
+		triggerTrainingChanged.attach(o);
+	}
+	/**
+	 * Observer called when the buidlingSlot list in a particular province is changed
+	 */
+	public void attatchBuildingChangedObserver(Observer<Province> o) {
+		triggerBuildingChanged.attach(o);
+	}
+	/**
+	 * Observer called whenever the unit list in a particular province is changed
+	 */
+	public void attatchUnitsChangedObserver(Observer<Province> o) {
+		triggerUnitsChanged.attach(o);
+	}
+	
+	
+	
+
 	@JsonCreator
 	private GameController() {}
 	
@@ -65,7 +110,6 @@ public class GameController {
 			e.printStackTrace(); 
 			throw new DataInitializationError("Error while loading game", e);
 		}
-		
 	}
 	/**
 	 * Saves game in human readable json
@@ -82,8 +126,6 @@ public class GameController {
 	public GameController(String adjacencyFile,
 			String landlockedFile, String factionFile) throws DataInitializationError{
 		Map<String, Province> provinceMap;
-		
-		
 		provinceMap = Parsing.readAdjacency(adjacencyFile);
 		if(landlockedFile != null) {
 			Parsing.readLandlocked(landlockedFile, provinceMap);
@@ -134,13 +176,6 @@ public class GameController {
  * 
  */
 
-	/**
-	 * Returns the current faction's turn
-	 * @return
-	 */
-	public Faction getCurrentTurn() {
-		return this.factionOrder.get(this.currentTurn);
-	}
 	
 //	Constraints:
 //	UnitType must be in getMercenaries()
@@ -170,10 +205,14 @@ public class GameController {
  * @param province
  * @param unitType
  */
+	
 //	Free slots must be available
 	public void trainUnit (Province province, ItemType unitType) {
 		// Create a unit with unitType
 		province.trainUnit(unitType);
+		
+		triggerProvinceChanged.notifyUpdate(province);
+		triggerTrainingChanged.notifyUpdate(province);
 	}
 
 	// Constraints:
@@ -189,7 +228,9 @@ public class GameController {
 	public void buildInfrastructure(Province province, ItemType infraType) {
 		// add build to building queue #func in province
 		province.build(infraType);
-		// should return the entry??
+		
+		triggerProvinceChanged.notifyUpdate(province);
+		triggerBuildingChanged.notifyUpdate(province);
 	}
 	
 	/**
@@ -200,6 +241,9 @@ public class GameController {
 	public void cancelInfrastructure(BuildingSlotEntry entry) {
 		Province province = entry.getProvince();
 		province.getCurrentConstruction().remove(entry);
+		
+		triggerProvinceChanged.notifyUpdate(province);
+		triggerBuildingChanged.notifyUpdate(province);
 	}
 	/**
 	 * @pre For some province in getProvinces(getCurrentTurn()), entry in province.getCurrentTraining()
@@ -207,9 +251,10 @@ public class GameController {
 	 */
 	public void cancelTraining(TrainingSlotEntry entry) {
 		Province province = entry.getProvince();
-		//System.out.println(province.getCurrentTraining());
 		province.trainAdjustUnit(entry);
-		//System.out.println(province.getCurrentTraining());
+		
+		triggerProvinceChanged.notifyUpdate(province);
+		triggerTrainingChanged.notifyUpdate(province);
 	}
 	
 	/**
@@ -220,6 +265,8 @@ public class GameController {
 	 */
 	public void setTax (Province province, TaxLevel taxLevel) {
 		province.setTaxLevel(taxLevel);
+		triggerProvinceChanged.notifyUpdate(province);
+		triggerProvinceChanged.notifyUpdate(province);
 	}
 	
 	// /**
@@ -260,6 +307,7 @@ public class GameController {
 	 * @return
 	 */
 	public AttackInfo invade(List<Unit>attackers,Province defender){
+		Province attacker = attackers.get(0).getProvince();
 		Faction attackOwner = attackers.get(0).getOwner();
 		Faction defendOwner = defender.getOwner();
 		Battle battle = new Battle(attackers, defender.getUnits());
@@ -291,6 +339,8 @@ public class GameController {
 		}
 		Unit.expendInvade(attackers);
 		Unit.expendMovement(attackers); // could get the province's updated list, but like ceebs, it shouldnt break anything
+		triggerUnitsChanged.notifyUpdate(attacker);
+		triggerUnitsChanged.notifyUpdate(defender);
 		return attackInfo;
 	}
 	
@@ -353,7 +403,8 @@ public class GameController {
 		// Move units between provinces and subtract mov points accordingly.
 		Unit.transferArmy(unitGroup, destination);
 		Unit.expendMovement(unitGroup, movCost);
-		
+		triggerUnitsChanged.notifyUpdate(start);
+		triggerUnitsChanged.notifyUpdate(destination);
 	}
 	
 	/**
@@ -371,6 +422,7 @@ public class GameController {
 				this.currentTurn = 0;	
 			}
 		}
+		triggerTurnChanged.notifyUpdate(this);
 		return vic;
 	}
 	private void updateVictoryInfo(){
@@ -404,6 +456,7 @@ public class GameController {
 		List<Unit> disownedUnits = new ArrayList<>(province.getUnits());
 		Faction.NO_ONE.takeProvince(province);
 		province.addUnits(disownedUnits);
+		triggerProvinceChanged.notifyUpdate(province);
 	}
 	
 /*
@@ -511,13 +564,13 @@ public class GameController {
 		}
 	}
 	
-//	returns the province under the specified location
-/* 	To implement in M3
-	public Province getProvince(Point location) {
-		return null;
+	/**
+	 * Returns the current faction's turn
+	 * @return
+	 */
+	public Faction getCurrentTurn() {
+		return this.factionOrder.get(this.currentTurn);
 	}
-	*/
-	
 	
 	/**
 	 * @param name
@@ -537,7 +590,8 @@ public class GameController {
 	}
 	
 	public int getYear() {
-		return 200+round;
+		return START_YEAR + round;
 	}
+	
 	
 }
