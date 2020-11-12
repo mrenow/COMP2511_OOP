@@ -87,7 +87,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import unsw.engine.*;
+import unsw.engine.VicCondition.*;
 import unsw.ui.TopBar;
+import unsw.ui.Observer.MsgObserverable;
 import unsw.ui.Observer.Observable;
 import unsw.ui.Observer.Subject;
 
@@ -101,6 +103,7 @@ public class GloriaRomanusController extends Controller{
 	private GameController game;
 	private MapController mapController;
 	
+	private MsgObserverable turnchange = new MsgObserverable();
 
 	@FXML
 	private void initialize() throws Exception {
@@ -119,15 +122,38 @@ public class GloriaRomanusController extends Controller{
 		// adds to the first index of the child list
 		((Pane)getRoot()).getChildren().add(0, mapController.getRoot());
 		
+
+		//topbar observer and observerable implement
+
+		
+		VicComposite vic = generateVic();
+		game.setVic(vic);
 		displayInfo();
+		game.setTurnObserverable(turnchange);
 	}
 
+	private VicComposite generateVic(){
+		VicLeaf l1 = new VicLeaf(VictoryCondition.CONQUEST);
+		VicLeaf l2 = new VicLeaf(VictoryCondition.WEALTH);
+		VicLeaf l3 = new VicLeaf(VictoryCondition.TREASURY);
+		VicComposite vic1 = new VicComposite(VictoryCondition.AND);
+		VicComposite vic2 = new VicComposite(VictoryCondition.OR);
+
+		vic2.addSubVic(l2);
+		vic2.addSubVic(l3);
+		vic1.addSubVic(l1);
+		vic1.addSubVic(vic2);
+		return vic1;
+	}
 
 	@FXML
 	private HBox topbox;
 	private TopBar topBar;
 	private void displayInfo(){
 		this.topBar=new TopBar(topbox, game);
+		
+		turnchange.attach(topBar);
+		
 	}
 	
 	@Override
