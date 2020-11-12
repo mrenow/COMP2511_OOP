@@ -12,7 +12,7 @@ import javafx.scene.control.ToggleButton;
  * 
  * @author Derek
  */
-public class ProvinceSideBarController {
+public class ProvinceSideBarController extends Controller {
 
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
