@@ -1,6 +1,7 @@
-package unsw.engine.Observer;
+package unsw.ui.Observer;
 
-public class PublicMsg implements MsgObserver{
+public class RomeMsg implements MsgObserver{
+    
     @Override
     public void update(Message m) {
         // TODO Auto-generated method stub

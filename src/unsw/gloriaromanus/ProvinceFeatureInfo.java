@@ -27,9 +27,14 @@ public class ProvinceFeatureInfo implements Comparable<ProvinceFeatureInfo>{
 		return province.getName();
 	}
 	
+	public Province getProvince() {
+		return province;
+	}
+
 	public Polygon getShape() {
 		return shape;
 	}
+	
 	public void setShape(Polygon shape) {
 		this.shape =  shape;
 	}

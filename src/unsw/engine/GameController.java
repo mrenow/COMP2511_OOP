@@ -17,8 +17,11 @@ import java.util.Set;
 
 import org.geojson.Point;
 
+import unsw.ui.Observer.MsgObserver;
+import unsw.ui.Observer.MsgObserverable;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
+import unsw.ui.Observer.Message;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -108,6 +111,12 @@ public class GameController {
 		this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap, STARTING_DENSITY);
 		this.allProvinces = provinceMap.values();
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
+	}
+
+	public void setVic(VicComposite vic){
+		for (Faction faction : factionOrder) {
+			faction.setVicComposite(vic);
+		}
 	}
 	/**
 	 * Helper method for init
@@ -355,7 +364,10 @@ public class GameController {
 		Unit.expendMovement(unitGroup, movCost);
 		
 	}
-	
+	private MsgObserverable turnchange;
+	public void setTurnObserverable(MsgObserverable change){
+		this.turnchange=change;
+	}
 	/**
 	 * @return null if no one has won, otherwise returns a victory info object detailing who has won and by which victory.
 	 */
@@ -371,6 +383,12 @@ public class GameController {
 				this.currentTurn = 0;	
 			}
 		}
+		Message m = new Message();
+		m.setGame(this);
+		if (turnchange == null) {
+			System.out.println("osangow");
+		}
+		turnchange.notifyUpdate(m);
 		return vic;
 	}
 	private void updateVictoryInfo(){
