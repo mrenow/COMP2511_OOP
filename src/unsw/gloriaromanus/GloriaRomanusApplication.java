@@ -6,10 +6,13 @@ import java.net.URL;
 import java.nio.file.Paths;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 public class GloriaRomanusApplication extends Application {
 	public static GloriaRomanusApplication app;

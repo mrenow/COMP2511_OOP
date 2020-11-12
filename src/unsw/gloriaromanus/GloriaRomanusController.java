@@ -40,6 +40,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import util.ArrayUtil;
 import util.MathUtil;
 
@@ -102,6 +103,7 @@ public class GloriaRomanusController extends Controller{
 
 	private GameController game;
 	private MapController mapController;
+	private ProvinceSideBarController sideController;
 	
 	private MsgObserverable turnchange = new MsgObserverable();
 
@@ -122,6 +124,13 @@ public class GloriaRomanusController extends Controller{
 		// adds to the first index of the child list
 		((Pane)getRoot()).getChildren().add(0, mapController.getRoot());
 		
+		sideController = new ProvinceSideBarController(game);
+
+		sideController = GloriaRomanusApplication.loadController("src/unsw/gloriaromanus/ProvinceSideBar.fxml");
+		// adds to the next index of the child list
+		((Pane)getRoot()).getChildren().add(1, sideController.getRoot());
+		// attach observer
+		mapController.attachProvinceSelectedObserver(sideController);
 
 		//topbar observer and observerable implement
 

@@ -1,5 +1,9 @@
 package unsw.gloriaromanus;
 
+import java.util.ResourceBundle.Control;
+
+import com.esri.arcgisruntime.internal.io.handler.request.ServerContextConcurrentHashMap.HashMapChangedEvent.Action;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,13 +11,22 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import unsw.engine.*;
+import unsw.ui.Observer.*;
 
 /**
  * 
  * @author Derek
  */
-public class ProvinceSideBarController extends Controller {
+public class ProvinceSideBarController extends Controller implements Observer<ProvinceFeatureInfo> {
 
+    private GameController game;
+    private Province province;
+    private Province initialProvince;
+    private Province targetProvince;
+    private String myProvince;
+    private String enemyProvince;
+    
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
     @FXML private Label choiceBoxLabel;
@@ -28,51 +41,43 @@ public class ProvinceSideBarController extends Controller {
 
     private String selectedTargetthing;
 
-    //@FXML
-    public void handleTrainBtn() {
+    public ProvinceSideBarController() {
+        
+    }
+
+    public ProvinceSideBarController(GameController game) {
+        this.game = game;
+    }
+
+    @FXML
+    public void handleTrainBtn(ActionEvent e) {
         choiceBoxLabel.setText(trainChoiceBox.getValue().toString());
         trainTextField.setText(trainChoiceBox.getValue());
         // TODO Call train method
+        
         
     }
     
     // Button to move to allied province or attack enemy province (two in one kinda)
     // Select province -> select unit -> select another province (enemy or ally) to move
-    public void handleMove() {
-        String selectedUnit = provinceUnitCB.getValue().toString();
+    @FXML
+    public void handleMove(ActionEvent e) {
         // Handle move or attack
-        //if (ALLIED_PROVINCE_SELECTED) {
-        if (selectedTargetthing = ally) {
-            moveBtn.setText("Move");
+        if (initialProvince.getOwner().equals(targetProvince.getOwner())) {
             // TODO Call move method
 
         }
-        //else if (ENEMY_PROVINCE_SELECTED) {
-        else if (selectedTargetthing = enemy) {
-            moveBtn.setText("Invade");
-            // TODO Call Attack/Invade method
-
-        }
-
-    }
-
-    // This might be better to handle selecting a target province vs basic button
-    public void handleToggleSelect() {
-        boolean isSelected = toggleSelect.isSelected();
-        // TODO SELECT A SECOND TARGET PROVINCE AND STORE
-        if (isSelected) {
-            // TODO do select target province
+        else {
+            // TODO Call invade method
             
         }
-
     }
 
     // When this button is selected, choose a 2nd province and store in list(?)
+    @FXML
     public void handleSelectTarget() {
-        // TODO SELECT A SECOND TARGET PROVINCE AND STORE
-        // observer(?) State(?)
-        selectedTargetthing = SELECTED_PROVINCE;
-
+        //invading_province.setText(myProvince);
+        this.initialProvince = province;
     }
 
     //@Override
@@ -81,10 +86,11 @@ public class ProvinceSideBarController extends Controller {
 
         // This items are for configuring the ChoiceBox (To Train)
         choiceBoxLabel.setText("");
-        //choiceBox.setValue("SAMPLE");
+        trainChoiceBox.getItems().add("TEST_TROOP");
         trainChoiceBox.getItems().add("Heavy Calvary");
         trainChoiceBox.getItems().add("Archer");
         trainChoiceBox.getItems().add("Elephants");
+        //trainChoiceBox.getItems().addAll(ItemType.nameList);
 
         // These items are for configuring the choicebox for units in province
         provinceUnitLabel.setText("");
@@ -92,4 +98,29 @@ public class ProvinceSideBarController extends Controller {
         provinceUnitCB.getItems().add("Unit2");
         provinceUnitCB.getItems().add("Unit3");
     }
+
+    @Override
+    public void update(ProvinceFeatureInfo p) {
+        //this.province = p.getProvince();
+        if (p.getOwner().equals(game.getCurrentTurn())) {
+            this.province = p.getProvince();
+            this.myProvince = p.getName();
+            moveBtn.setText("Move");
+        }
+        else {
+            this.targetProvince = p.getProvince();
+            this.enemyProvince = p.getName();
+            moveBtn.setText("Invade");
+        }
+    }
+
+/*
+    public void setInvadingProvince(String province) {
+        invading_province.setText(province);
+    }
+
+    public void setOpponentProvince(String province) {
+        opponent_province.setText(province);
+    }
+*/
 }
