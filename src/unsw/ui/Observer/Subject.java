@@ -1,7 +1,7 @@
 package unsw.ui.Observer;
 
-public interface Subject {
-    public void attach(MsgObserver o);
-    public void detach(MsgObserver o);
-    public void notifyUpdate(Message m);
+public interface Subject <T>{
+    public void attach(Observer <T> o);
+    public void detach(Observer <T> o);
+    public void notifyUpdate(T m);
 }

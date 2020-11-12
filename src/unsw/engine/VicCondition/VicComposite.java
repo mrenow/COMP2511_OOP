@@ -27,6 +27,10 @@ public class VicComposite implements VicComponent{
     }
     @Override
     public boolean checkVic() {
+        if (goal == null) {
+            System.out.println("no goal move on");
+            return false;
+        }
         switch (goal) {
             case AND:
                 for (VicComponent vicComponent : subgoals) {
@@ -69,10 +73,51 @@ public class VicComposite implements VicComponent{
         }
         return -1;
     }
-    public double getMainProgress(){
-        for (VicComponent vicComponent : subgoals) {
-            
+    public Double getMainProgress(){
+        Double prog = 0.0;
+        VicComposite temp;
+        Double max = 0.0;
+        switch (goal) {
+            case AND:
+                for (VicComponent vicComponent : subgoals) {
+                    switch (vicComponent.getGoal()) {
+                        case AND:
+                            temp = (VicComposite)vicComponent;
+                            prog += temp.getMainProgress();
+                            break;
+                        case OR:
+                            temp = (VicComposite)vicComponent;
+                            max = Double.max(max, temp.getMainProgress());
+                            break;
+                        
+                        default:
+                            prog += 0.5*vicComponent.getProgress(vicComponent.getGoal());
+                            break;
+                    }
+                }
+                prog += max*0.5;
+                break;
+            case OR:
+                for (VicComponent vicComponent : subgoals) {
+                    switch (vicComponent.getGoal()) {
+                        case AND:
+                            temp = (VicComposite)vicComponent;
+                            prog += temp.getMainProgress();
+                            break;
+                        case OR:
+                            temp = (VicComposite)vicComponent;
+                            max = Double.max(max, temp.getMainProgress());
+                            break;
+                        default:
+                            vicComponent.getProgress(vicComponent.getGoal());
+                            break;
+                    }
+                }
+                prog += max*0.5;
+                break;
+            default:
+                break;
         }
-        return -1;
+        return prog;
     }
 }
