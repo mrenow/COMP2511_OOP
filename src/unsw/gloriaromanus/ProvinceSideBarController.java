@@ -1,5 +1,7 @@
 package unsw.gloriaromanus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle.Control;
 
 import com.esri.arcgisruntime.internal.io.handler.request.ServerContextConcurrentHashMap.HashMapChangedEvent.Action;
@@ -26,6 +28,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     private Province targetProvince;
     private String myProvince;
     private String enemyProvince;
+    private List<Unit> unitList;
     
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
@@ -62,15 +65,36 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     // Select province -> select unit -> select another province (enemy or ally) to move
     @FXML
     public void handleMove(ActionEvent e) {
-        // Handle move or attack
-        if (initialProvince.getOwner().equals(targetProvince.getOwner())) {
-            // TODO Call move method
-
+        String u = provinceUnitCB.getValue().toString();
+        if (u == "All Units") {
+            // Handle move or attack
+            if (initialProvince.getOwner().equals(province.getOwner())) {
+                // Call move method
+                game.move(initialProvince.getUnits(), province);
+            }
+            else {
+                // Call invade method
+                game.invade(initialProvince, targetProvince);
+            }
         }
         else {
-            // TODO Call invade method
-            
+            for (Unit unit : initialProvince.getUnits()) {
+                if (u == unit.getName()) {
+                    unitList = new ArrayList<Unit>();
+                    unitList.add(unit);
+                    // Handle move or attack
+                    if (initialProvince.getOwner().equals(province.getOwner())) {
+                        // Call move method
+                        game.move(unitList, province);
+                    }
+                    else {
+                        // Call invade method
+                        game.invade(unitList, targetProvince);
+                    }
+                }
+            }
         }
+        
     }
 
     // When this button is selected, choose a 2nd province and store in list(?)
@@ -94,6 +118,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
         // These items are for configuring the choicebox for units in province
         provinceUnitLabel.setText("");
+        provinceUnitCB.getItems().add("All Units");
         provinceUnitCB.getItems().add("Unit1");
         provinceUnitCB.getItems().add("Unit2");
         provinceUnitCB.getItems().add("Unit3");
