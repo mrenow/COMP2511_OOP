@@ -19,6 +19,9 @@ import org.geojson.Point;
 
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
+import unsw.ui.Observer.Message;
+import unsw.ui.Observer.MsgObserver;
+import unsw.ui.Observer.MsgObserverable;
 import unsw.ui.Observer.Observable;
 import unsw.ui.Observer.Observer;
 
@@ -43,7 +46,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 public class GameController {
 	public static double STARTING_DENSITY = 0.5;
 	public static int AVERAGE_BARBARIANS = 4;
-	public static int START_YEAR = 200;
 	
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;
@@ -54,7 +56,7 @@ public class GameController {
 	
 	
 	// Observable events
-	private Observable<GameController> triggerTurnChanged = new Observable<>();
+	private MsgObserverable triggerTurnChanged = new MsgObserverable();
 	private Observable<Province> triggerProvinceChanged = new Observable<>();
 	private Observable<Province> triggerTrainingChanged = new Observable<>();
 	private Observable<Province> triggerBuildingChanged = new Observable<>();
@@ -63,11 +65,11 @@ public class GameController {
 	/**
 	 * called on endTurn()
 	 */
-	public void attatchTurnChangedObserver(Observer<GameController> o) {
+	public void attatchTurnChangedObserver(MsgObserver o) {
 		triggerTurnChanged.attach(o);
 	}
 	/**
-	 * Observer called whenever a game method caused a province to change.
+	 * Observer called whenever a game function caused a province to change.
 	 */
 	public void attatchProvinceChangedObserver(Observer<Province> o) {
 		triggerProvinceChanged.attach(o);
@@ -151,6 +153,13 @@ public class GameController {
 		this.allProvinces = provinceMap.values();
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
+	
+	public void setVic(VicComposite vic){
+		for (Faction faction : factionOrder) {
+			faction.setVicComposite(vic);
+		}
+	}
+
 	/**
 	 * Helper method for init
 	 * Current algorithm just uses a gaussian distribution around N units.
@@ -422,7 +431,9 @@ public class GameController {
 				this.currentTurn = 0;	
 			}
 		}
-		triggerTurnChanged.notifyUpdate(this);
+		Message m = new Message();
+		m.setGame(this);
+		triggerTurnChanged.notifyUpdate(m);
 		return vic;
 	}
 	private void updateVictoryInfo(){
@@ -456,7 +467,6 @@ public class GameController {
 		List<Unit> disownedUnits = new ArrayList<>(province.getUnits());
 		Faction.NO_ONE.takeProvince(province);
 		province.addUnits(disownedUnits);
-		triggerProvinceChanged.notifyUpdate(province);
 	}
 	
 /*
@@ -564,6 +574,14 @@ public class GameController {
 		}
 	}
 	
+//	returns the province under the specified location
+/* 	To implement in M3
+	public Province getProvince(Point location) {
+		return null;
+	}
+	*/
+	
+
 	/**
 	 * Returns the current faction's turn
 	 * @return
@@ -590,7 +608,7 @@ public class GameController {
 	}
 	
 	public int getYear() {
-		return START_YEAR + round;
+		return 200+round;
 	}
 	
 	

@@ -74,8 +74,6 @@ public class MapController extends Controller{
 	
 	private Observable<ProvinceFeatureInfo> triggerProvinceSelected = new Observable<ProvinceFeatureInfo>();
 
-
-	
 	// Symbols
 	private Map<FactionType, Symbol> factionSymbolMap = new EnumMap<>(FactionType.class);
 	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
@@ -312,6 +310,7 @@ public class MapController extends Controller{
 			identifyFuture.addDoneListener(() -> {
 				try {
 					IdentifyLayerResult identifyLayerResult = identifyFuture.get();
+					// Only trigger on unique result province exists
 					if(identifyLayerResult.getElements().size()==1) {
 						Feature f = (Feature) identifyLayerResult.getElements().get(0);
 						String province = (String) f.getAttributes().get("name");
@@ -410,9 +409,11 @@ public class MapController extends Controller{
 			mapView.dispose();
 		}
 	}
+	
 	public void attatchProvinceSelectedObserver(Observer<ProvinceFeatureInfo> o) {
 		triggerProvinceSelected.attach(o);
 	}
+	
 	private void debugActions(KeyEvent e) {
 		switch(e.getCharacter()) {
 		case "1":

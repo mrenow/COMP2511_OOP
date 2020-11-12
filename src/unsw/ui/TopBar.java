@@ -7,6 +7,7 @@ import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
 import unsw.ui.Observer.Message;
 import unsw.ui.Observer.MsgObserver;
+import unsw.ui.Observer.Observer;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -48,6 +49,7 @@ public class TopBar implements MsgObserver{
         Text yearIndicator = new Text("Year:");
         this.topbar = topbar;
         this.game = game;
+        facnameIndicator.setText(game.getCurrentTurn().getType().toString());
         gold.setText("Gold:"+g.toString());;
         endTurn.setOnAction((e)->endTurnPressed());
         this.topbar.getChildren().addAll(yearIndicator,y,facnameIndicator,infoMenu,endTurn);
