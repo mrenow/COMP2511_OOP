@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="topbox" alignment="CENTER" maxHeight="20" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.topbar.TopBarController">
+<HBox fx:id="topbox" alignment="CENTER" maxHeight="20" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="yearLable" text="Year: " />
       <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />

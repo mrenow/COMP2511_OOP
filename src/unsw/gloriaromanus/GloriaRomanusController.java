@@ -3,6 +3,7 @@ package unsw.gloriaromanus;
 import java.io.FileInputStream;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -50,13 +51,17 @@ public class GloriaRomanusController extends Controller{
 		GloriaRomanusApplication.loadExistingController(sideController, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
 		// adds to the next index of the child list
 		((Pane)getRoot()).getChildren().add(1, sideController.getRoot());
+		StackPane.setAlignment(sideController.getRoot(), Pos.CENTER_RIGHT);
+		
 		// attach observer
 		mapController.attachProvinceSelectedObserver(sideController);
-
+		
+		topbar = new TopBarController(game);
 		//topbar observer and observerable implement
 		GloriaRomanusApplication.loadExistingController(topbar, "src/unsw/ui/topbar/TopBar.fxml");
 		
 		((Pane)getRoot()).getChildren().add(2, topbar.getRoot());
+		StackPane.setAlignment(topbar.getRoot(), Pos.TOP_CENTER);
 		
 
 		//these two should be inside main
