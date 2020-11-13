@@ -17,7 +17,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unsw.engine.AttackInfo;
+import unsw.engine.BattleResult;
 import unsw.engine.Battle;
 import unsw.engine.DataInitializationError;
 import unsw.engine.Faction;
@@ -53,9 +53,9 @@ public class BattleTest {
     public void invadeEmpty() {
     	// move romans to province 2 and invade province 3 (empty)
     	game.move(List.of(RU(1)), P(2));
-    	AttackInfo result = game.invade(P(2).getUnits(), P(3));
+    	BattleResult result = game.invade(P(2).getUnits(), P(3));
     	int oldHealth = RU(1).getHealth();
-    	assertEquals(AttackInfo.WIN, result);
+    	assertEquals(BattleResult.WIN, result);
     	
     	// Test that ownership has been transferred
     	TestUtil.assertCollectionEquals(List.of(P(1), P(2), P(3)), rome.getProvinces());
@@ -78,7 +78,7 @@ public class BattleTest {
     	assertTrue(GU(1).canAttack());
     	assertIterableEquals(game.getAttackable(List.of(GU(1))), List.of(P(2)));
     	// Face off:
-    	assertEquals(AttackInfo.LOSE, game.invade(List.of(GU(1)), P(2)));
+    	assertEquals(BattleResult.LOSE, game.invade(List.of(GU(1)), P(2)));
     	assertFalse(GU(1).isAlive());
     	assertTrue(RU(0).isAlive());
     	assertIterableEquals(List.of(), P(3).getUnits());
@@ -86,7 +86,7 @@ public class BattleTest {
     	
     	game.move(List.of(GU(0)), P(3));
     	//assertIterableEquals(List.of(P(2)),  game.getAttackable(P(3)));
-    	assertEquals(AttackInfo.DRAW, game.invade(List.of(GU(0)), P(2)));
+    	assertEquals(BattleResult.DRAW, game.invade(List.of(GU(0)), P(2)));
     	assertTrue(RU(0).isAlive());
     	assertTrue(GU(0).isAlive());
     	// Unit which has attacked cannot attack again.
@@ -108,7 +108,7 @@ public class BattleTest {
     	game.endTurn();
     	game.move(List.of(GU(0)), P(3));
    
-    	assertEquals(AttackInfo.WIN, game.invade(List.of(GU(0)), P(2)));
+    	assertEquals(BattleResult.WIN, game.invade(List.of(GU(0)), P(2)));
     
     	// eagles are lost
     	assertFalse(RU(4).isAlive());
@@ -129,7 +129,7 @@ public class BattleTest {
     	List<Unit> romanArmy = P(1).getUnits();
     	
     	// Check that eagles return once the settlement is recaptured.
-    	assertEquals(AttackInfo.WIN, game.invade(romanArmy, P(2)));
+    	assertEquals(BattleResult.WIN, game.invade(romanArmy, P(2)));
     	assertIterableEquals(List.of(), rome.getLostEagleProvinces());
     	assertEquals(0, rome.getNumLostEagles());	
     }
@@ -140,8 +140,8 @@ public class BattleTest {
     	GlobalRandom.init();
     	// possibilites : 
     	Battle b  = new Battle(List.of(RU(0)), List.of(GU(4)));
-    	
-    	AttackInfo result = b.getResult();
+
+		BattleResult result = b.getResult().getResult();
     	b.printLog(new PrintStream(new File("src/test/basicRawBattle.log")));
     }
     

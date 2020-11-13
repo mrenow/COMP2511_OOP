@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unsw.engine.AttackInfo;
+import unsw.engine.BattleResult;
 import unsw.engine.Battle;
 import unsw.engine.DataInitializationError;
 import unsw.engine.Faction;
@@ -41,7 +41,7 @@ public class ElephantBattleTest {
 
 		GlobalRandom.init(-1272667509544333134L);
 		Battle b = new Battle(romanUnits, gallicUnits);
-		AttackInfo result = b.getResult();
+		BattleResult result = b.getResult().getResult();
 		assertTrue(70 < b.getNumAttemptedEngagements());
 		b.printLog(new PrintStream(new File("src/test/elephantsAmok.log")));
 	}
@@ -51,7 +51,7 @@ public class ElephantBattleTest {
 
 		GlobalRandom.init(-5216799251492405668L);
 		Battle b = new Battle(List.of(RU(0), RU(1)), List.of(GU(0), GU(1)));
-		AttackInfo result = b.getResult();
+		BattleResult result = b.getResult().getResult();
 		b.printLog(new PrintStream(new File("src/test/elephantsAmok.log")));
 	}
 	private Unit RU(int index) {

@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unsw.engine.AttackInfo;
+import unsw.engine.BattleResult;
 import unsw.engine.Battle;
 import unsw.engine.DataInitializationError;
 import unsw.engine.Faction;
@@ -40,9 +40,9 @@ public class VeryBigBattleTest {
     	GlobalRandom.init(-8182561916007065045L);
     	
     	Battle b = new Battle(romanUnits, gallicUnits);
-    	AttackInfo result = b.getResult();
-    	assertEquals(AttackInfo.DRAW, result);
-    	assertEquals(AttackInfo.DRAW, result.defenderView());
+		BattleResult result = b.getResult().getResult();
+    	assertEquals(BattleResult.DRAW, result);
+    	assertEquals(BattleResult.DRAW, result.defenderView());
     	assertEquals(201, b.getNumAttemptedEngagements());
     	b.printLog(new PrintStream(new File("src/test/bigEngagementTimeout.log")));
      }   

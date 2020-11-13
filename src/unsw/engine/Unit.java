@@ -180,6 +180,13 @@ public class Unit {
 		army.forEach(u -> {if(u.isAlive()) { out.add(u);}});
 		return out;
 	}
+	public static int getMilitaryIndex(Collection<Unit> army) {
+		double totMilitaryIndex = 0;
+		for(Unit u: army) {
+			totMilitaryIndex += Math.log(u.getHealth()*u.getArmour())*u.getAttack();
+		}
+		return (int)Math.round(totMilitaryIndex);
+	}
 	static void expendMovement(Collection<Unit> army, int movPoints) {
 		army.forEach(u-> u.movPoints -= movPoints);
 		

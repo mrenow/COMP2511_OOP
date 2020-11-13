@@ -27,6 +27,7 @@ import unsw.ui.Observer.Observer;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import util.Concatenator;
 import util.MappingIterable;
@@ -56,11 +57,13 @@ public class GameController {
 	
 	
 	// Observable events
-	private MsgObserverable triggerTurnChanged = new MsgObserverable();
-	private Observable<Province> triggerProvinceChanged = new Observable<>();
-	private Observable<Province> triggerTrainingChanged = new Observable<>();
-	private Observable<Province> triggerBuildingChanged = new Observable<>();
-	private Observable<Province> triggerUnitsChanged = new Observable<>();
+	
+	@JsonIgnore private MsgObserverable triggerTurnChanged = new MsgObserverable();
+	@JsonIgnore private Observable<Province> triggerProvinceChanged = new Observable<>();
+	@JsonIgnore private Observable<Province> triggerTrainingChanged = new Observable<>();
+	@JsonIgnore private Observable<Province> triggerBuildingChanged = new Observable<>();
+	@JsonIgnore private Observable<Province> triggerUnitsChanged = new Observable<>();
+	@JsonIgnore private Observable<BattleInfo> triggerBattleEnd = new Observable<>();
 	
 	/**
 	 * called on endTurn()
@@ -91,6 +94,13 @@ public class GameController {
 	 */
 	public void attatchUnitsChangedObserver(Observer<Province> o) {
 		triggerUnitsChanged.attach(o);
+	}
+	
+	/**
+	 * Observer called whenever the unit list in a particular province is changed
+	 */
+	public void attatchBattleEndObserver(Observer<BattleInfo> o) {
+		triggerBattleEnd.attach(o);
 	}
 	
 	
@@ -303,7 +313,7 @@ public class GameController {
 	 * @param defender
 	 * @return
 	 */
-	public AttackInfo invade (Province attacker, Province defender) {
+	public BattleResult invade (Province attacker, Province defender) {
 		return invade(attacker.getUnits(), defender);
 	}
 	/**
@@ -315,7 +325,7 @@ public class GameController {
 	 * @param defender
 	 * @return
 	 */
-	public AttackInfo invade(List<Unit>attackers,Province defender){
+	public BattleResult invade(List<Unit>attackers,Province defender){
 		Province attacker = attackers.get(0).getProvince();
 		Faction attackOwner = attackers.get(0).getOwner();
 		Faction defendOwner = defender.getOwner();
@@ -329,7 +339,9 @@ public class GameController {
 			}
 		}
 		
-		AttackInfo attackInfo = battle.getResult();
+		BattleInfo info = battle.getResult();
+		
+		BattleResult attackInfo = info.getResult();
 		
 		// done after the battle so battle can function without province information.
 		for (Unit u : new Concatenator<>(attackers,defender.getUnits())) {
@@ -340,7 +352,7 @@ public class GameController {
 		
 		// After attackinfo is assigned
 		// if the current province is taken, lost eagles are assigned to this province
-		if(attackInfo == AttackInfo.WIN) {
+		if(attackInfo == BattleResult.WIN) {
 			defender.putLostEagles(defNumEagles);
 			// Finally, change owner and move armies
 			attackOwner.takeProvince(defender);
@@ -350,6 +362,7 @@ public class GameController {
 		Unit.expendMovement(attackers); // could get the province's updated list, but like ceebs, it shouldnt break anything
 		triggerUnitsChanged.notifyUpdate(attacker);
 		triggerUnitsChanged.notifyUpdate(defender);
+		triggerBattleEnd.notifyUpdate(info);
 		return attackInfo;
 	}
 	
@@ -601,8 +614,8 @@ public class GameController {
 			}
 		}
 		return null;
-		
 	}
+	
 	public int getNumProvinces() {
 		return allProvinces.size();
 	}
@@ -612,10 +625,5 @@ public class GameController {
 	}
 	
 
-	
-	public int getDevelopmentIndex(Province p) {
-		
-		// no buildings
-		return 0;
-	}
+
 }

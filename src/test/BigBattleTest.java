@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import unsw.engine.AttackInfo;
+import unsw.engine.BattleResult;
 import unsw.engine.Battle;
 import unsw.engine.DataInitializationError;
 import unsw.engine.Faction;
@@ -49,9 +49,9 @@ public class BigBattleTest {
 	public void bigEngagementGaulsWin() throws FileNotFoundException {
 		GlobalRandom.init(-5826966330945702263L);
 		Battle b = new Battle(romanUnits, gallicUnits);
-		AttackInfo result = b.getResult();
-		assertEquals(AttackInfo.LOSE, result);
-		assertEquals(AttackInfo.WIN, result.defenderView());
+		BattleResult result = b.getResult().getResult();
+		assertEquals(BattleResult.LOSE, result);
+		assertEquals(BattleResult.WIN, result.defenderView());
 		b.printLog(new PrintStream(new File("src/test/bigEngagementGaulsWin.log")));
 
 	}
@@ -60,9 +60,9 @@ public class BigBattleTest {
 	public void bigEngagementRomansWin() throws FileNotFoundException {
 		GlobalRandom.init(-7558078402375791967L);
 		Battle b = new Battle(romanUnits, gallicUnits);
-		AttackInfo result = b.getResult();
-		assertEquals(AttackInfo.WIN, result);
-		assertEquals(AttackInfo.LOSE, result.defenderView());
+		BattleResult result = b.getResult().getResult();
+		assertEquals(BattleResult.WIN, result);
+		assertEquals(BattleResult.LOSE, result.defenderView());
 		b.printLog(new PrintStream(new File("src/test/bigEngagementRomansWin.log")));
 	}
 
@@ -71,9 +71,9 @@ public class BigBattleTest {
 		GlobalRandom.init(4071336349643094880L);
 
 		Battle b = new Battle(romanUnits, gallicUnits);
-		AttackInfo result = b.getResult();
-		assertEquals(AttackInfo.DRAW, result);
-		assertEquals(AttackInfo.DRAW, result.defenderView());
+		BattleResult result = b.getResult().getResult();
+		assertEquals(BattleResult.DRAW, result);
+		assertEquals(BattleResult.DRAW, result.defenderView());
 		b.printLog(new PrintStream(new File("src/test/bigEngagementDraw.log")));
 	}
 
@@ -84,9 +84,9 @@ public class BigBattleTest {
 
 
 		Battle b = new Battle(romanUnits, gallicUnits);
-		AttackInfo result = b.getResult();
-		assertEquals(AttackInfo.WIN, result);
-		assertEquals(AttackInfo.LOSE, result.defenderView());
+		BattleResult result = b.getResult().getResult();
+		assertEquals(BattleResult.WIN, result);
+		assertEquals(BattleResult.LOSE, result.defenderView());
 		assertEquals(200, b.getNumAttemptedEngagements());
 		b.printLog(new PrintStream(new File("src/test/bigEngagementWin200.log")));
 	}
