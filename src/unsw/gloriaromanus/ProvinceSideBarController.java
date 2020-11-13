@@ -33,16 +33,20 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
+    @FXML private ChoiceBox<String> taxChoiceBox;
     @FXML private Label choiceBoxLabel;
     @FXML private Label provinceUnitLabel;
     @FXML private Label wealthLabel;
     @FXML private Label taxLabel;
+    @FXML private Label taxLevelLabel;
     @FXML private Button trainBtn;
     @FXML private Button moveBtn;
+    @FXML private Button taxLevelBtn;
     @FXML private Button selectActionProvince;
     @FXML private Button selectTargetProvince;
     @FXML private TextField wealthField;
     @FXML private TextField taxField;
+    @FXML private TextField taxLevelField;
     @FXML private TextField trainTextField;
     @FXML private TextField selected_province;
     @FXML private TextField action_province;
@@ -107,9 +111,28 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         }
     }
 
+    @FXML
+    public void handleTaxLevel() {
+        String newTaxLevel = taxChoiceBox.getValue().toString();
+        switch(newTaxLevel) {
+            case "Low Tax":
+                game.setTax(initialProvince, TaxLevel.LOW_TAX);
+                break;
+            case "Normal Tax":
+                game.setTax(initialProvince, TaxLevel.NORMAL_TAX);
+                break;
+            case "High Tax":
+                game.setTax(initialProvince, TaxLevel.HIGH_TAX);
+                break;
+            case "Very High Tax":
+                game.setTax(initialProvince, TaxLevel.VERY_HIGH_TAX);
+                break;
+        }
+    }
+
     // Displays the name of the selected action province along with its information
     @FXML
-    public void handleSelectProvince() {
+    public void handleSelectProvince(ActionEvent e) {
         provinceUnitCB.getItems().clear();
         if (!province.getOwner().equals(game.getCurrentTurn())) {
             System.out.println("Action province must be your own province.");
@@ -117,7 +140,24 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         else {
             this.initialProvince = province;
             action_province.setText(initialProvince.getName());
-
+            // Update wealth and tax info
+            wealthField.setText(Integer.toString(initialProvince.getWealth()));
+            taxField.setText(Double.toString(initialProvince.getTaxLevel().getTaxRate()));
+            switch(initialProvince.getTaxLevel()) {
+                case LOW_TAX:
+                    taxLevelField.setText("Low Tax");
+                    break;
+                case NORMAL_TAX:
+                    taxLevelField.setText("Normal Tax");
+                    break;
+                case HIGH_TAX:
+                    taxLevelField.setText("High Tax");
+                    break;
+                case VERY_HIGH_TAX:
+                    taxLevelField.setText("Very High Tax");
+                    break;
+            }
+            // Update units in province choicebox
             provinceUnitCB.getItems().add("All Units");
             for (Unit u : initialProvince.getUnits()) {
                 provinceUnitCB.getItems().add(u.getName());
@@ -126,7 +166,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         }
     }
     @FXML
-    public void handleSelectTarget() {
+    public void handleSelectTarget(ActionEvent e) {
         this.targetProvince = province;
         target_province.setText(targetProvince.getName());
 
@@ -153,6 +193,12 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         // These items are for configuring the choicebox for units in province
         provinceUnitLabel.setText("");
 
+        // These items are for configuring the tax level choice box
+        taxChoiceBox.getItems().add("Low Tax");
+        taxChoiceBox.getItems().add("Normal Tax");
+        taxChoiceBox.getItems().add("High Tax");
+        taxChoiceBox.getItems().add("Very High Tax");
+
     }
 
     @Override
@@ -167,8 +213,10 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             selectedProvinceUnitsList.setText(u.getName() + "\n");
         }
         // Display wealth and taxes info for player's provinces only
-        wealthField.setText(Integer.toString(p.getWealth()));
-        taxField.setText(Double.toString(p.getTaxInfo()));
+        //if (province.getOwner().equals(game.getCurrentTurn())) {
+        //    wealthField.setText(Integer.toString(p.getWealth()));
+        //    taxField.setText(Double.toString(p.getTaxInfo()));
+        //}
     }
 
 }

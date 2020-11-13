@@ -37,21 +37,6 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                       </TitledPane>
-                        <TitledPane animated="false" text="Wealth and Tax information:">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Label fx:id="wealthLabel" layoutX="14.0" layoutY="14.0" text="Wealth Status:" />
-                                    <Label fx:id="taxLabel" layoutX="14.0" layoutY="71.0" text="Tax Information:" />
-                                    <TextField fx:id="wealthField" editable="false" layoutX="14.0" layoutY="31.0" />
-                                    <TextField fx:id="taxField" editable="false" layoutX="14.0" layoutY="88.0" />
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </TitledPane>
                     </panes>
                   </Accordion>
                </children>
@@ -63,6 +48,23 @@
                </font>
             </Label>
             <TextField fx:id="action_province" editable="false" />
+            <TitledPane animated="false" text="Wealth and Tax information:">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="wealthLabel" layoutX="14.0" text="Wealth Status:" />
+                        <Label fx:id="taxLabel" layoutX="16.0" layoutY="82.0" text="Tax Rate:" />
+                        <TextField fx:id="wealthField" editable="false" layoutX="14.0" layoutY="14.0" />
+                        <TextField fx:id="taxField" editable="false" layoutX="16.0" layoutY="99.0" />
+                        <Label fx:id="taxLevelLabel" layoutX="16.0" layoutY="39.0" text="Tax Level:" />
+                        <TextField fx:id="taxLevelField" layoutX="14.0" layoutY="56.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TitledPane>
             <Button fx:id="selectTargetProvince" mnemonicParsing="false" onAction="#handleSelectTarget" text="Select Target Province" />
             <Label alignment="CENTER" text="Target Province:" textFill="RED">
                <font>
@@ -114,6 +116,20 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                 </TitledPane>
+                  <TitledPane animated="false" text="Tax Settings:">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="283.0">
+                           <children>
+                              <ChoiceBox fx:id="taxChoiceBox" layoutX="14.0" layoutY="31.0" prefWidth="150.0" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Select new tax level:" />
+                              <Button fx:id="taxLevelBtn" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleTaxLevel" text="Set new tax level" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </TitledPane>
               </panes>
             </Accordion>
          </children>
