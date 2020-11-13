@@ -135,7 +135,6 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         System.out.println("Selected province is: " + targetProvince.getName());
     }
 
-    //@Override
     @FXML
     public void initialize() {
 
@@ -149,10 +148,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
         // These items are for configuring the choicebox for units in province
         provinceUnitLabel.setText("");
-        //provinceUnitCB.getItems().add("All Units");
-        //provinceUnitCB.getItems().add("Unit1");
-        //provinceUnitCB.getItems().add("Unit2");
-        //provinceUnitCB.getItems().add("Unit3");
+
     }
 
     @Override
@@ -162,27 +158,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         selected_province.setText(p.getName());
         this.province = p.getProvince();
         this.myProvince = p.getName();
-        /*
-        if (p.getOwner().equals(game.getCurrentTurn())) {
-            System.out.println("This province belongs to me.");
-            this.province = p.getProvince();
-            this.myProvince = p.getName();
-        }
-        else {
-            System.out.println("This province is either enemy or NO_ONE");
-            this.targetProvince = p.getProvince();
-            this.enemyProvince = p.getName();
-        }
-        */
+       
     }
 
-/*
-    public void setInvadingProvince(String province) {
-        invading_province.setText(province);
-    }
-
-    public void setOpponentProvince(String province) {
-        opponent_province.setText(province);
-    }
-*/
 }
