@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, creatorVisibility = Visibility.ANY)
-public class Unit {
+public class Unit implements Comparable<Unit>{
 	private Map<ActiveType, List<CombatModifierMethod>> combatModifiers = new EnumMap<>(ActiveType.class);
 	private Map<ActiveType, List<MoraleModifierMethod>> moraleModifiers = new EnumMap<>(ActiveType.class);
 
@@ -217,12 +217,15 @@ public class Unit {
 	}
 	
 	public String statRep() {
-		return String.format("ATTK %.2f | ARMR %.2f | SKIL : %.2f | SHLD %.2f | MORL %.2f | SPED : %.2f", attack, armour, defenseSkill, shieldDefense, morale, speed);
+		return String.format("%d♥ %d🗡 %d(%d)🛡 %d🎖️ %d👞",
+				health, (int)attack,  (int)shieldDefense + (int)defenseSkill + (int)armour, (int)(shieldDefense + armour), (int)morale, (int)speed);
 	}
 
 	public ItemType getType() {
 		return type;
 	}
+	
+	
 	public UnitClass getUnitClass() {
 		return unitClass;
 	}
@@ -340,6 +343,17 @@ public class Unit {
 	void update() {
 		movPoints = maxMovPoints;
 		canAttack = true;
+	}
+
+	@Override
+	public int compareTo(Unit other) {
+		int out;
+		if((out = getName().compareTo(other.getName())) != 0) {
+			return out;
+		}else if ((out = getHealth() - other.getHealth()) != 0) {
+			return out;
+		}
+		return 0;
 	}
 }
 
