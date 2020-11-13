@@ -34,6 +34,7 @@ import com.esri.arcgisruntime.mapping.view.Graphic;
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
 import com.esri.arcgisruntime.mapping.view.IdentifyLayerResult;
 import com.esri.arcgisruntime.mapping.view.MapView;
+import com.esri.arcgisruntime.symbology.ColorUtil;
 import com.esri.arcgisruntime.symbology.FillSymbol;
 import com.esri.arcgisruntime.symbology.MarkerSymbol;
 import com.esri.arcgisruntime.symbology.PictureMarkerSymbol;
@@ -54,6 +55,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import unsw.engine.Faction;
 import unsw.engine.FactionType;
 import unsw.engine.GameController;
@@ -109,11 +111,11 @@ public class MapController extends Controller{
 	private final double ZOOM_RATE = 0.001;
 	private final double MAX_SCALE = 3E6;
 	
-	private final int FONT_SIZE = 10;
+	private final int FONT_SIZE = 12;
 	
 	// Used for custom panning algorithm
 	private Point mouseAnchor = null;
-	
+		
 	public MapController(GameController game) {
 		this.game = game;
 	}
@@ -127,8 +129,9 @@ public class MapController extends Controller{
 			id++;
 		}
 		// TODO: better algorithm than just randomly generating colours
+		Random r = new Random();
 		for (Faction f : game.getFactions()) {
-			factionColourMap.put(f.getType(), 0x88000000 + new Random().nextInt(0x1000000));
+			factionColourMap.put(f.getType(), 0x60000000 | (0x00FFFFFF & ColorUtil.colorToArgb(Color.hsb(r.nextDouble()*360, 1 - r.nextDouble()*0.3, r.nextDouble()))));
 			factionSymbolMap.put(f.getType(), new SimpleFillSymbol(Style.SOLID, factionColourMap.get(f.getType()), null));
 		}
 		factionColourMap.put(FactionType.NO_ONE, 0);
@@ -137,6 +140,7 @@ public class MapController extends Controller{
 		map = new ArcGISMap(Basemap.Type.OCEANS, 41.883333, 12.5, 0);
 
 		map.getBasemap().getReferenceLayers().remove(0);
+		
 		map.setMaxScale(MAX_SCALE);
 		
 		mapView.setMap(map);
@@ -194,6 +198,9 @@ public class MapController extends Controller{
 			overlays[i] = new GraphicsOverlay();
 			mapView.getGraphicsOverlays().add(overlays[i]);
 		}
+
+		FeatureCollection fc = new ObjectMapper().readValue(new File("src/unsw/gloriaromanus/provinces_label.geojson"), FeatureCollection.class);
+		initProvinceCentres(fc);
 		
 		GeoPackage gpkg_provinces = new GeoPackage("src/unsw/gloriaromanus/provinces_right_hand_fixed.gpkg");
 		gpkg_provinces.loadAsync();
@@ -202,16 +209,14 @@ public class MapController extends Controller{
 				// create province border feature
 				initFeatureLayer(gpkg_provinces);
 				initProvinceShapes(featureLayer_provinces);
+				game.attatchProvinceChangedObserver(this::updateProvinceGraphics);
 			} else {
 				System.out.println("load failure");
 			}
 		});
-		FeatureCollection fc = new ObjectMapper().readValue(new File("src/unsw/gloriaromanus/provinces_label.geojson"), FeatureCollection.class);
-		initProvinceCentres(fc);
-		
 	}
 	/**
-	 *  called after province shape data is loaded.
+	 *  called after province shape data is loaded, and after province point data is initialized
 	 * @param provinceShapeLayer
 	 */
 	private void initProvinceShapes(FeatureLayer provinceShapeLayer) {
@@ -233,8 +238,9 @@ public class MapController extends Controller{
 				Graphic g;
 				// for other potential layer initializations.
 				// Faction colour map
-				g = new Graphic(pfi.getShape(), factionSymbolMap.get(pfi.getOwner().getType()));
+				g = new Graphic(pfi.getShape(), NO_SYMBOL);
 				overlays[COLOUR_LAYER].getGraphics().add(g);
+				updateProvinceGraphics(pfi.getProvince());
 
 				g = new Graphic(pfi.getShape(), NO_SYMBOL);
 				overlays[PATTERN_LAYER].getGraphics().add(g);
@@ -277,12 +283,9 @@ public class MapController extends Controller{
 			// for other potential layer initializations.
 			g = new Graphic(pfi.getCentre(), NO_SYMBOL);
 			overlays[MARKER_LAYER].getGraphics().add(g);
-			
-
-			
-			g = new Graphic(pfi.getCentre(), ts);
+		
+			g = new Graphic(pfi.getCentre(), NO_SYMBOL);
 			overlays[LABEL_LAYER].getGraphics().add(g);
-			
 		}
 		overlays[LABEL_LAYER].setMinScale(1.5E7);
 		overlays[MARKER_LAYER].getGraphics().add(uniqueHoverMarker);
@@ -370,15 +373,17 @@ public class MapController extends Controller{
 		map.setMinScale(MathUtil.min(PIXELS_PER_UNIT_X*(X_MAX-X_MIN)/mapView.getWidth(), PIXELS_PER_UNIT_Y*(Y_MAX-Y_MIN)/mapView.getHeight()));
 	}
 	
-	private void updateProvinceLabel(Province p) {
+	// Observer<Province>
+	private void updateProvinceGraphics(Province p) {
 		
-		
-		TextSymbol ts = new TextSymbol(FONT_SIZE, p.getName(), factionColourMap.get(p.getOwner().getType()),
+		String text = String.format("%s\n%d 🗡", p.getName(), p.getMilitaryIndex());
+		TextSymbol ts = new TextSymbol(FONT_SIZE, text, toSolidColour(factionColourMap.get(p.getOwner().getType())),
 				HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+		// White outline
 		ts.setHaloColor(0xFFFFFFFF);
 		ts.setHaloWidth(2);
 		setProvinceSymbols(List.of(p), LABEL_LAYER, ts);
-		
+		setProvinceSymbols(List.of(p), COLOUR_LAYER, factionSymbolMap.get(p.getOwner().getType()));
 	}
 
 	void setProvinceSymbols(Collection<Province> provinces, int layer, Symbol symb) {
@@ -443,5 +448,9 @@ public class MapController extends Controller{
 		}
 		
 	}
+	private Integer toSolidColour(Integer colour) {
+		return 0xFF000000 | colour;
+	}
+
 }
 	
