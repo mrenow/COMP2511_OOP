@@ -41,11 +41,10 @@ public class Battle {
 	 */
 	
 	private ProcessLogger logger = new ProcessLogger("Battle:");
+	private BattleInfo info = new BattleInfo();
 	
 	private int numEngagements = 0;
 	private Map<BattleSide, Integer> numCasualties = new EnumMap<>(BattleSide.class);
-	// record in attackinfo
-	private AttackInfo attackInfo;
 
 	private Iterable<Modifier<MoraleData>> moraleSupport;
 	private Iterable<Modifier<CombatData>> combatSupport;
@@ -108,7 +107,7 @@ public class Battle {
 		}
 	}
 
-	public AttackInfo getResult() {
+	public BattleInfo getResult() {
 		try {
 			while (!isBattleEnd()) {
 				// setupengagement data for unit
@@ -138,21 +137,19 @@ public class Battle {
 		}
 		logger.log("Attacker:");
 		logger.into();
-			logger.log("Result:", attackInfo);
+			logger.log("Result:", info.getResult());
 			logger.log("Number of Casualties:", getNumCasualties(ATTACK));
 			logger.log("Dead Units:", getDeadUnits(ATTACK));
 		logger.out();
 		
 		logger.log("Defender:");
 		logger.into();
-			logger.log("Result:", attackInfo.defenderView());
+			logger.log("Result:", info.getResult().defenderView());
 			logger.log("Number of Casualties:", getNumCasualties(DEFEND));
 			logger.log("Dead Units:", getDeadUnits(DEFEND));
 		logger.out();
 		
-		
-		
-		return this.attackInfo;
+		return info;
 	}
 	public void printLog(PrintStream out) {
 		out.println(logger);
@@ -181,13 +178,13 @@ public class Battle {
 		return armies.get(side).get(GlobalRandom.nextInt(armyLength)); // RANDOM (ONCE) (LENGTH)
 	}
 	/**
-	 * check if the end of battle condition reached
+	 * check if the end of battle condition reached and sets battleResult appropriately
 	 * 
 	 * @return if the battle ended
 	 */
 	private boolean isBattleEnd() {
 		if (this.numEngagements > 200) {
-			this.attackInfo=AttackInfo.DRAW;
+			info.setResult(BattleResult.DRAW);
 			return true;
 		}
 		if (armies.get(ATTACK).size()>0){
@@ -197,17 +194,17 @@ public class Battle {
 			}
 			else{
 				//no defender yet attacker exist
-				this.attackInfo=AttackInfo.WIN;
+				info.setResult(BattleResult.WIN);
 				return true;
 			}
 		}
 		if (armies.get(DEFEND).size()>0){
 			//no attacker yet defender exist
-			this.attackInfo=AttackInfo.LOSE;
+			info.setResult(BattleResult.LOSE);
 			return true;
 		}else{
 			//no attacker no defender DRAW
-			this.attackInfo=AttackInfo.DRAW;
+			info.setResult(BattleResult.DRAW);
 			return true;
 		}
 	}
@@ -260,6 +257,7 @@ public class Battle {
 			if(!(attackUnit.isAlive() && defendUnit.isAlive())) {
 				logger.out();
 				logger.log("Skirmish end");
+				info.addSkirmish(attackUnit, defendUnit);
 				break;
 			}
 	
@@ -314,23 +312,43 @@ public class Battle {
 				logger.log("Skirmish end");
 				route(attackUnit, ATTACK);
 				route(defendUnit, DEFEND);
-				break;
+				info.addSkirmish(attackUnit, SkirmishResult.ROUTED, defendUnit, SkirmishResult.ROUTED);
+
+				logger.out();
+				return;
 			} else if (attBreaks) {
 				logger.out();
 				logger.log("Attacker", attackUnit.getType(), "Breaks");
 				runBreaking(defendUnit, attackUnit, DEFEND);	// RANDOM (MANY)
 				logger.log("Skirmish end");
-				break;
+				
+				if(attackUnit.isAlive()) {
+					info.addSkirmish(attackUnit, SkirmishResult.ROUTED, defendUnit, SkirmishResult.WON);
+				}else {
+					info.addSkirmish(attackUnit, SkirmishResult.KILLED, defendUnit, SkirmishResult.WON);	
+				}
+
+				logger.out();
+				return;
 			} else if (defBreaks) {
 				logger.out();
 				logger.log("Defender", defendUnit.getType(), "Breaks");
 				runBreaking(attackUnit, defendUnit, ATTACK);	// RANDOM (MANY)
 				logger.log("Skirmish end");
-				break;
+				
+				if(defendUnit.isAlive()) {
+					info.addSkirmish(attackUnit, SkirmishResult.WON, defendUnit, SkirmishResult.ROUTED);
+				}else {
+					info.addSkirmish(attackUnit, SkirmishResult.WON, defendUnit, SkirmishResult.KILLED);	
+				}
+
+				logger.out();
+				return;
 			}
 			logger.out();
+			info.addSkirmish(attackUnit, defendUnit);
+			return;
 		}
-		logger.out();
 		// Skirmish end
 	}
 	
@@ -382,6 +400,7 @@ public class Battle {
 				return;
 			}
 		}
+		
 	}
 	/**
 	 * Handles picking units in elephants amok, CombatModifiers, damage, and killing units 
@@ -455,7 +474,7 @@ public class Battle {
 		int oldHealth = victim.getHealth();
 		
 		victim.damage(casualties);
-		addCasualties(aggressorSide.other(), oldHealth-victim.getHealth());
+		addNumCasualties(aggressorSide.other(), oldHealth-victim.getHealth());
 		logger.log("Casualties: ", oldHealth + "->" +  victim.getHealth());
 		
 		if(!victim.isAlive()) {
@@ -473,12 +492,12 @@ public class Battle {
 		numEngagements ++;
 		return out;
 	}
-	private void addCasualties(BattleSide side, int num) {
+	private void addNumCasualties(BattleSide side, int num) {
 		numCasualties.put(side, numCasualties.get(side) + num);		
 	}
 	private void kill(Unit u, BattleSide side) {
 		logger.log("Victim", u.getType(), "dies");
-		deadUnits.get(side).add(u);
+		info.addCasualties(side, u);
 		armies.get(side).remove(u);
 	}
 	private void route(Unit u, BattleSide side) {

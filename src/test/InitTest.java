@@ -92,8 +92,8 @@ public class InitTest {
     	// Tested on 10000 runs without fail, so 50 will do for now.
     	for (int i = 0; i < 50; i ++) {
         	// make a new random game
-        	game = new GameController("src/unsw/ui/province_id_adjacent.json",
-        			"src/unsw/ui/landlocked_provinces.json",
+        	game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json",
+        			"src/unsw/gloriaromanus/landlocked_provinces.json",
         			List.of(FactionType.ROME, FactionType.GAUL));
         	Faction rome = game.getCurrentTurn();
         	Faction gaul = game.getFactions().get(1);

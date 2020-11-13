@@ -187,15 +187,20 @@ public class Province {
 		return trainableList;
 	}
 	
-	
+	/**
+	 * rough estimate of miltiatry strength. Does not factor in morale or speed.
+	 * @return
+	 */
 	public int getMilitaryIndex() {
-		double totMilitaryIndex = 0;
-		for(Unit u: units) {
-			totMilitaryIndex += Math.log(u.getHealth()*u.getArmour())*u.getAttack();
-		}
-		return (int)Math.round(totMilitaryIndex);
+		return Unit.getMilitaryIndex(getUnits());
 	}
-
+	
+	public int getDevelopmentIndex(Province p) {
+		
+		// no buildings
+		return 0;
+	}
+	
 	public int getMovCost() {
 		return movCost;
 	}

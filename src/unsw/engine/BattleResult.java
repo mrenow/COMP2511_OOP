@@ -1,8 +1,8 @@
 package unsw.engine;
 
-public enum AttackInfo {
+public enum BattleResult {
     WIN, LOSE, DRAW;
-    public AttackInfo defenderView(){
+    public BattleResult defenderView(){
         switch (this) {
             case WIN:
                 return LOSE;
