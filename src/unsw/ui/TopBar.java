@@ -35,10 +35,10 @@ public class TopBar implements MsgObserver{
 
     private Menu vic = new Menu("VicInfo");
     
-    private DoubleProperty p = new SimpleDoubleProperty();
-    private DoubleProperty p1 = new SimpleDoubleProperty();
-    private DoubleProperty p2 = new SimpleDoubleProperty();
-    private DoubleProperty p3 = new SimpleDoubleProperty();
+    private DoubleProperty p = new SimpleDoubleProperty(0.0);
+    private DoubleProperty p1 = new SimpleDoubleProperty(0.0);
+    private DoubleProperty p2 = new SimpleDoubleProperty(0.0);
+    private DoubleProperty p3 = new SimpleDoubleProperty(0.0);
     
     /**
      * top bar constructor
@@ -70,7 +70,7 @@ public class TopBar implements MsgObserver{
         MenuItem item2 = new MenuItem("Treasury",gn2);
     
         ProgressBar gn3 = new ProgressBar();
-        gn2.progressProperty().bind(p3);
+        gn3.progressProperty().bind(p3);
         MenuItem item3 = new MenuItem("Wealth",gn3);
         
         //set main entry
@@ -104,10 +104,9 @@ public class TopBar implements MsgObserver{
     @Override
     public void update(Message m) {
         this.game = m.getGame();
-        System.out.println("update top bar");
         year = game.getYear();
-        y.setText(year.toString());
-        facnameIndicator.setText(game.getCurrentTurn().getType().toString());
+        y.setText(year.toString()+"  ");
+        facnameIndicator.setText("Faction: "+game.getCurrentTurn().getType().toString());
         vicinfo = game.getCurrentTurn().getVicComposite();
         g = game.getCurrentTurn().getGold();
         gold.setText("Gold:"+g.toString());
