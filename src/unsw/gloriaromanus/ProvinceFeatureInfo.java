@@ -5,6 +5,7 @@ import com.esri.arcgisruntime.geometry.Polygon;
 
 import unsw.engine.Faction;
 import unsw.engine.Province;
+import unsw.engine.TaxLevel;
 
 public class ProvinceFeatureInfo implements Comparable<ProvinceFeatureInfo>{
 	// Index into graphics id lists.
@@ -29,6 +30,14 @@ public class ProvinceFeatureInfo implements Comparable<ProvinceFeatureInfo>{
 	
 	public Province getProvince() {
 		return province;
+	}
+
+	public int getWealth() {
+		return province.getWealth();
+	}
+
+	public double getTaxInfo() {
+		return province.getTaxLevel().getTaxRate();
 	}
 
 	public Polygon getShape() {

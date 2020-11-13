@@ -35,10 +35,14 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     @FXML private ChoiceBox<String> trainChoiceBox;
     @FXML private Label choiceBoxLabel;
     @FXML private Label provinceUnitLabel;
+    @FXML private Label wealthLabel;
+    @FXML private Label taxLabel;
     @FXML private Button trainBtn;
     @FXML private Button moveBtn;
     @FXML private Button selectActionProvince;
     @FXML private Button selectTargetProvince;
+    @FXML private TextField wealthField;
+    @FXML private TextField taxField;
     @FXML private TextField trainTextField;
     @FXML private TextField selected_province;
     @FXML private TextField action_province;
@@ -158,7 +162,13 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         selected_province.setText(p.getName());
         this.province = p.getProvince();
         this.myProvince = p.getName();
-       
+        // Show units in selected province
+        for (Unit u : p.getProvince().getUnits()) {
+            selectedProvinceUnitsList.setText(u.getName() + "\n");
+        }
+        // Display wealth and taxes info for player's provinces only
+        wealthField.setText(Integer.toString(p.getWealth()));
+        taxField.setText(Double.toString(p.getTaxInfo()));
     }
 
 }
