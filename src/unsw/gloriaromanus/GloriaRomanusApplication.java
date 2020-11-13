@@ -22,7 +22,6 @@ public class GloriaRomanusApplication extends Application {
   public void start(Stage stage) throws IOException {
     // set up the scene
 
- 
 	mainController = loadController("src/unsw/gloriaromanus/main.fxml");
     Scene scene = new Scene(mainController.getRoot());
     // set up the stage
