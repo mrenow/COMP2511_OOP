@@ -173,6 +173,15 @@ public class Province {
 		trainableList.add(ItemType.HEAVY_CAVALRY);
 		return trainableList;
 	}
+	
+	
+	public int getMilitaryIndex() {
+		double totMilitaryIndex = 0;
+		for(Unit u: units) {
+			totMilitaryIndex += Math.log(u.getHealth()*u.getArmour())*u.getAttack();
+		}
+		return (int)Math.round(totMilitaryIndex);
+	}
 
 	public int getMovCost() {
 		return movCost;

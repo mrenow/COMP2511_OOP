@@ -611,5 +611,11 @@ public class GameController {
 		return 200+round;
 	}
 	
+
 	
+	public int getDevelopmentIndex(Province p) {
+		
+		// no buildings
+		return 0;
+	}
 }
