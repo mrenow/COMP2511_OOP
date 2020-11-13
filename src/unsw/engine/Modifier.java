@@ -21,18 +21,3 @@ class Modifier<T>{
 		return method.toString();
 	}
 }
-
-/**
- * Represents the side that an attacker can be on.
- */
-enum BattleSide {
-	ATTACK,DEFEND;
-	public BattleSide other() {
-		switch(this) {
-		case ATTACK : return DEFEND;
-		case DEFEND : return ATTACK;
-		default : return null;
-		}
-		
-	}
-}
