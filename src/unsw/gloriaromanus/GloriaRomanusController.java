@@ -47,7 +47,6 @@ public class GloriaRomanusController extends Controller{
 		((Pane)getRoot()).getChildren().add(0, mapController.getRoot());
 		
 		sideController = new ProvinceSideBarController(game);
-
 		GloriaRomanusApplication.loadExistingController(sideController, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
 		// adds to the next index of the child list
 		((Pane)getRoot()).getChildren().add(1, sideController.getRoot());
@@ -59,11 +58,9 @@ public class GloriaRomanusController extends Controller{
 		topbar = new TopBarController(game);
 		//topbar observer and observerable implement
 		GloriaRomanusApplication.loadExistingController(topbar, "src/unsw/ui/topbar/TopBar.fxml");
-		
 		((Pane)getRoot()).getChildren().add(2, topbar.getRoot());
 		StackPane.setAlignment(topbar.getRoot(), Pos.TOP_CENTER);
 		
-
 		//these two should be inside main
 		VicComposite vic = generateVic();
 		game.setVic(vic);
