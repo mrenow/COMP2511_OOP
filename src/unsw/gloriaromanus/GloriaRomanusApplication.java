@@ -56,6 +56,12 @@ public class GloriaRomanusApplication extends Application {
 	  scene.setRoot(c.getRoot());
 	  mainController = c;
   }
+  public Parent getSceneRoot() {
+	  return scene.getRoot();
+  }
+  public Controller getMainController() {
+	  return mainController;
+  }
 
   /**
    * Stops and releases all resources used in application.
