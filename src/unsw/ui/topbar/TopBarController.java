@@ -1,48 +1,42 @@
 package unsw.ui.topbar;
 
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import unsw.engine.GameController;
-import unsw.engine.VicCondition.VicComposite;
-import unsw.engine.VicCondition.VictoryCondition;
-import unsw.gloriaromanus.Controller;
-import unsw.gloriaromanus.GloriaRomanusApplication;
-import unsw.gloriaromanus.GloriaRomanusController;
-import unsw.gloriaromanus.MapController;
-import unsw.ui.Observer.Message;
-import unsw.ui.Observer.MsgObserver;
-import unsw.ui.Observer.Observer;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import unsw.engine.GameController;
+import unsw.engine.VicCondition.VicComposite;
+import unsw.engine.VicCondition.VictoryCondition;
+import unsw.ui.Observer.Message;
+import unsw.ui.Observer.Observer;
+import unsw.ui.topbar.TurnFeatureInfo;
+import unsw.gloriaromanus.Controller;
 
-import java.io.FileInputStream;
-
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.fxml.FXMLLoader;
-
-public class TopBar implements MsgObserver{
-    private HBox topbar;
+public class TopBarController extends Controller implements Observer<TurnFeatureInfo>{
     private GameController game;
+    private TurnFeatureInfo turninfo;
+
+    @FXML
+    private HBox topbar;
     private VicComposite vicinfo;
+    
 
-    private Integer year = 300;
-    private Text y = new Text(year.toString());
-    private Text facnameIndicator = new Text("faction name");
-    private MenuBar infoMenu = new MenuBar();
-    private Menu gold = new Menu();
-    private Integer g = 0;
-    private Button endTurn = new Button("EndTurn");
+    @FXML private Label yearLable;
+    @FXML private Label facnameLable;
+    @FXML private Label goldLable;
+    @FXML private MenuBar infoMenu;
+    @FXML private Button endTurn;
 
+    @FXML private Text year;
+    @FXML private Text faction;
+    @FXML private Text gold;
 
     private Menu vic = new Menu("VicInfo");
     
@@ -50,24 +44,36 @@ public class TopBar implements MsgObserver{
     private DoubleProperty p1 = new SimpleDoubleProperty(0.0);
     private DoubleProperty p2 = new SimpleDoubleProperty(0.0);
     private DoubleProperty p3 = new SimpleDoubleProperty(0.0);
-    
-    /**
-     * top bar constructor
-     * @param topbar topbar constructed
-     * @param game gameconstructed pointer
-     */
-    public TopBar(HBox topbar,GameController game) {
-        Text yearIndicator = new Text("Year:");
-        this.topbar = topbar;
+
+    public TopBarController(){}
+    public TopBarController(GameController game){
         this.game = game;
-        facnameIndicator.setText(game.getCurrentTurn().getType().toString());
-        gold.setText("Gold:"+g.toString());;
+    }
+
+    @FXML
+    public void initialize(){
+        turninfo=new TurnFeatureInfo(game);
+        year.setText(getYear());
+        faction.setText(getFaction());
+
+        gold.setText(getgold());
+
         endTurn.setOnAction((e)->endTurnPressed());
-        this.topbar.getChildren().addAll(yearIndicator,y,facnameIndicator,infoMenu,endTurn);
         
         infoMenuSetup();
     }
 
+    private String getgold() {
+        return turninfo.getGold();
+    }
+
+    private String getFaction() {
+        return turninfo.getFaction();
+    }
+
+    private String getYear() {
+        return turninfo.getYear();
+    }
 
     private void infoMenuSetup(){
         //set 1st entry
@@ -89,7 +95,7 @@ public class TopBar implements MsgObserver{
         gn.progressProperty().bind(p);
         vic.getItems().addAll(item1,item2,item3);
         vic.graphicProperty().set(gn);
-        infoMenu.getMenus().addAll(vic,gold);
+        infoMenu.getMenus().addAll(vic);
     }
     
     private void endTurnPressed(){
@@ -113,14 +119,12 @@ public class TopBar implements MsgObserver{
     }
     
     @Override
-    public void update(Message m) {
+    public void update(TurnFeatureInfo m) {
         this.game = m.getGame();
-        year = game.getYear();
-        y.setText(year.toString()+"  ");
-        facnameIndicator.setText("Faction: "+game.getCurrentTurn().getType().toString());
+        year.setText(getYear());
+        faction.setText(getFaction());
         vicinfo = game.getCurrentTurn().getVicComposite();
-        g = game.getCurrentTurn().getGold();
-        gold.setText("Gold:"+g.toString());
+        gold.setText(getgold());
         progressVicInfo(vicinfo);
 
         //victory\defeat display
@@ -131,6 +135,7 @@ public class TopBar implements MsgObserver{
         //     System.out.println("exceptio");
         // }
     }
+
 
     // private void image()throws Exception{
     //     // FXMLLoader loader = new FXMLLoader(getClass().getResource("src/unsw/ui/VicUI.fxml"));
