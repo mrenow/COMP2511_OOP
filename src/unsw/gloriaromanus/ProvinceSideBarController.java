@@ -68,8 +68,11 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     public void handleTrainBtn(ActionEvent e) {
         choiceBoxLabel.setText(trainChoiceBox.getValue().toString());
         trainTextField.setText(trainChoiceBox.getValue());
-        // TODO Call train method
-        
+        // Call train method
+        for (ItemType u : initialProvince.getTrainable()) {
+            if (trainChoiceBox.getValue().toString() == u.getName(1));
+            game.trainUnit(initialProvince, u);
+        }
         
     }
     
@@ -167,7 +170,11 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             for (TrainingSlotEntry u : copy) {
                 unitsInTraining.setText(u.getType().getName(1));
             }
-
+            // Update Trainable Units
+            List<ItemType> trainableUnits = initialProvince.getTrainable();
+            for (ItemType u : trainableUnits) {
+                trainChoiceBox.getItems().add(u.getName(1));
+            }
             
             System.out.println("Action province selected.");
         }
@@ -191,10 +198,12 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
         // This items are for configuring the ChoiceBox (To Train)
         choiceBoxLabel.setText("");
+        /*
         trainChoiceBox.getItems().add("TEST_TROOP");
         trainChoiceBox.getItems().add("Heavy Calvary");
         trainChoiceBox.getItems().add("Archer");
         trainChoiceBox.getItems().add("Elephants");
+        */
         //trainChoiceBox.getItems().addAll(ItemType.nameList);
 
         // These items are for configuring the choicebox for units in province
@@ -219,11 +228,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         for (Unit u : p.getProvince().getUnits()) {
             selectedProvinceUnitsList.setText(u.getName() + "\n");
         }
-        // Display wealth and taxes info for player's provinces only
-        //if (province.getOwner().equals(game.getCurrentTurn())) {
-        //    wealthField.setText(Integer.toString(p.getWealth()));
-        //    taxField.setText(Double.toString(p.getTaxInfo()));
-        //}
+        
     }
 
 }
