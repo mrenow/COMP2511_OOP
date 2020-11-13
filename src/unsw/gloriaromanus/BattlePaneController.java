@@ -60,7 +60,7 @@ public class BattlePaneController extends Controller{
 		defenderPane.setFitToWidth(true);
 		skirmishPane.setFitToWidth(true);
 	
-		returnButton.setOnAction(this::onReturnButtonPressed);
+		returnButton.setOnAction(e -> destroy());
 		invadeButton.setOnAction(this::onInvadeButtonPressed);
 		
 		initArmyPane(attackerGridPane, ATTACK);
@@ -79,15 +79,7 @@ public class BattlePaneController extends Controller{
 		}
 	}
 	
-	public void onReturnButtonPressed(ActionEvent e) {
-		
-	}
 	public void onInvadeButtonPressed(ActionEvent e) {
 		
-		
-		
 	}
-	
-	
-	
 }
