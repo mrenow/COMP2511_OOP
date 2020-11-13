@@ -1,14 +1,18 @@
 package unsw.gloriaromanus;
 
+import java.io.FileInputStream;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
+import javafx.scene.layout.StackPane;
 import unsw.engine.*;
 import unsw.engine.VicCondition.*;
-import unsw.ui.TopBar;
-
+import unsw.ui.topbar.TopBar;
+import unsw.ui.VicUIController;
 import unsw.ui.Observer.MsgObserverable;
 import unsw.ui.Observer.Observable;
 import unsw.ui.Observer.Subject;
@@ -19,7 +23,7 @@ public class GloriaRomanusController extends Controller{
 
 	private GameController game;
 	private MapController mapController;
-	
+	private VicUIController vicUIController;
 	private MsgObserverable turnChangedObservable = new MsgObserverable();
 
 	@FXML
@@ -70,6 +74,13 @@ public class GloriaRomanusController extends Controller{
 		this.topBar = new TopBar(topbox, game);
 		
 		game.attatchTurnChangedObserver(topBar);
+	}
+
+	public void victory() throws Exception{
+		Image im = new Image(new FileInputStream("src/unsw/ui/Victory.JPG"));
+		ImageView image = new ImageView(im);
+		StackPane pane = new StackPane(image);
+		((StackPane)getRoot()).getChildren().add(0, pane);
 	}
 	
 	@Override

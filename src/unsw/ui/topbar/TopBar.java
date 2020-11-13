@@ -1,23 +1,34 @@
-package unsw.ui;
+package unsw.ui.topbar;
 
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
+import unsw.gloriaromanus.Controller;
+import unsw.gloriaromanus.GloriaRomanusApplication;
+import unsw.gloriaromanus.GloriaRomanusController;
+import unsw.gloriaromanus.MapController;
 import unsw.ui.Observer.Message;
 import unsw.ui.Observer.MsgObserver;
 import unsw.ui.Observer.Observer;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+
+import java.io.FileInputStream;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.fxml.FXMLLoader;
 
 public class TopBar implements MsgObserver{
     private HBox topbar;
@@ -35,10 +46,10 @@ public class TopBar implements MsgObserver{
 
     private Menu vic = new Menu("VicInfo");
     
-    private DoubleProperty p = new SimpleDoubleProperty();
-    private DoubleProperty p1 = new SimpleDoubleProperty();
-    private DoubleProperty p2 = new SimpleDoubleProperty();
-    private DoubleProperty p3 = new SimpleDoubleProperty();
+    private DoubleProperty p = new SimpleDoubleProperty(0.0);
+    private DoubleProperty p1 = new SimpleDoubleProperty(0.0);
+    private DoubleProperty p2 = new SimpleDoubleProperty(0.0);
+    private DoubleProperty p3 = new SimpleDoubleProperty(0.0);
     
     /**
      * top bar constructor
@@ -70,7 +81,7 @@ public class TopBar implements MsgObserver{
         MenuItem item2 = new MenuItem("Treasury",gn2);
     
         ProgressBar gn3 = new ProgressBar();
-        gn2.progressProperty().bind(p3);
+        gn3.progressProperty().bind(p3);
         MenuItem item3 = new MenuItem("Wealth",gn3);
         
         //set main entry
@@ -104,13 +115,35 @@ public class TopBar implements MsgObserver{
     @Override
     public void update(Message m) {
         this.game = m.getGame();
-        System.out.println("update top bar");
         year = game.getYear();
-        y.setText(year.toString());
-        facnameIndicator.setText(game.getCurrentTurn().getType().toString());
+        y.setText(year.toString()+"  ");
+        facnameIndicator.setText("Faction: "+game.getCurrentTurn().getType().toString());
         vicinfo = game.getCurrentTurn().getVicComposite();
         g = game.getCurrentTurn().getGold();
         gold.setText("Gold:"+g.toString());
         progressVicInfo(vicinfo);
+
+        //victory\defeat display
+        // try {
+        //     image();
+        // } catch (Exception e) {
+        //     //TODO: handle exception
+        //     System.out.println("exceptio");
+        // }
     }
+
+    // private void image()throws Exception{
+    //     // FXMLLoader loader = new FXMLLoader(getClass().getResource("src/unsw/ui/VicUI.fxml"));
+    //     // Parent parent = loader.load();
+    //     // T c = loader.getController();
+    //     Controller controller;
+    //     try {
+    //         controller = GloriaRomanusApplication.loadController("src/unsw/ui/VicUI.fxml");
+    //     } catch (Exception e) {
+    //         //TODO: handle exception
+    //     }
+        
+    //     GloriaRomanusApplication.app.setScene(controller);
+    //     System.out.println("new image");
+    // }
 }
