@@ -52,14 +52,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import unsw.engine.Faction;
 import unsw.engine.FactionType;
 import unsw.engine.GameController;
+import unsw.engine.ItemType;
 import unsw.engine.Province;
+import unsw.engine.Unit;
 import unsw.ui.Observer.Observable;
 import unsw.ui.Observer.Observer;
 import util.MathUtil;
@@ -444,6 +449,11 @@ public class MapController extends Controller{
 		case "c":
 			clearGraphicLayer(PATTERN_LAYER);
 			break;
+		case "d":
+			BattlePaneController c = new BattlePaneController(game, List.of(Unit.newUnit(ItemType.CHARIOTS, 1, provinceFeatureMap.get("V").getProvince())), provinceFeatureMap.get("I").getProvince());
+
+			Pane root = (Pane)GloriaRomanusApplication.app.getSceneRoot();
+			root.getChildren().add(1, c.getRoot());
 		}
 		
 	}

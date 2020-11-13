@@ -44,21 +44,3 @@ public class BattleInfo {
 		return new ArrayList<>(skirmishes);
 	}
 }
-class SkirmishInfo{
-	private Map<BattleSide, SkirmishResult> results = new EnumMap<>(BattleSide.class);
-	private Map<BattleSide, Unit> units = new EnumMap<>(BattleSide.class);
-	
-	SkirmishInfo(Unit ua, SkirmishResult ra, Unit ud, SkirmishResult rd) {
-		units.put(ATTACK, ua);
-		results.put(ATTACK, ra);
-		units.put(DEFEND, ud);
-		results.put(DEFEND, rd);
-	}
-	public Unit getUnit(BattleSide side) {
-		return units.get(side);
-	}
-	
-	public SkirmishResult getResult(BattleSide side) {
-		return results.get(side);
-	}
-}

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<TitledPane alignment="CENTER" collapsible="false" contentDisplay="TEXT_ONLY" text="Battle" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane alignment="CENTER" collapsible="false" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" text="Battle" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="649.0">
          <children>
@@ -37,13 +37,11 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <content>
-                              <GridPane fx:id="attackerGridPane">
+                              <GridPane fx:id="attackerGridPane" prefHeight="0.0" prefWidth="200.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                                 </rowConstraints>
                               </GridPane>
                            </content>
                         </ScrollPane>
@@ -64,10 +62,8 @@
                               <GridPane fx:id="defenderGridPane">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                                 </rowConstraints>
                               </GridPane>
                            </content>
                         </ScrollPane>
@@ -88,10 +84,8 @@
                   <GridPane fx:id="skirmishGridPane">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                     </rowConstraints>
                   </GridPane>
                </content>
             </ScrollPane>

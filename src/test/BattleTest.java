@@ -53,7 +53,7 @@ public class BattleTest {
     public void invadeEmpty() {
     	// move romans to province 2 and invade province 3 (empty)
     	game.move(List.of(RU(1)), P(2));
-    	BattleResult result = game.invade(P(2).getUnits(), P(3));
+    	BattleResult result = game.invade(P(2).getUnits(), P(3)).getResult();
     	int oldHealth = RU(1).getHealth();
     	assertEquals(BattleResult.WIN, result);
     	

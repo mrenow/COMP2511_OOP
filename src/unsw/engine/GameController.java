@@ -313,7 +313,7 @@ public class GameController {
 	 * @param defender
 	 * @return
 	 */
-	public BattleResult invade (Province attacker, Province defender) {
+	public BattleInfo invade (Province attacker, Province defender) {
 		return invade(attacker.getUnits(), defender);
 	}
 	/**
@@ -325,7 +325,7 @@ public class GameController {
 	 * @param defender
 	 * @return
 	 */
-	public BattleResult invade(List<Unit>attackers,Province defender){
+	public BattleInfo invade(List<Unit>attackers,Province defender){
 		Province attacker = attackers.get(0).getProvince();
 		Faction attackOwner = attackers.get(0).getOwner();
 		Faction defendOwner = defender.getOwner();
@@ -363,7 +363,7 @@ public class GameController {
 		triggerUnitsChanged.notifyUpdate(attacker);
 		triggerUnitsChanged.notifyUpdate(defender);
 		triggerBattleEnd.notifyUpdate(info);
-		return attackInfo;
+		return info;
 	}
 	
 	/**

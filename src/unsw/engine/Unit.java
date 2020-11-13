@@ -166,6 +166,7 @@ public class Unit implements Comparable<Unit>{
 		if(home != null && home.getTaxLevel() == TaxLevel.VERY_HIGH_TAX) {
 			out.addMoraleModifier(MoraleModifierMethod.VERY_HIGH_TAX);
 		}
+		out.province = home;
 		
 		return out;
 	}
@@ -217,7 +218,7 @@ public class Unit implements Comparable<Unit>{
 	}
 	
 	public String statRep() {
-		return String.format("%d♥ %d🗡 %d(%d)🛡 %d🎖️ %d👞",
+		return String.format("%d♥ %d 🗡 %d(%d) 🛡 %d 🎖️ %d 👞 ",
 				health, (int)attack,  (int)shieldDefense + (int)defenseSkill + (int)armour, (int)(shieldDefense + armour), (int)morale, (int)speed);
 	}
 
