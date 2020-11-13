@@ -162,6 +162,13 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             for (Unit u : initialProvince.getUnits()) {
                 provinceUnitCB.getItems().add(u.getName());
             }
+            // Update units currently in training for that province in text area
+            List<TrainingSlotEntry> copy = new ArrayList<>(initialProvince.getCurrentTraining());
+            for (TrainingSlotEntry u : copy) {
+                unitsInTraining.setText(u.getType().getName(1));
+            }
+
+            
             System.out.println("Action province selected.");
         }
     }
