@@ -1,4 +1,4 @@
-package unsw.ui;
+package unsw.ui.topbar;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -13,6 +13,7 @@ import unsw.gloriaromanus.MapController;
 import unsw.ui.Observer.Message;
 import unsw.ui.Observer.MsgObserver;
 import unsw.ui.Observer.Observer;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
@@ -27,6 +28,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.fxml.FXMLLoader;
 
 public class TopBar implements MsgObserver{
     private HBox topbar;
@@ -122,18 +124,26 @@ public class TopBar implements MsgObserver{
         progressVicInfo(vicinfo);
 
         //victory\defeat display
-        try {
-            image();
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
+        // try {
+        //     image();
+        // } catch (Exception e) {
+        //     //TODO: handle exception
+        //     System.out.println("exceptio");
+        // }
     }
 
-    private void image()throws Exception{
-        Image im = new Image(new FileInputStream("src/unsw/ui/Victory.jpg"));
-        MapController mapController;
-        GloriaRomanusApplication.loadExistingController(mapController, "src/unsw/gloriaromanus/map.fxml");
-		
-		((Pane)getRoot()).getChildren().add(0, mapController.getRoot());
-    }
+    // private void image()throws Exception{
+    //     // FXMLLoader loader = new FXMLLoader(getClass().getResource("src/unsw/ui/VicUI.fxml"));
+    //     // Parent parent = loader.load();
+    //     // T c = loader.getController();
+    //     Controller controller;
+    //     try {
+    //         controller = GloriaRomanusApplication.loadController("src/unsw/ui/VicUI.fxml");
+    //     } catch (Exception e) {
+    //         //TODO: handle exception
+    //     }
+        
+    //     GloriaRomanusApplication.app.setScene(controller);
+    //     System.out.println("new image");
+    // }
 }
