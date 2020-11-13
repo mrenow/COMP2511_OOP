@@ -1,18 +1,27 @@
 package unsw.ui;
 
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
+import unsw.gloriaromanus.Controller;
+import unsw.gloriaromanus.GloriaRomanusApplication;
+import unsw.gloriaromanus.GloriaRomanusController;
+import unsw.gloriaromanus.MapController;
 import unsw.ui.Observer.Message;
 import unsw.ui.Observer.MsgObserver;
 import unsw.ui.Observer.Observer;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+
+import java.io.FileInputStream;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -111,5 +120,20 @@ public class TopBar implements MsgObserver{
         g = game.getCurrentTurn().getGold();
         gold.setText("Gold:"+g.toString());
         progressVicInfo(vicinfo);
+
+        //victory\defeat display
+        try {
+            image();
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+    }
+
+    private void image()throws Exception{
+        Image im = new Image(new FileInputStream("src/unsw/ui/Victory.jpg"));
+        MapController mapController;
+        GloriaRomanusApplication.loadExistingController(mapController, "src/unsw/gloriaromanus/map.fxml");
+		
+		((Pane)getRoot()).getChildren().add(0, mapController.getRoot());
     }
 }
