@@ -11,6 +11,5 @@ public class VicUIController extends Controller{
     @FXML
     private void initialize()throws Exception{
         
-        GloriaRomanusApplication.load
     }
 }
