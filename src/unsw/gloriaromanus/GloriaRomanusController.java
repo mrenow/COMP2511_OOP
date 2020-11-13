@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import unsw.engine.*;
 import unsw.engine.VicCondition.*;
-import unsw.ui.topbar.TopBar;
+import unsw.ui.topbar.TopBarController;
 import unsw.ui.VicUIController;
 import unsw.ui.Observer.MsgObserverable;
 
@@ -26,9 +26,7 @@ public class GloriaRomanusController extends Controller{
 	
 	private MsgObserverable turnchange = new MsgObserverable();
 
-	@FXML
-	private HBox topbox;
-	private TopBar topBar;
+	private TopBarController topbar;
 	
 	@FXML
 	private void initialize() throws Exception {
@@ -56,13 +54,22 @@ public class GloriaRomanusController extends Controller{
 		mapController.attachProvinceSelectedObserver(sideController);
 
 		//topbar observer and observerable implement
+		GloriaRomanusApplication.loadExistingController(topbar, "src/unsw/ui/topbar/TopBar.fxml");
 		
+		((Pane)getRoot()).getChildren().add(2, topbar.getRoot());
+		
+
+		//these two should be inside main
 		VicComposite vic = generateVic();
 		game.setVic(vic);
-		displayInfo();
 		
 	}
 
+	/**
+	 * this should belong to main menu feature
+	 * and we dont have main menu yet so just put here for later implement
+	 * @return
+	 */
 	private VicComposite generateVic(){
 		VicLeaf l1 = new VicLeaf(VictoryCondition.CONQUEST);
 		VicLeaf l2 = new VicLeaf(VictoryCondition.WEALTH);
@@ -77,18 +84,13 @@ public class GloriaRomanusController extends Controller{
 		return vic1;
 	}
 
-	private void displayInfo(){
-		this.topBar = new TopBar(topbox, game);
-		
-		game.attatchTurnChangedObserver(topBar);
-	}
 
-	public void victory() throws Exception{
-		Image im = new Image(new FileInputStream("src/unsw/ui/Victory.JPG"));
-		ImageView image = new ImageView(im);
-		StackPane pane = new StackPane(image);
-		((StackPane)getRoot()).getChildren().add(0, pane);
-	}
+	// public void victory() throws Exception{
+	// 	Image im = new Image(new FileInputStream("src/unsw/ui/Victory.JPG"));
+	// 	ImageView image = new ImageView(im);
+	// 	StackPane pane = new StackPane(image);
+	// 	((StackPane)getRoot()).getChildren().add(0, pane);
+	// }
 	
 	@Override
 	void terminate() {
