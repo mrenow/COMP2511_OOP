@@ -24,7 +24,7 @@ public class Controller {
 	// Only if parent allows
 	void destroy() {
 		// Cast error on this line means that root does not support modifying children
-		((Pane)root).getChildren().remove(this.root);
+		((Pane)root.getParent()).getChildren().remove(this.root);
 		terminate();
 		isDestroyed = true;
 	}
