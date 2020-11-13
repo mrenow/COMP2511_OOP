@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxWidth="280.0" opacity="0.8" prefHeight="598.0" prefWidth="276.0" style="-fx-background-color: #00ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER">
+         <children>
+            <VBox>
+               <children>
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="271.0" text="Selected Province:" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="selected_province" editable="false" />
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="Units in Selected Province:">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="selectedProvinceUnitsList" editable="false" prefHeight="200.0" prefWidth="200.0" text="List of units in current province here" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </VBox>
+            <Button fx:id="selectActionProvince" mnemonicParsing="false" onAction="#handleSelectProvince" text="Select Action Province" />
+            <Label alignment="CENTER" text="Action Province:" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="action_province" editable="false" />
+            <TitledPane animated="false" text="Wealth and Tax information:">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="wealthLabel" layoutX="14.0" text="Wealth Status:" />
+                        <Label fx:id="taxLabel" layoutX="16.0" layoutY="82.0" text="Tax Rate:" />
+                        <TextField fx:id="wealthField" editable="false" layoutX="14.0" layoutY="14.0" />
+                        <TextField fx:id="taxField" editable="false" layoutX="16.0" layoutY="99.0" />
+                        <Label fx:id="taxLevelLabel" layoutX="16.0" layoutY="39.0" text="Tax Level:" />
+                        <TextField fx:id="taxLevelField" layoutX="14.0" layoutY="56.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TitledPane>
+            <Button fx:id="selectTargetProvince" mnemonicParsing="false" onAction="#handleSelectTarget" text="Select Target Province" />
+            <Label alignment="CENTER" text="Target Province:" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="target_province" editable="false" prefHeight="25.0" prefWidth="272.0" />
+            <Accordion>
+              <panes>
+                <TitledPane animated="false" text="Units in action province:">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox fx:id="provinceUnitCB" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                              <Label layoutX="14.0" layoutY="46.0" text="Selected Unit:" />
+                              <Label fx:id="provinceUnitLabel" layoutX="14.0" layoutY="63.0" text="Label" />
+                              <Button fx:id="moveBtn" layoutX="28.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                </TitledPane>
+                <TitledPane animated="false" text="Units training in action province:">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextArea fx:id="unitsInTraining" editable="false" prefHeight="200.0" prefWidth="200.0" text="List of units in training here" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                </TitledPane>
+                <TitledPane animated="false" text="Train Unit Options in action province:">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox fx:id="trainChoiceBox" layoutX="14.0" layoutY="21.0" prefWidth="150.0" />
+                              <Button fx:id="trainBtn" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleTrainBtn" text="Train" />
+                              <Label fx:id="choiceBoxLabel" layoutX="14.0" layoutY="71.0" text="Label" />
+                              <TextField fx:id="trainTextField" layoutX="15.0" layoutY="99.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                </TitledPane>
+                  <TitledPane animated="false" text="Tax Settings:">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="283.0">
+                           <children>
+                              <ChoiceBox fx:id="taxChoiceBox" layoutX="14.0" layoutY="31.0" prefWidth="150.0" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Select new tax level:" />
+                              <Button fx:id="taxLevelBtn" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleTaxLevel" text="Set new tax level" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </TitledPane>
+              </panes>
+            </Accordion>
+         </children>
+      </VBox>
+   </children>
+</VBox>

@@ -278,7 +278,7 @@ public class Parsing {
 				
 				for(Province adj : curr.getAdjacent()) {
 					// Ensure that we arent double counting and that this province is free.
-					if(selection.contains(adj) || !adj.getOwner().equals(Faction.NO_ONE)) {
+					if(!freeProvinces.contains(adj)) {
 						continue;
 					}
 					// all clear. Add adj

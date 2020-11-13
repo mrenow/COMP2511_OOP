@@ -3,7 +3,6 @@ package unsw.gloriaromanus;
 import java.io.FileInputStream;
 import java.util.List;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -14,8 +13,6 @@ import unsw.engine.VicCondition.*;
 import unsw.ui.topbar.TopBar;
 import unsw.ui.VicUIController;
 import unsw.ui.Observer.MsgObserverable;
-import unsw.ui.Observer.Observable;
-import unsw.ui.Observer.Subject;
 
 
 public class GloriaRomanusController extends Controller{
@@ -25,6 +22,9 @@ public class GloriaRomanusController extends Controller{
 	private MapController mapController;
 	private VicUIController vicUIController;
 	private MsgObserverable turnChangedObservable = new MsgObserverable();
+	private ProvinceSideBarController sideController;
+	
+	private MsgObserverable turnchange = new MsgObserverable();
 
 	@FXML
 	private HBox topbox;
@@ -47,6 +47,13 @@ public class GloriaRomanusController extends Controller{
 		// adds to the first index of the child list
 		((Pane)getRoot()).getChildren().add(0, mapController.getRoot());
 		
+		sideController = new ProvinceSideBarController(game);
+
+		GloriaRomanusApplication.loadExistingController(sideController, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
+		// adds to the next index of the child list
+		((Pane)getRoot()).getChildren().add(1, sideController.getRoot());
+		// attach observer
+		mapController.attachProvinceSelectedObserver(sideController);
 
 		//topbar observer and observerable implement
 		
