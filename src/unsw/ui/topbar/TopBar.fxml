@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox fx:id="topbox" alignment="CENTER" maxHeight="20" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="yearLable" text="Year: " />
+      <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="19.0" />
+      <Label fx:id="facnameIndicator" text="Faction: " />
+      <Text fx:id="faction" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="24.0" />
+      <Label fx:id="goldIndicator" text="Gold: " />
+      <Text fx:id="gold" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="130.0" />
+      <MenuBar fx:id="infoMenu" />
+      <Separator orientation="VERTICAL" prefHeight="27.0" prefWidth="128.0" />
+      <Button fx:id="endTurn" text="EndTurn" />
+   </children>
+</HBox>
