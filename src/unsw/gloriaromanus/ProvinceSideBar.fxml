@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxWidth="280.0" style="-fx-background-color: #00ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxWidth="280.0" opacity="0.8" prefHeight="598.0" prefWidth="276.0" style="-fx-background-color: #00ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER">
          <children>
@@ -22,26 +22,49 @@
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="invading_province" editable="false" />
+                  <TextField fx:id="selected_province" editable="false" />
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="Units in Selected Province:">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="selectedProvinceUnitsList" editable="false" prefHeight="200.0" prefWidth="200.0" text="List of units in current province here" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
                </children>
             </VBox>
-            <Label text="Target Province:" textFill="RED">
+            <Button fx:id="selectActionProvince" mnemonicParsing="false" onAction="#handleSelectProvince" text="Select Action Province" />
+            <Label alignment="CENTER" text="Action Province:" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="opponent_province" editable="false" prefHeight="25.0" prefWidth="272.0" />
+            <TextField fx:id="action_province" editable="false" />
+            <Button fx:id="selectTargetProvince" mnemonicParsing="false" onAction="#handleSelectTarget" text="Select Target Province" />
+            <Label alignment="CENTER" text="Target Province:" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="target_province" editable="false" prefHeight="25.0" prefWidth="272.0" />
             <Accordion>
               <panes>
-                <TitledPane animated="false" text="Units in province:">
+                <TitledPane animated="false" text="Units in action province:">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <ChoiceBox fx:id="provinceUnitCB" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
                               <Label layoutX="14.0" layoutY="46.0" text="Selected Unit:" />
                               <Label fx:id="provinceUnitLabel" layoutX="14.0" layoutY="63.0" text="Label" />
-                              <Button fx:id="moveBtn" layoutX="124.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" />
-                              <Button fx:id="selectTarget" layoutX="16.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleSelectTarget" text="Click to select target province on map" />
+                              <Button fx:id="moveBtn" layoutX="28.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -49,7 +72,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                 </TitledPane>
-                <TitledPane animated="false" text="Units in training:">
+                <TitledPane animated="false" text="Units training in action province:">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -57,8 +80,11 @@
                            </children>
                         </AnchorPane>
                   </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                 </TitledPane>
-                <TitledPane animated="false" text="Train Unit Options:">
+                <TitledPane animated="false" text="Train Unit Options in action province:">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -69,6 +95,9 @@
                            </children>
                         </AnchorPane>
                   </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                 </TitledPane>
               </panes>
             </Accordion>
