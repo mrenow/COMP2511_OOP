@@ -429,8 +429,7 @@ public class MapController extends Controller{
 			mapView.dispose();
 		}
 	}
-	
-	public void attatchProvinceSelectedObserver(Observer<ProvinceFeatureInfo> o) {
+	public void attachProvinceSelectedObserver(Observer<ProvinceFeatureInfo> o) {
 		triggerProvinceSelected.attach(o);
 	}
 	

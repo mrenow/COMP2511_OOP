@@ -171,6 +171,19 @@ public class Province {
 		List<ItemType> trainableList = new ArrayList<>();
 		trainableList.add(ItemType.TEST_TROOP);
 		trainableList.add(ItemType.HEAVY_CAVALRY);
+		trainableList.add(ItemType.JAVELIN_SKIRMISHER);
+		trainableList.add(ItemType.ELEPHANTS);
+		trainableList.add(ItemType.ROMAN_LEGIONARY);
+		trainableList.add(ItemType.TREBUCHET);
+		trainableList.add(ItemType.ARCHER);
+		trainableList.add(ItemType.SPEARMEN);
+		trainableList.add(ItemType.PIKEMEN);
+		trainableList.add(ItemType.HOPILITE);
+		trainableList.add(ItemType.BERSERKER);
+		trainableList.add(ItemType.HORSE_ARCHER);
+		trainableList.add(ItemType.LIGHT_CAVALRY);
+		trainableList.add(ItemType.DRUID);
+		trainableList.add(ItemType.CHARIOTS);
 		return trainableList;
 	}
 	
