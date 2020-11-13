@@ -612,4 +612,18 @@ public class GameController {
 	}
 	
 	
+	public int getMilitaryIndex(Province p) {
+		double totMilitaryIndex = 0;
+		List<Unit> units = p.getUnits();
+		for(Unit u: units) {
+			totMilitaryIndex += Math.log(u.getHealth()*u.getArmour())*u.getAttack();
+		}
+		return (int)Math.round(totMilitaryIndex);
+	}
+	
+	public int getDevelopmentIndex(Province p) {
+		
+		// no buildings
+		return 0;
+	}
 }
