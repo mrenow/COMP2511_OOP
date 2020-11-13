@@ -27,15 +27,11 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     private Province province;
     private Province initialProvince;
     private Province targetProvince;
-    private String myProvince;
-    private String enemyProvince;
     private List<Unit> unitList;
     
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
     @FXML private ChoiceBox<String> taxChoiceBox;
-    @FXML private Label choiceBoxLabel;
-    @FXML private Label provinceUnitLabel;
     @FXML private Label wealthLabel;
     @FXML private Label taxLabel;
     @FXML private Label taxLevelLabel;
@@ -54,19 +50,15 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     @FXML private TextArea selectedProvinceUnitsList;
     @FXML private TextArea unitsInTraining;
 
-    private String selectedTargetthing;
-
-    public ProvinceSideBarController() {
-        
-    }
+    public ProvinceSideBarController() {}
 
     public ProvinceSideBarController(GameController game) {
         this.game = game;
     }
 
+    // Handles button to train units in that province
     @FXML
     public void handleTrainBtn(ActionEvent e) {
-        choiceBoxLabel.setText(trainChoiceBox.getValue().toString());
         trainTextField.setText(trainChoiceBox.getValue());
         // Call train method
         for (ItemType u : initialProvince.getTrainable()) {
@@ -76,8 +68,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         
     }
     
-    // Button to move to allied province or attack enemy province (two in one kinda)
-    // Select province -> select unit -> select another province (enemy or ally) to move
+    // Handles button to move to allied province or attack enemy province
     @FXML
     public void handleMove(ActionEvent e) {
         String u = provinceUnitCB.getValue().toString();
@@ -92,6 +83,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             else {
                 // Call invade method
                 game.invade(initialProvince, targetProvince);
+                //BattlePaneController b = new BattlePaneController(initialProvince, targetProvince);
             }
         }
         // Else any other individual unit tag chosen
@@ -108,15 +100,19 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
                     else {
                         // Call invade method
                         game.invade(unitList, targetProvince);
+                        //BattlePaneController b = new BattlePaneController(unitList, targetProvince);
                     }
                 }
             }
         }
     }
 
+    // Handles changing of tax level
     @FXML
     public void handleTaxLevel() {
+        // Get new tax level choice from choice box
         String newTaxLevel = taxChoiceBox.getValue().toString();
+        // Switch case to set new tax level
         switch(newTaxLevel) {
             case "Low Tax":
                 game.setTax(initialProvince, TaxLevel.LOW_TAX);
@@ -133,9 +129,10 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         }
     }
 
-    // Displays the name of the selected action province along with its information
+    // Displays the name of the selected action province along with all other information
     @FXML
     public void handleSelectProvince(ActionEvent e) {
+        // Clears the province unit choice box every time handle event is called
         provinceUnitCB.getItems().clear();
         if (!province.getOwner().equals(game.getCurrentTurn())) {
             System.out.println("Action province must be your own province.");
@@ -175,19 +172,23 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             for (ItemType u : trainableUnits) {
                 trainChoiceBox.getItems().add(u.getName(1));
             }
-            
             System.out.println("Action province selected.");
         }
     }
+
+    // Handles button that selects target province
     @FXML
     public void handleSelectTarget(ActionEvent e) {
         this.targetProvince = province;
         target_province.setText(targetProvince.getName());
-
+        // Check if target province belongs to player faction
         if (targetProvince.getOwner().equals(game.getCurrentTurn())) {
+            // Set button text to "Move"
             moveBtn.setText("Move");
         }
+        // Else target province belongs to enemy
         else {
+            // Set button text to "Invade"
             moveBtn.setText("Invade");
         }
         System.out.println("Selected province is: " + targetProvince.getName());
@@ -195,19 +196,6 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
     @FXML
     public void initialize() {
-
-        // This items are for configuring the ChoiceBox (To Train)
-        choiceBoxLabel.setText("");
-        /*
-        trainChoiceBox.getItems().add("TEST_TROOP");
-        trainChoiceBox.getItems().add("Heavy Calvary");
-        trainChoiceBox.getItems().add("Archer");
-        trainChoiceBox.getItems().add("Elephants");
-        */
-        //trainChoiceBox.getItems().addAll(ItemType.nameList);
-
-        // These items are for configuring the choicebox for units in province
-        provinceUnitLabel.setText("");
 
         // These items are for configuring the tax level choice box
         taxChoiceBox.getItems().add("Low Tax");
@@ -223,12 +211,10 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         System.out.println("Selected province owner is: " + p.getOwner().getTitle());
         selected_province.setText(p.getName());
         this.province = p.getProvince();
-        this.myProvince = p.getName();
         // Show units in selected province
         for (Unit u : p.getProvince().getUnits()) {
             selectedProvinceUnitsList.setText(u.getName() + "\n");
         }
-        
     }
 
 }

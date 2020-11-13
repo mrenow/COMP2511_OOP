@@ -79,8 +79,6 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <ChoiceBox fx:id="provinceUnitCB" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
-                              <Label layoutX="14.0" layoutY="46.0" text="Selected Unit:" />
-                              <Label fx:id="provinceUnitLabel" layoutX="14.0" layoutY="63.0" text="Label" />
                               <Button fx:id="moveBtn" layoutX="28.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" />
                            </children>
                         </AnchorPane>
@@ -107,7 +105,6 @@
                            <children>
                               <ChoiceBox fx:id="trainChoiceBox" layoutX="14.0" layoutY="21.0" prefWidth="150.0" />
                               <Button fx:id="trainBtn" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleTrainBtn" text="Train" />
-                              <Label fx:id="choiceBoxLabel" layoutX="14.0" layoutY="71.0" text="Label" />
                               <TextField fx:id="trainTextField" layoutX="15.0" layoutY="99.0" />
                            </children>
                         </AnchorPane>
