@@ -176,7 +176,6 @@ public class Faction {
 	public void setVicComposite(VicComposite vicComposite) {
 		this.vicComposite = vicComposite;
 	}
-
 	/*
 	 * @JsonGetter private List<Integer> saveLostEagles() { List<Province> keys =
 	 * getSortedLostEagleKeys(); List<Integer> out = new ArrayList<>(keys.size());

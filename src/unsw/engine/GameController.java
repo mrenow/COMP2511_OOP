@@ -7,25 +7,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 
 import org.geojson.Point;
 
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
-import unsw.ui.Observer.Message;
-import unsw.ui.Observer.MsgObserver;
-import unsw.ui.Observer.MsgObserverable;
 import unsw.ui.Observer.Observable;
 import unsw.ui.Observer.Observer;
-import unsw.ui.topbar.TurnFeatureInfo;
+import unsw.ui.Observer.*;
 
+import com.esri.arcgisruntime.symbology.ColorUtil;
+import com.esri.arcgisruntime.symbology.SimpleFillSymbol;
+import com.esri.arcgisruntime.symbology.SimpleFillSymbol.Style;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,6 +37,8 @@ import util.MappingIterable;
 import util.MathUtil;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+import javafx.scene.paint.Color;
 
 /**
  * Game controller class
@@ -51,6 +55,8 @@ public class GameController {
 	
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;
+	// ARGB
+	private Map<FactionType, Integer> factionColourMap = new EnumMap<>(FactionType.class);
 
 	//private List<ItemType> currentMercenaries = new ArrayList<ItemType>();
 	private int round = 0;
@@ -144,6 +150,11 @@ public class GameController {
 			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}
 		this.factionOrder = Parsing.readFactions(factionFile, provinceMap);
+		Random r = new Random();
+		for (Faction f : factionOrder) {
+			factionColourMap.put(f.getType(), 0x60000000 | (0x00FFFFFF & ColorUtil.colorToArgb(Color.hsb(r.nextDouble()*360, 1 - r.nextDouble()*0.3, r.nextDouble()))));
+		}
+		factionColourMap.put(FactionType.NO_ONE, 0);
 		this.allProvinces = provinceMap.values();
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
@@ -161,9 +172,16 @@ public class GameController {
 			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}
 		this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap, STARTING_DENSITY);
+		Random r = new Random();
+		for (Faction f : factionOrder) {
+			factionColourMap.put(f.getType(), 0x60000000 | (0x00FFFFFF & ColorUtil.colorToArgb(Color.hsb(r.nextDouble()*360, 1 - r.nextDouble()*0.3, r.nextDouble()))));
+		}
+		factionColourMap.put(FactionType.NO_ONE, 0);
 		this.allProvinces = provinceMap.values();
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
+	
+	
 	
 	public void setVic(VicComposite vic){
 		for (Faction faction : factionOrder) {
@@ -624,6 +642,19 @@ public class GameController {
 			}
 		}
 		return null;
+	}
+	public Integer getFactionColour(Faction f) {
+		return getFactionColour(f.getType());
+	}
+	public Integer getFactionColour(FactionType type) {
+		return factionColourMap.get(type);
+	}
+	public Integer getSolidFactionColour(Faction f) {
+		return getSolidFactionColour(f.getType());
+		
+	}
+	public Integer getSolidFactionColour(FactionType type) {
+		return  0xFF000000 | factionColourMap.get(type);
 	}
 	
 	public int getNumProvinces() {

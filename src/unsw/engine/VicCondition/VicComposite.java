@@ -2,6 +2,7 @@ package unsw.engine.VicCondition;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -130,4 +131,8 @@ public class VicComposite implements VicComponent{
         }
         return prog;
     }
+	@Override
+	public String toString() {
+		return "(" + String.join(" " + goal.toString() + " ", subgoals.stream().map(Object::toString).collect(Collectors.toList())) + ")";
+	}
 }

@@ -1,7 +1,10 @@
 package unsw.gloriaromanus;
 
 import java.io.FileInputStream;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -25,6 +28,7 @@ public class GloriaRomanusController extends Controller{
 	private MapController mapController;
 	private VicUIController vicUIController;
 	private ProvinceSideBarController sideController;
+	private Map<FactionType, Integer> factionColourMap = new EnumMap<>(FactionType.class); // TODO integrate colours into faction map
 
 	private TopBarController topBar;
 	
@@ -39,7 +43,9 @@ public class GloriaRomanusController extends Controller{
 						FactionType.CARTHAGE,
 						FactionType.PARTHIA,
 						FactionType.BRITAIN));
-		
+
+		VicComposite vic = generateVic();
+		game.setVic(vic);
 		
 		VBox bottomPane = new VBox();
 		HBox lowerBox = new HBox();
@@ -50,8 +56,6 @@ public class GloriaRomanusController extends Controller{
 		topBar = new TopBarController(game);
 		game.attatchTurnChangedObserver(topBar);
 		//these two should be inside main
-		VicComposite vic = generateVic();
-		game.setVic(vic);
 		
 		
 		HBox.setHgrow(mapController.getRoot(), Priority.ALWAYS);
@@ -80,6 +84,7 @@ public class GloriaRomanusController extends Controller{
 		vic2.addSubVic(l3);
 		vic1.addSubVic(l1);
 		vic1.addSubVic(vic2);
+		System.out.println(vic1);
 		return vic1;
 	}
 

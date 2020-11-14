@@ -82,7 +82,6 @@ public class MapController extends Controller{
 	private Observable<ProvinceFeatureInfo> triggerProvinceSelected = new Observable<ProvinceFeatureInfo>();
 
 	// Symbols
-	private Map<FactionType, Integer> factionColourMap = new EnumMap<>(FactionType.class); // TODO integrate colours into faction map
 	private Map<FactionType, Symbol> factionSymbolMap = new EnumMap<>(FactionType.class);
 	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
 	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
@@ -136,11 +135,11 @@ public class MapController extends Controller{
 		}
 		// TODO: better algorithm than just randomly generating colours
 		Random r = new Random();
+		
 		for (Faction f : game.getFactions()) {
-			factionColourMap.put(f.getType(), 0x60000000 | (0x00FFFFFF & ColorUtil.colorToArgb(Color.hsb(r.nextDouble()*360, 1 - r.nextDouble()*0.3, r.nextDouble()))));
-			factionSymbolMap.put(f.getType(), new SimpleFillSymbol(Style.SOLID, factionColourMap.get(f.getType()), null));
+			factionSymbolMap.put(f.getType(), new SimpleFillSymbol(Style.SOLID, game.getFactionColour(f), null));
 		}
-		factionColourMap.put(FactionType.NO_ONE, 0);
+		
 		factionSymbolMap.put(FactionType.NO_ONE, NO_SYMBOL);
 		
 		map = new ArcGISMap(Basemap.Type.OCEANS, 41.883333, 12.5, 0);
@@ -383,7 +382,7 @@ public class MapController extends Controller{
 	private void updateProvinceGraphics(Province p) {
 		
 		String text = String.format("%s\n%d 🗡", p.getName(), p.getMilitaryIndex());
-		TextSymbol ts = new TextSymbol(FONT_SIZE, text, toSolidColour(factionColourMap.get(p.getOwner().getType())),
+		TextSymbol ts = new TextSymbol(FONT_SIZE, text, toSolidColour(game.getFactionColour(p.getOwner())),
 				HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
 		// White outline
 		ts.setHaloColor(0xFFFFFFFF);

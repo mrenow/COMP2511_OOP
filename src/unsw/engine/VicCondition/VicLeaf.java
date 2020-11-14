@@ -37,4 +37,8 @@ public class VicLeaf implements VicComponent{
         // return -1;
         return this.progress;
     }
+    @Override
+    public String toString() {
+    	return goal.toString();
+    }
 }

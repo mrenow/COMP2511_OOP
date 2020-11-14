@@ -14,9 +14,9 @@ import javafx.scene.text.Text;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
-import unsw.ui.Observer.Message;
+import unsw.ui.UIPath;
 import unsw.ui.Observer.Observer;
-import unsw.ui.topbar.TurnFeatureInfo;
+import unsw.ui.Observer.TurnFeatureInfo;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
 
@@ -29,16 +29,15 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     private VicComposite vicinfo;
     
 
-    @FXML private Label yearLable;
-    @FXML private Label facnameLable;
-    @FXML private Label goldLable;
+    @FXML private Label yearLabel;
+    @FXML private Label facnameLabel;
+    @FXML private Label goldLabel;
+    @FXML private Label goalLabel;
     @FXML private MenuBar infoMenu;
+    
     @FXML private Button endTurn;
 
-    @FXML private Text year;
-    @FXML private Text faction;
-    @FXML private Text gold;
-
+    @FXML
     private Menu vic = new Menu("VicInfo");
     
     private DoubleProperty p = new SimpleDoubleProperty(0.0);
@@ -49,17 +48,12 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     public TopBarController(){}
     public TopBarController(GameController game){
         this.game = game;
-		GloriaRomanusApplication.loadExistingController(this, "src/unsw/ui/topbar/TopBar.fxml");
+		GloriaRomanusApplication.loadExistingController(this, UIPath.TOPBAR.getPath());
     }
 
     @FXML
     public void initialize(){
-        turninfo=new TurnFeatureInfo(game);
-        year.setText(getYear());
-        faction.setText(getFaction());
-
-        gold.setText(getgold());
-
+        update(new TurnFeatureInfo(game));
         endTurn.setOnAction((e)->endTurnPressed());
         
         infoMenuSetup();
@@ -123,11 +117,16 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     
     @Override
     public void update(TurnFeatureInfo m) {
-        this.game = m.getGame();
-        year.setText(getYear());
-        faction.setText(getFaction());
+        turninfo = m;
+        
+        yearLabel.setText(getYear() + " AD");
+        facnameLabel.setText(getFaction());
+
+        goldLabel.setText(getgold() + " Gold");
+
         vicinfo = game.getCurrentTurn().getVicComposite();
-        gold.setText(getgold());
+        goalLabel.setText("Goal: " + vicinfo.toString());
+        
         progressVicInfo(vicinfo);
 
         //victory\defeat display
