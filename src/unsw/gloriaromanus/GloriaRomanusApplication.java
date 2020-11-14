@@ -24,8 +24,8 @@ public class GloriaRomanusApplication extends Application {
     scene = new Scene(mainController.getRoot());
     // set up the stage
     stage.setTitle("Gloria Romanus");
-    stage.setWidth(800);
-    stage.setHeight(700);
+    stage.setWidth(1200);
+    stage.setHeight(800);
     stage.setScene(scene);
     stage.show();
 
@@ -60,6 +60,11 @@ public class GloriaRomanusApplication extends Application {
   }
   public Controller getMainController() {
 	  return mainController;
+  }
+  
+  public void displayText(Object txt) {
+	  System.out.println(txt.toString());
+	  
   }
 
   /**
