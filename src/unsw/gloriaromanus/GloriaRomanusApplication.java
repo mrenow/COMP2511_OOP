@@ -19,10 +19,17 @@ public class GloriaRomanusApplication extends Application {
   @Override
   public void start(Stage stage) throws IOException {
     // set up the scene
-	 app = this;
+   app = this;
+   /*
 	mainController = loadController("src/unsw/gloriaromanus/main.fxml");
     scene = new Scene(mainController.getRoot());
     // set up the stage
+    */
+
+    // Controller controller = GloriaRomanusApplication.loadController("src/unsw/ui/MainMenu/MainMenu.fxml");
+    // GloriaRomanusApplication.app.setScene(controller);
+    mainController =loadController("src/unsw/ui/MainMenu/MainMenu.fxml");
+    scene = new Scene(mainController.getRoot());
     stage.setTitle("Gloria Romanus");
     stage.setWidth(1200);
     stage.setHeight(800);
