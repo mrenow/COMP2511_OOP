@@ -147,6 +147,8 @@ public class MapController extends Controller{
 		
 		factionSymbolMap.put(FactionType.NO_ONE, NO_SYMBOL);
 		
+		
+		
 		map = new ArcGISMap(Basemap.Type.OCEANS, 41.883333, 12.5, 0);
 
 		map.getBasemap().getReferenceLayers().remove(0);
@@ -186,8 +188,10 @@ public class MapController extends Controller{
 
 		// Province event handling
 		mapView.setOnMouseMoved(provinceToMouseEventHandler((e, provinceName) -> {
-			setUniqueMarker(uniqueHoverMarker, provinceName, ATTACK_ICON);
-			setUniqueShape(uniqueHoverOutline, provinceName, ON_HOVER_SYMBOL);	
+//			int id = provinceFeatureMap.get(provinceName).getId();
+//			if(overlays[PATTERN_LAYER].getGraphics().) {
+//				
+//			}
 		}));
 		mapView.setOnMouseClicked(provinceToMouseEventHandler((e, provinceName)->{
 			// TODO : Sets patterns for testing only
@@ -224,6 +228,7 @@ public class MapController extends Controller{
 				System.out.println("load failure");
 			}
 		});
+		unitSelection.addListener((ListChangeListener<Unit>)c -> updateActionOverlay());
 	}
 	/**
 	 *  called after province shape data is loaded, and after province point data is initialized
@@ -403,6 +408,11 @@ public class MapController extends Controller{
 		}
 	}
 	
+	void updateActionOverlay() {
+		setProvinceSymbols(game.getDestinations(unitSelection), PATTERN_LAYER, CAN_MOVE_SYMBOL);
+		setProvinceSymbols(game.getAttackable(unitSelection), PATTERN_LAYER, CAN_ATTACK_SYMBOL);
+	}
+	
 	void setNamedProvinceSymbols(Collection<String> provinceNames, int layer, Symbol symb) {
 		for(String name : provinceNames) {
 			ProvinceFeatureInfo pfi = provinceFeatureMap.get(name);
@@ -440,9 +450,9 @@ public class MapController extends Controller{
 		}
 	}
 	
-	public void attachProvinceSelectedObserver(Observer<ProvinceFeatureInfo> o) {
-		triggerProvinceSelected.attach(o);
-	}
+    ListProperty<Unit> getUnitSelectionProperty() {
+    	return unitSelection;
+    }
 	
 	private void debugActions(KeyEvent e) {
 		switch(e.getCharacter()) {

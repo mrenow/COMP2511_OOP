@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.LoadSave.LoadSaveController">
@@ -12,6 +14,10 @@
       <ButtonBar layoutX="105.0" layoutY="362.0" nodeOrientation="RIGHT_TO_LEFT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <buttons>
             <Button mnemonicParsing="false" onAction="#load" text="Load" />
+            <Separator orientation="VERTICAL" prefHeight="100.0" prefWidth="38.0" />
+            <TextField fx:id="filename" />
+            <Button mnemonicParsing="false" onAction="#save" text="Save" />
+            <Separator orientation="VERTICAL" prefHeight="100.0" prefWidth="45.0" />
             <Button mnemonicParsing="false" onAction="#delete" text="Delete" />
             <Button mnemonicParsing="false" onAction="#quit" text="↩ Return" />
          </buttons>

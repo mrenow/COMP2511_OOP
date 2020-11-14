@@ -646,6 +646,7 @@ public class GameController {
 		}
 		return null;
 	}
+	
 	public Integer getFactionColour(Faction f) {
 		return getFactionColour(f.getType());
 	}
