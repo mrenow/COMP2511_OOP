@@ -18,6 +18,7 @@ import unsw.engine.*;
 import unsw.engine.VicCondition.*;
 import unsw.ui.topbar.TopBarController;
 import unsw.ui.VicUI.VicUIController;
+import unsw.ui.UIPath;
 import unsw.ui.Observer.MsgObserverable;
 
 
@@ -28,21 +29,16 @@ public class GloriaRomanusController extends Controller{
 	private MapController mapController;
 	private VicUIController vicUIController;
 	private ProvinceSideBarController sideController;
-	private Map<FactionType, Integer> factionColourMap = new EnumMap<>(FactionType.class); // TODO integrate colours into faction map
 
 	private TopBarController topBar;
 	
+	public GloriaRomanusController(GameController game) {
+		this.game = game;
+    	GloriaRomanusApplication.loadExistingController(this, UIPath.GAME.getPath());
+	}
 	
 	@FXML
 	private void initialize() throws Exception {
-		// TODO = you should rely on an object oriented design to determine ownership
-		game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json",
-				"src/unsw/gloriaromanus/landlocked_provinces.json",
-				List.of(FactionType.ROME,
-						FactionType.GAUL,
-						FactionType.CARTHAGE,
-						FactionType.PARTHIA,
-						FactionType.BRITAIN));
 
 		VicComposite vic = generateVic();
 		game.setVic(vic);
