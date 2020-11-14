@@ -46,7 +46,10 @@ public class GloriaRomanusController extends Controller{
 		
 		mapController = new MapController(game);
 		sideController = new ProvinceSideBarController(game);
+		mapController.attachProvinceSelectedObserver(sideController);
 		mapController.getUnitSelectionProperty().bind(sideController.getUnitSelectionProperty());
+		
+		
 		
 		topBar = new TopBarController(game);
 		game.attatchTurnChangedObserver(topBar);

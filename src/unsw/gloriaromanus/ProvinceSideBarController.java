@@ -318,7 +318,4 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         trainChoiceBox.getItems().clear();
         trainTextField.clear();
     }
-    ListProperty<Unit> getUnitSelectionProperty() {
-    	return unitSelection;
-    }
 }
