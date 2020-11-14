@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,8 +30,6 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML private ListView<FactionType> factionList;
     // implement later
     @FXML private ListView<FactionType> VictoryConditionList;
-    private List<String> faction = new ArrayList<>();
-    private List<String> condition = new ArrayList<>();
     
     
     
@@ -38,14 +37,16 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML
     public void initialize() {
     	factionList.getItems().addAll(FactionType.values());
+    	factionList.getItems().remove(FactionType.NO_ONE);	
     	factionList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    	
+    	factionList.getSelectionModel().getSelectedItems().addListener(
+    			(ListChangeListener<FactionType>)(c -> play.setDisable(c.getList().size() < 2)));
     }
+   
     @FXML
     public void play(){
     	// Init game
     	List<VictoryCondition> valuesList = new ArrayList<>(Arrays.asList(VictoryCondition.values()));
-		
     	GameController game = new GameController(
     			"src/unsw/gloriaromanus/province_id_adjacent.json",
 				"src/unsw/gloriaromanus/landlocked_provinces.json",
@@ -71,7 +72,6 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML
     public void GenerateVictoryCondition(){
         // randomize victory conditions
-    	// Make two levels of vic composites. Choose roots randomly.
     	
     }
     @FXML
