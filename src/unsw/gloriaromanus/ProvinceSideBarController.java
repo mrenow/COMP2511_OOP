@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -222,6 +223,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         else {
             for (Unit u : p.getUnits()) {
                 unitsProvinceListView.getItems().add(u);
+                checkLast().setDisable(true);
             }
         }
     }
@@ -283,6 +285,10 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         targetProvince.setValue(null);
         selectedProvince.setValue(null);
         actionProvince.setValue(null);
+    }
+
+    private ListCell<Unit> checkLast() {
+        return ((ListCell<Unit>)unitsProvinceListView.getChildrenUnmodifiable().get(unitsProvinceListView.getItems().size()-1));
     }
 
     ListProperty<Unit> getUnitSelectionProperty() {
