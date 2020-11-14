@@ -12,6 +12,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Text;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
+import unsw.ui.UIPath;
 import unsw.ui.Observer.MenuInfo;
 import unsw.ui.Observer.Observer;
 
@@ -32,7 +33,7 @@ public class LoadSaveController extends Controller implements Observer<MenuInfo>
     @FXML
     public void quit(){
         try {
-            Controller controller = GloriaRomanusApplication.loadController("src/unsw/ui/MainMenu/Menu.fxml");
+            Controller controller = GloriaRomanusApplication.loadController(UIPath.MENU.getPath());
             GloriaRomanusApplication.app.setScene(controller);
         } catch (Exception e) {
             System.out.println("setting fild DNE");

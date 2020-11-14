@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
+import unsw.ui.UIPath;
 import unsw.ui.Observer.Observer;
 import unsw.ui.Observer.TurnFeatureInfo;
 import unsw.gloriaromanus.Controller;
@@ -48,7 +49,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     public TopBarController(){}
     public TopBarController(GameController game){
         this.game = game;
-		GloriaRomanusApplication.loadExistingController(this, "src/unsw/ui/topbar/TopBar.fxml");
+		GloriaRomanusApplication.loadExistingController(this, UIPath.TOPBAR.getPath());
     }
 
     @FXML

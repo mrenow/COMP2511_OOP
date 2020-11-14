@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
 import unsw.ui.Observer.Observer;
+import unsw.ui.UIPath;
 import unsw.ui.Observer.MenuInfo;
 
 public class GameSettingController extends Controller implements Observer<MenuInfo>{
@@ -32,7 +33,7 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML
     public void play(){
         try {
-            Controller controller = GloriaRomanusApplication.loadController("src/unsw/gloriaromanus/main.fxml");
+            Controller controller = GloriaRomanusApplication.loadController(UIPath.GAME.getPath());
             GloriaRomanusApplication.app.setScene(controller);
         } catch (Exception e) {
             System.out.println("fild DNE");
@@ -41,7 +42,12 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     }
     @FXML
     public void quit(){
-        
+        try {
+            Controller controller = GloriaRomanusApplication.loadController(UIPath.MENU.getPath());
+            GloriaRomanusApplication.app.setScene(controller);
+        } catch (Exception e) {
+            System.out.println("setting fild DNE");
+        }
     }
     @FXML
     public void GenerateVictoryCondition(){
