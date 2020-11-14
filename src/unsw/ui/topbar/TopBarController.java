@@ -17,6 +17,7 @@ import unsw.engine.VicCondition.VictoryCondition;
 import unsw.ui.Observer.Observer;
 import unsw.ui.Observer.TurnFeatureInfo;
 import unsw.gloriaromanus.Controller;
+import unsw.gloriaromanus.GloriaRomanusApplication;
 
 public class TopBarController extends Controller implements Observer<TurnFeatureInfo>{
     private GameController game;
@@ -47,6 +48,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     public TopBarController(){}
     public TopBarController(GameController game){
         this.game = game;
+		GloriaRomanusApplication.loadExistingController(this, "src/unsw/ui/topbar/TopBar.fxml");
     }
 
     @FXML

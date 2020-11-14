@@ -95,12 +95,7 @@ public class BattlePaneController extends Controller{
 		Collections.sort(armies.get(ATTACK));
 		Collections.sort(armies.get(DEFEND));
 
-		try {
-			GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/battle.fxml");
-		} catch (IOException e) {
-			System.err.println("Failed to load!!");
-			e.printStackTrace();
-		}
+		GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/battle.fxml");
 	}
 	
 	@FXML

@@ -8,7 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import unsw.engine.*;
 import unsw.engine.VicCondition.*;
 import unsw.ui.topbar.TopBarController;
@@ -23,15 +25,14 @@ public class GloriaRomanusController extends Controller{
 	private MapController mapController;
 	private VicUIController vicUIController;
 	private ProvinceSideBarController sideController;
-	
 
-	private TopBarController topbar;
+	private TopBarController topBar;
 	
 	
 	@FXML
 	private void initialize() throws Exception {
 		// TODO = you should rely on an object oriented design to determine ownership
-		this.game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json",
+		game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json",
 				"src/unsw/gloriaromanus/landlocked_provinces.json",
 				List.of(FactionType.ROME,
 						FactionType.GAUL,
@@ -39,33 +40,28 @@ public class GloriaRomanusController extends Controller{
 						FactionType.PARTHIA,
 						FactionType.BRITAIN));
 		
-		this.mapController = new MapController(game);
 		
-		GloriaRomanusApplication.loadExistingController(mapController, "src/unsw/gloriaromanus/map.fxml");
-		// adds to the first index of the child list
-		((Pane)getRoot()).getChildren().add(0, mapController.getRoot());
+		VBox bottomPane = new VBox();
+		HBox lowerBox = new HBox();
 		
+		mapController = new MapController(game);
 		sideController = new ProvinceSideBarController(game);
-		GloriaRomanusApplication.loadExistingController(sideController, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
-		// adds to the next index of the child list
-		((Pane)getRoot()).getChildren().add(1, sideController.getRoot());
-		StackPane.setAlignment(sideController.getRoot(), Pos.CENTER_RIGHT);
-		
-		// attach observer
 		mapController.attachProvinceSelectedObserver(sideController);
-		
-		topbar = new TopBarController(game);
-		//topbar observer and observerable implement
-		GloriaRomanusApplication.loadExistingController(topbar, "src/unsw/ui/topbar/TopBar.fxml");
-		((Pane)getRoot()).getChildren().add(2, topbar.getRoot());
-		StackPane.setAlignment(topbar.getRoot(), Pos.TOP_CENTER);
-		
-
-		game.attatchTurnChangedObserver(topbar);
+		topBar = new TopBarController(game);
+		game.attatchTurnChangedObserver(topBar);
 		//these two should be inside main
 		VicComposite vic = generateVic();
 		game.setVic(vic);
 		
+		
+		HBox.setHgrow(mapController.getRoot(), Priority.ALWAYS);
+		lowerBox.getChildren().add(mapController.getRoot());
+		HBox.setHgrow(sideController.getRoot(), Priority.NEVER);
+		lowerBox.getChildren().add(sideController.getRoot());
+		bottomPane.getChildren().add(topBar.getRoot());
+		VBox.setVgrow(lowerBox, Priority.ALWAYS);
+		bottomPane.getChildren().add(lowerBox);
+		((StackPane) root).getChildren().add(bottomPane);
 	}
 
 	/**

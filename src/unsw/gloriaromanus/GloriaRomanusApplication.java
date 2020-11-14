@@ -40,12 +40,17 @@ public class GloriaRomanusApplication extends Application {
   
   
   // Loads nodes into existing controller
-  public static Controller loadExistingController(Controller c, String fileName) throws IOException {
-
-	FXMLLoader loader = new FXMLLoader(new File(fileName).toURI().toURL());
-	loader.setController(c);
-	Parent root = loader.load();
-	c.setRoot(root);	  
+  public static Controller loadExistingController(Controller c, String fileName ){
+	try {
+		FXMLLoader loader = new FXMLLoader(new File(fileName).toURI().toURL());
+		loader.setController(c);
+		Parent root = loader.load();
+		c.setRoot(root);
+	}catch(IOException e){
+		System.err.println("Failed to Load!!");
+		e.printStackTrace();
+		return null;
+	}
 	return c;
   }
   
