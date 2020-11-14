@@ -2,6 +2,9 @@ package util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Random;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -25,6 +28,14 @@ public class ArrayUtil
     public static JSONArray convert(Collection<Object> list)
     {
         return new JSONArray(list);
+    }
+    public static <T> T selectRandom(List<T> list, Random r) {
+    	return list.get(r.nextInt(list.size()));
+    	
+    }
+
+    public static <T> T selectRandom(T[] arr, Random r) {
+    	return arr[r.nextInt(arr.length)];
     }
 
 }

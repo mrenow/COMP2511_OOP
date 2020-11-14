@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.geojson.Point;
 
+import unsw.engine.VicCondition.VicComponent;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
 import unsw.ui.Observer.Observable;
@@ -142,21 +143,19 @@ public class GameController {
 	 * the order in which factions appear in the file at <code>ownershipFilePath</code>.
 	 * primarily used for testing backend.
 	 */
+	
 	public GameController(String adjacencyFile,
-			String landlockedFile, String factionFile) throws DataInitializationError{
+			String landlockedFile, String factionFile, VicComponent conditions) throws DataInitializationError{
+		
 		Map<String, Province> provinceMap;
 		provinceMap = Parsing.readAdjacency(adjacencyFile);
 		if(landlockedFile != null) {
 			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}
 		this.factionOrder = Parsing.readFactions(factionFile, provinceMap);
-		Random r = new Random();
-		for (Faction f : factionOrder) {
-			factionColourMap.put(f.getType(), 0x60000000 | (0x00FFFFFF & ColorUtil.colorToArgb(Color.hsb(r.nextDouble()*360, 1 - r.nextDouble()*0.3, r.nextDouble()))));
-		}
-		factionColourMap.put(FactionType.NO_ONE, 0);
 		this.allProvinces = provinceMap.values();
-		spawnBarbarianUnits(AVERAGE_BARBARIANS);
+		setGoal(conditions);
+		setupEntities();
 	}
 
 
@@ -165,27 +164,31 @@ public class GameController {
 	 * Uses factionTypes list order to determine turn order.
 	 */
 	public GameController(String adjacencyFile, String landlockedFile,
-			List<FactionType> factionTypes) throws DataInitializationError{
+			List<FactionType> factionTypes, VicComponent conditions) throws DataInitializationError{
 		Map<String, Province> provinceMap;
 		provinceMap = Parsing.readAdjacency(adjacencyFile);
 		if(landlockedFile != null) {
 			Parsing.readLandlocked(landlockedFile, provinceMap);
 		}
 		this.factionOrder = Parsing.allocateProvinces(factionTypes, provinceMap, STARTING_DENSITY);
+		this.allProvinces = provinceMap.values();
+		setGoal(conditions);
+		setupEntities();
+	}
+	
+	private void setupEntities() {
 		Random r = new Random();
 		for (Faction f : factionOrder) {
 			factionColourMap.put(f.getType(), 0x60000000 | (0x00FFFFFF & ColorUtil.colorToArgb(Color.hsb(r.nextDouble()*360, 1 - r.nextDouble()*0.3, r.nextDouble()))));
 		}
 		factionColourMap.put(FactionType.NO_ONE, 0);
-		this.allProvinces = provinceMap.values();
 		spawnBarbarianUnits(AVERAGE_BARBARIANS);
 	}
 	
 	
-	
-	public void setVic(VicComposite vic){
+	private void setGoal(VicComponent vic){
 		for (Faction faction : factionOrder) {
-			faction.setVicComposite(vic);
+			faction.setVicComponent(vic);
 		}
 	}
 
@@ -451,11 +454,11 @@ public class GameController {
 	/**
 	 * @return null if no one has won, otherwise returns a victory info object detailing who has won and by which victory.
 	 */
-	public VicComposite endTurn() {
+	public VicComponent endTurn() {
 		Faction curr = getCurrentTurn();
 		curr.update();//update faction's gold and province wealth
 		updateVictoryInfo();
-		VicComposite vic = checkVictory();
+		VicComponent vic = checkVictory();
 		if(vic==null){	
 			this.currentTurn++;
 			if (this.factionOrder.size() == this.currentTurn) {
@@ -469,7 +472,7 @@ public class GameController {
 	}
 	private void updateVictoryInfo(){
 		Faction faction = getCurrentTurn();
-		VicComposite vic = faction.getVicComposite();
+		VicComponent vic = faction.getVicComponent();
 		double ownpro = faction.getProvinces().size();
 		double allpro = this.getNumProvinces();
 		Integer gold = faction.getGold();
@@ -484,12 +487,12 @@ public class GameController {
 		wealth.doubleValue()/400000.0
 		//0.5//test
 		);
-		faction.setVicComposite(vic);
+		faction.setVicComponent(vic);
 	}
 //	returns non-null VictoryInfo if the player ending their turn has won.
-	public VicComposite checkVictory() {
+	public VicComponent checkVictory() {
 		//return getCurrentTurn().getVictoryInfo();
-		VicComposite vicComposite = getCurrentTurn().getVicComposite();
+		VicComponent vicComposite = getCurrentTurn().getVicComponent();
 		if (vicComposite.checkVic()) {
 			return vicComposite;
 		} else {

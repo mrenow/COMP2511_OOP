@@ -1,7 +1,9 @@
 package unsw.ui.GameSetting;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,13 +13,16 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import unsw.engine.FactionType;
 import unsw.engine.GameController;
+import unsw.engine.VicCondition.VicComponent;
+import unsw.engine.VicCondition.VicComposite;
+import unsw.engine.VicCondition.VictoryCondition;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
 import unsw.gloriaromanus.GloriaRomanusController;
 import unsw.ui.Observer.Observer;
 import unsw.ui.UIPath;
 import unsw.ui.Observer.MenuInfo;
-
+import static unsw.gloriaromanus.GloriaRomanusApplication.app;
 public class GameSettingController extends Controller implements Observer<MenuInfo>{
     @FXML private Button play;
     @FXML private Button quit;
@@ -39,12 +44,16 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML
     public void play(){
     	// Init game
-		GameController game = new GameController("src/unsw/gloriaromanus/province_id_adjacent.json",
+    	List<VictoryCondition> valuesList = new ArrayList<>(Arrays.asList(VictoryCondition.values()));
+		
+    	GameController game = new GameController(
+    			"src/unsw/gloriaromanus/province_id_adjacent.json",
 				"src/unsw/gloriaromanus/landlocked_provinces.json",
-				new ArrayList<>(factionList.getSelectionModel().getSelectedItems()));
+				new ArrayList<>(factionList.getSelectionModel().getSelectedItems()),
+				VicComponent.randVicComponent(valuesList, new Random()));
         try {
         	GloriaRomanusController controller = new GloriaRomanusController(game);
-            GloriaRomanusApplication.app.setScene(controller);
+            app.setScene(controller);
         } catch (Exception e) {
             System.out.println("fild DNE");
         }
@@ -54,7 +63,7 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     public void quit(){
         try {
             Controller controller = GloriaRomanusApplication.loadController(UIPath.MENU.getPath());
-            GloriaRomanusApplication.app.setScene(controller);
+            app.setScene(controller);
         } catch (Exception e) {
             System.out.println("setting fild DNE");
         }
@@ -62,6 +71,8 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML
     public void GenerateVictoryCondition(){
         // randomize victory conditions
+    	// Make two levels of vic composites. Choose roots randomly.
+    	
     }
     @FXML
     public void selectfaction(){
