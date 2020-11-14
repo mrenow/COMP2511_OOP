@@ -19,5 +19,7 @@
 	"attack" : 3,
 	
 	"combatModifiers" : "SKIRMISHER_ANTI_ARMOUR",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Spearman/Spearman_NB.png"
 }

@@ -19,5 +19,7 @@
 	"attack" : 14,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : "LEGIONARY_EAGLE"
+	"moraleModifiers" : "LEGIONARY_EAGLE",
+	
+	"image" : "Flagbearer/Roman/RomanFlagbearer_NB.png"
 }

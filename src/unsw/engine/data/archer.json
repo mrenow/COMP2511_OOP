@@ -19,5 +19,7 @@
 	"attack" : 4,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "ArcherMan/Archer_Man_NB.png"
 }

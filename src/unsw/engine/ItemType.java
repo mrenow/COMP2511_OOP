@@ -201,7 +201,7 @@ public enum ItemType{
 		return maxLevel;
 	}
 
-	public Object getAttribute(String name, int level) throws NoSuchElementException{	
+	public <T> T getAttribute(String name, int level) throws NoSuchElementException{	
 		List<Object> list = attributes.get(name);
 		if (list == null) {
 			throw new NoSuchElementException(this.name() + " has no attribute " + name);
@@ -214,8 +214,16 @@ public enum ItemType{
 							level)
 					);
 		}
-		return list.get(level-1);
+		return (T)list.get(level-1);
 	}
+	public <T> T getAttributeOrNull(String name, int level){	
+		List<Object> list = attributes.get(name);
+		if (list == null || level > maxLevel) {
+			return null;
+		}
+		return (T)list.get(level-1);
+	}
+	
 	
 	public static void main(String[] args) {
 		ItemType i = ItemType.TEST_TROOP;

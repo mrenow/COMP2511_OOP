@@ -22,5 +22,7 @@
 	"charge" : 3,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png"
 }

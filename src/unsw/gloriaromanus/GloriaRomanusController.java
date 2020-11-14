@@ -29,6 +29,7 @@ public class GloriaRomanusController extends Controller{
 
 	private TopBarController topbar;
 	
+	
 	@FXML
 	private void initialize() throws Exception {
 		// TODO = you should rely on an object oriented design to determine ownership

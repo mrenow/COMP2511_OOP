@@ -19,5 +19,7 @@
 	"attack" : 8,
 
 	"combatModifiers" : "",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Pikeman/Pikeman_NB.png"
 }

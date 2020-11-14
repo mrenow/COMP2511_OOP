@@ -1,6 +1,6 @@
 {
 	"maxLevel" : 1,
-	"names" : "Hopilite",
+	"names" : "Hoplite",
 	"descriptions" : "Assemble into near inpenetrable formations, but are hard to manoevure",
 	"costs" : 20,
 	"durations" : 1,
@@ -19,5 +19,7 @@
 	"attack" : 8,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Hoplite/Hoplite_NB.png"
 }
