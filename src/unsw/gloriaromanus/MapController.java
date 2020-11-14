@@ -123,6 +123,7 @@ public class MapController extends Controller{
 		
 	public MapController(GameController game) {
 		this.game = game;
+		GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/map.fxml");
 	}
 	
 	@FXML
@@ -451,7 +452,7 @@ public class MapController extends Controller{
 			break;
 		case "d":
 			BattlePaneController c = new BattlePaneController(game, List.of(Unit.newUnit(ItemType.HEAVY_CAVALRY, 1, provinceFeatureMap.get("V").getProvince())), provinceFeatureMap.get("I").getProvince());
-
+			System.out.print("shed");
 			Pane root = (Pane)GloriaRomanusApplication.app.getSceneRoot();
 			root.getChildren().add(c.getRoot());
 		}

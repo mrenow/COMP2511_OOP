@@ -56,6 +56,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
     public ProvinceSideBarController(GameController game) {
         this.game = game;
+		GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
     }
 
     // Handles button to train units in that province

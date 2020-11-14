@@ -211,6 +211,7 @@ public class Parsing {
 			// MUST COPY BEFORE EDITING MAPPER CONFIG
 			ObjectMapper om = mapper.copy();
 			JsonNode root = om.readTree(new File(factionFile));
+
 			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			// Construct factions without provinces
 			List<Faction> factionOrder = om.readValue(new File(factionFile), new TypeReference<List<Faction>>() {});
