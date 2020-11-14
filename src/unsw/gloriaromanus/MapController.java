@@ -136,10 +136,12 @@ public class MapController extends Controller{
 		}
 		// TODO: better algorithm than just randomly generating colours
 		Random r = new Random();
+		
 		for (Faction f : game.getFactions()) {
 			factionColourMap.put(f.getType(), 0x60000000 | (0x00FFFFFF & ColorUtil.colorToArgb(Color.hsb(r.nextDouble()*360, 1 - r.nextDouble()*0.3, r.nextDouble()))));
 			factionSymbolMap.put(f.getType(), new SimpleFillSymbol(Style.SOLID, factionColourMap.get(f.getType()), null));
 		}
+		
 		factionColourMap.put(FactionType.NO_ONE, 0);
 		factionSymbolMap.put(FactionType.NO_ONE, NO_SYMBOL);
 		

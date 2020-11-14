@@ -39,7 +39,9 @@ public class GloriaRomanusController extends Controller{
 						FactionType.CARTHAGE,
 						FactionType.PARTHIA,
 						FactionType.BRITAIN));
-		
+
+		VicComposite vic = generateVic();
+		game.setVic(vic);
 		
 		VBox bottomPane = new VBox();
 		HBox lowerBox = new HBox();
@@ -50,8 +52,6 @@ public class GloriaRomanusController extends Controller{
 		topBar = new TopBarController(game);
 		game.attatchTurnChangedObserver(topBar);
 		//these two should be inside main
-		VicComposite vic = generateVic();
-		game.setVic(vic);
 		
 		
 		HBox.setHgrow(mapController.getRoot(), Priority.ALWAYS);
@@ -80,6 +80,7 @@ public class GloriaRomanusController extends Controller{
 		vic2.addSubVic(l3);
 		vic1.addSubVic(l1);
 		vic1.addSubVic(vic2);
+		System.out.println(vic1);
 		return vic1;
 	}
 
