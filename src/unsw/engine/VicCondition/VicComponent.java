@@ -28,7 +28,7 @@ public interface VicComponent {
     void update(VictoryCondition vc,Double progress);
     
     public static VicComponent randVicComponent(List<VictoryCondition> values, Random r) {
-    	if(values.size()==1) {
+    	if(values.size() < 4) {
     		return randVicLeaf(values, r);
     	}
     	VictoryCondition goal = ArrayUtil.selectRandom(values, r);
