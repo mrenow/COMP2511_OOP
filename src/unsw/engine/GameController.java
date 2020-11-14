@@ -202,7 +202,7 @@ public class GameController {
 	private void spawnBarbarianUnits(int mean) {
 		for (Province p : allProvinces) {
 			if(p.getOwner() != Faction.NO_ONE) {
-				continue;
+				//continue;
 			}
 			int numUnits = (int)Math.round(Math.max(1, mean + GlobalRandom.nextGaussian() * mean));
 			while(numUnits-- > 0) {

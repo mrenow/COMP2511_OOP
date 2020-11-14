@@ -5,6 +5,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -48,6 +50,9 @@ public class GloriaRomanusController extends Controller{
 		sideController = new ProvinceSideBarController(game);
 		mapController.attachProvinceSelectedObserver(sideController);
 		mapController.getUnitSelectionProperty().bind(sideController.getUnitSelectionProperty());
+		sideController.addActionChangedListener((ob,prev,next)->mapController.updateActionProvince(next));
+		sideController.addTargetChangedListener((ob,prev,next)->mapController.updateTargetProvince(next));
+		sideController.addSelectedChangedListener((ob,prev,next)->mapController.updateSelectedProvince(next));
 		
 		topBar = new TopBarController(game);
 		game.attatchTurnChangedObserver(topBar);

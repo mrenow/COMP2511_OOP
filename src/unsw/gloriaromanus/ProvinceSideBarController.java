@@ -7,7 +7,10 @@ import java.util.ResourceBundle.Control;
 import com.esri.arcgisruntime.internal.io.handler.request.ServerContextConcurrentHashMap.HashMapChangedEvent.Action;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,9 +37,9 @@ import static unsw.gloriaromanus.GloriaRomanusApplication.app;;
 public class ProvinceSideBarController extends Controller implements Observer<ProvinceFeatureInfo> {
 
     private GameController game;
-    private Province province;
-    private Province initialProvince;
-    private Province targetProvince;
+    private Property<Province> selectedProvince = new SimpleObjectProperty<Province>();
+    private Property<Province> targetProvince = new SimpleObjectProperty<Province>();
+    private Property<Province> actionProvince = new SimpleObjectProperty<Province>();
     private List<Unit> unitList;
     
     @FXML private ChoiceBox<String> provinceUnitCB;
@@ -78,9 +81,9 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     public void handleTrainBtn(ActionEvent e) {
         trainTextField.setText(trainChoiceBox.getValue());
         // Call train method
-        for (ItemType u : initialProvince.getTrainable()) {
+        for (ItemType u : actionProvince.getValue().getTrainable()) {
             if (trainChoiceBox.getValue().toString() == u.getName(1)) {
-                game.trainUnit(initialProvince, u);
+                game.trainUnit(actionProvince.getValue(), u);
             }
         }
     }
@@ -100,33 +103,33 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     public void handleMove(ActionEvent e) {
         //String u = provinceUnitCB.getValue().toString();
         ArrayList<Unit> copy = new ArrayList<Unit>(unitsProvinceListView.getSelectionModel().getSelectedItems());
-        if (game.getDestinations(copy).contains(targetProvince)) {
+        if (game.getDestinations(copy).contains(targetProvince.getValue())) {
             // Call move method
             System.out.println("IM HERE");
-            game.move(copy, targetProvince);
+            game.move(copy, targetProvince.getValue());
         }
-        else if (game.getAttackable(copy).contains(targetProvince)) {
+        else if (game.getAttackable(copy).contains(targetProvince.getValue())) {
             // Pass info needed for invation to BattlePaneController
-            BattlePaneController b = new BattlePaneController(game, copy, targetProvince);
+            BattlePaneController b = new BattlePaneController(game, copy, targetProvince.getValue());
             addToApp(b);
         }
         /*
         // If "All Units" tag chosen
         if (u == "All Units") {
-            if (game.getDestinations(initialProvince.getUnits()).contains(targetProvince)) {
+            if (game.getDestinations(actionProvince.getUnits()).contains(targetProvince)) {
                 // Call move method
-                game.move(initialProvince.getUnits(), targetProvince);
+                game.move(actionProvince.getUnits(), targetProvince);
             }
             // Else enemy province so invade
-            else if (game.getAttackable(initialProvince.getUnits()).contains(targetProvince)) {
+            else if (game.getAttackable(actionProvince.getUnits()).contains(targetProvince)) {
                 // Pass info needed for invation to BattlePaneController
-                BattlePaneController b = new BattlePaneController(game, initialProvince.getUnits(), targetProvince);
+                BattlePaneController b = new BattlePaneController(game, actionProvince.getUnits(), targetProvince);
                 addToApp(b);
             }
         }
         // Else any other individual unit tag chosen
         else {
-            for (Unit unit : initialProvince.getUnits()) {
+            for (Unit unit : actionProvince.getUnits()) {
                 if (u == unit.getName()) {
                     unitList = new ArrayList<Unit>();
                     unitList.add(unit);
@@ -155,16 +158,16 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         // Switch case to set new tax level
         switch(newTaxLevel) {
             case "Low Tax":
-                game.setTax(initialProvince, TaxLevel.LOW_TAX);
+                game.setTax(actionProvince.getValue(), TaxLevel.LOW_TAX);
                 break;
             case "Normal Tax":
-                game.setTax(initialProvince, TaxLevel.NORMAL_TAX);
+                game.setTax(actionProvince.getValue(), TaxLevel.NORMAL_TAX);
                 break;
             case "High Tax":
-                game.setTax(initialProvince, TaxLevel.HIGH_TAX);
+                game.setTax(actionProvince.getValue(), TaxLevel.HIGH_TAX);
                 break;
             case "Very High Tax":
-                game.setTax(initialProvince, TaxLevel.VERY_HIGH_TAX);
+                game.setTax(actionProvince.getValue(), TaxLevel.VERY_HIGH_TAX);
                 break;
         }
     }
@@ -176,20 +179,21 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         //provinceUnitCB.getItems().clear();
         unitsProvinceListView.getItems().clear();
         trainChoiceBox.getItems().clear();
+        Province province = selectedProvince.getValue();
         if (!province.getOwner().equals(game.getCurrentTurn())) {
             app.displayText("Action province must be your own province.");
         }
         else {
-            this.initialProvince = province;
-            action_province.setText(initialProvince.getName());
+            actionProvince.setValue(province);
+            action_province.setText(province.getName());
             // Update wealth and tax info
-            wealthField.setText(Integer.toString(initialProvince.getWealth()));
-            taxField.setText(Double.toString(initialProvince.getTaxLevel().getTaxRate()));
-            setTaxLevel(initialProvince.getTaxLevel());
+            wealthField.setText(Integer.toString(province.getWealth()));
+            taxField.setText(Double.toString(province.getTaxLevel().getTaxRate()));
+            setTaxLevel(province.getTaxLevel());
             // Update province choicebox accordingly with units
-            if (!initialProvince.getUnits().isEmpty() || initialProvince.getUnits() != null) {
+            if (!province.getUnits().isEmpty() || province.getUnits() != null) {
                 //provinceUnitCB.getItems().add("All Units");
-                for (Unit u : initialProvince.getUnits()) {
+                for (Unit u : province.getUnits()) {
                     //provinceUnitCB.getItems().add(u.getName());
                     unitsProvinceListView.getItems().add(u);
                 }
@@ -198,7 +202,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
                 app.displayText("There are no units currently in selected province.");
             }
             // Update units currently in training for that province in text area
-            List<TrainingSlotEntry> copy = new ArrayList<>(initialProvince.getCurrentTraining());
+            List<TrainingSlotEntry> copy = new ArrayList<>(province.getCurrentTraining());
             for (TrainingSlotEntry u : copy) {
                 //unitsInTraining.setText(u.getType().getName(1));
                 unitsTrainingListView.getItems().add(u);
@@ -206,7 +210,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
                 //unitsDurationTableView.getItems().add(u.getType().getDuration(1));
             }
             // Update Trainable Units
-            List<ItemType> trainableUnits = initialProvince.getTrainable();
+            List<ItemType> trainableUnits = province.getTrainable();
             for (ItemType u : trainableUnits) {
                 trainChoiceBox.getItems().add(u.getName(1));
             }
@@ -217,10 +221,11 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     // Handles button that selects target province
     @FXML
     public void handleSelectTarget(ActionEvent e) {
-        this.targetProvince = province;
-        target_province.setText(targetProvince.getName());
+    	Province province = selectedProvince.getValue();
+        targetProvince.setValue(province);
+        target_province.setText(province.getName());
         // Check if target province belongs to player faction
-        if (targetProvince.getOwner().equals(game.getCurrentTurn())) {
+        if (province.getOwner().equals(game.getCurrentTurn())) {
             // Set button text to "Move"
             moveBtn.setText("Move");
         }
@@ -229,7 +234,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             // Set button text to "Invade"
             moveBtn.setText("Invade");
         }
-        app.displayText("Selected province is: " + targetProvince.getName());
+        app.displayText("Selected province is: " + province.getName());
     }
 
     @FXML
@@ -256,7 +261,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             app.displayText("Selected province owner is: " + p.getOwner().getTitle());
         }
         selected_province.setText(p.getName());
-        this.province = p.getProvince();
+        selectedProvince.setValue(p.getProvince());
         // Show units in selected province
         for (Unit u : p.getProvince().getUnits()) {
             selectedProvinceUnitsList.setText(u.getName() + "\n");
@@ -338,9 +343,21 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         unitsTrainingListView.getItems().clear();
         trainChoiceBox.getItems().clear();
         trainTextField.clear();
+        targetProvince.setValue(null);
+        selectedProvince.setValue(null);
+        actionProvince.setValue(null);
     }
 
     ListProperty<Unit> getUnitSelectionProperty() {
     	return new SimpleListProperty<>(unitsProvinceListView.getSelectionModel().getSelectedItems());
+    }
+    void addTargetChangedListener(ChangeListener<? super Province> l) {
+    	targetProvince.addListener(l);
+    }
+    void addSelectedChangedListener(ChangeListener<? super Province> l) {
+    	selectedProvince.addListener(l);
+    }
+    void addActionChangedListener(ChangeListener<? super Province> l) {
+    	actionProvince.addListener(l);
     }
 }

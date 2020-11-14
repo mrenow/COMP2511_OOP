@@ -91,8 +91,10 @@ public class MapController extends Controller{
 	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
 	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
 
-	private static final FillSymbol ON_SELECT_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x050E0F0, 4));
-	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));	
+	private static final FillSymbol ON_SELECT_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x70FFD000, 6));
+	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0F080, 2));	
+	private static final FillSymbol TARGET_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6030F0F0, 6));	
+	private static final FillSymbol ACTION_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6000F000, 6));	
 	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol(Images.ATTACK_ICON);
 	private static final MarkerSymbol MOVE_ICON = new PictureMarkerSymbol(Images.SPEED_ICON);
 	
@@ -198,10 +200,10 @@ public class MapController extends Controller{
 		mapView.setOnMouseMoved(provinceToMouseEventHandler((e, provinceName) -> {
 			int pfid = provinceFeatureMap.get(provinceName).getId();
 			Symbol symb = overlays[PATTERN_LAYER].getGraphics().get(pfid).getSymbol();
+			setUniqueShape(uniqueHoverOutline, provinceName, ON_HOVER_SYMBOL);
 			if(CAN_MOVE_SYMBOL.equals(symb)) {
 				setUniqueMarker(uniqueHoverMarker, provinceName, MOVE_ICON);
-			}
-			if(CAN_ATTACK_SYMBOL.equals(symb)) {
+			}else if(CAN_ATTACK_SYMBOL.equals(symb)) {
 				setUniqueMarker(uniqueHoverMarker, provinceName, ATTACK_ICON);
 			}else {
 				setUniqueMarker(uniqueHoverMarker, provinceName, NO_SYMBOL);
@@ -210,9 +212,8 @@ public class MapController extends Controller{
 		mapView.setOnMouseClicked(provinceToMouseEventHandler((e, provinceName)->{
 			// TODO : Sets patterns for testing only
 			if(e.getButton() == MouseButton.PRIMARY) {
-				setUniqueShape(uniqueSelectedOutline, provinceName, ON_SELECT_SYMBOL);
+				triggerProvinceSelected.notifyUpdate(provinceFeatureMap.get(provinceName));
 			}
-			triggerProvinceSelected.notifyUpdate(provinceFeatureMap.get(provinceName));
 		}));		
 		
 		// TODO REMOVE:
@@ -275,6 +276,9 @@ public class MapController extends Controller{
 				g = new Graphic(pfi.getShape(), NO_SYMBOL);
 				overlays[HIGHLIGHT_LAYER].getGraphics().add(g);
 			}
+			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueSelectedOutline);
+			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueTargetOutline);
+			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueActionOutline);
 			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueHoverOutline);
 			
 					
@@ -413,8 +417,13 @@ public class MapController extends Controller{
 		setProvinceSymbols(List.of(p), COLOUR_LAYER, factionSymbolMap.get(p.getOwner().getType()));
 	}
 	void updateTargetProvince(Province p) {
-		
-		
+		setUniqueShape(uniqueTargetOutline, p, TARGET_SYMBOL);
+	}
+	void updateSelectedProvince(Province p) {
+		setUniqueShape(uniqueSelectedOutline, p, ON_SELECT_SYMBOL);
+	}
+	void updateActionProvince(Province p) {
+		setUniqueShape(uniqueActionOutline, p, ACTION_SYMBOL);
 	}
 	void setProvinceSymbols(Collection<Province> provinces, int layer, Symbol symb) {
 		for(Province p : provinces) {
@@ -436,18 +445,34 @@ public class MapController extends Controller{
 		}
 	}
 	void setUniqueMarker(Graphic g, Province p, Symbol symb) {
+		if(p == null) {
+			g.setSymbol(NO_SYMBOL);
+			return;
+		}
 		g.setGeometry(provinceFeatureMap.get(p.getName()).getCentre());
 		g.setSymbol(symb);
 	}
 	void setUniqueMarker(Graphic g, String s, Symbol symb) {
+		if(s == null) {
+			g.setSymbol(NO_SYMBOL);
+			return;
+		}
 		g.setGeometry(provinceFeatureMap.get(s).getCentre());
 		g.setSymbol(symb);
 	}
 	void setUniqueShape(Graphic g, Province p, Symbol symb) {
+		if(p == null) {
+			g.setSymbol(NO_SYMBOL);
+			return;
+		}
 		g.setGeometry(provinceFeatureMap.get(p.getName()).getShape());
 		g.setSymbol(symb);
 	}
 	void setUniqueShape(Graphic g, String s, Symbol symb) {
+		if(s == null) {
+			g.setSymbol(NO_SYMBOL);
+			return;
+		}
 		g.setGeometry(provinceFeatureMap.get(s).getShape());
 		g.setSymbol(symb);
 	}
