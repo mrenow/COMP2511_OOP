@@ -15,6 +15,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -48,6 +51,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     @FXML private Button taxLevelBtn;
     @FXML private Button selectActionProvince;
     @FXML private Button selectTargetProvince;
+    @FXML private Button cancelTrainingBtn;
     @FXML private TextField wealthField;
     @FXML private TextField taxField;
     @FXML private TextField taxLevelField;
@@ -56,7 +60,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     @FXML private TextField action_province;
     @FXML private TextField target_province;
     @FXML private TextArea selectedProvinceUnitsList;
-    @FXML private TextArea unitsInTraining;
+    @FXML private ListView<TrainingSlotEntry> unitsTrainingListView;
 
     public ProvinceSideBarController() {}
 
@@ -78,6 +82,16 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             if (trainChoiceBox.getValue().toString() == u.getName(1)) {
                 game.trainUnit(initialProvince, u);
             }
+        }
+    }
+
+    // Handles cancel training
+    @FXML
+    public void handleCancelTraining(ActionEvent e) {
+        ArrayList<TrainingSlotEntry> copy = new ArrayList<TrainingSlotEntry>(unitsTrainingListView.getSelectionModel().getSelectedItems());
+        app.displayText("Cancelling training for: " + copy.toString());
+        for (TrainingSlotEntry t : copy) {
+            game.cancelTraining(t);
         }
     }
     
@@ -171,7 +185,10 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             // Update units currently in training for that province in text area
             List<TrainingSlotEntry> copy = new ArrayList<>(initialProvince.getCurrentTraining());
             for (TrainingSlotEntry u : copy) {
-                unitsInTraining.setText(u.getType().getName(1));
+                //unitsInTraining.setText(u.getType().getName(1));
+                unitsTrainingListView.getItems().add(u);
+                //unitsTrainingTableView.getItems().add(u.getType().getName(1));
+                //unitsDurationTableView.getItems().add(u.getType().getDuration(1));
             }
             // Update Trainable Units
             List<ItemType> trainableUnits = initialProvince.getTrainable();
@@ -244,9 +261,13 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
     // Updates list of units in training
     private void updateTrainingList(Province p) {
-        unitsInTraining.clear();
+        //unitsInTraining.clear();
+        unitsTrainingListView.getItems().clear();
         for (TrainingSlotEntry u : p.getCurrentTraining()) {
-            unitsInTraining.appendText(u.getType().getName(1) + "\n");
+            //unitsInTraining.appendText(u.getType().getName(1) + "\n");
+            unitsTrainingListView.getItems().add(u);
+            //unitsTrainingTableView.getText().add(u.getType().getName(1));
+            //unitsDurationTableView.getItems().add(u.getType().getDuration(1));
         }
     }
 
@@ -293,7 +314,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         taxField.clear();
         target_province.clear();
         provinceUnitCB.getItems().clear();
-        unitsInTraining.clear();
+        unitsTrainingListView.getItems().clear();
         trainChoiceBox.getItems().clear();
         trainTextField.clear();
     }

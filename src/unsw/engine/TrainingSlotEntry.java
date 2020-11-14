@@ -15,6 +15,10 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 		super(type, level, p);
 	}
 
+	public String toString() {
+		return name + "\t\t" + turnsRemaining;
+	}
+
 	@Override
 	void onFinish() {
 		// Spawn relevant troop in provinces
