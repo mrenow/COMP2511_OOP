@@ -5,6 +5,7 @@ public enum UIPath {
     NEWGAME("src/unsw/ui/GameSetting/GameSetting.fxml"),
     GAME("src/unsw/gloriaromanus/main.fxml"),
     LOADSAVE("src/unsw/ui/LoadSave/LoadSave.fxml"),
+    SAVES("src/unsw/saves/savedgames"),
     TOPBAR("src/unsw/ui/topbar/TopBar.fxml"),
     VIC("src/unsw/ui/VicUI/VicUI.fxml");
 
