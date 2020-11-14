@@ -90,8 +90,11 @@ public class MapController extends Controller{
 	private Map<FactionType, Symbol> factionSymbolMap = new EnumMap<>(FactionType.class);
 	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
 	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
+	
 	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0E040, 2));	
-	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol("images/legionary.png");
+	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol(Images.ATTACK_ICON);
+	private static final MarkerSymbol MOVE_ICON = new PictureMarkerSymbol(Images.SPEED_ICON);
+	
 
 	private static final Symbol NO_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , null);
 	
@@ -188,10 +191,14 @@ public class MapController extends Controller{
 
 		// Province event handling
 		mapView.setOnMouseMoved(provinceToMouseEventHandler((e, provinceName) -> {
-//			int id = provinceFeatureMap.get(provinceName).getId();
-//			if(overlays[PATTERN_LAYER].getGraphics().) {
-//				
-//			}
+			int pfid = provinceFeatureMap.get(provinceName).getId();
+			Symbol symb = overlays[PATTERN_LAYER].getGraphics().get(pfid).getSymbol();
+			if(CAN_MOVE_SYMBOL.equals(symb)) {
+				setUniqueMarker(uniqueHoverMarker, provinceName, MOVE_ICON);
+			}
+			if(CAN_ATTACK_SYMBOL.equals(symb)) {
+				setUniqueMarker(uniqueHoverMarker, provinceName, ATTACK_ICON);
+			}
 		}));
 		mapView.setOnMouseClicked(provinceToMouseEventHandler((e, provinceName)->{
 			// TODO : Sets patterns for testing only
@@ -453,6 +460,11 @@ public class MapController extends Controller{
     ListProperty<Unit> getUnitSelectionProperty() {
     	return unitSelection;
     }
+ 
+    void attachProvinceSelectedObserver(Observer<ProvinceFeatureInfo> o) {
+    	triggerProvinceSelected.attach(o);
+    }
+    
 	
 	private void debugActions(KeyEvent e) {
 		switch(e.getCharacter()) {

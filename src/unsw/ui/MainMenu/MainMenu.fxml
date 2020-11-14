@@ -7,8 +7,8 @@
 
 <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.MainMenu.MainMenuController">
    <children>
-      <ImageView fx:id="mainpicture" fitHeight="400.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="203.0" AnchorPane.rightAnchor="0.0">
+      <ImageView fx:id="mainpicture" fitHeight="400.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0" />
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="203.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="sidepicture" fitHeight="226.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="newGame" mnemonicParsing="false" onAction="#newGame" text="New Game" />

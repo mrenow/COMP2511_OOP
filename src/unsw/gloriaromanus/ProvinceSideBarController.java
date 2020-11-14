@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -65,7 +66,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
     public ProvinceSideBarController(GameController game) {
         this.game = game;
-        GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/ProvinceSideBarTest.fxml");
+        GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
         game.attatchTrainingChangedObserver(this::updateTrainingList);
         game.attatchUnitsChangedObserver(this::updateUnitList);
         game.attatchProvinceChangedObserver(this::updateProvinceInfo);
@@ -97,10 +98,11 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     // Handles button to move to allied province or attack enemy province
     @FXML
     public void handleMove(ActionEvent e) {
-        String u = provinceUnitCB.getValue().toString();
+        //String u = provinceUnitCB.getValue().toString();
         ArrayList<Unit> copy = new ArrayList<Unit>(unitsProvinceListView.getSelectionModel().getSelectedItems());
         if (game.getDestinations(copy).contains(targetProvince)) {
             // Call move method
+            System.out.println("IM HERE");
             game.move(copy, targetProvince);
         }
         else if (game.getAttackable(copy).contains(targetProvince)) {
@@ -186,9 +188,10 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             setTaxLevel(initialProvince.getTaxLevel());
             // Update province choicebox accordingly with units
             if (!initialProvince.getUnits().isEmpty() || initialProvince.getUnits() != null) {
-                provinceUnitCB.getItems().add("All Units");
+                //provinceUnitCB.getItems().add("All Units");
                 for (Unit u : initialProvince.getUnits()) {
-                    provinceUnitCB.getItems().add(u.getName());
+                    //provinceUnitCB.getItems().add(u.getName());
+                    unitsProvinceListView.getItems().add(u);
                 }
             }
             else {
@@ -237,6 +240,9 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         taxChoiceBox.getItems().add("Normal Tax");
         taxChoiceBox.getItems().add("High Tax");
         taxChoiceBox.getItems().add("Very High Tax");
+
+        // Set selection mode for listview in action province list to multiple
+        unitsProvinceListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
     }
 
