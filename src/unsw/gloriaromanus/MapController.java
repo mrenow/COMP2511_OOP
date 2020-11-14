@@ -450,10 +450,10 @@ public class MapController extends Controller{
 			clearGraphicLayer(PATTERN_LAYER);
 			break;
 		case "d":
-			BattlePaneController c = new BattlePaneController(game, List.of(Unit.newUnit(ItemType.CHARIOTS, 1, provinceFeatureMap.get("V").getProvince())), provinceFeatureMap.get("I").getProvince());
+			BattlePaneController c = new BattlePaneController(game, List.of(Unit.newUnit(ItemType.HEAVY_CAVALRY, 1, provinceFeatureMap.get("V").getProvince())), provinceFeatureMap.get("I").getProvince());
 
 			Pane root = (Pane)GloriaRomanusApplication.app.getSceneRoot();
-			root.getChildren().add(1, c.getRoot());
+			root.getChildren().add(c.getRoot());
 		}
 		
 	}

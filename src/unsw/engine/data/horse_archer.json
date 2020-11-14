@@ -19,5 +19,7 @@
 	"attack" : 3,
 	
 	"combatModifiers" : "CANTABRIAN_CIRCLE",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Horse/Horse_Archer/Horse_Archer_NB.png"
 }

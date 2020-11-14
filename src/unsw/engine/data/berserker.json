@@ -20,5 +20,7 @@
 	"attack" : 6,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Swordsman/Swordsman_NB.png"
 }

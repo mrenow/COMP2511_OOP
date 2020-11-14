@@ -113,7 +113,11 @@ public class Battle {
 				// setupengagement data for unit
 	
 				// create skirmish
-				runSkirmish(pickUnit(ATTACK), pickUnit(DEFEND));
+				Unit attUnit = pickUnit(ATTACK);
+				Unit defUnit = pickUnit(DEFEND);
+				info.beginSkirmish(attUnit, defUnit);
+				runSkirmish(attUnit, defUnit);
+				info.finishSkirmish();
 				
 				// checkresult and do other stuff
 				//
@@ -226,10 +230,12 @@ public class Battle {
 			logger.log("Attacker", attackUnit.getType(), attackUnit.statRep());
 			logger.log("Defender", defendUnit.getType(), defendUnit.statRep());
 		// Begin engagement
+		
 		while (tryEngagement()) {
 			
 			logger.log("Engagement", numEngagements);
 			logger.into();
+			
 			int attOldHealth = attackUnit.getHealth();
 			int defOldHealth = defendUnit.getHealth();
 
@@ -257,7 +263,6 @@ public class Battle {
 			if(!(attackUnit.isAlive() && defendUnit.isAlive())) {
 				logger.out();
 				logger.log("Skirmish end");
-				info.addSkirmish(attackUnit, defendUnit);
 				break;
 			}
 	
@@ -312,7 +317,6 @@ public class Battle {
 				logger.log("Skirmish end");
 				route(attackUnit, ATTACK);
 				route(defendUnit, DEFEND);
-				info.addSkirmish(attackUnit, SkirmishResult.ROUTED, defendUnit, SkirmishResult.ROUTED);
 
 				logger.out();
 				return;
@@ -322,12 +326,6 @@ public class Battle {
 				runBreaking(defendUnit, attackUnit, DEFEND);	// RANDOM (MANY)
 				logger.log("Skirmish end");
 				
-				if(attackUnit.isAlive()) {
-					info.addSkirmish(attackUnit, SkirmishResult.ROUTED, defendUnit, SkirmishResult.WON);
-				}else {
-					info.addSkirmish(attackUnit, SkirmishResult.KILLED, defendUnit, SkirmishResult.WON);	
-				}
-
 				logger.out();
 				return;
 			} else if (defBreaks) {
@@ -335,18 +333,11 @@ public class Battle {
 				logger.log("Defender", defendUnit.getType(), "Breaks");
 				runBreaking(attackUnit, defendUnit, ATTACK);	// RANDOM (MANY)
 				logger.log("Skirmish end");
-				
-				if(defendUnit.isAlive()) {
-					info.addSkirmish(attackUnit, SkirmishResult.WON, defendUnit, SkirmishResult.ROUTED);
-				}else {
-					info.addSkirmish(attackUnit, SkirmishResult.WON, defendUnit, SkirmishResult.KILLED);	
-				}
 
 				logger.out();
 				return;
 			}
 			logger.out();
-			info.addSkirmish(attackUnit, defendUnit);
 			return;
 		}
 		// Skirmish end
@@ -415,15 +406,18 @@ public class Battle {
 		// Not to mention uprooting the old system
 		// And am I a better person for it?
 		// The worst part is I may never know.
-
-		if(aggressor.getType() == ItemType.ELEPHANTS && GlobalRandom.nextUniform() < 0.1 && armies.get(aggressorSide).size() > 1){ // RANDOM (ONCE)
+		boolean elephantsAmok = aggressor.getType() == ItemType.ELEPHANTS &&
+				GlobalRandom.nextUniform() < 0.1 &&
+				armies.get(aggressorSide).size() > 1;
+		if(elephantsAmok){ // RANDOM (ONCE)
     		// Ensuring that dumb elephant does not attack itself
 			// (As much as I would like it to)
 			// This is fine right?
 			do {
     			victim = pickUnit(aggressorSide);
     		}while(Objects.equals(victim,aggressor));
-
+			// initiate subskirmish
+			info.beginSkirmish(aggressor, victim);
 			logger.log("Elephants amok with " + victim.getType());
     	}
 		// Create CombatData
@@ -476,7 +470,11 @@ public class Battle {
 		victim.damage(casualties);
 		addNumCasualties(aggressorSide.other(), oldHealth-victim.getHealth());
 		logger.log("Casualties: ", oldHealth + "->" +  victim.getHealth());
-		
+		// will be overwritten by kill if needed
+		if(elephantsAmok) {
+			info.setSkirmishResult(aggressorSide.other(), SkirmishResult.ROUTED);
+			info.finishSkirmish();
+		}
 		if(!victim.isAlive()) {
 			kill(victim, aggressorSide.other());
 		}
@@ -498,12 +496,14 @@ public class Battle {
 	private void kill(Unit u, BattleSide side) {
 		logger.log("Victim", u.getType(), "dies");
 		info.addCasualties(side, u);
+		info.setSkirmishResult(side, SkirmishResult.DIED);
 		armies.get(side).remove(u);
 	}
 	private void route(Unit u, BattleSide side) {
 		logger.log(u.getType(), "Routes");
 		routedUnits.get(side).add(u);
 		armies.get(side).remove(u);
+		info.setSkirmishResult(side, SkirmishResult.ROUTED);
 	}
 	/**
 	 * Uses the given parameters (and RNG) to decide whether an engagement is ranged, and 

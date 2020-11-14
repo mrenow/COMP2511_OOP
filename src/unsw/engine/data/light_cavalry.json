@@ -20,5 +20,7 @@
 	"charge" : 3,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Horse/Horse_Alone/Horse_NB.png"
 }

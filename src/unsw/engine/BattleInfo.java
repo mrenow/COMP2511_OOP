@@ -15,17 +15,29 @@ public class BattleInfo {
 	private BattleResult result;
 	private List<SkirmishInfo> skirmishes = new ArrayList<SkirmishInfo>();
 	private Map<BattleSide, List<Unit>> casualties = new EnumMap<>(BattleSide.class);
+	private int skirmishIndex = 0;
 	public BattleInfo() {
 		casualties.put(ATTACK, new ArrayList<>());
 		casualties.put(DEFEND, new ArrayList<>());
 	}
-	public void addSkirmish(Unit ua, SkirmishResult ra, Unit ud, SkirmishResult rd) {
-		skirmishes.add(new SkirmishInfo(ua, ra, ud, rd));
+	// inserts a skirmish before the currently active one
+	public void beginSkirmish(Unit att, Unit def) {
+		skirmishes.add(skirmishIndex, new SkirmishInfo(att, def));
 	}
-	public void addSkirmish(Unit ua, Unit ud) {
-		skirmishes.add(new SkirmishInfo(ua, ua.isAlive()? SkirmishResult.WON : SkirmishResult.KILLED,
-										ud, ud.isAlive()? SkirmishResult.WON : SkirmishResult.KILLED));
+	
+	public void setSkirmishResult(BattleSide side, SkirmishResult result) {
+		skirmishes.get(skirmishIndex).putResult(side, result);
 	}
+	// move on to next skirmish
+	public void finishSkirmish() {
+		skirmishes.get(skirmishIndex).finish();
+		skirmishIndex++;
+	}
+	
+	public void discardSkirmish() {
+		skirmishes.remove(skirmishIndex);
+	}
+	
 	
 	public void addCasualties(BattleSide side, Unit u) {
 		casualties.get(side).add(u);

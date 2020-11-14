@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<TitledPane alignment="CENTER" collapsible="false" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" text="Battle" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane fx:id="titlePane" alignment="CENTER" collapsible="false" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" text="Battle" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="649.0">
          <children>

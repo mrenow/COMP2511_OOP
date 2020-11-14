@@ -20,5 +20,7 @@
 	"seige" : 200,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : ""
+	"moraleModifiers" : "",
+	
+	"image" : "Trebuchet/Trebuchet_NB.png"
 }
