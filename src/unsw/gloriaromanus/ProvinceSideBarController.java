@@ -38,7 +38,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     private Province targetProvince;
     private List<Unit> unitList;
     
-    private ObservableList<Unit> unitSelection = new SimpleListProperty<>();
+    private ListProperty<Unit> unitSelection = new SimpleListProperty<>();
     
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
@@ -318,7 +318,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         trainChoiceBox.getItems().clear();
         trainTextField.clear();
     }
-    public void addUnitSelectionChangedListener(ListChangeListener<Unit> l) {
-    	unitSelection.addListener(l);
+    ListProperty<Unit> getUnitSelectionProperty() {
+    	return unitSelection;
     }
 }
