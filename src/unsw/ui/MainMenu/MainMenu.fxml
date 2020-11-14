@@ -5,15 +5,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.MainMenu.MainMenuController">
    <children>
       <VBox alignment="CENTER" layoutX="403.0" prefHeight="400.0" prefWidth="203.0">
          <children>
-            <ImageView fx:id="sidepicture" fitHeight="251.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="LocalGame" mnemonicParsing="false" onAction="#localGame" text="LocalGame" />
-            <Button mnemonicParsing="false" text="LocalNet" />
-            <Button mnemonicParsing="false" text="Online" />
+            <ImageView fx:id="sidepicture" fitHeight="226.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="newGame" mnemonicParsing="false" onAction="#newGame" text="New Game" />
+            <Button mnemonicParsing="false" text="Local Network" />
+            <Button mnemonicParsing="false" text="Online Game" />
+            <Button mnemonicParsing="false" onAction="#loadsave" text="Load Game" />
             <Button fx:id="Setting" mnemonicParsing="false" onAction="#setting" text="Setting" />
             <Button fx:id="quit" mnemonicParsing="false" onAction="#quit" text="Quit" />
          </children>

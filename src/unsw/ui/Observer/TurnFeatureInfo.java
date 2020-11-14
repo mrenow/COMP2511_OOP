@@ -1,4 +1,4 @@
-package unsw.ui.topbar;
+package unsw.ui.Observer;
 
 import unsw.engine.Faction;
 import unsw.engine.GameController;

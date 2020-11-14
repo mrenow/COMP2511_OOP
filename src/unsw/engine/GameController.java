@@ -19,12 +19,9 @@ import org.geojson.Point;
 
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
-import unsw.ui.Observer.Message;
-import unsw.ui.Observer.MsgObserver;
-import unsw.ui.Observer.MsgObserverable;
 import unsw.ui.Observer.Observable;
 import unsw.ui.Observer.Observer;
-import unsw.ui.topbar.TurnFeatureInfo;
+import unsw.ui.Observer.*;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;

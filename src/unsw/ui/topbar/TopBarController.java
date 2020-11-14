@@ -14,9 +14,8 @@ import javafx.scene.text.Text;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
-import unsw.ui.Observer.Message;
 import unsw.ui.Observer.Observer;
-import unsw.ui.topbar.TurnFeatureInfo;
+import unsw.ui.Observer.TurnFeatureInfo;
 import unsw.gloriaromanus.Controller;
 
 public class TopBarController extends Controller implements Observer<TurnFeatureInfo>{
@@ -51,7 +50,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     }
 
     @FXML
-    public void initialize(){
+    private void initialize() throws Exception {
         turninfo=new TurnFeatureInfo(game);
         year.setText(getYear());
         faction.setText(getFaction());
