@@ -101,7 +101,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     private void endTurnPressed(){
         if (this.game.endTurn()==null){
             //game continue
-            
+            System.out.println("endturn");
         }else{
             //game end
             //TODO new sceen
@@ -112,6 +112,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
         Double conquest = vic.getProgress(VictoryCondition.CONQUEST);
         Double treasury = vic.getProgress(VictoryCondition.TREASURY);
         Double wealth = vic.getProgress(VictoryCondition.WEALTH);
+        //System.out.println(conquest.toString()+" "+ treasury.toString()+" "+wealth.toString());//terminal debug progress
         p1.set(conquest);
         p2.set(treasury);
         p3.set(wealth);

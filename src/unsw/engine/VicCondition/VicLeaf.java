@@ -22,15 +22,19 @@ public class VicLeaf implements VicComponent{
     public boolean checkVic(){
         return (progress>=1.0)?(true):(false);
     }
-    void update(Double progress){
-        this.progress = progress;
+    @Override
+    public void update(VictoryCondition vc, Double progress){
+        if (vc.equals(this.goal)) {
+            this.progress=progress;
+        }
     }
 
     @Override
     public double getProgress(VictoryCondition vCondition) {
-        if (vCondition==goal) {
-            return progress;
-        }
-        return -1;
+        // if (vCondition.equals(goal)) {
+        //     return progress;
+        // }
+        // return -1;
+        return this.progress;
     }
 }

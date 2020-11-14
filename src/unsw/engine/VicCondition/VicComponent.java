@@ -16,4 +16,5 @@ public interface VicComponent {
 	VictoryCondition getGoal();
     boolean checkVic();
     double getProgress(VictoryCondition vCondition);
+    void update(VictoryCondition vc,Double progress);
 }

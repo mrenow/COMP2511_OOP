@@ -24,6 +24,7 @@ import unsw.ui.Observer.MsgObserver;
 import unsw.ui.Observer.MsgObserverable;
 import unsw.ui.Observer.Observable;
 import unsw.ui.Observer.Observer;
+import unsw.ui.topbar.TurnFeatureInfo;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -58,7 +59,7 @@ public class GameController {
 	
 	// Observable events
 	
-	@JsonIgnore private MsgObserverable triggerTurnChanged = new MsgObserverable();
+	@JsonIgnore private Observable<TurnFeatureInfo> triggerTurnChanged = new Observable<>();
 	@JsonIgnore private Observable<Province> triggerProvinceChanged = new Observable<>();
 	@JsonIgnore private Observable<Province> triggerTrainingChanged = new Observable<>();
 	@JsonIgnore private Observable<Province> triggerBuildingChanged = new Observable<>();
@@ -68,7 +69,7 @@ public class GameController {
 	/**
 	 * called on endTurn()
 	 */
-	public void attatchTurnChangedObserver(MsgObserver o) {
+	public void attatchTurnChangedObserver(Observer<TurnFeatureInfo> o) {
 		triggerTurnChanged.attach(o);
 	}
 	/**
@@ -444,8 +445,7 @@ public class GameController {
 				this.currentTurn = 0;	
 			}
 		}
-		Message m = new Message();
-		m.setGame(this);
+		TurnFeatureInfo m = new TurnFeatureInfo(this);
 		triggerTurnChanged.notifyUpdate(m);
 		return vic;
 	}
@@ -454,9 +454,19 @@ public class GameController {
 		VicComposite vic = faction.getVicComposite();
 		double ownpro = faction.getProvinces().size();
 		double allpro = this.getNumProvinces();
+		Integer gold = faction.getGold();
+		Integer wealth = faction.getTotalWealth();
+		//System.out.println(gold.toString()+"  " +wealth.toString());//test
 		vic.update(VictoryCondition.CONQUEST, ownpro/allpro);
-		vic.update(VictoryCondition.TREASURY, faction.getGold() /100000.0);
-		vic.update(VictoryCondition.WEALTH, faction.getTotalWealth()/400000.0);
+		vic.update(VictoryCondition.TREASURY, 
+		//0.5//test
+		gold.doubleValue()/100000.0
+		);
+		vic.update(VictoryCondition.WEALTH, 
+		wealth.doubleValue()/400000.0
+		//0.5//test
+		);
+		faction.setVicComposite(vic);
 	}
 //	returns non-null VictoryInfo if the player ending their turn has won.
 	public VicComposite checkVictory() {

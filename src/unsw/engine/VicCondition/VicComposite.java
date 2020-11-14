@@ -57,19 +57,29 @@ public class VicComposite implements VicComponent{
 
     public void update(VictoryCondition vCondition, Double progress){
         for (VicComponent vicComponent : subgoals) {
-            if (vicComponent.getGoal()==vCondition) {
-                VicLeaf vl =(VicLeaf)vicComponent;
-                vl.update(progress);
-            }
+            vicComponent.update(vCondition, progress);
         }
     }
 
     @Override
     public double getProgress(VictoryCondition vCondition) {
         for (VicComponent vicComponent : subgoals) {
-            if (vicComponent.getGoal()==vCondition) {
-                return vicComponent.getProgress(vCondition);
+            // if (vicComponent.getGoal().equals(vCondition)) {
+            //     return vicComponent.getProgress(vCondition);
+            // }
+            
+            switch (vicComponent.getGoal()) {
+                case OR:
+                    return vicComponent.getProgress(vCondition);
+                case AND:
+                    return vicComponent.getProgress(vCondition);
+                default:
+                    if (vicComponent.getGoal().equals(vCondition)) {
+                        return vicComponent.getProgress(vCondition);
+                    }
+                    break;
             }
+            
         }
         return -1;
     }

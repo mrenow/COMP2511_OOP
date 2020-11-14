@@ -1,4 +1,4 @@
-package unsw.ui;
+package unsw.ui.VicUI;
 
 import java.io.FileInputStream;
 
