@@ -78,12 +78,16 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             if (targetProvince.getOwner().equals(initialProvince.getOwner())) {
                 // Call move method
                 game.move(initialProvince.getUnits(), targetProvince);
+                // Clear selections because "All Units" moved
+                provinceUnitCB.getItems().clear();
             }
             // Else enemy province so invade
             else {
                 // Call invade method
-                game.invade(initialProvince, targetProvince);
-                //BattlePaneController b = new BattlePaneController(initialProvince, targetProvince);
+                //game.invade(initialProvince, targetProvince);
+                BattlePaneController b = new BattlePaneController(game, initialProvince.getUnits(), targetProvince);
+                // Clear selections because "All Units" attacked
+                provinceUnitCB.getItems().clear();
             }
         }
         // Else any other individual unit tag chosen
@@ -96,11 +100,15 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
                     if (targetProvince.getOwner().equals(initialProvince.getOwner())) {
                         // Call move method
                         game.move(unitList, targetProvince);
+                        // Remove selection from province CB
+                        provinceUnitCB.getItems().remove(unit.getName());
                     }
                     else {
                         // Call invade method
-                        game.invade(unitList, targetProvince);
-                        //BattlePaneController b = new BattlePaneController(unitList, targetProvince);
+                        //game.invade(unitList, targetProvince);
+                        BattlePaneController b = new BattlePaneController(game, unitList, targetProvince);
+                        // Remove selection from province CB
+                        provinceUnitCB.getItems().remove(unit.getName());
                     }
                 }
             }
@@ -157,10 +165,15 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
                     taxLevelField.setText("Very High Tax");
                     break;
             }
-            // Update units in province choicebox
-            provinceUnitCB.getItems().add("All Units");
-            for (Unit u : initialProvince.getUnits()) {
-                provinceUnitCB.getItems().add(u.getName());
+            // Update province choicebox accordingly with units
+            if (!initialProvince.getUnits().isEmpty() || initialProvince.getUnits() != null) {
+                provinceUnitCB.getItems().add("All Units");
+                for (Unit u : initialProvince.getUnits()) {
+                    provinceUnitCB.getItems().add(u.getName());
+                }
+            }
+            else {
+                System.out.println("There are no units currently in selected province.");
             }
             // Update units currently in training for that province in text area
             List<TrainingSlotEntry> copy = new ArrayList<>(initialProvince.getCurrentTraining());
