@@ -13,7 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.Pane;
 import unsw.engine.*;
 import unsw.ui.Observer.*;
 
@@ -56,7 +56,11 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
     public ProvinceSideBarController(GameController game) {
         this.game = game;
-		GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
+        GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
+        game.attatchTrainingChangedObserver(this::updateTrainingList);
+        game.attatchUnitsChangedObserver(this::updateUnitList);
+        game.attatchProvinceChangedObserver(this::updateProvinceInfo);
+        game.attatchTurnChangedObserver(this::refresh);
     }
 
     // Handles button to train units in that province
@@ -65,10 +69,10 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         trainTextField.setText(trainChoiceBox.getValue());
         // Call train method
         for (ItemType u : initialProvince.getTrainable()) {
-            if (trainChoiceBox.getValue().toString() == u.getName(1));
-            game.trainUnit(initialProvince, u);
+            if (trainChoiceBox.getValue().toString() == u.getName(1)) {
+                game.trainUnit(initialProvince, u);
+            }
         }
-        
     }
     
     // Handles button to move to allied province or attack enemy province
@@ -77,20 +81,15 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         String u = provinceUnitCB.getValue().toString();
         // If "All Units" tag chosen
         if (u == "All Units") {
-            // If target province is player's own province
-            if (targetProvince.getOwner().equals(initialProvince.getOwner())) {
+            if (game.getDestinations(initialProvince.getUnits()).contains(targetProvince)) {
                 // Call move method
                 game.move(initialProvince.getUnits(), targetProvince);
-                // Clear selections because "All Units" moved
-                provinceUnitCB.getItems().clear();
             }
             // Else enemy province so invade
-            else {
-                // Call invade method
-                //game.invade(initialProvince, targetProvince);
+            else if (game.getAttackable(initialProvince.getUnits()).contains(targetProvince)) {
+                // Pass info needed for invation to BattlePaneController
                 BattlePaneController b = new BattlePaneController(game, initialProvince.getUnits(), targetProvince);
-                // Clear selections because "All Units" attacked
-                provinceUnitCB.getItems().clear();
+                addToApp(b);
             }
         }
         // Else any other individual unit tag chosen
@@ -100,18 +99,15 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
                     unitList = new ArrayList<Unit>();
                     unitList.add(unit);
                     // Handle move or attack
-                    if (targetProvince.getOwner().equals(initialProvince.getOwner())) {
+                    if (game.getDestinations(unitList).contains(targetProvince)) {
                         // Call move method
                         game.move(unitList, targetProvince);
-                        // Remove selection from province CB
-                        provinceUnitCB.getItems().remove(unit.getName());
                     }
-                    else {
-                        // Call invade method
-                        //game.invade(unitList, targetProvince);
+                    else if (game.getAttackable(unitList).contains(targetProvince)) {
+                        // Pass info needed for invation to BattlePaneController
                         BattlePaneController b = new BattlePaneController(game, unitList, targetProvince);
-                        // Remove selection from province CB
-                        provinceUnitCB.getItems().remove(unit.getName());
+                        addToApp(b);
+                        break;
                     }
                 }
             }
@@ -145,6 +141,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     public void handleSelectProvince(ActionEvent e) {
         // Clears the province unit choice box every time handle event is called
         provinceUnitCB.getItems().clear();
+        trainChoiceBox.getItems().clear();
         if (!province.getOwner().equals(game.getCurrentTurn())) {
             app.displayText("Action province must be your own province.");
         }
@@ -154,20 +151,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             // Update wealth and tax info
             wealthField.setText(Integer.toString(initialProvince.getWealth()));
             taxField.setText(Double.toString(initialProvince.getTaxLevel().getTaxRate()));
-            switch(initialProvince.getTaxLevel()) {
-                case LOW_TAX:
-                    taxLevelField.setText("Low Tax");
-                    break;
-                case NORMAL_TAX:
-                    taxLevelField.setText("Normal Tax");
-                    break;
-                case HIGH_TAX:
-                    taxLevelField.setText("High Tax");
-                    break;
-                case VERY_HIGH_TAX:
-                    taxLevelField.setText("Very High Tax");
-                    break;
-            }
+            setTaxLevel(initialProvince.getTaxLevel());
             // Update province choicebox accordingly with units
             if (!initialProvince.getUnits().isEmpty() || initialProvince.getUnits() != null) {
                 provinceUnitCB.getItems().add("All Units");
@@ -238,4 +222,73 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         }
     }
 
+    // Update province unit choicebox which deals with move/invade
+    private void updateUnitList(Province p) {
+        provinceUnitCB.getItems().clear();
+        if (p.getUnits() == null || p.getUnits().isEmpty()) {
+            app.displayText("No more active units in province");
+        }
+        else {
+            provinceUnitCB.getItems().add("All Units");
+            for (Unit u : p.getUnits()) {
+                provinceUnitCB.getItems().add(u.getName());
+            }
+        }
+    }
+
+    // Updates list of units in training
+    private void updateTrainingList(Province p) {
+        unitsInTraining.clear();
+        for (TrainingSlotEntry u : p.getCurrentTraining()) {
+            unitsInTraining.appendText(u.getType().getName(1) + "\n");
+        }
+    }
+
+    // Updates tax/wealth info
+    private void updateProvinceInfo(Province p) {
+        wealthField.clear();
+        wealthField.setText(Integer.toString(p.getWealth()));
+        taxLevelField.clear();
+        setTaxLevel(p.getTaxLevel());
+        taxField.clear();
+        taxField.setText(Double.toString(p.getTaxLevel().getTaxRate()));
+    }
+
+    // Calls the BattlePane
+    private void addToApp(BattlePaneController b) {
+        Pane root = (Pane)GloriaRomanusApplication.app.getSceneRoot();
+        root.getChildren().add(b.getRoot());
+    }
+
+    private void setTaxLevel(TaxLevel t) {
+        switch(t) {
+            case LOW_TAX:
+                taxLevelField.setText("Low Tax");
+                break;
+            case NORMAL_TAX:
+                taxLevelField.setText("Normal Tax");
+                break;
+            case HIGH_TAX:
+                taxLevelField.setText("High Tax");
+                break;
+            case VERY_HIGH_TAX:
+                taxLevelField.setText("Very High Tax");
+                break;
+        }
+    }
+
+    // Clear all fields when turn ends
+    private void refresh(TurnFeatureInfo o) {
+        selected_province.clear();
+        selectedProvinceUnitsList.clear();
+        action_province.clear();
+        wealthField.clear();
+        taxLevelField.clear();
+        taxField.clear();
+        target_province.clear();
+        provinceUnitCB.getItems().clear();
+        unitsInTraining.clear();
+        trainChoiceBox.getItems().clear();
+        trainTextField.clear();
+    }
 }
