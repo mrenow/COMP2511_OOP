@@ -19,12 +19,12 @@ import unsw.ui.Observer.MenuInfo;
 import unsw.ui.Observer.Observer;
 
 public class LoadSaveController extends Controller implements Observer<MenuInfo>{
-    @FXML
-    private ListView<String> list = new ListView<String>();
+    
     @FXML
     private TextField filename;
+    @FXML
+    private ListView<String> list = new ListView<String>();
     private GameData gameData = new GameData();
-    private List<String> strings = new ArrayList<>();
     private ObservableList<String> name;
     private String selectFile;
     @FXML
