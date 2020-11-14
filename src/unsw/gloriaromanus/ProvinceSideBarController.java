@@ -285,7 +285,6 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         targetProvince.setValue(null);
         selectedProvince.setValue(null);
         actionProvince.setValue(null);
-        ((ListCell)unitsProvinceListView.getChildrenUnmodifiable().get(unitsProvinceListView.getItems().size()-1))
     }
 
     private ListCell<Unit> checkLast() {
