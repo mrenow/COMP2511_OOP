@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 import unsw.engine.*;
 import unsw.engine.VicCondition.*;
 import unsw.ui.topbar.TopBarController;
-import unsw.ui.VicUIController;
+import unsw.ui.VicUI.VicUIController;
 import unsw.ui.Observer.MsgObserverable;
 
 
@@ -22,10 +22,8 @@ public class GloriaRomanusController extends Controller{
 	private GameController game;
 	private MapController mapController;
 	private VicUIController vicUIController;
-	private MsgObserverable turnChangedObservable = new MsgObserverable();
 	private ProvinceSideBarController sideController;
 	
-	private MsgObserverable turnchange = new MsgObserverable();
 
 	private TopBarController topbar;
 	
@@ -62,6 +60,8 @@ public class GloriaRomanusController extends Controller{
 		((Pane)getRoot()).getChildren().add(2, topbar.getRoot());
 		StackPane.setAlignment(topbar.getRoot(), Pos.TOP_CENTER);
 		
+
+		game.attatchTurnChangedObserver(topbar);
 		//these two should be inside main
 		VicComposite vic = generateVic();
 		game.setVic(vic);
