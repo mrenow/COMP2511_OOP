@@ -1,8 +1,6 @@
 package unsw.ui.MainMenu;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
 import unsw.ui.UIPath;
