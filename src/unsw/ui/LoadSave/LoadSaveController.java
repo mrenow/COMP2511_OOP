@@ -24,11 +24,19 @@ public class LoadSaveController extends Controller implements Observer<MenuInfo>
 
     @FXML
 	public void initialize() {
-        for (int i = 0; i < 20; i++) {
-            buttons.add(new Text(Integer.toString(i)));
-        }
-        ObservableList<Text> items = FXCollections.observableList(buttons);
-        list.setItems(items);
+        
+    }
+    @FXML
+    public void load(){
+
+    }
+    @FXML
+    public void save(){
+
+    }
+    @FXML
+    public void delete(){
+
     }
     @FXML
     public void quit(){
