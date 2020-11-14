@@ -312,7 +312,7 @@ public class Unit implements Comparable<Unit>{
 	}
 	
 	public String toString() {
-		return String.format("(%s : %d)", type, health);
+		return getName() + "\t\t" + health + "❤";
 	}
 	/**
 	 * Provinces are the only things that track units.

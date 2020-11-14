@@ -79,8 +79,8 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox fx:id="provinceUnitCB" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
-                              <Button fx:id="moveBtn" layoutX="28.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" />
+                              <Button fx:id="moveBtn" layoutX="28.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <ListView fx:id="unitsProvinceListView" layoutX="18.6" layoutY="19.6" prefHeight="86.0" prefWidth="255.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                   </content>
