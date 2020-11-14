@@ -38,8 +38,6 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     private Province targetProvince;
     private List<Unit> unitList;
     
-    private ListProperty<Unit> unitSelection = new SimpleListProperty<>();
-    
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
     @FXML private ChoiceBox<String> taxChoiceBox;
@@ -101,7 +99,16 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     public void handleMove(ActionEvent e) {
         String u = provinceUnitCB.getValue().toString();
         ArrayList<Unit> copy = new ArrayList<Unit>(unitsProvinceListView.getSelectionModel().getSelectedItems());
-
+        if (game.getDestinations(copy).contains(targetProvince)) {
+            // Call move method
+            game.move(copy, targetProvince);
+        }
+        else if (game.getAttackable(copy).contains(targetProvince)) {
+            // Pass info needed for invation to BattlePaneController
+            BattlePaneController b = new BattlePaneController(game, copy, targetProvince);
+            addToApp(b);
+        }
+        /*
         // If "All Units" tag chosen
         if (u == "All Units") {
             if (game.getDestinations(initialProvince.getUnits()).contains(targetProvince)) {
@@ -135,6 +142,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
                 }
             }
         }
+        */
     }
 
     // Handles changing of tax level
@@ -325,7 +333,8 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         trainChoiceBox.getItems().clear();
         trainTextField.clear();
     }
+
     ListProperty<Unit> getUnitSelectionProperty() {
-    	return unitSelection;
+    	return new SimpleListProperty<>(unitsProvinceListView.getSelectionModel().getSelectedItems());
     }
 }
