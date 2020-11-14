@@ -22,6 +22,7 @@ public class Controller {
 	}
 	
 	// Only if parent allows
+	@FXML
 	void destroy() {
 		// Cast error on this line means that root does not support modifying children
 		((Pane)root.getParent()).getChildren().remove(this.root);

@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -346,6 +347,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         targetProvince.setValue(null);
         selectedProvince.setValue(null);
         actionProvince.setValue(null);
+        ((ListCell)unitsProvinceListView.getChildrenUnmodifiable().get(unitsProvinceListView.getItems().size()-1))
     }
 
     ListProperty<Unit> getUnitSelectionProperty() {

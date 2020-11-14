@@ -384,6 +384,8 @@ public class GameController {
 		Unit.expendMovement(attackers); // could get the province's updated list, but like ceebs, it shouldnt break anything
 		triggerUnitsChanged.notifyUpdate(attacker);
 		triggerUnitsChanged.notifyUpdate(defender);
+		triggerProvinceChanged.notifyUpdate(attacker);
+		triggerProvinceChanged.notifyUpdate(defender);
 		triggerBattleEnd.notifyUpdate(info);
 		return info;
 	}
@@ -449,6 +451,8 @@ public class GameController {
 		Unit.expendMovement(unitGroup, movCost);
 		triggerUnitsChanged.notifyUpdate(start);
 		triggerUnitsChanged.notifyUpdate(destination);
+		triggerProvinceChanged.notifyUpdate(start);
+		triggerProvinceChanged.notifyUpdate(destination);
 	}
 	
 	/**

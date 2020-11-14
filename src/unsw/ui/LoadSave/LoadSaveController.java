@@ -19,7 +19,8 @@ import unsw.ui.Observer.MenuInfo;
 import unsw.ui.Observer.Observer;
 
 public class LoadSaveController extends Controller implements Observer<MenuInfo>{
-    
+    public static String SAVE_PATH = "saves/";
+
     @FXML
     private TextField filename;
     @FXML
