@@ -13,11 +13,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import unsw.engine.*;
 import unsw.ui.Observer.*;
-import unsw.ui.topbar.TurnFeatureInfo;
 
 import static unsw.gloriaromanus.GloriaRomanusApplication.app;;
 
