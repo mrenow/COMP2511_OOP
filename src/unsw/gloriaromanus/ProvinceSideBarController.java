@@ -6,6 +6,10 @@ import java.util.ResourceBundle.Control;
 
 import com.esri.arcgisruntime.internal.io.handler.request.ServerContextConcurrentHashMap.HashMapChangedEvent.Action;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,6 +34,8 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     private Province initialProvince;
     private Province targetProvince;
     private List<Unit> unitList;
+    
+    private ObservableList<Unit> unitSelection = new SimpleListProperty<>();
     
     @FXML private ChoiceBox<String> provinceUnitCB;
     @FXML private ChoiceBox<String> trainChoiceBox;
@@ -290,5 +296,8 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         unitsInTraining.clear();
         trainChoiceBox.getItems().clear();
         trainTextField.clear();
+    }
+    public void addUnitSelectionChangedListener(ListChangeListener<Unit> l) {
+    	unitSelection.addListener(l);
     }
 }

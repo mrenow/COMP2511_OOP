@@ -49,6 +49,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -80,6 +83,8 @@ public class MapController extends Controller{
 	private Map<String, ProvinceFeatureInfo> provinceFeatureMap = new HashMap<>();
 	
 	private Observable<ProvinceFeatureInfo> triggerProvinceSelected = new Observable<ProvinceFeatureInfo>();
+	
+	private ListProperty<Unit> unitSelection = new SimpleListProperty<Unit>();
 
 	// Symbols
 	private Map<FactionType, Symbol> factionSymbolMap = new EnumMap<>(FactionType.class);
@@ -434,6 +439,7 @@ public class MapController extends Controller{
 			mapView.dispose();
 		}
 	}
+	
 	public void attachProvinceSelectedObserver(Observer<ProvinceFeatureInfo> o) {
 		triggerProvinceSelected.attach(o);
 	}
