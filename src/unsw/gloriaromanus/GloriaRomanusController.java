@@ -1,7 +1,10 @@
 package unsw.gloriaromanus;
 
 import java.io.FileInputStream;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -25,6 +28,7 @@ public class GloriaRomanusController extends Controller{
 	private MapController mapController;
 	private VicUIController vicUIController;
 	private ProvinceSideBarController sideController;
+	private Map<FactionType, Integer> factionColourMap = new EnumMap<>(FactionType.class); // TODO integrate colours into faction map
 
 	private TopBarController topBar;
 	
