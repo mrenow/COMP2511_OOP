@@ -40,8 +40,6 @@ public class GloriaRomanusController extends Controller{
 	@FXML
 	private void initialize() throws Exception {
 
-		VicComposite vic = generateVic();
-		game.setVic(vic);
 		
 		VBox bottomPane = new VBox();
 		HBox lowerBox = new HBox();
@@ -62,26 +60,6 @@ public class GloriaRomanusController extends Controller{
 		VBox.setVgrow(lowerBox, Priority.ALWAYS);
 		bottomPane.getChildren().add(lowerBox);
 		((StackPane) root).getChildren().add(bottomPane);
-	}
-
-	/**
-	 * this should belong to main menu feature
-	 * and we dont have main menu yet so just put here for later implement
-	 * @return
-	 */
-	private VicComposite generateVic(){
-		VicLeaf l1 = new VicLeaf(VictoryCondition.CONQUEST);
-		VicLeaf l2 = new VicLeaf(VictoryCondition.WEALTH);
-		VicLeaf l3 = new VicLeaf(VictoryCondition.TREASURY);
-		VicComposite vic1 = new VicComposite(VictoryCondition.AND);
-		VicComposite vic2 = new VicComposite(VictoryCondition.OR);
-
-		vic2.addSubVic(l2);
-		vic2.addSubVic(l3);
-		vic1.addSubVic(l1);
-		vic1.addSubVic(vic2);
-		System.out.println(vic1);
-		return vic1;
 	}
 
 
