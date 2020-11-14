@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import unsw.gloriaromanus.Controller;
+import unsw.gloriaromanus.GloriaRomanusApplication;
 import unsw.ui.Observer.Observer;
 import unsw.ui.Observer.MenuInfo;
 
@@ -30,7 +31,13 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     }
     @FXML
     public void play(){
-
+        try {
+            Controller controller = GloriaRomanusApplication.loadController("src/unsw/gloriaromanus/main.fxml");
+            GloriaRomanusApplication.app.setScene(controller);
+        } catch (Exception e) {
+            System.out.println("fild DNE");
+        }
+        
     }
     @FXML
     public void quit(){

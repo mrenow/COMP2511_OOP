@@ -9,7 +9,7 @@ import unsw.ui.Observer.Observer;
 import unsw.ui.Observer.TurnFeatureInfo;
 
 public class MainMenuController extends Controller implements Observer<TurnFeatureInfo>{
-    @FXML private Button newGame;
+    
     
     private void initialize() throws Exception {
 
@@ -17,15 +17,22 @@ public class MainMenuController extends Controller implements Observer<TurnFeatu
 
     @FXML
     public void newGame()throws Exception{
-        Controller mainMenu = GloriaRomanusApplication.loadController("src/unsw/ui/MainMenu/MainMenu.fxml");
-        System.out.println("here");
-        GloriaRomanusApplication.app.setScene(mainMenu);;
-        
+        try {
+            Controller controller = GloriaRomanusApplication.loadController("src/unsw/ui/GameSetting/GameSetting.fxml");
+            GloriaRomanusApplication.app.setScene(controller);
+        } catch (Exception e) {
+            System.out.println("setting fild DNE");
+        }
     
     }
     @FXML
     public void loadsave(){
-
+        try {
+            Controller controller = GloriaRomanusApplication.loadController("src/unsw/ui/LoadSave/LoadSave.fxml");
+            GloriaRomanusApplication.app.setScene(controller);
+        } catch (Exception e) {
+            System.out.println("setting fild DNE");
+        }
     }
     @FXML
     public void setting(){

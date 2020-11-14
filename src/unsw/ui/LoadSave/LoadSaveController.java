@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Text;
 import unsw.gloriaromanus.Controller;
+import unsw.gloriaromanus.GloriaRomanusApplication;
 import unsw.ui.Observer.MenuInfo;
 import unsw.ui.Observer.Observer;
 
@@ -27,6 +28,15 @@ public class LoadSaveController extends Controller implements Observer<MenuInfo>
         }
         ObservableList<Text> items = FXCollections.observableList(buttons);
         list.setItems(items);
+    }
+    @FXML
+    public void quit(){
+        try {
+            Controller controller = GloriaRomanusApplication.loadController("src/unsw/ui/MainMenu/Menu.fxml");
+            GloriaRomanusApplication.app.setScene(controller);
+        } catch (Exception e) {
+            System.out.println("setting fild DNE");
+        }
     }
     @Override
     public void update(MenuInfo message) {};
