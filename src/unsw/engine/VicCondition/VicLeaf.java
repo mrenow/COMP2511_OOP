@@ -41,4 +41,9 @@ public class VicLeaf implements VicComponent{
     public String toString() {
     	return goal.toString();
     }
+	@Override
+	public double getMainProgress() {
+		
+		return progress;
+	}
 }

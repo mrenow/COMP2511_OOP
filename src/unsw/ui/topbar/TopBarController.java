@@ -11,6 +11,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import unsw.engine.GameController;
+import unsw.engine.VicCondition.VicComponent;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
 import unsw.ui.UIPath;
@@ -25,7 +26,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
 
     @FXML
     private HBox topbar;
-    private VicComposite vicinfo;
+    private VicComponent vicinfo;
     
 
     @FXML private Label yearLabel;
@@ -103,7 +104,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
         }
     }
 
-    private void progressVicInfo(VicComposite vic){
+    private void progressVicInfo(VicComponent vic){
         Double conquest = vic.getProgress(VictoryCondition.CONQUEST);
         Double treasury = vic.getProgress(VictoryCondition.TREASURY);
         Double wealth = vic.getProgress(VictoryCondition.WEALTH);
@@ -123,7 +124,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
 
         goldLabel.setText(getgold() + " Gold");
 
-        vicinfo = game.getCurrentTurn().getVicComposite();
+        vicinfo = game.getCurrentTurn().getVicComponent();
         goalLabel.setText("Goal: " + vicinfo.toString());
         
         progressVicInfo(vicinfo);

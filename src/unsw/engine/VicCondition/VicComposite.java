@@ -64,70 +64,43 @@ public class VicComposite implements VicComponent{
 
     @Override
     public double getProgress(VictoryCondition vCondition) {
-        for (VicComponent vicComponent : subgoals) {
-            // if (vicComponent.getGoal().equals(vCondition)) {
-            //     return vicComponent.getProgress(vCondition);
-            // }
+        double out;
+    	for (VicComponent vicComponent : subgoals) {
             
             switch (vicComponent.getGoal()) {
                 case OR:
-                    return vicComponent.getProgress(vCondition);
                 case AND:
-                    return vicComponent.getProgress(vCondition);
+                    out = vicComponent.getProgress(vCondition);
+                    if(out >= 0) {
+                    	// found relevant condition
+                    	return out;
+                    }else {
+                    	continue;
+                    }
                 default:
                     if (vicComponent.getGoal().equals(vCondition)) {
                         return vicComponent.getProgress(vCondition);
                     }
-                    break;
+                    continue;
             }
             
         }
         return -1;
     }
-    public Double getMainProgress(){
+    @Override
+    public double getMainProgress(){
         Double prog = 0.0;
-        VicComposite temp;
-        Double max = 0.0;
-        switch (goal) {
-            case AND:
-                for (VicComponent vicComponent : subgoals) {
-                    switch (vicComponent.getGoal()) {
-                        case AND:
-                            temp = (VicComposite)vicComponent;
-                            prog += temp.getMainProgress();
-                            break;
-                        case OR:
-                            temp = (VicComposite)vicComponent;
-                            max = Double.max(max, temp.getMainProgress());
-                            break;
-                        
-                        default:
-                            prog += 0.5*vicComponent.getProgress(vicComponent.getGoal());
-                            break;
-                    }
-                }
-                prog += max*0.5;
-                break;
-            case OR:
-                for (VicComponent vicComponent : subgoals) {
-                    switch (vicComponent.getGoal()) {
-                        case AND:
-                            temp = (VicComposite)vicComponent;
-                            prog += temp.getMainProgress();
-                            break;
-                        case OR:
-                            temp = (VicComposite)vicComponent;
-                            max = Double.max(max, temp.getMainProgress());
-                            break;
-                        default:
-                            vicComponent.getProgress(vicComponent.getGoal());
-                            break;
-                    }
-                }
-                prog += max*0.5;
-                break;
-            default:
-                break;
+        for (VicComponent vicComponent : subgoals) {
+	        switch (goal) {
+	            case AND:
+	                prog += vicComponent.getMainProgress()/2;
+	                continue;
+	            case OR:
+	                prog = Double.max(prog, vicComponent.getMainProgress());
+	                continue;
+	            default:
+	                return -1; // should not run!!
+	        }
         }
         return prog;
     }

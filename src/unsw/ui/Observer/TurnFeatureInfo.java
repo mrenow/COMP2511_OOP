@@ -2,6 +2,7 @@ package unsw.ui.Observer;
 
 import unsw.engine.Faction;
 import unsw.engine.GameController;
+import unsw.engine.VicCondition.VicComponent;
 import unsw.engine.VicCondition.VicComposite;
 
 public class TurnFeatureInfo{
@@ -30,7 +31,7 @@ public class TurnFeatureInfo{
     public String getGold() {
         return Integer.toString(game.getCurrentTurn().getGold());
     }
-    public VicComposite getComposite() {
-        return game.getCurrentTurn().getVicComposite();
+    public VicComponent getVicComponent() {
+        return game.getCurrentTurn().getVicComponent();
     }
 }
