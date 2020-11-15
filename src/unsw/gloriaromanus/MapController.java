@@ -211,7 +211,9 @@ public class MapController extends Controller{
 		}));
 		mapView.setOnMouseClicked(provinceToMouseEventHandler((e, provinceName)->{
 			// TODO : Sets patterns for testing only
-			triggerProvinceSelected.notifyUpdate(new ProvinceMouseEvent(provinceFeatureMap.get(provinceName).getProvince(), e));	
+			ProvinceFeatureInfo pfi = provinceFeatureMap.get(provinceName);
+			Symbol symb = overlays[PATTERN_LAYER].getGraphics().get(pfi.getId()).getSymbol();
+			triggerProvinceSelected.notifyUpdate(new ProvinceMouseEvent(pfi.getProvince(), e, CAN_MOVE_SYMBOL.equals(symb),CAN_ATTACK_SYMBOL.equals(symb)));	
 		}));		
 		
 		// TODO REMOVE:

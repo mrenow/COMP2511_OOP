@@ -122,6 +122,9 @@ public class ProvinceSideBarController extends Controller{
                 }
             }
     	});  
+
+    	moveBtn.setText("Select Target");
+    	moveBtn.setDisable(true);
     }
 
     public void update(ProvinceMouseEvent p) {
@@ -167,13 +170,12 @@ public class ProvinceSideBarController extends Controller{
             target_province.setText(p.getName());
             Province province = targetProvince.getValue();
             // Check if target province belongs to player faction
-            if (game.getDestinations(getUnitSelectionProperty()).contains(province)){
+            if (p.canMove()){
                 // Set button text to "Move"
                 moveBtn.setText("Move");
             	moveBtn.setDisable(false);
             }
-            // Else target province belongs to enemy
-            else if (game.getAttackable(getUnitSelectionProperty()).contains(province)){
+            else if (p.canAttack()){
                 // Set button text to "Invade"
                 moveBtn.setText("Invade");
             	moveBtn.setDisable(false);
