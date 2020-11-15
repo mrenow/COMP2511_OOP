@@ -13,11 +13,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import unsw.engine.*;
@@ -33,9 +35,8 @@ import static unsw.gloriaromanus.GloriaRomanusApplication.app;;
 public class ProvinceSideBarController extends Controller{
 
     private GameController game;
-    private Property<Province> selectedProvince = new SimpleObjectProperty<Province>();
-    private Property<Province> targetProvince = new SimpleObjectProperty<Province>();
-    private Property<Province> actionProvince = new SimpleObjectProperty<Province>();
+    private Property<ProvinceMouseEvent> targetProvince = new SimpleObjectProperty<ProvinceMouseEvent>();
+    private Property<ProvinceMouseEvent> actionProvince = new SimpleObjectProperty<ProvinceMouseEvent>();
     
     @FXML private ChoiceBox<ItemType> trainChoiceBox;
     @FXML private ChoiceBox<TaxLevel> taxChoiceBox;
@@ -46,7 +47,6 @@ public class ProvinceSideBarController extends Controller{
     @FXML private TextField wealthRateField;
     @FXML private TextField wealthField;
     @FXML private TextField taxField;
-    @FXML private TextField taxLevelField;
     @FXML private TextField action_province;
     @FXML private TextField target_province;
     @FXML private ListView<TrainingSlotEntry> unitsTrainingListView;
@@ -58,16 +58,59 @@ public class ProvinceSideBarController extends Controller{
         this.game = game;
         GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/ProvinceSideBar.fxml");
         game.attatchTrainingChangedObserver(this::updateTrainingList);
+        game.attatchTrainingChangedObserver(p -> updateTrainEnable());
+        
         game.attatchUnitsChangedObserver(this::updateUnitList);
         game.attatchProvinceChangedObserver(this::updateProvinceInfo);
         game.attatchTurnChangedObserver(this::refresh);
+    }
+
+    @FXML
+    public void initialize() {
+    	
+        taxChoiceBox.getItems().addAll(TaxLevel.values());
+
+        // Set selection mode for listview in action province list to multiple
+        unitsProvinceListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        unitsProvinceListView.setCellFactory((self) -> new ListCell<Unit>() {
+            @Override 
+            protected void updateItem(Unit item, boolean empty) {
+                super.updateItem(item, empty);
+                if(!empty) {
+                	setDisable(!item.canAttack());
+                    setText(item.toString());
+                }else {
+                	setText("");
+                	setDisable(true);
+                }
+            }
+    	}); 
+        unitsTrainingListView.setCellFactory((self) -> new ListCell<TrainingSlotEntry>() {
+        	@Override
+        	protected void updateItem(TrainingSlotEntry item, boolean empty) {
+        		super.updateItem(item, empty);
+        		if(empty) {
+        			setText("");
+        			setDisable(true);
+        			return;
+        		}
+        		this.setGraphic(new ImageView(Images.ITEM_ICONS.get(item.getType())));
+        		this.setContentDisplay(ContentDisplay.LEFT);
+        		this.setText(item.toString());
+        	}
+        });
+
+    	moveBtn.setText("Select Target");
+    	moveBtn.setDisable(true);
+    	trainChoiceBox.setOnAction((e)->updateTrainEnable());
+    	taxChoiceBox.setOnAction((e)->handleTaxLevel());
     }
 
     // Handles button to train units in that province
     @FXML
     public void handleTrainBtn(ActionEvent e) {
         // Call train method
-        game.trainUnit(actionProvince.getValue(), trainChoiceBox.getValue());
+        game.trainUnit(actionProvince.getValue().getProvince(), trainChoiceBox.getValue());
     }
 
     // Handles cancel training
@@ -84,111 +127,87 @@ public class ProvinceSideBarController extends Controller{
     @FXML
     public void handleMove(ActionEvent e) {
         ArrayList<Unit> copy = new ArrayList<Unit>(unitsProvinceListView.getSelectionModel().getSelectedItems());
-        if (game.getDestinations(copy).contains(targetProvince.getValue())) {
+        Province province = targetProvince.getValue().getProvince();
+        if (targetProvince.getValue().canMove()) {
             // Call move method
             System.out.println("IM HERE");
-            game.move(copy, targetProvince.getValue());
+            game.move(copy, province);
         }
-        else if (game.getAttackable(copy).contains(targetProvince.getValue())) {
-            // Pass info needed for invation to BattlePaneController
-            BattlePaneController b = new BattlePaneController(game, copy, targetProvince.getValue());
-            addToApp(b);
+        else if (targetProvince.getValue().canAttack()) {
+            // Pass info needed for invasion to BattlePaneController
+            GloriaRomanusApplication.app.addController(new BattlePaneController(game, copy, province));
         }
     }
 
     // Handles changing of tax level
     @FXML
     public void handleTaxLevel() {
-        game.setTax(actionProvince.getValue(), taxChoiceBox.getValue()); 
+        game.setTax(actionProvince.getValue().getProvince(), taxChoiceBox.getValue()); 
     }
 
-    @FXML
-    public void initialize() {
-    	
-        taxChoiceBox.getItems().addAll(TaxLevel.values());
-
-        // Set selection mode for listview in action province list to multiple
-        unitsProvinceListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        unitsProvinceListView.setCellFactory((param) -> new ListCell<Unit>() {
-            @Override 
-            protected void updateItem(Unit item, boolean empty) {
-                super.updateItem(item, empty);
-                if(!empty) {
-                	setDisable(!item.canAttack());
-                    setText(item.toString());
-                }else {
-                	setText("");
-                	setDisable(true);
-                }
-            }
-    	});  
-
-    	moveBtn.setText("Select Target");
-    	moveBtn.setDisable(true);
-    }
 
     public void update(ProvinceMouseEvent p) {
         // Primary mouse button to determine action province
         if (p.getSource().getButton() == MouseButton.PRIMARY && p.getOwner().equals(game.getCurrentTurn())) {
             app.displayText("Selected province belongs to you.");
-            // Clears the province unit choice box every time handle event is called
-            unitsProvinceListView.getItems().clear();
-            trainChoiceBox.getItems().clear();
-            action_province.setText(p.getName());
-            actionProvince.setValue(p.getProvince());
-            Province province = actionProvince.getValue();
-            // Update wealth and tax info
-            wealthField.setText(Integer.toString(province.getWealth()));
-            taxField.setText(Double.toString(province.getTaxLevel().getTaxRate()));
-            setTaxLevel(province.getTaxLevel());
-            wealthRateField.setText(Integer.toString(province.getTaxLevel().getwealthgen()));
-            // Update province choicebox accordingly with units
-            if (!province.getUnits().isEmpty() || province.getUnits() != null) {
-                for (Unit u : province.getUnits()) {
-                    unitsProvinceListView.getItems().add(u);
-                }
-            }
-            else {
-                app.displayText("There are no units currently in selected province.");
-            }
-            // Update units currently in training for that province in listview
-            List<TrainingSlotEntry> copy = new ArrayList<>(province.getCurrentTraining());
-            for (TrainingSlotEntry u : copy) {
-                unitsTrainingListView.getItems().add(u);
-            }
-            // Update Trainable Units
-            List<ItemType> trainableUnits = province.getTrainable();
-            for (ItemType u : trainableUnits) {
-                trainChoiceBox.getItems().add(u);
-            }
+
+            actionProvince.setValue(p);
+        	updateActionProvince(p.getProvince());
             app.displayText("Action province selected.");
         }
         // Secondary mouse button to determine target province
         else if (p.getSource().getButton() == MouseButton.SECONDARY) {
             app.displayText("Selected target province is: " + p.getName());
-            targetProvince.setValue(p.getProvince());
-            target_province.setText(p.getName());
-            Province province = targetProvince.getValue();
-            // Check if target province belongs to player faction
-            if (p.canMove()){
-                // Set button text to "Move"
-                moveBtn.setText("Move");
-            	moveBtn.setDisable(false);
-            }
-            else if (p.canAttack()){
-                // Set button text to "Invade"
-                moveBtn.setText("Invade");
-            	moveBtn.setDisable(false);
-            }else {
-            	moveBtn.setText("Select Target");
-            	moveBtn.setDisable(true);
+            targetProvince.setValue(p);
+        	updateTargetProvince(p.getProvince());
+        }
+    }
+    private void updateActionProvince(Province p) {
+        
+        
+        // Clears the province unit choice box every time handle event is called
+        unitsProvinceListView.getItems().clear();
+        trainChoiceBox.getItems().clear();
+        action_province.setText(p.getName());
+        Province province = actionProvince.getValue().getProvince();
+        // Update wealth and tax info
+
+        taxChoiceBox.setValue(p.getTaxLevel());
+        wealthField.setText(Integer.toString(province.getWealth()));
+        taxField.setText(Double.toString(province.getTaxLevel().getTaxRate()));
+        wealthRateField.setText(Integer.toString(province.getTaxLevel().getwealthgen()));
+        // Update province choicebox accordingly with units
+        if (!province.getUnits().isEmpty() || province.getUnits() != null) {
+            for (Unit u : province.getUnits()) {
+                unitsProvinceListView.getItems().add(u);
             }
         }
+        else {
+            app.displayText("There are no units currently in selected province.");
+        }
+        // Update units currently in training for that province in listview
+        List<TrainingSlotEntry> copy = new ArrayList<>(province.getCurrentTraining());
+        for (TrainingSlotEntry u : copy) {
+            unitsTrainingListView.getItems().add(u);
+        }
+        // Update Trainable Units
+        List<ItemType> trainableUnits = province.getTrainable();
+        for (ItemType u : trainableUnits) {
+            trainChoiceBox.getItems().add(u);
+        }
+        updateTrainEnable();
+        
+    }
+    private void updateTargetProvince(Province p) {
+        target_province.setText(p.getName());
+        updateTargetButton();
     }
 
     // Update province unit choicebox which deals with move/invade
     private void updateUnitList(Province p) {
-    	if(!p.equals(actionProvince.getValue())) return;
+    	// throw away if we arent currently focusing on this province
+    	if(!p.equals(actionProvince.getValue().getProvince())) return;
+    	
         unitsProvinceListView.getItems().clear();
         if (p.getUnits() == null || p.getUnits().isEmpty()) {
             app.displayText("No more active units in province");
@@ -211,50 +230,59 @@ public class ProvinceSideBarController extends Controller{
     private void updateProvinceInfo(Province p) {
         wealthField.clear();
         wealthField.setText(Integer.toString(p.getWealth()));
-        taxLevelField.clear();
-        setTaxLevel(p.getTaxLevel());
         taxField.clear();
         taxField.setText(Double.toString(p.getTaxLevel().getTaxRate()));
     }
 
-    // Calls the BattlePane
-    private void addToApp(BattlePaneController b) {
-        Pane root = (Pane)GloriaRomanusApplication.app.getSceneRoot();
-        root.getChildren().add(b.getRoot());
-    }
-
-    private void setTaxLevel(TaxLevel t) {
-        taxLevelField.setText(ArrayUtil.enumToTitle(t));
-    }
 
     // Clear all fields when turn ends
     private void refresh(TurnFeatureInfo o) {
         action_province.clear();
         wealthField.clear();
-        taxLevelField.clear();
         taxField.clear();
         target_province.clear();
         unitsProvinceListView.getItems().clear();
         unitsTrainingListView.getItems().clear();
         trainChoiceBox.getItems().clear();
         targetProvince.setValue(null);
-        selectedProvince.setValue(null);
         actionProvince.setValue(null);
     }
-    void updateTrainEnable() {
-    	trainBtn.setDisable((actionProvince.getValue().getTrainingSlots() <= 0) ||
+    
+    /**
+     * Updates the state of the action button to match the current target province
+     * 
+     */
+    private void updateTargetButton() {
+        // Check if target province belongs to player faction
+        if (targetProvince.getValue().canMove()){
+            // Set button text to "Move"
+            moveBtn.setText("Move");
+        	moveBtn.setDisable(false);
+        }
+        else if (targetProvince.getValue().canAttack()){
+            // Set button text to "Invade"
+            moveBtn.setText("Invade");
+        	moveBtn.setDisable(false);
+        }else {
+        	moveBtn.setText("Select Target");
+        	moveBtn.setDisable(true);
+        }
+    }
+    // observer
+    private void updateTrainEnable() {
+    	trainBtn.setDisable(
+    			(actionProvince.getValue().getProvince().getTrainingSlots() <= 0) ||
+    			(trainChoiceBox.getValue() == null) ||
     			(trainChoiceBox.getValue().getCost(1) > game.getCurrentTurn().getGold()));
+    	
     }
     ListProperty<Unit> getUnitSelectionProperty() {
     	return new SimpleListProperty<>(unitsProvinceListView.getSelectionModel().getSelectedItems());
     }
-    void addTargetChangedListener(ChangeListener<? super Province> l) {
+    void addTargetChangedListener(ChangeListener<? super ProvinceMouseEvent> l) {
     	targetProvince.addListener(l);
     }
-    void addSelectedChangedListener(ChangeListener<? super Province> l) {
-    	selectedProvince.addListener(l);
-    }
-    void addActionChangedListener(ChangeListener<? super Province> l) {
+    void addActionChangedListener(ChangeListener<? super ProvinceMouseEvent> l) {
     	actionProvince.addListener(l);
     }
 }

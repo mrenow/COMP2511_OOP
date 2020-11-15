@@ -84,7 +84,7 @@ public enum ItemType{
 	
 	// Attributes
 	private int maxLevel;
-	 
+
 	private List<String> names;
 	private List<String> descriptions;
 	private List<Integer> costs;
