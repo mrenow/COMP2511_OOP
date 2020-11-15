@@ -1,0 +1,22 @@
+.background{
+    -fx-background-image: url("https://i.imgur.com/91y04wH.jpg");
+        background-image: url("https://i.imgur.com/91y04wH.jpg");
+    -fx-background-position: center;
+        background-position: center;
+    -fx-background-size: cover;
+        background-size: cover;
+    -fx-background-repeat: no-repeat;
+        background-repeat: no-repeat;
+    -fx-background-color: brown;
+        background-color: brown;
+}
+
+.buttons{
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #ff5400, #be1d00);
+        background-color: linear-gradient(from 0% 93% to 0% 100%, #ff5400, #be1d00);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;;
+    -fx-background-radius: 20;
+    -fx-padding: 8 15 8 15;
+        padding: 8 15 8 15;
+}

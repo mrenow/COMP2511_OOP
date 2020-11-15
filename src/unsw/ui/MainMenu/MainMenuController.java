@@ -29,7 +29,9 @@ public class MainMenuController extends Controller{
 	public void initialize() throws Exception {
         Image mappic = new Image(new FileInputStream("src/unsw/ui/MainMenu/map.png"));
         //sidepicture.setImage(mappic);
-        mainpicture.setImage(mappic);
+        //mainpicture.setImage(mappic);
+
+        
     }
 
     @FXML

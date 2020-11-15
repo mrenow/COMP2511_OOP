@@ -7,12 +7,43 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" prefHeight="599.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.MainMenu.MainMenuController">
+<AnchorPane id="pane" fx:id="pane" prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@MenuStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.MainMenu.MainMenuController">
    <children>
-      <Pane HBox.hgrow="ALWAYS">
+      <ImageView fx:id="mainpicture" fitHeight="400.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0" />
+      <VBox alignment="CENTER" layoutX="32.0" layoutY="132.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="mainpicture" fitHeight="202.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="newGame" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newGame" styleClass="buttons" text="New Game" textFill="#1f217c">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="buttons" text="Local Network" textFill="#1f217c">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="buttons" text="Online Game" textFill="#1f217c">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadsave" styleClass="buttons" text="Load Game" textFill="#1f217c">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="Setting" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setting" styleClass="buttons" text="Setting" textFill="#1f217c">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="quit" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#quit" styleClass="buttons" text="Quit" textFill="#1f217c">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Separator orientation="VERTICAL" prefHeight="200.0" />
