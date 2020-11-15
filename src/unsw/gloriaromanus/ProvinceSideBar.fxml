@@ -48,37 +48,32 @@
                                     <RowConstraints>
 
                                     </RowConstraints>
-                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES">
+                                    <RowConstraints>
 
                                     </RowConstraints>
-                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES">
+                                    <RowConstraints>
 
                                     </RowConstraints>
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label fx:id="taxLabel" text="Tax Rate:" GridPane.rowIndex="2" />
-                                    <TextField fx:id="taxField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
+                                    <Label fx:id="taxLabel" text="Tax Rate:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="taxField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
 
                                     </TextField>
-                                    <Label fx:id="wealthLabel" text="Wealth Rate:" GridPane.rowIndex="3" />
-                                    <TextField fx:id="wealthRateField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="NEVER" />
-                                    <Label fx:id="wealthLabel1" text="Wealth:" GridPane.rowIndex="4" />
-                                    <TextField fx:id="wealthField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
+                                    <Label fx:id="wealthLabel" text="Wealth Rate:" GridPane.rowIndex="5" />
+                                    <TextField fx:id="wealthRateField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="NEVER" />
+                                    <Label fx:id="wealthLabel1" text="Wealth:" GridPane.rowIndex="6" />
+                                    <TextField fx:id="wealthField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="NEVER" />
                                     <Label text="Tax Level:" />
-                                    <TextField fx:id="taxLevelField" editable="false" GridPane.columnIndex="1" />
+                                    <ChoiceBox fx:id="taxChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+                                    <Separator prefHeight="1.0" prefWidth="101.0" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
                            </children>
                         </AnchorPane>
-                        <Separator prefWidth="200.0">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </Separator>
-                        <Label fx:id="taxLevelLabel" text="Tax Level Selection:" />
-                        <ChoiceBox fx:id="taxChoiceBox" prefWidth="150.0" />
-                        <Button fx:id="taxLevelBtn" mnemonicParsing="false" onAction="#handleTaxLevel" text="Change Tax Level" />
                      </children>
                   </VBox>
               </content>

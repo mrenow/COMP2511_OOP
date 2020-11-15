@@ -91,9 +91,10 @@ public class MapController extends Controller{
 	private static final FillSymbol CAN_MOVE_SYMBOL = new SimpleFillSymbol(Style.FORWARD_DIAGONAL, 0xC000A0F0, null);
 	private static final FillSymbol CAN_ATTACK_SYMBOL = new SimpleFillSymbol(Style.DIAGONAL_CROSS, 0xA0F000A0, null);
 
-	private static final FillSymbol ON_SELECT_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x70FFD000, 6));
+	private static final FillSymbol SELECT_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x70FFD000, 6));
 	private static final FillSymbol ON_HOVER_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F0F080, 2));	
-	private static final FillSymbol TARGET_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6030F0F0, 6));	
+	private static final FillSymbol ATTACK_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F000A0, 6));	
+	private static final FillSymbol MOVE_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6030F0F0, 6));	
 	private static final FillSymbol ACTION_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6000F000, 6));	
 	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol(Images.ATTACK_ICON);
 	private static final MarkerSymbol MOVE_ICON = new PictureMarkerSymbol(Images.SPEED_ICON);
@@ -115,7 +116,6 @@ public class MapController extends Controller{
 	private Graphic uniqueHoverOutline = new Graphic(new Point(0,0), NO_SYMBOL);
 	private Graphic uniqueTargetOutline = new Graphic(new Point(0,0), NO_SYMBOL);
 	private Graphic uniqueActionOutline = new Graphic(new Point(0,0), NO_SYMBOL);
-	private Graphic uniqueSelectedOutline = new Graphic(new Point(0,0), NO_SYMBOL);
 	
 	
 	// Map constraints
@@ -148,8 +148,6 @@ public class MapController extends Controller{
 			provinceFeatureMap.put(p.getName(), new ProvinceFeatureInfo(id, p));
 			id++;
 		}
-		// TODO: better algorithm than just randomly generating colours
-		Random r = new Random();
 		
 		for (Faction f : game.getFactions()) {
 			factionSymbolMap.put(f.getType(), new SimpleFillSymbol(Style.SOLID, game.getFactionColour(f), null));
@@ -187,7 +185,7 @@ public class MapController extends Controller{
 			}
 		});
 		
-		mapView.setOnScroll(e ->{
+		mapView.setOnScroll(e -> {
 			System.out.println("max : " + map.getMaxScale());
 			System.out.println("min : " + map.getMinScale());
 			Point centre = mapView.screenToLocation(new Point2D(e.getX(), e.getY()));
@@ -198,12 +196,11 @@ public class MapController extends Controller{
 
 		// Province event handling
 		mapView.setOnMouseMoved(provinceToMouseEventHandler((e, provinceName) -> {
-			int pfid = provinceFeatureMap.get(provinceName).getId();
-			Symbol symb = overlays[PATTERN_LAYER].getGraphics().get(pfid).getSymbol();
+			ProvinceFeatureInfo pfi = provinceFeatureMap.get(provinceName);
 			setUniqueShape(uniqueHoverOutline, provinceName, ON_HOVER_SYMBOL);
-			if(CAN_MOVE_SYMBOL.equals(symb)) {
+			if(isDestination(pfi)) {
 				setUniqueMarker(uniqueHoverMarker, provinceName, MOVE_ICON);
-			}else if(CAN_ATTACK_SYMBOL.equals(symb)) {
+			}else if(isAttackable(pfi)) {
 				setUniqueMarker(uniqueHoverMarker, provinceName, ATTACK_ICON);
 			}else {
 				setUniqueMarker(uniqueHoverMarker, provinceName, NO_SYMBOL);
@@ -211,11 +208,10 @@ public class MapController extends Controller{
 		}));
 		mapView.setOnMouseClicked(provinceToMouseEventHandler((e, provinceName)->{
 			// TODO : Sets patterns for testing only
-			triggerProvinceSelected.notifyUpdate(new ProvinceMouseEvent(provinceFeatureMap.get(provinceName).getProvince(), e));	
-		}));		
+			ProvinceFeatureInfo pfi = provinceFeatureMap.get(provinceName);
+			triggerProvinceSelected.notifyUpdate(new ProvinceMouseEvent(pfi.getProvince(), e, isDestination(pfi), isAttackable(pfi)));	
+		}));
 		
-		// TODO REMOVE:
-		mapView.setOnKeyTyped(this::debugActions);
 		
 		// Overlays
 		
@@ -274,7 +270,6 @@ public class MapController extends Controller{
 				g = new Graphic(pfi.getShape(), NO_SYMBOL);
 				overlays[HIGHLIGHT_LAYER].getGraphics().add(g);
 			}
-			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueSelectedOutline);
 			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueTargetOutline);
 			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueActionOutline);
 			overlays[HIGHLIGHT_LAYER].getGraphics().add(uniqueHoverOutline);
@@ -290,7 +285,6 @@ public class MapController extends Controller{
 	 * @param provincePointCollection
 	 */
 	private void initProvinceCentres(FeatureCollection provincePointCollection) {
-		GraphicsOverlay graphicsOverlay = new GraphicsOverlay();
 	
 		for (org.geojson.Feature f : provincePointCollection.getFeatures()) {
 			if (f.getGeometry() instanceof org.geojson.Point) {
@@ -376,7 +370,6 @@ public class MapController extends Controller{
 		Point newCentre = new Point(oldCentre.getX() + deltaX, oldCentre.getY() + deltaY,
 				oldCentre.getSpatialReference());
 		mapView.setViewpoint(new Viewpoint(newCentre, mapScale));
-	
 	}
 	
 	private void zoomAtPoint(Point centre, double factor) {
@@ -397,6 +390,7 @@ public class MapController extends Controller{
 		// mapView.setViewpointAsync(new Viewpoint(newViewCentre, newScale));
 		setConstrainedViewpoint(newViewArea, newScale);
 	}
+	
 	private void updateMinScale() {
 		// Basically unit bashing
 		map.setMinScale(MathUtil.min(PIXELS_PER_UNIT_X*(X_MAX-X_MIN)/mapView.getWidth(), PIXELS_PER_UNIT_Y*(Y_MAX-Y_MIN)/mapView.getHeight()));
@@ -414,21 +408,32 @@ public class MapController extends Controller{
 		setProvinceSymbols(List.of(p), LABEL_LAYER, ts);
 		setProvinceSymbols(List.of(p), COLOUR_LAYER, factionSymbolMap.get(p.getOwner().getType()));
 	}
+	
+	private boolean isAttackable(ProvinceFeatureInfo pfi) {
+		return CAN_ATTACK_SYMBOL.equals(overlays[PATTERN_LAYER].getGraphics().get(pfi.getId()).getSymbol());
+	}
+	
+	private boolean isDestination(ProvinceFeatureInfo pfi) {
+		return CAN_MOVE_SYMBOL.equals(overlays[PATTERN_LAYER].getGraphics().get(pfi.getId()).getSymbol());
+	}
+
 	void updateTargetProvince(Province p) {
-		setUniqueShape(uniqueTargetOutline, p, TARGET_SYMBOL);
+		ProvinceFeatureInfo pfi = provinceFeatureMap.get(p.getName());
+		if(isAttackable(pfi)) {
+			setUniqueShape(uniqueTargetOutline, p, ATTACK_SYMBOL);
+		} else if(isDestination(pfi)) {
+			setUniqueShape(uniqueTargetOutline, p, MOVE_SYMBOL);
+		} else {
+			setUniqueShape(uniqueTargetOutline, p, SELECT_SYMBOL);
+		}
+		
+		
 	}
-	void updateSelectedProvince(Province p) {
-		setUniqueShape(uniqueSelectedOutline, p, ON_SELECT_SYMBOL);
-	}
+	
 	void updateActionProvince(Province p) {
 		setUniqueShape(uniqueActionOutline, p, ACTION_SYMBOL);
 	}
-	void setProvinceSymbols(Collection<Province> provinces, int layer, Symbol symb) {
-		for(Province p : provinces) {
-			ProvinceFeatureInfo pfi = provinceFeatureMap.get(p.getName());
-			overlays[layer].getGraphics().get(pfi.getId()).setSymbol(symb);	
-		}
-	}
+
 	
 	void updateActionOverlay() {
 		clearGraphicLayer(PATTERN_LAYER);
@@ -436,6 +441,13 @@ public class MapController extends Controller{
 		setProvinceSymbols(game.getAttackable(unitSelection), PATTERN_LAYER, CAN_ATTACK_SYMBOL);
 	}
 	
+	void setProvinceSymbols(Collection<Province> provinces, int layer, Symbol symb) {
+		for(Province p : provinces) {
+			ProvinceFeatureInfo pfi = provinceFeatureMap.get(p.getName());
+			overlays[layer].getGraphics().get(pfi.getId()).setSymbol(symb);	
+		}
+	}
+
 	void setNamedProvinceSymbols(Collection<String> provinceNames, int layer, Symbol symb) {
 		for(String name : provinceNames) {
 			ProvinceFeatureInfo pfi = provinceFeatureMap.get(name);
@@ -496,26 +508,7 @@ public class MapController extends Controller{
     	triggerProvinceSelected.attach(o);
     }
     
-	
-	private void debugActions(KeyEvent e) {
-		switch(e.getCharacter()) {
-		case "1":
-			
-			break;
-		case "2":
-			
-			break;
-		case "c":
-			clearGraphicLayer(PATTERN_LAYER);
-			break;
-		case "d":
-			BattlePaneController c = new BattlePaneController(game, List.of(Unit.newUnit(ItemType.HEAVY_CAVALRY, 1, provinceFeatureMap.get("V").getProvince())), provinceFeatureMap.get("I").getProvince());
-			System.out.print("shed");
-			Pane root = (Pane)GloriaRomanusApplication.app.getSceneRoot();
-			root.getChildren().add(c.getRoot());
-		}
-		
-	}
+
 	private Integer toSolidColour(Integer colour) {
 		return 0xFF000000 | colour;
 	}
