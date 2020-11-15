@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="570.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.GameSetting.GameSettingController">
+
+<VBox alignment="CENTER" prefHeight="596.0" prefWidth="791.0" styleClass="background" stylesheets="@GameSettingStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.GameSetting.GameSettingController">
    <children>
       <Label text="Gloria Romanus">
          <font>
@@ -26,18 +27,18 @@
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </Separator>
-      <GridPane prefHeight="466.0" prefWidth="512.0">
+      <GridPane alignment="CENTER" prefHeight="466.0" prefWidth="793.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-            <ColumnConstraints hgrow="NEVER" />
-            <ColumnConstraints hgrow="NEVER" maxWidth="151.0" minWidth="10.0" prefWidth="128.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="400.0" minWidth="10.0" prefWidth="382.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="86.0" minWidth="0.0" prefWidth="0.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="10.0" prefWidth="157.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="NEVER" />
             <RowConstraints minHeight="10.0" prefHeight="300.0" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
-            <ListView fx:id="factionList" maxHeight="1.7976931348623157E308" GridPane.rowIndex="1">
+            <ListView fx:id="factionList" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="409.0" prefWidth="345.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
@@ -61,7 +62,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </Label>
-            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Separator orientation="VERTICAL" prefHeight="429.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
