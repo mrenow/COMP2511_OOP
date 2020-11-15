@@ -18,6 +18,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import unsw.engine.*;
 import unsw.ui.Observer.*;
@@ -43,10 +44,10 @@ public class ProvinceSideBarController extends Controller{
     @FXML private Button selectActionProvince;
     @FXML private Button selectTargetProvince;
     @FXML private Button cancelTrainingBtn;
+    @FXML private TextField wealthRateField;
     @FXML private TextField wealthField;
     @FXML private TextField taxField;
     @FXML private TextField taxLevelField;
-    @FXML private TextField trainTextField;
     @FXML private TextField selected_province;
     @FXML private TextField action_province;
     @FXML private TextField target_province;
@@ -68,7 +69,6 @@ public class ProvinceSideBarController extends Controller{
     // Handles button to train units in that province
     @FXML
     public void handleTrainBtn(ActionEvent e) {
-        trainTextField.setText(trainChoiceBox.getValue().toString());
         // Call train method
         game.trainUnit(actionProvince.getValue(), trainChoiceBox.getValue());
     }
@@ -103,46 +103,6 @@ public class ProvinceSideBarController extends Controller{
     @FXML
     public void handleTaxLevel() {
         game.setTax(actionProvince.getValue(), taxChoiceBox.getValue()); 
-    }
-
-    // Displays the name of the selected action province along with all other information
-    @FXML
-    public void handleSelectProvince(ActionEvent e) {
-        // Clears the province unit choice box every time handle event is called
-        unitsProvinceListView.getItems().clear();
-        trainChoiceBox.getItems().clear();
-        Province province = selectedProvince.getValue();
-        if (!province.getOwner().equals(game.getCurrentTurn())) {
-            app.displayText("Action province must be your own province.");
-        }
-        else {
-            actionProvince.setValue(province);
-            action_province.setText(province.getName());
-            // Update wealth and tax info
-            wealthField.setText(Integer.toString(province.getWealth()));
-            taxField.setText(Double.toString(province.getTaxLevel().getTaxRate()));
-            setTaxLevel(province.getTaxLevel());
-            // Update province choicebox accordingly with units
-            if (!province.getUnits().isEmpty() || province.getUnits() != null) {
-                for (Unit u : province.getUnits()) {
-                    unitsProvinceListView.getItems().add(u);
-                }
-            }
-            else {
-                app.displayText("There are no units currently in selected province.");
-            }
-            // Update units currently in training for that province in text area
-            List<TrainingSlotEntry> copy = new ArrayList<>(province.getCurrentTraining());
-            for (TrainingSlotEntry u : copy) {
-                unitsTrainingListView.getItems().add(u);
-            }
-            // Update Trainable Units
-            List<ItemType> trainableUnits = province.getTrainable();
-            for (ItemType u : trainableUnits) {
-                trainChoiceBox.getItems().add(u);
-            }
-            app.displayText("Action province selected.");
-        }
     }
 
     // Handles button that selects target province
@@ -187,18 +147,57 @@ public class ProvinceSideBarController extends Controller{
     }
 
     public void update(ProvinceMouseEvent p) {
-        app.displayText("Selected province is: " + p.getName());
-        if (p.getOwner().equals(game.getCurrentTurn())) {
+        // Primary mouse button to determine action province
+        if (p.getSource().getButton() == MouseButton.PRIMARY && p.getOwner().equals(game.getCurrentTurn())) {
             app.displayText("Selected province belongs to you.");
+            // Clears the province unit choice box every time handle event is called
+            unitsProvinceListView.getItems().clear();
+            trainChoiceBox.getItems().clear();
+            action_province.setText(p.getName());
+            actionProvince.setValue(p.getProvince());
+            Province province = actionProvince.getValue();
+            // Update wealth and tax info
+            wealthField.setText(Integer.toString(province.getWealth()));
+            taxField.setText(Double.toString(province.getTaxLevel().getTaxRate()));
+            setTaxLevel(province.getTaxLevel());
+            wealthRateField.setText(Integer.toString(province.getTaxLevel().getwealthgen()));
+            // Update province choicebox accordingly with units
+            if (!province.getUnits().isEmpty() || province.getUnits() != null) {
+                for (Unit u : province.getUnits()) {
+                    unitsProvinceListView.getItems().add(u);
+                }
+            }
+            else {
+                app.displayText("There are no units currently in selected province.");
+            }
+            // Update units currently in training for that province in listview
+            List<TrainingSlotEntry> copy = new ArrayList<>(province.getCurrentTraining());
+            for (TrainingSlotEntry u : copy) {
+                unitsTrainingListView.getItems().add(u);
+            }
+            // Update Trainable Units
+            List<ItemType> trainableUnits = province.getTrainable();
+            for (ItemType u : trainableUnits) {
+                trainChoiceBox.getItems().add(u);
+            }
+            app.displayText("Action province selected.");
         }
-        else {
-            app.displayText("Selected province owner is: " + p.getOwner().getTitle());
-        }
-        selected_province.setText(p.getName());
-        selectedProvince.setValue(p.getProvince());
-        // Show units in selected province
-        for (Unit u : p.getProvince().getUnits()) {
-            selectedProvinceUnitsList.setText(u.getName() + "\n");
+        // Secondary mouse button to determine target province
+        else if (p.getSource().getButton() == MouseButton.SECONDARY) {
+            app.displayText("Selected target province is: " + p.getName());
+            targetProvince.setValue(p.getProvince());
+            target_province.setText(p.getName());
+            Province province = targetProvince.getValue();
+            // Check if target province belongs to player faction
+            if (province.getOwner().equals(game.getCurrentTurn())) {
+                // Set button text to "Move"
+                moveBtn.setText("Move");
+            }
+            // Else target province belongs to enemy
+            else {
+                // Set button text to "Invade"
+                moveBtn.setText("Invade");
+            }
         }
     }
 
@@ -268,7 +267,6 @@ public class ProvinceSideBarController extends Controller{
         unitsProvinceListView.getItems().clear();
         unitsTrainingListView.getItems().clear();
         trainChoiceBox.getItems().clear();
-        trainTextField.clear();
         targetProvince.setValue(null);
         selectedProvince.setValue(null);
         actionProvince.setValue(null);

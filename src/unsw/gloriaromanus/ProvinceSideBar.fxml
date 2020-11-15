@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,31 +23,9 @@
          <children>
             <VBox>
                <children>
-                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="271.0" text="Selected Province:" textFill="RED">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="selected_province" editable="false" />
-                  <Accordion>
-                    <panes>
-                      <TitledPane animated="false" text="Units in Selected Province:">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <TextArea fx:id="selectedProvinceUnitsList" editable="false" prefHeight="200.0" prefWidth="200.0" text="List of units in current province here" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                        </content>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                      </TitledPane>
-                    </panes>
-                  </Accordion>
+                  <Accordion />
                </children>
             </VBox>
-            <Button fx:id="selectActionProvince" mnemonicParsing="false" onAction="#handleSelectProvince" text="Select Action Province" />
             <Label alignment="CENTER" text="Action Province:" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
@@ -59,13 +36,6 @@
               <content>
                   <VBox>
                      <children>
-                        <Label fx:id="taxLevelLabel" text="Tax Level:" />
-                        <ChoiceBox fx:id="taxChoiceBox" prefWidth="150.0" />
-                        <Separator prefWidth="200.0">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </Separator>
                         <AnchorPane>
                            <children>
                               <GridPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -74,6 +44,7 @@
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                  </columnConstraints>
                                  <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
                                     <RowConstraints>
 
                                     </RowConstraints>
@@ -86,18 +57,28 @@
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label fx:id="taxLabel" text="Tax Rate:" GridPane.rowIndex="1" />
-                                    <TextField fx:id="taxField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                                    <Label fx:id="taxLabel" text="Tax Rate:" GridPane.rowIndex="2" />
+                                    <TextField fx:id="taxField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
 
                                     </TextField>
-                                    <Label fx:id="wealthLabel" text="Wealth Rate:" GridPane.rowIndex="2" />
-                                    <TextField fx:id="wealthField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="NEVER" />
-                                    <Label fx:id="wealthLabel1" text="Wealth:" GridPane.rowIndex="3" />
-                                    <TextField fx:id="wealthField1" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="NEVER" />
+                                    <Label fx:id="wealthLabel" text="Wealth Rate:" GridPane.rowIndex="3" />
+                                    <TextField fx:id="wealthRateField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.vgrow="NEVER" />
+                                    <Label fx:id="wealthLabel1" text="Wealth:" GridPane.rowIndex="4" />
+                                    <TextField fx:id="wealthField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER" />
+                                    <Label text="Tax Level:" />
+                                    <TextField fx:id="taxLevelField" editable="false" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
                            </children>
                         </AnchorPane>
+                        <Separator prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Separator>
+                        <Label fx:id="taxLevelLabel" text="Tax Level Selection:" />
+                        <ChoiceBox fx:id="taxChoiceBox" prefWidth="150.0" />
+                        <Button fx:id="taxLevelBtn" mnemonicParsing="false" onAction="#handleTaxLevel" text="Change Tax Level" />
                      </children>
                   </VBox>
               </content>
@@ -105,7 +86,6 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </TitledPane>
-            <Button fx:id="selectTargetProvince" mnemonicParsing="false" onAction="#handleSelectTarget" text="Select Target Province" />
             <Label alignment="CENTER" text="Target Province:" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
