@@ -22,6 +22,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import unsw.engine.*;
 import unsw.ui.Observer.*;
+import util.ArrayUtil;
 
 import static unsw.gloriaromanus.GloriaRomanusApplication.app;;
 
@@ -166,14 +167,19 @@ public class ProvinceSideBarController extends Controller{
             target_province.setText(p.getName());
             Province province = targetProvince.getValue();
             // Check if target province belongs to player faction
-            if (province.getOwner().equals(game.getCurrentTurn())) {
+            if (game.getDestinations(getUnitSelectionProperty()).contains(province)){
                 // Set button text to "Move"
                 moveBtn.setText("Move");
+            	moveBtn.setDisable(false);
             }
             // Else target province belongs to enemy
-            else {
+            else if (game.getAttackable(getUnitSelectionProperty()).contains(province)){
                 // Set button text to "Invade"
                 moveBtn.setText("Invade");
+            	moveBtn.setDisable(false);
+            }else {
+            	moveBtn.setText("Select Target");
+            	moveBtn.setDisable(true);
             }
         }
     }
@@ -216,20 +222,7 @@ public class ProvinceSideBarController extends Controller{
     }
 
     private void setTaxLevel(TaxLevel t) {
-        switch(t) {
-            case LOW_TAX:
-                taxLevelField.setText("Low Tax");
-                break;
-            case NORMAL_TAX:
-                taxLevelField.setText("Normal Tax");
-                break;
-            case HIGH_TAX:
-                taxLevelField.setText("High Tax");
-                break;
-            case VERY_HIGH_TAX:
-                taxLevelField.setText("Very High Tax");
-                break;
-        }
+        taxLevelField.setText(ArrayUtil.enumToTitle(t));
     }
 
     // Clear all fields when turn ends
