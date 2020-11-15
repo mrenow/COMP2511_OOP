@@ -41,17 +41,13 @@ public class ProvinceSideBarController extends Controller{
     @FXML private Button trainBtn;
     @FXML private Button moveBtn;
     @FXML private Button taxLevelBtn;
-    @FXML private Button selectActionProvince;
-    @FXML private Button selectTargetProvince;
     @FXML private Button cancelTrainingBtn;
     @FXML private TextField wealthRateField;
     @FXML private TextField wealthField;
     @FXML private TextField taxField;
     @FXML private TextField taxLevelField;
-    @FXML private TextField selected_province;
     @FXML private TextField action_province;
     @FXML private TextField target_province;
-    @FXML private TextArea selectedProvinceUnitsList;
     @FXML private ListView<TrainingSlotEntry> unitsTrainingListView;
     @FXML private ListView<Unit> unitsProvinceListView;
 
@@ -103,25 +99,6 @@ public class ProvinceSideBarController extends Controller{
     @FXML
     public void handleTaxLevel() {
         game.setTax(actionProvince.getValue(), taxChoiceBox.getValue()); 
-    }
-
-    // Handles button that selects target province
-    @FXML
-    public void handleSelectTarget(ActionEvent e) {
-    	Province province = selectedProvince.getValue();
-        targetProvince.setValue(province);
-        target_province.setText(province.getName());
-        // Check if target province belongs to player faction
-        if (province.getOwner().equals(game.getCurrentTurn())) {
-            // Set button text to "Move"
-            moveBtn.setText("Move");
-        }
-        // Else target province belongs to enemy
-        else {
-            // Set button text to "Invade"
-            moveBtn.setText("Invade");
-        }
-        app.displayText("Selected province is: " + province.getName());
     }
 
     @FXML
@@ -257,8 +234,6 @@ public class ProvinceSideBarController extends Controller{
 
     // Clear all fields when turn ends
     private void refresh(TurnFeatureInfo o) {
-        selected_province.clear();
-        selectedProvinceUnitsList.clear();
         action_province.clear();
         wealthField.clear();
         taxLevelField.clear();
