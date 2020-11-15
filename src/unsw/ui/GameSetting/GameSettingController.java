@@ -73,7 +73,17 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML
     public void GenerateVictoryCondition(){
         // randomize victory conditions
-    	
+        
+        List<VictoryCondition> conditions = new ArrayList<>();
+        List<VictoryCondition> generated = new ArrayList<>();
+        conditions.add(VictoryCondition.CONQUEST);
+        conditions.add(VictoryCondition.TREASURY);
+        conditions.add(VictoryCondition.WEALTH);
+        List<VictoryCondition> logic = new ArrayList<>();
+        conditions.add(VictoryCondition.AND);
+        conditions.add(VictoryCondition.OR);
+        Random r = new Random();
+
     }
     @FXML
     public void selectfaction(){

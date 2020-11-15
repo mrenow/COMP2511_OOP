@@ -33,7 +33,6 @@ public class GameData {
         for (int i = 0; i < listoFiles.length; i++) {
             fileNames.add(listoFiles[i].getName());
         }
-        fileNames.remove("GameData.java");
     }
     
 }
