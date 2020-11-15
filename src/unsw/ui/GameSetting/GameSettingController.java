@@ -16,6 +16,7 @@ import unsw.engine.FactionType;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComponent;
 import unsw.engine.VicCondition.VicComposite;
+import unsw.engine.VicCondition.VicLeaf;
 import unsw.engine.VicCondition.VictoryCondition;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
@@ -29,9 +30,9 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML private Button quit;
     @FXML private ListView<FactionType> factionList;
     // implement later
-    @FXML private ListView<FactionType> VictoryConditionList;
-    
-    
+    //@FXML private ListView<FactionType> VictoryConditionList;
+    @FXML private ListView<FactionType> selectedfaction;
+    //private List<FactionType> selectedfaction = new ArrayList<>();
     
     
     @FXML
@@ -41,7 +42,8 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     	factionList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	factionList.getSelectionModel().getSelectedItems().addListener(
     			(ListChangeListener<FactionType>)(c -> play.setDisable(c.getList().size() < 2)));
-    	play.setDisable(true);
+        //play.setDisable(true);
+        play.setDisable(false);
     }
    
     @FXML
@@ -75,20 +77,33 @@ public class GameSettingController extends Controller implements Observer<MenuIn
         // randomize victory conditions
         
         List<VictoryCondition> conditions = new ArrayList<>();
-        List<VictoryCondition> generated = new ArrayList<>();
         conditions.add(VictoryCondition.CONQUEST);
         conditions.add(VictoryCondition.TREASURY);
         conditions.add(VictoryCondition.WEALTH);
         List<VictoryCondition> logic = new ArrayList<>();
-        conditions.add(VictoryCondition.AND);
-        conditions.add(VictoryCondition.OR);
+        logic.add(VictoryCondition.AND);
+        logic.add(VictoryCondition.OR);
         Random r = new Random();
-
+        VicComposite logic1 = new VicComposite(logic.get(r.nextInt()%2));
+        VicComposite logic2 = new VicComposite(logic.get(r.nextInt()%2));
+        int index = r.nextInt()%3;
+        VicLeaf leaf1 = new VicLeaf(conditions.get(index));
+        conditions.remove(index);
+        index = r.nextInt()%2;
+        VicLeaf leaf2 = new VicLeaf(conditions.get(index));
+        conditions.remove(index);
+        VicLeaf leaf3 = new VicLeaf(conditions.get(0));
+        conditions.remove(index);
+        logic2.addSubVic(leaf2);
+        logic2.addSubVic(leaf3);
+        logic1.addSubVic(leaf1);
+        logic1.addSubVic(logic2);
+        //final vic = logic1;
     }
-    @FXML
-    public void selectfaction(){
+    // @FXML
+    // public void selectfaction(){
         
-    }
+    // }
     
     @Override
     public void update(MenuInfo message) {

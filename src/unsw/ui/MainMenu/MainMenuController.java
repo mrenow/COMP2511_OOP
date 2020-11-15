@@ -1,8 +1,11 @@
 package unsw.ui.MainMenu;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
 import unsw.ui.UIPath;
@@ -11,9 +14,11 @@ import unsw.ui.Observer.TurnFeatureInfo;
 
 public class MainMenuController extends Controller implements Observer<TurnFeatureInfo>{
     
-    
-    private void initialize() throws Exception {
-
+    @FXML private ImageView sidepicture;
+    @FXML
+	public void initialize() throws Exception {
+        Image mappic = new Image(new FileInputStream("src/unsw/ui/MainMenu/map.png"));
+        sidepicture.setImage(mappic);
     }
 
     @FXML

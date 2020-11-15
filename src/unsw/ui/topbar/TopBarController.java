@@ -106,7 +106,8 @@ public class TopBarController extends Controller{
             System.out.println("endturn");
         }else{
             //game end
-            //TODO new sceen
+            Controller controller = GloriaRomanusApplication.loadController(UIPath.VIC.getPath());
+            GloriaRomanusApplication.app.setScene(controller);
         }
     }   
     @FXML
