@@ -108,6 +108,12 @@ public class TopBarController extends Controller{
             System.out.println("endturn");
         }else{
             //game end
+            try {
+                game.saveGame(UIPath.TMP.getPath());
+            } catch (Exception e) {
+                System.out.println("save game fail");
+            }
+            
             Controller controller = GloriaRomanusApplication.loadController(UIPath.VIC.getPath());
             GloriaRomanusApplication.app.setScene(controller);
         }
