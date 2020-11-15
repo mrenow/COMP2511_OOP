@@ -1,18 +1,18 @@
 {
 // Morale
-"_HEROIC_CHARGE_MORALE" : "description",
-"VERY_HIGH_TAX" : "description",
-"DRUIDIC_FERVOUR" : "description",
-"FIRE_ARROWS_MORALE" : "description",
-"LEGIONARY_EAGLE" : "description",
-"LOST_EAGLE" : "description",
+"_HEROIC_CHARGE_MORALE" : "Where your army has fewer than half the number of units as the enemy, this unit has 50% higher morale.",
+"VERY_HIGH_TAX" : "-1 morale for all soldiers residing in the province.",
+"DRUIDIC_FERVOUR" : "While the druids haven't been routed, allied units in an army with druids has 10% bonus to morale, and enemy units suffer a 5% penalty to morale.",
+"FIRE_ARROWS_MORALE" : "Reduces morale of enemy soldiers in a skirmish with them by 20%.",
+"LEGIONARY_EAGLE" : "+1 morale to all friendly units in the province.",
+"LOST_EAGLE" : "For every legionary eagle lost, all friendly units suffer a 0.2 penalty to morale until the settlement is recaptured.",
 // Combat
 "_RANGED" : "description",
 "_ARTILLERY" : "description",
 "_TOWER" : "description",
-"_SHIELD_CHARGE" : "description",
-"_HEROIC_CHARGE_COMBAT" : "description",
-"FIRE_ARROWS_COMBAT" : "description",
-"SKIRMISHER_ANTI_ARMOUR" : "description",
-"CANTABRIAN_CIRCLE" : "description"
+"_SHIELD_CHARGE" : "For every 4th engagement by this unit of melee infantry per battle, the value of shield defense is added to this unit's attack damage value.",
+"_HEROIC_CHARGE_COMBAT" : "Where your army has fewer than half the number of units as the enemy, this unit has double charge attack damage.",
+"FIRE_ARROWS_COMBAT" : "Lose 10% of missile attack damage.",
+"SKIRMISHER_ANTI_ARMOUR" : "In ranged engagements,  troops fighting these skirmishers only receive half the protection from armour.",
+"CANTABRIAN_CIRCLE" : "When enemy missile units engage this unit of horse archers, the enemy missile units will suffer a 50% loss to missile attack damage."
 }
