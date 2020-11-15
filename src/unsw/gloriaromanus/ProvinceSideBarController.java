@@ -28,7 +28,7 @@ import static unsw.gloriaromanus.GloriaRomanusApplication.app;;
  * 
  * @author Derek
  */
-public class ProvinceSideBarController extends Controller implements Observer<ProvinceFeatureInfo> {
+public class ProvinceSideBarController extends Controller{
 
     private GameController game;
     private Property<Province> selectedProvince = new SimpleObjectProperty<Province>();
@@ -186,8 +186,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     	});  
     }
 
-    @Override
-    public void update(ProvinceFeatureInfo p) {
+    public void update(ProvinceMouseEvent p) {
         app.displayText("Selected province is: " + p.getName());
         if (p.getOwner().equals(game.getCurrentTurn())) {
             app.displayText("Selected province belongs to you.");
@@ -209,8 +208,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         unitsProvinceListView.getItems().clear();
         if (p.getUnits() == null || p.getUnits().isEmpty()) {
             app.displayText("No more active units in province");
-        }
-        else {
+        } else {
             for (Unit u : p.getUnits()) {
                 unitsProvinceListView.getItems().add(u);
             }
@@ -279,7 +277,6 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     	trainBtn.setDisable((actionProvince.getValue().getTrainingSlots() <= 0) ||
     			(trainChoiceBox.getValue().getCost(1) > game.getCurrentTurn().getGold()));
     }
-
     ListProperty<Unit> getUnitSelectionProperty() {
     	return new SimpleListProperty<>(unitsProvinceListView.getSelectionModel().getSelectedItems());
     }

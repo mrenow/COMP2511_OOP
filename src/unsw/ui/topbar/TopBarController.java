@@ -136,13 +136,13 @@ public class TopBarController extends Controller{
         ((HBox)root).setBackground(new Background(fill));
         
         
-        yearLabel.setText(getYear() + " AD");
+        yearLabel.setText(game.getYear() + " AD");
         
         facnameLabel.setText(f.getTitle());
 
         goldLabel.setText(getgold() + " Gold");
         
-        wealthLabel.setText(f.getTotalWealth() + "Wealth");
+        wealthLabel.setText(f.getTotalWealth() + " Wealth");
 
         vicinfo = game.getCurrentTurn().getVicComponent();
         goalLabel.setText("Goal: " + vicinfo.toString());

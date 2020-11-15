@@ -82,7 +82,7 @@ public class MapController extends Controller{
 	private FeatureLayer featureLayer_provinces;
 	private Map<String, ProvinceFeatureInfo> provinceFeatureMap = new HashMap<>();
 	
-	private Observable<ProvinceFeatureInfo> triggerProvinceSelected = new Observable<ProvinceFeatureInfo>();
+	private Observable<ProvinceMouseEvent> triggerProvinceSelected = new Observable<ProvinceMouseEvent>();
 	
 	private ListProperty<Unit> unitSelection = new SimpleListProperty<Unit>();
 
@@ -105,8 +105,8 @@ public class MapController extends Controller{
 	private static final int COLOUR_LAYER = 0;
 	private static final int PATTERN_LAYER = 1; 
 	private static final int HIGHLIGHT_LAYER = 2; 
-	private static final int MARKER_LAYER = 3; 
-	private static final int LABEL_LAYER = 4; 
+	private static final int LABEL_LAYER = 3; 
+	private static final int MARKER_LAYER = 4; 
 	private static final int NUM_LAYERS = 5; 
 	
 	private GraphicsOverlay[] overlays = new GraphicsOverlay[NUM_LAYERS];	
@@ -211,9 +211,7 @@ public class MapController extends Controller{
 		}));
 		mapView.setOnMouseClicked(provinceToMouseEventHandler((e, provinceName)->{
 			// TODO : Sets patterns for testing only
-			if(e.getButton() == MouseButton.PRIMARY) {
-				triggerProvinceSelected.notifyUpdate(provinceFeatureMap.get(provinceName));
-			}
+			triggerProvinceSelected.notifyUpdate(new ProvinceMouseEvent(provinceFeatureMap.get(provinceName).getProvince(), e));	
 		}));		
 		
 		// TODO REMOVE:
@@ -494,7 +492,7 @@ public class MapController extends Controller{
     	return unitSelection;
     }
  
-    void attachProvinceSelectedObserver(Observer<ProvinceFeatureInfo> o) {
+    void attachProvinceSelectedObserver(Observer<ProvinceMouseEvent> o) {
     	triggerProvinceSelected.attach(o);
     }
     
