@@ -409,7 +409,7 @@ public class MapController extends Controller{
 		
 		String text = String.format("%s\n%d 🗡", p.getName(), p.getMilitaryIndex());
 		TextSymbol ts = new TextSymbol(FONT_SIZE, text, toSolidColour(game.getFactionColour(p.getOwner())),
-				HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+				HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
 		// White outline
 		ts.setHaloColor(0xFFFFFFFF);
 		ts.setHaloWidth(2);

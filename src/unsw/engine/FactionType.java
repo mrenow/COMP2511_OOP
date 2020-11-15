@@ -34,7 +34,7 @@ public enum FactionType {
 	private FactionType(String adjective, String plural) {
 		// Extract Title name
 		this.title = Character.toUpperCase(this.name().charAt(0)) +
-				this.name().substring(1).toLowerCase();
+				this.name().substring(1).toLowerCase().replace("_", " ");
 		
 		this.adjective = adjective;
 		this.plural = plural;
@@ -50,5 +50,9 @@ public enum FactionType {
 
 	public String getPlural() {
 		return plural;
+	}
+	@Override
+	public String toString() {
+		return getTitle();
 	}
 }

@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import unsw.engine.Faction;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComponent;
 import unsw.engine.VicCondition.VicComposite;
@@ -38,6 +39,7 @@ public class TopBarController extends Controller{
     @FXML private Label yearLabel;
     @FXML private Label facnameLabel;
     @FXML private Label goldLabel;
+    @FXML private Label wealthLabel;
     @FXML private Label goalLabel;
     @FXML private MenuBar infoMenu;
     
@@ -126,14 +128,21 @@ public class TopBarController extends Controller{
     
     public void updateValues() {
         turninfo = new TurnFeatureInfo(game);
-        Color bg = ColorUtil.argbToColor(game.getSolidFactionColour(game.getCurrentTurn()));
-        BackgroundFill f = new BackgroundFill(bg, null, null);
         
-        ((HBox)root).setBackground(new Background(f));
+        Faction f = game.getCurrentTurn();
+        Color bg = ColorUtil.argbToColor(game.getSolidFactionColour(f));
+        BackgroundFill fill = new BackgroundFill(bg, null, null);
+        
+        ((HBox)root).setBackground(new Background(fill));
+        
+        
         yearLabel.setText(getYear() + " AD");
-        facnameLabel.setText(getFaction());
+        
+        facnameLabel.setText(f.getTitle());
 
         goldLabel.setText(getgold() + " Gold");
+        
+        wealthLabel.setText(f.getTotalWealth() + "Wealth");
 
         vicinfo = game.getCurrentTurn().getVicComponent();
         goalLabel.setText("Goal: " + vicinfo.toString());

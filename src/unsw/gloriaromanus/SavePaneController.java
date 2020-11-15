@@ -10,6 +10,7 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import unsw.engine.GameController;
 import unsw.engine.Province;
 import unsw.engine.Unit;
@@ -29,8 +30,11 @@ public class SavePaneController extends Controller{
 	
 	@FXML
 	private void onSavePressed() {
+		String name = fileTextField.getText();
+		if(name.isBlank()) return;
 		try {
-			game.saveGame(UIPath.SAVES.getPath() + fileTextField.getText());
+			game.saveGame(UIPath.SAVES.getPath() + name);
+			destroy();
 		} catch (IOException e) {
 			System.err.println("Couldnt save");
 			System.err.println(e.getMessage());

@@ -8,9 +8,9 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="TEXT_ONLY" text="Save Game" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="176.0" prefWidth="250.0" text="Save Game" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
   <content>
-      <VBox>
+      <VBox prefWidth="250.0">
          <children>
             <Label text="Enter Save File Name">
                <VBox.margin>
