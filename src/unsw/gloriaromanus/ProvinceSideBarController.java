@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
@@ -34,8 +35,8 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     private Property<Province> targetProvince = new SimpleObjectProperty<Province>();
     private Property<Province> actionProvince = new SimpleObjectProperty<Province>();
     
-    @FXML private ChoiceBox<String> trainChoiceBox;
-    @FXML private ChoiceBox<String> taxChoiceBox;
+    @FXML private ChoiceBox<ItemType> trainChoiceBox;
+    @FXML private ChoiceBox<TaxLevel> taxChoiceBox;
     @FXML private Button trainBtn;
     @FXML private Button moveBtn;
     @FXML private Button taxLevelBtn;
@@ -67,13 +68,9 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     // Handles button to train units in that province
     @FXML
     public void handleTrainBtn(ActionEvent e) {
-        trainTextField.setText(trainChoiceBox.getValue());
+        trainTextField.setText(trainChoiceBox.getValue().toString());
         // Call train method
-        for (ItemType u : actionProvince.getValue().getTrainable()) {
-            if (trainChoiceBox.getValue().toString() == u.getName(1)) {
-                game.trainUnit(actionProvince.getValue(), u);
-            }
-        }
+        game.trainUnit(actionProvince.getValue(), trainChoiceBox.getValue());
     }
 
     // Handles cancel training
@@ -105,23 +102,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
     // Handles changing of tax level
     @FXML
     public void handleTaxLevel() {
-        // Get new tax level choice from choice box
-        String newTaxLevel = taxChoiceBox.getValue().toString();
-        // Switch case to set new tax level
-        switch(newTaxLevel) {
-            case "Low Tax":
-                game.setTax(actionProvince.getValue(), TaxLevel.LOW_TAX);
-                break;
-            case "Normal Tax":
-                game.setTax(actionProvince.getValue(), TaxLevel.NORMAL_TAX);
-                break;
-            case "High Tax":
-                game.setTax(actionProvince.getValue(), TaxLevel.HIGH_TAX);
-                break;
-            case "Very High Tax":
-                game.setTax(actionProvince.getValue(), TaxLevel.VERY_HIGH_TAX);
-                break;
-        }
+        game.setTax(actionProvince.getValue(), taxChoiceBox.getValue()); 
     }
 
     // Displays the name of the selected action province along with all other information
@@ -158,7 +139,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
             // Update Trainable Units
             List<ItemType> trainableUnits = province.getTrainable();
             for (ItemType u : trainableUnits) {
-                trainChoiceBox.getItems().add(u.getName(1));
+                trainChoiceBox.getItems().add(u);
             }
             app.displayText("Action province selected.");
         }
@@ -185,16 +166,24 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
     @FXML
     public void initialize() {
-
-        // These items are for configuring the tax level choice box
-        taxChoiceBox.getItems().add("Low Tax");
-        taxChoiceBox.getItems().add("Normal Tax");
-        taxChoiceBox.getItems().add("High Tax");
-        taxChoiceBox.getItems().add("Very High Tax");
+    	
+        taxChoiceBox.getItems().addAll(TaxLevel.values());
 
         // Set selection mode for listview in action province list to multiple
         unitsProvinceListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
+        unitsProvinceListView.setCellFactory((param) -> new ListCell<Unit>() {
+            @Override 
+            protected void updateItem(Unit item, boolean empty) {
+                super.updateItem(item, empty);
+                if(!empty) {
+                	setDisable(!item.canAttack());
+                    setText(item.toString());
+                }else {
+                	setText("");
+                	setDisable(true);
+                }
+            }
+    	});  
     }
 
     @Override
@@ -216,6 +205,7 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
 
     // Update province unit choicebox which deals with move/invade
     private void updateUnitList(Province p) {
+    	if(!p.equals(actionProvince.getValue())) return;
         unitsProvinceListView.getItems().clear();
         if (p.getUnits() == null || p.getUnits().isEmpty()) {
             app.displayText("No more active units in province");
@@ -223,7 +213,6 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         else {
             for (Unit u : p.getUnits()) {
                 unitsProvinceListView.getItems().add(u);
-                checkLast().setDisable(true);
             }
         }
     }
@@ -286,9 +275,9 @@ public class ProvinceSideBarController extends Controller implements Observer<Pr
         selectedProvince.setValue(null);
         actionProvince.setValue(null);
     }
-
-    private ListCell<Unit> checkLast() {
-        return ((ListCell<Unit>)unitsProvinceListView.getChildrenUnmodifiable().get(unitsProvinceListView.getItems().size()-1));
+    void updateTrainEnable() {
+    	trainBtn.setDisable((actionProvince.getValue().getTrainingSlots() <= 0) ||
+    			(trainChoiceBox.getValue().getCost(1) > game.getCurrentTurn().getGold()));
     }
 
     ListProperty<Unit> getUnitSelectionProperty() {

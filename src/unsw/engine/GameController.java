@@ -53,6 +53,8 @@ import javafx.scene.paint.Color;
 public class GameController {
 	public static double STARTING_DENSITY = 0.5;
 	public static int AVERAGE_BARBARIANS = 4;
+	// A reference to NO_ONE so the json parser knows about it.
+	private Faction NO_ONE = Faction.NO_ONE;
 	
 	private Collection<Province> allProvinces;
 	private List<Faction> factionOrder;

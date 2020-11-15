@@ -1,5 +1,7 @@
 package unsw.ui.MainMenu;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
@@ -15,23 +17,16 @@ public class MainMenuController extends Controller implements Observer<TurnFeatu
     }
 
     @FXML
-    public void newGame()throws Exception{
-        try {
-            Controller controller = GloriaRomanusApplication.loadController(UIPath.NEWGAME.getPath());
-            GloriaRomanusApplication.app.setScene(controller);
-        } catch (Exception e) {
-            System.out.println("setting fild DNE");
-        }
+    public void newGame(){
+        
+        Controller controller = GloriaRomanusApplication.loadController(UIPath.NEWGAME.getPath());
+        GloriaRomanusApplication.app.setScene(controller);
     
     }
     @FXML
     public void loadsave(){
-        try {
-            Controller controller = GloriaRomanusApplication.loadController(UIPath.LOADSAVE.getPath());
-            GloriaRomanusApplication.app.setScene(controller);
-        } catch (Exception e) {
-            System.out.println("setting fild DNE");
-        }
+        Controller controller = GloriaRomanusApplication.loadController(UIPath.LOADSAVE.getPath());
+        GloriaRomanusApplication.app.setScene(controller);
     }
     @FXML
     public void setting(){

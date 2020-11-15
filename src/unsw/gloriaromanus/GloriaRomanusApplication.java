@@ -37,12 +37,18 @@ public class GloriaRomanusApplication extends Application {
     stage.show();
 
   }
-  public static <T extends Controller> T loadController(String fileName) throws IOException {
-	FXMLLoader loader = new FXMLLoader(new File(fileName).toURI().toURL());
-	Parent root = loader.load();
-	T c = loader.getController();
-	c.setRoot(root);	  
-	return c;
+  public static <T extends Controller> T loadController(String fileName) {
+	try {
+		FXMLLoader loader = new FXMLLoader(new File(fileName).toURI().toURL());
+		Parent root = loader.load();
+		T c = loader.getController();
+		c.setRoot(root);
+		return c;
+	}catch(IOException e){
+		System.err.println("Failed to Load!!");
+		e.printStackTrace();
+		return null;
+	}
   }
   
   

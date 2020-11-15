@@ -1,5 +1,7 @@
 package unsw.ui.topbar;
 
+import com.esri.arcgisruntime.symbology.ColorUtil;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
@@ -9,7 +11,11 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import unsw.engine.GameController;
 import unsw.engine.VicCondition.VicComponent;
 import unsw.engine.VicCondition.VicComposite;
@@ -19,13 +25,13 @@ import unsw.ui.Observer.Observer;
 import unsw.ui.Observer.TurnFeatureInfo;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
+import unsw.gloriaromanus.SavePaneController;
 
-public class TopBarController extends Controller implements Observer<TurnFeatureInfo>{
+public class TopBarController extends Controller{
     private GameController game;
     private TurnFeatureInfo turninfo;
 
-    @FXML
-    private HBox topbar;
+
     private VicComponent vicinfo;
     
 
@@ -35,8 +41,6 @@ public class TopBarController extends Controller implements Observer<TurnFeature
     @FXML private Label goalLabel;
     @FXML private MenuBar infoMenu;
     
-    @FXML private Button endTurn;
-
     @FXML
     private Menu vic = new Menu("VicInfo");
     
@@ -53,8 +57,7 @@ public class TopBarController extends Controller implements Observer<TurnFeature
 
     @FXML
     public void initialize(){
-        update(new TurnFeatureInfo(game));
-        endTurn.setOnAction((e)->endTurnPressed());
+    	updateValues();
         
         infoMenuSetup();
     }
@@ -93,7 +96,8 @@ public class TopBarController extends Controller implements Observer<TurnFeature
         vic.graphicProperty().set(gn);
         infoMenu.getMenus().addAll(vic);
     }
-    
+
+    @FXML
     private void endTurnPressed(){
         if (this.game.endTurn()==null){
             //game continue
@@ -102,6 +106,11 @@ public class TopBarController extends Controller implements Observer<TurnFeature
             //game end
             //TODO new sceen
         }
+    }   
+    @FXML
+    private void saveGamePressed(){
+        SavePaneController c = new SavePaneController(game);
+        ((StackPane)GloriaRomanusApplication.app.getSceneRoot()).getChildren().add(c.getRoot());
     }
 
     private void progressVicInfo(VicComponent vic){
@@ -115,10 +124,12 @@ public class TopBarController extends Controller implements Observer<TurnFeature
         p.set(vic.getMainProgress());
     }
     
-    @Override
-    public void update(TurnFeatureInfo m) {
-        turninfo = m;
+    public void updateValues() {
+        turninfo = new TurnFeatureInfo(game);
+        Color bg = ColorUtil.argbToColor(game.getSolidFactionColour(game.getCurrentTurn()));
+        BackgroundFill f = new BackgroundFill(bg, null, null);
         
+        ((HBox)root).setBackground(new Background(f));
         yearLabel.setText(getYear() + " AD");
         facnameLabel.setText(getFaction());
 

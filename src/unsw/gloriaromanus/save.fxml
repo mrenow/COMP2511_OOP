@@ -24,7 +24,7 @@
             </TextField>
             <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
                <buttons>
-                  <Button mnemonicParsing="false" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#onSavePressed" text="Save" />
                   <Button mnemonicParsing="false" onAction="#destroy" text="↩ Return" />
                </buttons>
                <VBox.margin>

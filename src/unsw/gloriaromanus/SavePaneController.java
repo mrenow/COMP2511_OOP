@@ -13,25 +13,29 @@ import javafx.scene.control.TextField;
 import unsw.engine.GameController;
 import unsw.engine.Province;
 import unsw.engine.Unit;
+import unsw.ui.UIPath;
+import unsw.ui.LoadSave.LoadSaveController;
 
 public class SavePaneController extends Controller{
+	
 	
 	private GameController game;
 	@FXML private TextField fileTextField;
 	public SavePaneController(GameController game) {
 		this.game = game;
-		GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/battle.fxml");
+		GloriaRomanusApplication.loadExistingController(this, "src/unsw/gloriaromanus/save.fxml");
+	}
 	
 	
 	@FXML
-	private void save() {
+	private void onSavePressed() {
 		try {
-			game.saveGame(fileTextField.getText());
+			game.saveGame(UIPath.SAVES.getPath() + fileTextField.getText());
 		} catch (IOException e) {
 			System.err.println("Couldnt save");
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 		}
 	} 
-	
+
 }

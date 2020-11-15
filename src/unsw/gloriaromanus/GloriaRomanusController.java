@@ -55,9 +55,9 @@ public class GloriaRomanusController extends Controller{
 		sideController.addSelectedChangedListener((ob,prev,next)->mapController.updateSelectedProvince(next));
 		
 		topBar = new TopBarController(game);
-		game.attatchTurnChangedObserver(topBar);
+		game.attatchTurnChangedObserver((m) -> topBar.updateValues());
 		//these two should be inside main
-		
+		game.attatchProvinceChangedObserver((m) -> topBar.updateValues());
 		
 		HBox.setHgrow(mapController.getRoot(), Priority.ALWAYS);
 		lowerBox.getChildren().add(mapController.getRoot());
