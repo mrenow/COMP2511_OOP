@@ -28,41 +28,50 @@ import unsw.ui.Observer.TurnFeatureInfo;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
 import static unsw.gloriaromanus.GloriaRomanusApplication.app;
+
+import java.io.IOException;
+
 import unsw.gloriaromanus.SavePaneController;
 
-public class TopBarController extends Controller{
+public class TopBarController extends Controller {
     private GameController game;
     private TurnFeatureInfo turninfo;
 
-
     private VicComponent vicinfo;
-    
 
-    @FXML private Label yearLabel;
-    @FXML private Label facnameLabel;
-    @FXML private Label goldLabel;
-    @FXML private Label wealthLabel;
-    @FXML private Label goalLabel;
-    @FXML private MenuBar infoMenu;
-    
+    @FXML
+    private Label yearLabel;
+    @FXML
+    private Label facnameLabel;
+    @FXML
+    private Label goldLabel;
+    @FXML
+    private Label wealthLabel;
+    @FXML
+    private Label goalLabel;
+    @FXML
+    private MenuBar infoMenu;
+
     @FXML
     private Menu vic = new Menu("VicInfo");
-    
+
     private DoubleProperty p = new SimpleDoubleProperty(0.0);
     private DoubleProperty p1 = new SimpleDoubleProperty(0.0);
     private DoubleProperty p2 = new SimpleDoubleProperty(0.0);
     private DoubleProperty p3 = new SimpleDoubleProperty(0.0);
 
-    public TopBarController(){}
-    public TopBarController(GameController game){
+    public TopBarController() {
+    }
+
+    public TopBarController(GameController game) {
         this.game = game;
-		GloriaRomanusApplication.loadExistingController(this, UIPath.TOPBAR.getPath());
+        GloriaRomanusApplication.loadExistingController(this, UIPath.TOPBAR.getPath());
     }
 
     @FXML
-    public void initialize(){
-    	updateValues();
-        
+    public void initialize() {
+        updateValues();
+
         infoMenuSetup();
     }
 
@@ -78,62 +87,65 @@ public class TopBarController extends Controller{
         return turninfo.getYear();
     }
 
-    private void infoMenuSetup(){
-        //set 1st entry
+    private void infoMenuSetup() {
+        // set 1st entry
         ProgressBar gn1 = new ProgressBar();
         gn1.progressProperty().bind(p1);
-        MenuItem item1 = new MenuItem("Conquest",gn1);
-    
-        //set 2nd entry
+        MenuItem item1 = new MenuItem("Conquest", gn1);
+
+        // set 2nd entry
         ProgressBar gn2 = new ProgressBar();
         gn2.progressProperty().bind(p2);
-        MenuItem item2 = new MenuItem("Treasury",gn2);
-    
+        MenuItem item2 = new MenuItem("Treasury", gn2);
+
         ProgressBar gn3 = new ProgressBar();
         gn3.progressProperty().bind(p3);
-        MenuItem item3 = new MenuItem("Wealth",gn3);
-        
-        //set main entry
+        MenuItem item3 = new MenuItem("Wealth", gn3);
+
+        // set main entry
         ProgressBar gn = new ProgressBar();
         gn.progressProperty().bind(p);
-        vic.getItems().addAll(item1,item2,item3);
+        vic.getItems().addAll(item1, item2, item3);
         vic.graphicProperty().set(gn);
         infoMenu.getMenus().addAll(vic);
     }
 
     @FXML
-    private void endTurnPressed(){
+    private void endTurnPressed() {
         GameController tmp = this.game;
-        if (this.game.endTurn()==null){
-            //game continue
+        if (this.game.endTurn() == null) {
+            // game continue
             System.out.println("endturn");
-        }else{
-            //game end
+        } else {
+            // game end
             try {
                 tmp.saveGame(UIPath.TMP.getPath());
             } catch (Exception e) {
                 System.out.println("save game fail");
             }
-            
+
             Controller controller = GloriaRomanusApplication.loadController(UIPath.VIC.getPath());
             GloriaRomanusApplication.app.setScene(controller);
         }
-    }   
-    @FXML
-    private void saveGamePressed(){
-        SavePaneController c = new SavePaneController(game);
-        ((StackPane)GloriaRomanusApplication.app.getSceneRoot()).getChildren().add(c.getRoot());
     }
+
     @FXML
-    private void menuPressed(){
+    private void saveGamePressed() {
+        SavePaneController c = new SavePaneController(game);
+        ((StackPane) GloriaRomanusApplication.app.getSceneRoot()).getChildren().add(c.getRoot());
+    }
+
+    @FXML
+    private void menuPressed() {
         try {
             game.saveGame(UIPath.TMP.getPath());
-            MainMenuController controller = GloriaRomanusApplication.loadController(UIPath.MENU.getPath());
-            controller.setGame(game);
-            app.setScene(controller);
-        } catch (Exception e) {
-            System.out.println("setting fild DNE");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        MainMenuController controller = GloriaRomanusApplication.loadController(UIPath.MENU.getPath());
+        controller.setGame(game);
+        app.setScene(controller);
+        
     }
     private void progressVicInfo(VicComponent vic){
         Double conquest = vic.getProgress(VictoryCondition.CONQUEST);

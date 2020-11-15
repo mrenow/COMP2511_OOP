@@ -1,0 +1,36 @@
+.background{
+    -fx-background-image: url("https://i.imgur.com/AkRR9mz.jpg");
+        background-image: url("https://i.imgur.com/AkRR9mz.jpg");
+    -fx-background-position: center;
+        background-position: center;
+    -fx-background-size: cover;
+        background-size: cover;
+    -fx-background-repeat: no-repeat;
+        background-repeat: no-repeat;
+}
+
+.button{
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #ff5400, #be1d00);
+        background-color: linear-gradient(from 0% 93% to 0% 100%, #ff5400, #be1d00);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;;
+    -fx-background-radius: 20;
+    -fx-padding: 8 8 8 8;
+        padding: 8 8 8 8;
+}
+
+.title{
+    -fx-text-fill: #FD6A02;
+    -fx-font-size: 25px;
+        font-size: 25px;
+    -fx-font-family: "Arial Black";
+        font-family: "Arial Black";
+    -fx-fill: #818181;
+        fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.listView{
+    -fx-control-inner-background: #EBD5B3 ;
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 50%);
+}
