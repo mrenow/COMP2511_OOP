@@ -23,6 +23,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -32,6 +33,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 import unsw.engine.BattleInfo;
 import unsw.engine.BattleSide;
 import unsw.engine.GameController;
@@ -172,6 +174,7 @@ public class BattlePaneController extends Controller{
 			}
 			for (int col = 1; col < gridRow.size(); col ++) {
 				Label label = gridRow.get(col);
+				label.setTooltip(tooltipFactory(u, col));
 				label.setText(stringMap(u, GridPane.getColumnIndex(label)));
 			}
 		}
@@ -190,6 +193,22 @@ public class BattlePaneController extends Controller{
 		case 8: return Integer.toString((int)u.getSpeed());
 		default: return "";
 		}
+	}
+	
+	private Tooltip tooltipFactory(Unit u, int column) {
+		Tooltip t;
+		switch(column) {
+		case 2: t = new Tooltip("Health: " + stringMap(u,column)); break;
+		case 3: t = new Tooltip("Attack: " + stringMap(u,column)); break;
+		case 4: t = new Tooltip("Armour: " + stringMap(u,column)); break;
+		case 5: t = new Tooltip("Shield: " + stringMap(u,column)); break;
+		case 6: t = new Tooltip("Defense Skill: " + stringMap(u,column) + "\n Ignored by ranged units."); break;
+		case 7: t = new Tooltip("Morale: " + stringMap(u,column)); break;
+		case 8: t = new Tooltip("Speed: " + stringMap(u,column)); break;
+		default: return null;
+		}
+		t.setShowDelay(Duration.millis(300));
+		return t;
 	}
 	
 	
