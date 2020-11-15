@@ -103,11 +103,18 @@ public class TopBarController extends Controller{
 
     @FXML
     private void endTurnPressed(){
+        GameController tmp = this.game;
         if (this.game.endTurn()==null){
             //game continue
             System.out.println("endturn");
         }else{
             //game end
+            try {
+                tmp.saveGame(UIPath.TMP.getPath());
+            } catch (Exception e) {
+                System.out.println("save game fail");
+            }
+            
             Controller controller = GloriaRomanusApplication.loadController(UIPath.VIC.getPath());
             GloriaRomanusApplication.app.setScene(controller);
         }

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
@@ -12,13 +13,13 @@ import unsw.ui.UIPath;
 
 public class VicUIController extends Controller{
 
-    @FXML private StackPane pane;
-    @FXML private ImageView vicImage;
+    @FXML private AnchorPane pane;
+    @FXML private ImageView vicimage;
     @FXML
     private void initialize()throws Exception{
         try {
             Image im = new Image(new FileInputStream("src/unsw/ui/VicUI/Victory.JPG"));
-            vicImage.setImage(im);
+            vicimage.setImage(im);
             
         
 
