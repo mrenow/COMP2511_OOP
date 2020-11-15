@@ -19,6 +19,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import util.ArrayUtil;
+
 /**
  * Represents a queueable task for a province that takes <code>duration</code>turns to complete
  * @author ezra
@@ -230,5 +232,7 @@ public enum ItemType{
 		System.out.println(i.attributes);
 		
 	}
-
+	public String toString() {
+		return ArrayUtil.enumToTitle(this);
+	}
 }
