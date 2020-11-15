@@ -22,10 +22,12 @@ import unsw.engine.VicCondition.VicComponent;
 import unsw.engine.VicCondition.VicComposite;
 import unsw.engine.VicCondition.VictoryCondition;
 import unsw.ui.UIPath;
+import unsw.ui.MainMenu.MainMenuController;
 import unsw.ui.Observer.Observer;
 import unsw.ui.Observer.TurnFeatureInfo;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
+import static unsw.gloriaromanus.GloriaRomanusApplication.app;
 import unsw.gloriaromanus.SavePaneController;
 
 public class TopBarController extends Controller{
@@ -115,7 +117,17 @@ public class TopBarController extends Controller{
         SavePaneController c = new SavePaneController(game);
         ((StackPane)GloriaRomanusApplication.app.getSceneRoot()).getChildren().add(c.getRoot());
     }
-
+    @FXML
+    private void menuPressed(){
+        try {
+            game.saveGame(UIPath.TMP.getPath());
+            MainMenuController controller = GloriaRomanusApplication.loadController(UIPath.MENU.getPath());
+            controller.setGame(game);
+            app.setScene(controller);
+        } catch (Exception e) {
+            System.out.println("setting fild DNE");
+        }
+    }
     private void progressVicInfo(VicComponent vic){
         Double conquest = vic.getProgress(VictoryCondition.CONQUEST);
         Double treasury = vic.getProgress(VictoryCondition.TREASURY);

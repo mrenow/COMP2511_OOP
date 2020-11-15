@@ -31,7 +31,7 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     @FXML private ListView<FactionType> factionList;
     // implement later
     //@FXML private ListView<FactionType> VictoryConditionList;
-    @FXML private ListView<FactionType> selectedfaction;
+    //@FXML private ListView<FactionType> selectedfaction;
     //private List<FactionType> selectedfaction = new ArrayList<>();
     
     

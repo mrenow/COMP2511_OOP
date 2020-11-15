@@ -49,6 +49,7 @@
             <Insets />
          </HBox.margin></Separator>
       <Label fx:id="goalLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="144.0" text="Goal: " textFill="WHITE" HBox.hgrow="ALWAYS" />
+      <Button onAction="#menuPressed" text="Menu" />
       <Button onAction="#saveGamePressed" text="Save Game" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets right="10.0" />

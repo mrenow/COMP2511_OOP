@@ -7,7 +7,8 @@ public enum UIPath {
     LOADSAVE("src/unsw/ui/LoadSave/LoadSave.fxml"),
     SAVES("src/unsw/saves/"),
     TOPBAR("src/unsw/ui/topbar/TopBar.fxml"),
-    VIC("src/unsw/ui/VicUI/VicUI.fxml");
+    VIC("src/unsw/ui/VicUI/VicUI.fxml"),
+    TMP("src/unsw/saves/tmp");
 
     private String path;
     UIPath (String path){
