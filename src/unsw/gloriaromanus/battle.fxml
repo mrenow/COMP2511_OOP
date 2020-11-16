@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane fx:id="titlePane" alignment="CENTER" collapsible="false" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" text="Battle" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane fx:id="titlePane" alignment="CENTER" collapsible="false" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@../ui/LoadSave/LoadSaveStyle.css" text="Battle" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="649.0">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="649.0" stylesheets="@../ui/LoadSave/LoadSaveStyle.css">
          <children>
             <GridPane prefHeight="209.0" prefWidth="579.0">
               <columnConstraints>
@@ -93,8 +93,8 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <buttons>
-                  <Button fx:id="invadeButton" mnemonicParsing="false" text="⚔️ Invade ⚔️" />
-                <Button fx:id="returnButton" mnemonicParsing="false" text="↩ Return" />
+                  <Button fx:id="invadeButton" mnemonicParsing="false" text="⚔️ Invade ⚔️" textFill="WHITE" />
+                <Button fx:id="returnButton" mnemonicParsing="false" text="↩ Return" textFill="WHITE" />
                </buttons>
             </ButtonBar>
          </children>

@@ -39,7 +39,7 @@ public class Images {
 			SPEED_ICON = new Image(new FileInputStream(new File("images/UISprites/speed_icon.png")),25,25,true,true);
 			MOVE_ICON = new Image(new FileInputStream(new File("images/UISprites/move_icon.png")),50,50,true,true);
 			MOV_POINT_ICON = new Image(new FileInputStream(new File("images/UISprites/move_icon.png")),25,25,true,true);
-			ATTACK_ICON = new Image(new FileInputStream(new File("images/UISprites/attack_icon.png")),50,50,true,true);
+			INVADE_ICON = new Image(new FileInputStream(new File("images/UISprites/attack_icon.png")),50,50,true,true);
 			
 			for (ItemType type : ItemType.values()) {
 				String location = type.getAttributeOrNull("image", 1);

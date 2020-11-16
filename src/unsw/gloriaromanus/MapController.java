@@ -96,7 +96,7 @@ public class MapController extends Controller{
 	private static final FillSymbol ATTACK_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x60F000A0, 6));	
 	private static final FillSymbol MOVE_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6030F0F0, 6));	
 	private static final FillSymbol ACTION_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6000F000, 6));	
-	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol(Images.ATTACK_ICON);
+	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol(Images.INVADE_ICON);
 	private static final MarkerSymbol MOVE_ICON = new PictureMarkerSymbol(Images.MOVE_ICON);
 	
 
@@ -237,7 +237,7 @@ public class MapController extends Controller{
 				System.out.println("load failure");
 			}
 		});
-		unitSelection.addListener((ListChangeListener<Unit>)c -> updateActionOverlay());
+		unitSelection.addListener((ListChangeListener<Unit>)(c -> updateActionOverlay()));
 	}
 	/**
 	 *  called after province shape data is loaded, and after province point data is initialized
