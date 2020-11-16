@@ -137,6 +137,7 @@ public class ProvinceSideBarController extends Controller{
 
 			@Override
 			public String toString(ItemType item) {
+				if(item == null) return "Select Unit";
 				return String.format("%d Gold,\t %s", item.getCost(1), item.toString());
 			}
 

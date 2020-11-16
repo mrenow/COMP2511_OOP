@@ -263,52 +263,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Bithynia et Pontus",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Bithynia et Pontus",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -318,15 +272,61 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Narbonensis",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Lugdunensis", "Aquitania", "Germania Superior", "Alpes Graiae et Poeninae", "Alpes Cottiae", "Alpes Maritimae", "Tarraconensis" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Narbonensis",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Narbonensis",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -361,81 +361,12 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Alpes Cottiae", "IX", "Narbonensis" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Alpes Maritimae",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Alpes Maritimae",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Alpes Maritimae",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -507,84 +438,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Galatia et Cappadocia",
-    "owner" : "NO_ONE",
+    "owner" : "GREECE",
     "adjacent" : [ "Bithynia et Pontus", "Cilicia", "Syria", "Lycia et Pamphylia", "Asia", "Armenia Mesopotamia" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Galatia et Cappadocia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Galatia et Cappadocia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Galatia et Cappadocia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -693,6 +555,29 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Iudaea",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -711,121 +596,6 @@
     "isLandlocked" : true,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dacia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dacia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dacia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dacia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dacia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -911,75 +681,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Arabia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Arabia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Arabia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -1020,29 +721,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Moesia Superior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -1061,6 +739,52 @@
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Achaia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Achaia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -1238,121 +962,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Caesariensis",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Caesariensis",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Caesariensis",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Caesariensis",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Caesariensis",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -1362,38 +971,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "II",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "IV", "I", "III" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "II",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -1494,130 +1080,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Raetia",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Germania Superior", "Alpes Graiae et Poeninae", "XI", "Noricum" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Raetia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Raetia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Raetia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Raetia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Raetia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -1927,6 +1398,121 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "III",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "III",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "III",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "III",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "III",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -1967,75 +1553,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Armenia Mesopotamia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Armenia Mesopotamia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Armenia Mesopotamia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -2045,15 +1562,84 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Britannia",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Lugdunensis" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Britannia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Britannia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Britannia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -2108,15 +1694,61 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Germania Inferior",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Belgica", "Germania Superior" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Germania Inferior",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Germania Inferior",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -2148,15 +1780,84 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "IV",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "VII", "VI", "V", "I", "II" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "IV",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "IV",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "IV",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -2219,6 +1920,75 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Creta et Cyrene",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Creta et Cyrene",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Creta et Cyrene",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -2228,15 +1998,153 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Aquitania",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Lugdunensis", "Narbonensis", "Tarraconensis" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Aquitania",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Aquitania",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Aquitania",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Aquitania",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Aquitania",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Aquitania",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -2268,268 +2176,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "IX",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "XI", "Alpes Cottiae", "Alpes Maritimae", "VIII", "VII" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "IX",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -2584,15 +2239,38 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Lugdunensis",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Britannia", "Belgica", "Aquitania", "Germania Superior", "Narbonensis" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Lugdunensis",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -2831,15 +2509,61 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Alpes Graiae et Poeninae",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Germania Superior", "XI", "Alpes Cottiae", "Narbonensis", "Raetia" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Alpes Graiae et Poeninae",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Alpes Graiae et Poeninae",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -2871,15 +2595,130 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "VI",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "VIII", "VII", "IV", "V" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -3020,15 +2859,199 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "VIII",
-    "owner" : "GREECE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "XI", "IX", "X", "VII", "VI" ],
     "buildings" : [ ],
-    "townWealth" : 30,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -3114,6 +3137,52 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Lycia et Pamphylia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Lycia et Pamphylia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -3123,84 +3192,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "I",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "VII", "IV", "III", "II" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "I",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "I",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "I",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -3281,121 +3281,6 @@
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Cilicia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Cilicia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Cilicia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Cilicia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Cilicia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -3757,6 +3642,29 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Africa Proconsularis",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -3797,75 +3705,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Pannonia Inferior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Pannonia Inferior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Pannonia Inferior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -3875,130 +3714,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Sardinia et Corsica",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "VII" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sardinia et Corsica",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sardinia et Corsica",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sardinia et Corsica",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sardinia et Corsica",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sardinia et Corsica",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -4122,107 +3846,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "V",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "VI", "IV" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "V",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "V",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "V",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "V",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -4254,15 +3886,153 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "X",
-    "owner" : "GREECE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "XI", "Noricum", "VIII", "Pannonia Superior", "Dalmatia" ],
     "buildings" : [ ],
-    "townWealth" : 30,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "X",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "X",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "X",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "X",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "X",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "X",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -4348,190 +4118,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Sicilia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -4572,6 +4158,144 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Baetica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Baetica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Baetica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Baetica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Baetica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Baetica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -4581,15 +4305,38 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Tarraconensis",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Aquitania", "Narbonensis", "Baetica", "Lusitania" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Tarraconensis",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -4767,98 +4514,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Noricum",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Noricum",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Noricum",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Noricum",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -4868,107 +4523,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Germania Superior",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Lugdunensis", "Belgica", "Germania Inferior", "Alpes Graiae et Poeninae", "Narbonensis", "Raetia" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Germania Superior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Germania Superior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Germania Superior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Germania Superior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -5163,144 +4726,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Tingitana",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Tingitana",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Tingitana",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Tingitana",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Tingitana",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Mauretania Tingitana",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -5399,12 +4824,104 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Alpes Graiae et Poeninae", "Alpes Cottiae", "IX", "Raetia", "Noricum", "X", "VIII" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "XI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "XI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "XI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "XI",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -5531,58 +5048,12 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Alpes Graiae et Poeninae", "XI", "Alpes Maritimae", "IX", "Narbonensis" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
     "units" : [ {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Alpes Cottiae",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Alpes Cottiae",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -5614,15 +5085,176 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Asia",
-    "owner" : "NO_ONE",
+    "owner" : "GREECE",
     "adjacent" : [ "Bithynia et Pontus", "Galatia et Cappadocia", "Lycia et Pamphylia" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Asia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Asia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Asia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Asia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Asia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Asia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Asia",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -5654,10 +5286,10 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "VII",
-    "owner" : "NO_ONE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "IX", "VIII", "VI", "IV", "I", "Sardinia et Corsica" ],
     "buildings" : [ ],
-    "townWealth" : 0,
+    "townWealth" : 90,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
@@ -5725,121 +5357,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Aegyptus",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Aegyptus",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Aegyptus",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Aegyptus",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Aegyptus",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -5880,6 +5397,98 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Moesia Inferior",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Moesia Inferior",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Moesia Inferior",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Moesia Inferior",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -5889,15 +5498,176 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Belgica",
-    "owner" : "CARTHAGE",
+    "owner" : "NO_ONE",
     "adjacent" : [ "Lugdunensis", "Germania Inferior", "Germania Superior" ],
     "buildings" : [ ],
-    "townWealth" : 150,
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Belgica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Belgica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Belgica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Belgica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Belgica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Belgica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Belgica",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 4.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
       "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
@@ -6006,144 +5776,6 @@
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Lusitania",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Lusitania",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Lusitania",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Lusitania",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Lusitania",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BARBARIAN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Lusitania",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : 5.0,
-      "armour" : 4.0,
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
     } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
@@ -6154,29 +5786,45 @@
   } ],
   "factionOrder" : [ {
     "type" : "CARTHAGE",
-    "gold" : 1415,
-    "provinces" : [ "Belgica", "Britannia", "Aquitania", "Alpes Maritimae", "Alpes Cottiae", "Tarraconensis", "Lugdunensis", "Raetia", "XI", "Germania Inferior", "Germania Superior", "Narbonensis", "Alpes Graiae et Poeninae" ],
+    "gold" : 518,
+    "provinces" : [ "I", "VII", "X", "XI", "Sardinia et Corsica", "VI", "II", "IX", "VIII", "V", "Alpes Maritimae", "Alpes Cottiae", "IV" ],
     "vicComponent" : {
-      "type" : "VicLeaf",
-      "goal" : "WEALTH",
-      "progress" : 4.875
+      "type" : "VicComposite",
+      "goal" : "OR",
+      "subgoals" : [ {
+        "type" : "VicLeaf",
+        "goal" : "CONQUEST",
+        "progress" : 0.24528301886792453
+      }, {
+        "type" : "VicLeaf",
+        "goal" : "WEALTH",
+        "progress" : 2.925
+      } ]
     },
     "lostEagles" : [ ]
   }, {
     "type" : "GREECE",
     "gold" : 89,
-    "provinces" : [ "Macedonia", "Moesia Superior", "Thracia", "Dacia", "X", "Moesia Inferior", "Noricum", "VIII", "Pannonia Superior", "Achaia", "Dalmatia", "Pannonia Inferior", "Bithynia et Pontus" ],
+    "provinces" : [ "Asia", "Moesia Superior", "Pannonia Inferior", "Moesia Inferior", "Dalmatia", "Thracia", "Achaia", "Galatia et Cappadocia", "Pannonia Superior", "Macedonia", "Noricum", "Bithynia et Pontus", "Dacia" ],
     "vicComponent" : {
-      "type" : "VicLeaf",
-      "goal" : "WEALTH",
-      "progress" : 4.875
+      "type" : "VicComposite",
+      "goal" : "OR",
+      "subgoals" : [ {
+        "type" : "VicLeaf",
+        "goal" : "CONQUEST",
+        "progress" : 0.24528301886792453
+      }, {
+        "type" : "VicLeaf",
+        "goal" : "WEALTH",
+        "progress" : 1.95
+      } ]
     },
     "lostEagles" : [ ]
   } ],
   "factionColourMap" : {
     "NO_ONE" : 0,
-    "CARTHAGE" : 1623184932,
-    "GREECE" : 1622821417
+    "CARTHAGE" : 1610748445,
+    "GREECE" : 1616527590
   },
   "round" : 3,
   "currentTurn" : 0

@@ -19,13 +19,18 @@ public class VicUIController extends Controller{
     @FXML private AnchorPane pane;
     @FXML private Label victorLabel;
 	private GameController game;
+	private String winner;
     
     public VicUIController(GameController game, String winner) {
     	this.game = game;
-    	victorLabel.setText("VICTORY FOR\n" +  winner.toUpperCase());
+    	this.winner = winner;
     	GloriaRomanusApplication.loadExistingController(this, UIPath.VIC.getPath());
     }
-    
+    @FXML
+    private void initialize() {
+
+    	victorLabel.setText("VICTORY FOR\n" +  winner.toUpperCase());
+    }
     @FXML
     private void quit(){
         Controller controller = GloriaRomanusApplication.loadController(UIPath.MENU.getPath());
