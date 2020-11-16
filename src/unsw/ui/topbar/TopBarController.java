@@ -125,8 +125,7 @@ public class TopBarController extends Controller {
                 System.out.println("save game fail");
             }
 
-            VicUIController controller = GloriaRomanusApplication.loadController(UIPath.VIC.getPath());
-            GloriaRomanusApplication.app.setScene(controller);
+            GloriaRomanusApplication.app.setScene(new VicUIController(game, game.getCurrentTurn().getTitle()));
         }
     }
 

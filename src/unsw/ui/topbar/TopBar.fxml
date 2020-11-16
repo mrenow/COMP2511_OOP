@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="917.0" stylesheets="@../LoadSave/LoadSaveStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="yearLabel" prefHeight="16.0" prefWidth="64.0" text="Year: " textFill="WHITE">
          <HBox.margin>
@@ -48,13 +48,16 @@
          <HBox.margin>
             <Insets />
          </HBox.margin></Separator>
-      <Label fx:id="goalLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="144.0" text="Goal: " textFill="WHITE" HBox.hgrow="ALWAYS" />
-      <Button onAction="#menuPressed" text="Menu" />
-      <Button onAction="#saveGamePressed" text="Save Game" HBox.hgrow="NEVER">
+      <Label fx:id="goalLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="132.0" text="Goal: " textFill="WHITE" HBox.hgrow="ALWAYS" />
+      <Button onAction="#menuPressed" text="Menu" textFill="WHITE">
          <HBox.margin>
             <Insets right="10.0" />
          </HBox.margin></Button>
-      <Button onAction="#endTurnPressed" text="EndTurn">
+      <Button onAction="#saveGamePressed" text="Save Game" textFill="WHITE" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets right="10.0" />
+         </HBox.margin></Button>
+      <Button onAction="#endTurnPressed" text="EndTurn" textFill="WHITE">
          <HBox.margin>
             <Insets right="10.0" />
          </HBox.margin>

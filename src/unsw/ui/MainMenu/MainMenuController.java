@@ -57,7 +57,6 @@ public class MainMenuController extends Controller{
         this.game = game;
         resume.onActionProperty().set(c-> resumeGame());
         resume.setDisable(false);
-        menu.getChildren().add(1, resume);
     }
     private void resumeGame(){
         GameController game = GameController.loadFromSave(UIPath.TMP.getPath());
