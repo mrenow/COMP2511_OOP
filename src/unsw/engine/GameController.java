@@ -74,6 +74,7 @@ public class GameController {
 	@JsonIgnore private Observable<Province> triggerBuildingChanged = new Observable<>();
 	@JsonIgnore private Observable<Province> triggerUnitsChanged = new Observable<>();
 	@JsonIgnore private Observable<BattleInfo> triggerBattleEnd = new Observable<>();
+	private boolean hasWon;
 	
 	/**
 	 * called on endTurn()
@@ -465,13 +466,12 @@ public class GameController {
 		curr.update();//update faction's gold and province wealth
 		updateVictoryInfo();
 		VicComponent vic = checkVictory();
-		if(vic==null){	
-			this.currentTurn++;
-			if (this.factionOrder.size() == this.currentTurn) {
-				this.round++;
-				this.currentTurn = 0;	
-			}
+		this.currentTurn++;
+		if (this.factionOrder.size() == this.currentTurn) {
+			this.round++;
+			this.currentTurn = 0;	
 		}
+		if(vic != null) hasWon = true;	
 		TurnFeatureInfo m = new TurnFeatureInfo(this);
 		triggerTurnChanged.notifyUpdate(m);
 		return vic;
@@ -673,6 +673,9 @@ public class GameController {
 	
 	public int getYear() {
 		return 200+round;
+	}
+	public boolean hasWon() {
+		return hasWon;
 	}
 	
 

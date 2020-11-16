@@ -33,7 +33,6 @@ public class GloriaRomanusController extends Controller{
 	private ProvinceSideBarController sideController;
 
 	private TopBarController topBar;
-	
 	public GloriaRomanusController(GameController game) {
 		this.game = game;
     	GloriaRomanusApplication.loadExistingController(this, UIPath.GAME.getPath());

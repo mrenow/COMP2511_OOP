@@ -61,13 +61,11 @@ public class TopBarController extends Controller {
     private DoubleProperty p2 = new SimpleDoubleProperty(0.0);
     private DoubleProperty p3 = new SimpleDoubleProperty(0.0);
     
-    private boolean hasWon;
 
     public TopBarController() {
     }
 
-    public TopBarController(GameController game, boolean hasWon) {
-        this.hasWon = hasWon;
+    public TopBarController(GameController game) {
     	this.game = game;
         GloriaRomanusApplication.loadExistingController(this, UIPath.TOPBAR.getPath());
     }
@@ -117,10 +115,14 @@ public class TopBarController extends Controller {
     @FXML
     private void endTurnPressed() {
     	GameController tmp = this.game;
-        if (this.game.endTurn() == null) {
+        if(game.hasWon()) {
+        	game.endTurn();
+        	return;
+        }
+    	if (this.game.endTurn() == null) {
             // game continue
             System.out.println("endturn");
-        } else {
+        } else{
             // game end
             try {
                 tmp.saveGame(UIPath.TMP.getPath());
