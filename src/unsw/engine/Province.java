@@ -177,7 +177,6 @@ public class Province {
 //	Called when province training menu is opened
 	public List<ItemType> getTrainable() {
 		List<ItemType> trainableList = new ArrayList<>();
-		trainableList.add(ItemType.TEST_TROOP);
 		trainableList.add(ItemType.HEAVY_CAVALRY);
 		trainableList.add(ItemType.JAVELIN_SKIRMISHER);
 		trainableList.add(ItemType.ELEPHANTS);
