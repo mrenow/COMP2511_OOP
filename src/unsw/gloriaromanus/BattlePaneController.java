@@ -120,7 +120,7 @@ public class BattlePaneController extends Controller{
 		List<List<Label>> labelGrid = labelGrids.get(side);
 		armyPane.getColumnConstraints().get(0).setMinWidth(GRID_HEIGHT);
 		armyPane.getColumnConstraints().get(0).setPrefWidth(GRID_HEIGHT);
-		armyPane.setGridLinesVisible(true);
+		
 		while(armyPane.getColumnCount() < NUM_COLUMNS) {
 			armyPane.getColumnConstraints().add(new ColumnConstraints(GRID_HEIGHT));
 		}
@@ -143,14 +143,15 @@ public class BattlePaneController extends Controller{
 			for (int col = 1; col < NUM_COLUMNS; col++) {
 				if(displayOrder[col] != null) {
 					ImageView bg = new ImageView(displayOrder[col]);
-					Label l = new Label(stringMap(u, col), bg);
+					Label l = new Label();
+					l.setGraphic(bg);
 					l.setContentDisplay(ContentDisplay.CENTER);
 					l.setFont(new Font(15));
 					
 					armyPane.add(l, col, row);
 					labelGrid.get(row).add(l);
 				}else {
-					Label l = new Label(stringMap(u, col));
+					Label l = new Label();
 					armyPane.add(l, col, row);
 					labelGrid.get(row).add(l);
 				}
@@ -160,6 +161,7 @@ public class BattlePaneController extends Controller{
 		// centre components
 		armyPane.getColumnConstraints().forEach((c)->c.setHalignment(HPos.CENTER));
 		armyPane.getRowConstraints().forEach((r)->r.setValignment(VPos.CENTER));
+		updateArmyPane(armyPane, side);
 	}
 	
 	private void updateArmyPane(GridPane armyPane, BattleSide side) {
@@ -207,7 +209,7 @@ public class BattlePaneController extends Controller{
 		case 8: t = new Tooltip("Speed: " + stringMap(u,column)); break;
 		default: return null;
 		}
-		t.setShowDelay(Duration.millis(300));
+		t.setShowDelay(Duration.millis(100));
 		return t;
 	}
 	
@@ -229,6 +231,14 @@ public class BattlePaneController extends Controller{
 			skirmishGridPane.add(new Label(attackMessage), 0 , index);
 			skirmishGridPane.add(new Label(defendMessage), 1 , index);
 			
+		}
+		switch(result.getResult()) {
+		case DRAW:
+			titlePane.setText("Draw");
+		case WIN:
+			titlePane.setText("You win!");
+		case LOSE:
+			titlePane.setText("You are defeated");
 		}
 	}
 }

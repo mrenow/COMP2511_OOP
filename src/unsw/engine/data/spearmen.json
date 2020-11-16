@@ -18,7 +18,7 @@
 	
 	"attack" : 4,
 	
-	"combatModifiers" : "",
+	"combatModifiers" : "ANTI_CAVALRY",
 	"moraleModifiers" : "",
 	
 	"image" : "Slingerman/Slinger_Man_NB.png" // edited to look like a guy with a spear

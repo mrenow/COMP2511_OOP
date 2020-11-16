@@ -33,7 +33,7 @@ public class Province {
 
 	// Generated every turn
 	private int townWealth = 0;
-	private TaxLevel taxLevel = TaxLevel.NORMAL_TAX;
+	private TaxLevel taxLevel = TaxLevel.LOW_TAX;
 
 	private int movCost = 4;
 	private boolean isLandlocked = false;
@@ -46,8 +46,11 @@ public class Province {
 
 	private int trainingSlotNum = 1;
 	private int buildingSlotNum = 1;
-	private int maxSlots = 1;
-	private Faction player;
+
+	// not used for any logic, since incrementing and decrementing takes care of
+	// training slot calculations
+	private int maxTrainingSlotNum = 1;
+	private int maxBuildingSlotNum = 1;
 
 	@JsonCreator
 	private Province() {
@@ -89,11 +92,16 @@ public class Province {
 	public int getTrainingSlots() {
 		return trainingSlotNum;
 	}
+	public int getMaxTrainingSlots() {
+		return maxTrainingSlotNum;
+	}
 
 	public int getBuildingSlots() {
 		return buildingSlotNum;
 	}
-
+	public int getMaxBuildingSlots() {
+		return maxBuildingSlotNum;
+	}
 	public int buildingWealth() {
 		int bWealth = 0;
 		for (Infrastructure building : buildings) {
@@ -117,7 +125,7 @@ public class Province {
 	 */
 	public int updateWealth() {
 		double gold = (this.townWealth + this.buildingWealth()) * this.taxLevel.getTaxRate();
-		this.townWealth += getWealthGrowth() + taxLevel.getwealthgen();
+		this.townWealth += getWealthGrowth() + taxLevel.getWealthGen();
 		this.townWealth = Integer.max(townWealth, 0);
 		updateBuildingWealth();
 		int g = (int) gold;
@@ -238,6 +246,7 @@ public class Province {
 		units.clear();
 		taxLevel = TaxLevel.NORMAL_TAX;
 		isConquered = true;
+		townWealth/=2;
 	}
 
 	void setTaxLevel(TaxLevel taxLevel) {

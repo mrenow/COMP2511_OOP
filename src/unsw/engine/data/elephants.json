@@ -24,7 +24,7 @@
 	"charge" : 16,
 	
 	"combatModifiers" : "", // Amok implmented in the system
-	"moraleModifiers" : "",
+	"moraleModifiers" : "SCARY_ELEPHANTS",
 	
 	"image" : "Elephant/Alone/Elephant_Alone_NB.png"
 }

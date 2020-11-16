@@ -25,6 +25,7 @@ import unsw.ui.UIPath;
 import unsw.ui.MainMenu.MainMenuController;
 import unsw.ui.Observer.Observer;
 import unsw.ui.Observer.TurnFeatureInfo;
+import unsw.ui.VicUI.VicUIController;
 import unsw.gloriaromanus.Controller;
 import unsw.gloriaromanus.GloriaRomanusApplication;
 import static unsw.gloriaromanus.GloriaRomanusApplication.app;
@@ -124,7 +125,7 @@ public class TopBarController extends Controller {
                 System.out.println("save game fail");
             }
 
-            Controller controller = GloriaRomanusApplication.loadController(UIPath.VIC.getPath());
+            VicUIController controller = GloriaRomanusApplication.loadController(UIPath.VIC.getPath());
             GloriaRomanusApplication.app.setScene(controller);
         }
     }

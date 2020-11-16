@@ -10,17 +10,22 @@ public enum TaxLevel {
 	
 	private String title;
 	private double taxRate;
+	private int taxPercentage;
 	private int wealthGen;
 		
-	private TaxLevel(int wealthgen, int taxpercentage) {
-		this.wealthGen = wealthgen;
-		this.taxRate = (1.0/100) * taxpercentage;
+	private TaxLevel(int wealthGen, int taxPercentage) {
+		this.wealthGen = wealthGen;
+		this.taxPercentage = taxPercentage;
+		this.taxRate = (1.0/100) * taxPercentage;
 		this.title = ArrayUtil.enumToTitle(this);
 	}
 	public double getTaxRate() {
 		return taxRate;
 	}
-	public int getwealthgen() {
+	public int getTaxPercentage() {
+		return taxPercentage;
+	}
+	public int getWealthGen() {
 		return wealthGen;
 	}
 	public String toString() {

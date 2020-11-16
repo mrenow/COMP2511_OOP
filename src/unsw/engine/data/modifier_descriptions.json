@@ -13,6 +13,7 @@
 "_SHIELD_CHARGE" : "For every 4th engagement by this unit of melee infantry per battle, the value of shield defense is added to this unit's attack damage value.",
 "_HEROIC_CHARGE_COMBAT" : "Where your army has fewer than half the number of units as the enemy, this unit has double charge attack damage.",
 "FIRE_ARROWS_COMBAT" : "Lose 10% of missile attack damage.",
-"SKIRMISHER_ANTI_ARMOUR" : "In ranged engagements,  troops fighting these skirmishers only receive half the protection from armour.",
-"CANTABRIAN_CIRCLE" : "When enemy missile units engage this unit of horse archers, the enemy missile units will suffer a 50% loss to missile attack damage."
+"SKIRMISHER_ANTI_ARMOUR" : "In ranged engagments, the opponents armour is halved.",
+"CANTABRIAN_CIRCLE" : "Ranged opponents deal half damage",
+"SCARY_ELEPHANTS" : "-2 morale to opponent"
 }

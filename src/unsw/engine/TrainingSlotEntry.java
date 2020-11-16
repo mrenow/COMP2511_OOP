@@ -16,7 +16,7 @@ public class TrainingSlotEntry extends ItemSlotEntry{
 	}
 
 	public String toString() {
-		return name + "\t\t" + turnsRemaining;
+		return name + "\t" + turnsRemaining + " turns remaining";
 	}
 
 	@Override

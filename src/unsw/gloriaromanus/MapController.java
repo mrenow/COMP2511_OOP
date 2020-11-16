@@ -97,10 +97,10 @@ public class MapController extends Controller{
 	private static final FillSymbol MOVE_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6030F0F0, 6));	
 	private static final FillSymbol ACTION_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, 0x6000F000, 6));	
 	private static final MarkerSymbol ATTACK_ICON = new PictureMarkerSymbol(Images.ATTACK_ICON);
-	private static final MarkerSymbol MOVE_ICON = new PictureMarkerSymbol(Images.SPEED_ICON);
+	private static final MarkerSymbol MOVE_ICON = new PictureMarkerSymbol(Images.MOVE_ICON);
 	
 
-	private static final Symbol NO_SYMBOL = new SimpleFillSymbol(Style.NULL, 0 , null);
+	private static final Symbol NO_SYMBOL = new SimpleFillSymbol(Style.SOLID, 0x001111 , null);
 	
 	// Faction highlight
 	private static final int COLOUR_LAYER = 0;
@@ -113,6 +113,8 @@ public class MapController extends Controller{
 	private GraphicsOverlay[] overlays = new GraphicsOverlay[NUM_LAYERS];	
 	
 	private Graphic uniqueHoverMarker = new Graphic(new Point(0,0), NO_SYMBOL);
+	private Graphic dummyMarkerGraphic = new Graphic(new Point(0,0), NO_SYMBOL);
+	
 	private Graphic uniqueHoverOutline = new Graphic(new Point(0,0), NO_SYMBOL);
 	private Graphic uniqueTargetOutline = new Graphic(new Point(0,0), NO_SYMBOL);
 	private Graphic uniqueActionOutline = new Graphic(new Point(0,0), NO_SYMBOL);
@@ -186,8 +188,6 @@ public class MapController extends Controller{
 		});
 		
 		mapView.setOnScroll(e -> {
-			System.out.println("max : " + map.getMaxScale());
-			System.out.println("min : " + map.getMinScale());
 			Point centre = mapView.screenToLocation(new Point2D(e.getX(), e.getY()));
 			zoomAtPoint(centre, 1 - ZOOM_RATE * e.getDeltaY());
 		});
@@ -197,15 +197,17 @@ public class MapController extends Controller{
 		// Province event handling
 		mapView.setOnMouseMoved(provinceToMouseEventHandler((e, provinceName) -> {
 			ProvinceFeatureInfo pfi = provinceFeatureMap.get(provinceName);
+
 			setUniqueShape(uniqueHoverOutline, provinceName, ON_HOVER_SYMBOL);
 			if(isDestination(pfi)) {
 				setUniqueMarker(uniqueHoverMarker, provinceName, MOVE_ICON);
 			}else if(isAttackable(pfi)) {
 				setUniqueMarker(uniqueHoverMarker, provinceName, ATTACK_ICON);
 			}else {
-				setUniqueMarker(uniqueHoverMarker, provinceName, NO_SYMBOL);
+				clearUniqueGraphic(uniqueHoverMarker);
 			}
 		}));
+			
 		mapView.setOnMouseClicked(provinceToMouseEventHandler((e, provinceName)->{
 			// TODO : Sets patterns for testing only
 			ProvinceFeatureInfo pfi = provinceFeatureMap.get(provinceName);
@@ -310,8 +312,9 @@ public class MapController extends Controller{
 			g = new Graphic(pfi.getCentre(), NO_SYMBOL);
 			overlays[LABEL_LAYER].getGraphics().add(g);
 		}
-		overlays[LABEL_LAYER].setMinScale(1.5E7);
+		overlays[LABEL_LAYER].setMinScale(2E7);
 		overlays[MARKER_LAYER].getGraphics().add(uniqueHoverMarker);
+		overlays[MARKER_LAYER].getGraphics().add(dummyMarkerGraphic);
 	}
 	
 	private void initFeatureLayer(GeoPackage gpkg_provinces) {
@@ -334,16 +337,21 @@ public class MapController extends Controller{
 			if(featureLayer_provinces == null) return;
 			final ListenableFuture<IdentifyLayerResult> identifyFuture = mapView.identifyLayerAsync(featureLayer_provinces,
 					new Point2D(e.getX(), e.getY()), 0, false, 25);
-	
+
 			// add a listener to the future
 			identifyFuture.addDoneListener(() -> {
 				try {
+					
 					IdentifyLayerResult identifyLayerResult = identifyFuture.get();
 					// Only trigger on unique result province exists
 					if(identifyLayerResult.getElements().size()==1) {
+
 						Feature f = (Feature) identifyLayerResult.getElements().get(0);
 						String province = (String) f.getAttributes().get("name");
 						action.accept(e, province);
+					}else {
+
+						clearUniqueGraphic(uniqueHoverMarker);
 					}
 				} catch (InterruptedException | ExecutionException ex) {
 					// ... must deal with checked exceptions thrown from the async identify
@@ -417,21 +425,29 @@ public class MapController extends Controller{
 		return CAN_MOVE_SYMBOL.equals(overlays[PATTERN_LAYER].getGraphics().get(pfi.getId()).getSymbol());
 	}
 
-	void updateTargetProvince(Province p) {
+	void updateTargetProvince(ProvinceMouseEvent p) {
+		if(p == null) {
+			clearUniqueGraphic(uniqueTargetOutline);
+			return;
+		}
 		ProvinceFeatureInfo pfi = provinceFeatureMap.get(p.getName());
 		if(isAttackable(pfi)) {
-			setUniqueShape(uniqueTargetOutline, p, ATTACK_SYMBOL);
+			setUniqueShape(uniqueTargetOutline, p.getName(), ATTACK_SYMBOL);
 		} else if(isDestination(pfi)) {
-			setUniqueShape(uniqueTargetOutline, p, MOVE_SYMBOL);
+			setUniqueShape(uniqueTargetOutline, p.getName(), MOVE_SYMBOL);
 		} else {
-			setUniqueShape(uniqueTargetOutline, p, SELECT_SYMBOL);
+			setUniqueShape(uniqueTargetOutline, p.getName(), SELECT_SYMBOL);
 		}
 		
 		
 	}
 	
-	void updateActionProvince(Province p) {
-		setUniqueShape(uniqueActionOutline, p, ACTION_SYMBOL);
+	void updateActionProvince(ProvinceMouseEvent p) {
+		if(p == null) {
+			clearUniqueGraphic(uniqueTargetOutline);
+			return;
+		}
+		setUniqueShape(uniqueActionOutline, p.getName(), ACTION_SYMBOL);
 	}
 
 	
@@ -456,7 +472,7 @@ public class MapController extends Controller{
 	}
 	void setUniqueMarker(Graphic g, Province p, Symbol symb) {
 		if(p == null) {
-			g.setSymbol(NO_SYMBOL);
+			clearUniqueGraphic(g);
 			return;
 		}
 		g.setGeometry(provinceFeatureMap.get(p.getName()).getCentre());
@@ -464,7 +480,7 @@ public class MapController extends Controller{
 	}
 	void setUniqueMarker(Graphic g, String s, Symbol symb) {
 		if(s == null) {
-			g.setSymbol(NO_SYMBOL);
+			clearUniqueGraphic(g);
 			return;
 		}
 		g.setGeometry(provinceFeatureMap.get(s).getCentre());
@@ -472,7 +488,7 @@ public class MapController extends Controller{
 	}
 	void setUniqueShape(Graphic g, Province p, Symbol symb) {
 		if(p == null) {
-			g.setSymbol(NO_SYMBOL);
+			clearUniqueGraphic(g);
 			return;
 		}
 		g.setGeometry(provinceFeatureMap.get(p.getName()).getShape());
@@ -480,7 +496,7 @@ public class MapController extends Controller{
 	}
 	void setUniqueShape(Graphic g, String s, Symbol symb) {
 		if(s == null) {
-			g.setSymbol(NO_SYMBOL);
+			clearUniqueGraphic(g);
 			return;
 		}
 		g.setGeometry(provinceFeatureMap.get(s).getShape());
@@ -492,6 +508,13 @@ public class MapController extends Controller{
 			g.setSymbol(NO_SYMBOL);
 		}		
 	}
+	void clearUniqueGraphic(Graphic unique) {
+		unique.setGeometry(new Point(0,0));
+		// wtf arcgis???????
+		// WHy are you Like this
+		unique.setVisible(true);
+	}
+
 	@Override
 	void terminate() {
 

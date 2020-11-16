@@ -13,7 +13,7 @@ import static unsw.engine.BattleSide.*;
  * @param data,
  * @return
  */
-enum CombatModifierMethod implements ModifierMethod<CombatData>{
+public enum CombatModifierMethod implements ModifierMethod<CombatData>{
 	// ActiveType = null means an exception will be thrown when 
 	// unit.addCombatModifier(RANGED) is called.
 	_RANGED(null){
@@ -91,6 +91,14 @@ enum CombatModifierMethod implements ModifierMethod<CombatData>{
 		public void modify(CombatData data, BattleSide side) {
 			if (data.isRanged()) {
 				// Enemy only has half armour value
+				data.multArmour(side.other(), 0.5);
+			}
+		}
+	},
+	ANTI_CAVALRY(ENGAGEMENT){
+		@Override
+		public void modify(CombatData data, BattleSide side) {
+			if(data.getUnit(side.other()).getUnitClass() == UnitClass.MELEE_CAVALRY) {
 				data.multArmour(side.other(), 0.5);
 			}
 		}

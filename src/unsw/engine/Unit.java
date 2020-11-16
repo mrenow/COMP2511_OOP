@@ -115,14 +115,8 @@ public class Unit implements Comparable<Unit>{
 		String combatString = (String)type.getAttribute("combatModifiers", level);
 		String moraleString = (String)type.getAttribute("moraleModifiers", level);
 
-		try {
-			Parsing.getEnums(combatString, CombatModifierMethod.class).forEach(this::addCombatModifier);
-			Parsing.getEnums(moraleString, MoraleModifierMethod.class).forEach(this::addMoraleModifier);
-		} catch (NoSuchElementException e){
-			System.err.println(e);
-			e.printStackTrace();
-			System.exit(1);
-		} 
+		Parsing.getEnums(combatString, CombatModifierMethod.class).forEach(this::addCombatModifier);
+		Parsing.getEnums(moraleString, MoraleModifierMethod.class).forEach(this::addMoraleModifier);
 	}
 	@JsonCreator
 	public static Unit newUnit(

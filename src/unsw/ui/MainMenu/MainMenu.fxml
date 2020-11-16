@@ -10,19 +10,24 @@
 <AnchorPane id="pane" fx:id="pane" prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@MenuStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.ui.MainMenu.MainMenuController">
    <children>
       <ImageView fx:id="mainpicture" fitHeight="400.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0" />
-      <VBox alignment="CENTER" layoutX="32.0" layoutY="132.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="menu" alignment="CENTER" layoutX="32.0" layoutY="132.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button fx:id="newGame" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newGame" styleClass="buttons" text="New Game" textFill="#1f217c">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="buttons" text="Local Network" textFill="#1f217c">
+            <Button fx:id="resume" disable="true" layoutX="10.0" layoutY="80.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newGame" styleClass="buttons" text="Continue" textFill="#1f217c">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="buttons" text="Online Game" textFill="#1f217c">
+            <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="buttons" text="Local Network" textFill="#1f217c">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="buttons" text="Online Game" textFill="#1f217c">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -32,7 +37,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="Setting" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setting" styleClass="buttons" text="Setting" textFill="#1f217c">
+            <Button fx:id="Setting" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setting" styleClass="buttons" text="Setting" textFill="#1f217c">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

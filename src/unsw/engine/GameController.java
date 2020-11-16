@@ -487,10 +487,10 @@ public class GameController {
 		vic.update(VictoryCondition.CONQUEST, ownpro/allpro);
 		vic.update(VictoryCondition.TREASURY, 
 		//0.5//test
-		gold.doubleValue()/100000.0
+		gold.doubleValue()/1000.0
 		);
 		vic.update(VictoryCondition.WEALTH, 
-		wealth.doubleValue()/400000.0
+		wealth.doubleValue()/400.0
 		//0.5//test
 		);
 		faction.setVicComponent(vic);

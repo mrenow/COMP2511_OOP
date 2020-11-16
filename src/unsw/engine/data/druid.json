@@ -18,7 +18,7 @@
 	"attack" : 2,
 	
 	"combatModifiers" : "",
-	"moraleModifiers" : "",
+	"moraleModifiers" : "DRUIDIC_FERVOUR",
 	
 	"image" : "Druid/Celtic_Druid_NB.png"
 }

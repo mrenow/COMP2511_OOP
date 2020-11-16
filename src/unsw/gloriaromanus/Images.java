@@ -17,6 +17,11 @@ public class Images {
 	public static Image ARMOUR_ICON;
 	public static Image MORALE_ICON;
 	public static Image SPEED_ICON;
+	public static Image INVADE_ICON;
+	public static Image MOVE_ICON;
+	public static Image MOV_POINT_ICON;
+	
+	
 	
 	public static Map<ItemType, Image> ITEM_ICONS = new EnumMap<>(ItemType.class);
 	public static String SPRITE_DIR = "images/CS2511Sprites_No_Background/";
@@ -32,6 +37,9 @@ public class Images {
 			MORALE_ICON = new Image(new FileInputStream(new File("images/UISprites/morale_icon.png")),25,25,true,true);
 			// iconfinder.com
 			SPEED_ICON = new Image(new FileInputStream(new File("images/UISprites/speed_icon.png")),25,25,true,true);
+			MOVE_ICON = new Image(new FileInputStream(new File("images/UISprites/move_icon.png")),50,50,true,true);
+			MOV_POINT_ICON = new Image(new FileInputStream(new File("images/UISprites/move_icon.png")),25,25,true,true);
+			ATTACK_ICON = new Image(new FileInputStream(new File("images/UISprites/attack_icon.png")),50,50,true,true);
 			
 			for (ItemType type : ItemType.values()) {
 				String location = type.getAttributeOrNull("image", 1);

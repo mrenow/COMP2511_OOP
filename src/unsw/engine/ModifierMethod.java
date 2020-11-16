@@ -23,7 +23,7 @@ enum ActiveType {
  * cannot share names.
  */
 
-interface ModifierMethod<T>{
+public interface ModifierMethod<T>{
 	public static String DESCRIPTION_FILE_PATH = "src/unsw/engine/data/modifier_descriptions.json";
 	
 	public final static Map<String, String> DESCRIPTIONS = Parsing.readValue(new File(DESCRIPTION_FILE_PATH));

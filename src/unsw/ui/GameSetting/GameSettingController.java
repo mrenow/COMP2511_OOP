@@ -42,8 +42,7 @@ public class GameSettingController extends Controller implements Observer<MenuIn
     	factionList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	factionList.getSelectionModel().getSelectedItems().addListener(
     			(ListChangeListener<FactionType>)(c -> play.setDisable(c.getList().size() < 2)));
-        //play.setDisable(true);
-        play.setDisable(false);
+        play.setDisable(true);
     }
    
     @FXML

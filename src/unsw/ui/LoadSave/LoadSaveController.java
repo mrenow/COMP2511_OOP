@@ -28,7 +28,7 @@ public class LoadSaveController extends Controller implements Observer<MenuInfo>
     private ObservableList<String> name;
     @FXML
 	public void initialize() {
-        name = FXCollections.observableArrayList(getgamelist());
+        name = FXCollections.observableArrayList(getGameList());
         list.setItems(name);
     }
     
@@ -53,14 +53,14 @@ public class LoadSaveController extends Controller implements Observer<MenuInfo>
     private String getSelectedFile() {
     	return list.getSelectionModel().getSelectedItem();
     }
-    private List<String> getgamelist(){
+    private List<String> getGameList(){
         List<String> namelist=gameData.getFileNames();
         namelist.remove("GameData.java");
         return namelist;
     }
     @Override
     public void update(MenuInfo message) {
-        name = FXCollections.observableArrayList(getgamelist());
+        name = FXCollections.observableArrayList(getGameList());
         list.setItems(name);
     };
 

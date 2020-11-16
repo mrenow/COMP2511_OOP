@@ -18,7 +18,7 @@
 	
 	"attack" : 8,
 
-	"combatModifiers" : "",
+	"combatModifiers" : "ANTI_CAVALRY",
 	"moraleModifiers" : "",
 	
 	"image" : "Pikeman/Pikeman_NB.png"

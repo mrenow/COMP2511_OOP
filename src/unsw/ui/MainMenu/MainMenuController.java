@@ -23,8 +23,7 @@ public class MainMenuController extends Controller{
     @FXML private ImageView sidepicture;
     @FXML private ImageView mainpicture;
     @FXML private VBox menu;
-    
-    private Button resume = new Button("Continue");
+    @FXML private Button resume;
     @FXML
 	public void initialize() throws Exception {
         Image mappic = new Image(new FileInputStream("src/unsw/ui/MainMenu/map.png"));
@@ -57,6 +56,7 @@ public class MainMenuController extends Controller{
     public void setGame(GameController game){
         this.game = game;
         resume.onActionProperty().set(c-> resumeGame());
+        resume.setDisable(false);
         menu.getChildren().add(1, resume);
     }
     private void resumeGame(){

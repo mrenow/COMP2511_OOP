@@ -17,104 +17,92 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" alignment="CENTER" maxWidth="280.0" opacity="0.8" prefHeight="598.0" prefWidth="327.0" style="-fx-background-color: #00ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" alignment="TOP_CENTER" maxWidth="321.0" opacity="0.8" prefHeight="733.0" prefWidth="321.0" style="-fx-background-color: #00ffff;" stylesheets="@../ui/LoadSave/LoadSaveStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER">
+      <VBox alignment="TOP_CENTER">
          <children>
-            <VBox>
-               <children>
-                  <Accordion />
-               </children>
-            </VBox>
             <Label alignment="CENTER" text="Action Province:" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
             </Label>
             <TextField fx:id="action_province" editable="false" />
-            <TitledPane animated="false" text="Wealth and Tax information:">
-              <content>
-                  <VBox>
-                     <children>
-                        <AnchorPane>
-                           <children>
-                              <GridPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                                    <RowConstraints>
-
-                                    </RowConstraints>
-                                    <RowConstraints>
-
-                                    </RowConstraints>
-                                    <RowConstraints>
-
-                                    </RowConstraints>
-                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <Label fx:id="taxLabel" text="Tax Rate:" GridPane.rowIndex="4" />
-                                    <TextField fx:id="taxField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
-
-                                    </TextField>
-                                    <Label fx:id="wealthLabel" text="Wealth Rate:" GridPane.rowIndex="5" />
-                                    <TextField fx:id="wealthRateField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="NEVER" />
-                                    <Label fx:id="wealthLabel1" text="Wealth:" GridPane.rowIndex="6" />
-                                    <TextField fx:id="wealthField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="NEVER" />
-                                    <Label text="Tax Level:" />
-                                    <ChoiceBox fx:id="taxChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
-                                    <Separator prefHeight="1.0" prefWidth="101.0" GridPane.rowIndex="3" />
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </VBox>
-              </content>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </TitledPane>
             <Label alignment="CENTER" text="Target Province:" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
             </Label>
             <TextField fx:id="target_province" editable="false" prefHeight="25.0" prefWidth="272.0" />
             <Accordion>
               <panes>
-                <TitledPane animated="false" text="Units in action province:">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <TitledPane animated="false" text="Wealth and Tax information:">
+                    <content>
+                        <VBox>
                            <children>
-                              <Button fx:id="moveBtn" layoutX="28.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleMove" text="Move" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <ListView fx:id="unitsProvinceListView" layoutX="18.6" layoutY="19.6" prefHeight="86.0" prefWidth="255.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <AnchorPane>
+                                 <children>
+                                    <GridPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                          <RowConstraints>
+
+                                    </RowConstraints>
+                                          <RowConstraints>
+
+                                    </RowConstraints>
+                                          <RowConstraints>
+
+                                    </RowConstraints>
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label fx:id="taxLabel" text="Tax Rate:" GridPane.rowIndex="4" />
+                                          <TextField fx:id="taxField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
+
+                                    </TextField>
+                                          <Label fx:id="wealthLabel" text="Wealth Rate:" GridPane.rowIndex="5" />
+                                          <TextField fx:id="wealthRateField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="NEVER" />
+                                          <Label fx:id="wealthLabel1" text="Wealth:" GridPane.rowIndex="6" />
+                                          <TextField fx:id="wealthField" editable="false" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="NEVER" />
+                                          <Label text="Tax Level:" />
+                                          <ChoiceBox fx:id="taxChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+                                          <Separator prefHeight="1.0" prefWidth="101.0" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
-                  </content>
+                        </VBox>
+                    </content>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
-                </TitledPane>
+                  </TitledPane>
                 <TitledPane animated="false" text="Units training in action province:">
                   <content>
                         <VBox>
                            <children>
-                              <ChoiceBox fx:id="trainChoiceBox" prefWidth="150.0">
+                              <ChoiceBox fx:id="trainChoiceBox" maxWidth="1.7976931348623157E308" prefWidth="150.0">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </ChoiceBox>
                               <HBox alignment="CENTER_LEFT">
                                  <children>
-                                    <Button fx:id="trainBtn" mnemonicParsing="false" onAction="#handleTrainBtn" prefHeight="24.0" prefWidth="93.0" text="Train Unit" />
-                                    <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="155.0" text="Slots" HBox.hgrow="ALWAYS">
+                                    <Button fx:id="trainBtn" mnemonicParsing="false" onAction="#handleTrainBtn" prefHeight="24.0" prefWidth="93.0" text="Train Unit" textFill="WHITE" />
+                                    <Label fx:id="numSlotsLabel" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="155.0" text="Slots" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets right="10.0" />
                                        </HBox.margin>
@@ -124,12 +112,33 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <ListView fx:id="unitsTrainingListView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="258.0">
+                              <ListView fx:id="unitsTrainingListView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="299.0" styleClass="listView">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </ListView>
-                              <Button fx:id="cancelTrainingBtn" mnemonicParsing="false" onAction="#handleCancelTraining" prefHeight="25.0" prefWidth="132.0" text="Cancel Training">
+                              <Button fx:id="cancelTrainingBtn" mnemonicParsing="false" onAction="#handleCancelTraining" prefHeight="25.0" prefWidth="132.0" text="Cancel Training" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                  </content>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                </TitledPane>
+                <TitledPane animated="false" maxHeight="1.7976931348623157E308" text="Units in action province:">
+                  <content>
+                        <VBox prefWidth="319.0">
+                           <children>
+                              <ListView fx:id="unitsProvinceListView" prefHeight="262.0" prefWidth="299.0" styleClass="listView">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </ListView>
+                              <Button fx:id="moveBtn" mnemonicParsing="false" onAction="#handleMove" prefHeight="24.0" prefWidth="154.0" text="Move to target" textFill="WHITE">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>

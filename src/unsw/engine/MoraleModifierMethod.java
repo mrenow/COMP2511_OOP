@@ -4,7 +4,7 @@ import static unsw.engine.ActiveType.*;
 import java.util.List;
 
 
-enum MoraleModifierMethod implements ModifierMethod<MoraleData> {
+public enum MoraleModifierMethod implements ModifierMethod<MoraleData> {
 	_HEROIC_CHARGE_MORALE(ENGAGEMENT) {
 		@Override
 		public void modify(MoraleData data, BattleSide side) {
@@ -59,6 +59,12 @@ enum MoraleModifierMethod implements ModifierMethod<MoraleData> {
 			data.addMorale(side, 1);
 		}
 	},
+	SCARY_ELEPHANTS(ENGAGEMENT){
+		@Override
+		public void modify(MoraleData data, BattleSide side) {
+			data.addMorale(side.other(), -2);
+		}
+	},
 	
 	LOST_EAGLE(SUPPORT){
 		@Override
@@ -73,7 +79,7 @@ enum MoraleModifierMethod implements ModifierMethod<MoraleData> {
 	
 	private MoraleModifierMethod(ActiveType active) {
 		this.active = active;
-		this.description = ModifierMethod.DESCRIPTIONS.get(super.toString());
+		this.description = ModifierMethod.DESCRIPTIONS.get(name());
 	}
 	
 	
