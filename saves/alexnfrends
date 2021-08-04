@@ -4,228 +4,7 @@
     "gold" : 0,
     "provinces" : [ ],
     "vicComponent" : null,
-    "lostEagles" : [ {
-      "key" : {
-        "name" : "IX",
-        "owner" : "CARTHAGE",
-        "adjacent" : [ "XI", "Alpes Cottiae", "Alpes Maritimae", "VIII", "VII" ],
-        "buildings" : [ ],
-        "townWealth" : 0,
-        "taxLevel" : "NORMAL_TAX",
-        "movCost" : 4,
-        "isLandlocked" : false,
-        "isConquered" : false,
-        "units" : [ ],
-        "buildingSlots" : [ ],
-        "trainingSlots" : [ ],
-        "trainingSlotNum" : 1,
-        "buildingSlotNum" : 1,
-        "maxTrainingSlotNum" : 1,
-        "maxBuildingSlotNum" : 1
-      },
-      "value" : 0
-    }, {
-      "key" : {
-        "name" : "VIII",
-        "owner" : "CARTHAGE",
-        "adjacent" : [ "XI", "IX", "X", "VII", "VI" ],
-        "buildings" : [ ],
-        "townWealth" : 0,
-        "taxLevel" : "NORMAL_TAX",
-        "movCost" : 4,
-        "isLandlocked" : false,
-        "isConquered" : false,
-        "units" : [ ],
-        "buildingSlots" : [ ],
-        "trainingSlots" : [ ],
-        "trainingSlotNum" : 1,
-        "buildingSlotNum" : 1,
-        "maxTrainingSlotNum" : 1,
-        "maxBuildingSlotNum" : 1
-      },
-      "value" : 0
-    }, {
-      "key" : {
-        "name" : "VII",
-        "owner" : "CARTHAGE",
-        "adjacent" : [ "IX", "VIII", "VI", "IV", "I", "Sardinia et Corsica" ],
-        "buildings" : [ ],
-        "townWealth" : 0,
-        "taxLevel" : "NORMAL_TAX",
-        "movCost" : 4,
-        "isLandlocked" : false,
-        "isConquered" : false,
-        "units" : [ {
-          "type" : "ARCHER",
-          "level" : 1,
-          "combatModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "moraleModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "province" : "VII",
-          "isMercenary" : false,
-          "health" : 17,
-          "maxMovPoints" : 10,
-          "movPoints" : 10,
-          "canAttack" : true,
-          "speed" : 5.0,
-          "morale" : 6.0,
-          "armour" : 4.0,
-          "attack" : 4.0,
-          "defenseSkill" : 2.0,
-          "shieldDefense" : 0.0
-        }, {
-          "type" : "BERSERKER",
-          "level" : 1,
-          "combatModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-          },
-          "moraleModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "province" : "VII",
-          "isMercenary" : false,
-          "health" : 1,
-          "maxMovPoints" : 10,
-          "movPoints" : 10,
-          "canAttack" : true,
-          "speed" : 5.0,
-          "morale" : "Infinity",
-          "armour" : "-Infinity",
-          "attack" : 6.0,
-          "defenseSkill" : 2.0,
-          "shieldDefense" : 0.0
-        }, {
-          "type" : "BERSERKER",
-          "level" : 1,
-          "combatModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-          },
-          "moraleModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "province" : "VII",
-          "isMercenary" : false,
-          "health" : 3,
-          "maxMovPoints" : 10,
-          "movPoints" : 10,
-          "canAttack" : true,
-          "speed" : 5.0,
-          "morale" : "Infinity",
-          "armour" : "-Infinity",
-          "attack" : 6.0,
-          "defenseSkill" : 2.0,
-          "shieldDefense" : 0.0
-        }, {
-          "type" : "BERSERKER",
-          "level" : 1,
-          "combatModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-          },
-          "moraleModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "province" : "VII",
-          "isMercenary" : false,
-          "health" : 3,
-          "maxMovPoints" : 10,
-          "movPoints" : 10,
-          "canAttack" : true,
-          "speed" : 5.0,
-          "morale" : "Infinity",
-          "armour" : "-Infinity",
-          "attack" : 6.0,
-          "defenseSkill" : 2.0,
-          "shieldDefense" : 0.0
-        }, {
-          "type" : "BERSERKER",
-          "level" : 1,
-          "combatModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-          },
-          "moraleModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "province" : "VII",
-          "isMercenary" : false,
-          "health" : 28,
-          "maxMovPoints" : 10,
-          "movPoints" : 10,
-          "canAttack" : true,
-          "speed" : 5.0,
-          "morale" : "Infinity",
-          "armour" : "-Infinity",
-          "attack" : 6.0,
-          "defenseSkill" : 2.0,
-          "shieldDefense" : 0.0
-        }, {
-          "type" : "BERSERKER",
-          "level" : 1,
-          "combatModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-          },
-          "moraleModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "province" : "VII",
-          "isMercenary" : false,
-          "health" : 1,
-          "maxMovPoints" : 10,
-          "movPoints" : 10,
-          "canAttack" : true,
-          "speed" : 5.0,
-          "morale" : "Infinity",
-          "armour" : "-Infinity",
-          "attack" : 6.0,
-          "defenseSkill" : 2.0,
-          "shieldDefense" : 0.0
-        }, {
-          "type" : "SPEARMEN",
-          "level" : 1,
-          "combatModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ "_SHIELD_CHARGE", "ANTI_CAVALRY" ]
-          },
-          "moraleModifiers" : {
-            "SUPPORT" : [ ],
-            "ENGAGEMENT" : [ ]
-          },
-          "province" : "VII",
-          "isMercenary" : false,
-          "health" : 29,
-          "maxMovPoints" : 10,
-          "movPoints" : 10,
-          "canAttack" : true,
-          "speed" : 3.0,
-          "morale" : 4.0,
-          "armour" : 3.0,
-          "attack" : 4.0,
-          "defenseSkill" : 3.0,
-          "shieldDefense" : 1.0
-        } ],
-        "buildingSlots" : [ ],
-        "trainingSlots" : [ ],
-        "trainingSlotNum" : 1,
-        "buildingSlotNum" : 1,
-        "maxTrainingSlotNum" : 1,
-        "maxBuildingSlotNum" : 1
-      },
-      "value" : 0
-    } ]
+    "lostEagles" : [ ]
   },
   "allProvinces" : [ {
     "name" : "Cyprus",
@@ -272,7 +51,7 @@
     "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Thracia", "Galatia et Cappadocia", "Asia" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
@@ -289,7 +68,7 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Lugdunensis", "Aquitania", "Germania Superior", "Alpes Graiae et Poeninae", "Alpes Cottiae", "Alpes Maritimae", "Tarraconensis" ],
     "buildings" : [ ],
-    "townWealth" : 52,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
@@ -306,7 +85,7 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Alpes Cottiae", "IX", "Narbonensis" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
@@ -742,35 +521,12 @@
     "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Moesia Superior", "Moesia Inferior" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
-    "units" : [ {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dacia",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -1052,151 +808,12 @@
     "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Pannonia Inferior", "Dalmatia", "Dacia", "Moesia Inferior", "Thracia", "Macedonia" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
-    "units" : [ {
-      "type" : "SPEARMEN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE", "ANTI_CAVALRY" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Moesia Superior",
-      "isMercenary" : false,
-      "health" : 8,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 3.0,
-      "morale" : 4.0,
-      "armour" : 3.0,
-      "attack" : 4.0,
-      "defenseSkill" : 3.0,
-      "shieldDefense" : 1.0
-    }, {
-      "type" : "SPEARMEN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE", "ANTI_CAVALRY" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Moesia Superior",
-      "isMercenary" : false,
-      "health" : 52,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 3.0,
-      "morale" : 4.0,
-      "armour" : 3.0,
-      "attack" : 4.0,
-      "defenseSkill" : 3.0,
-      "shieldDefense" : 1.0
-    }, {
-      "type" : "SPEARMEN",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE", "ANTI_CAVALRY" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Moesia Superior",
-      "isMercenary" : false,
-      "health" : 21,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 3.0,
-      "morale" : 4.0,
-      "armour" : 3.0,
-      "attack" : 4.0,
-      "defenseSkill" : 3.0,
-      "shieldDefense" : 1.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Moesia Superior",
-      "isMercenary" : false,
-      "health" : 14,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_HEROIC_CHARGE_MORALE" ]
-      },
-      "level" : 1,
-      "type" : "LIGHT_CAVALRY",
-      "province" : "Moesia Superior",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 9.0,
-      "morale" : 4.0,
-      "armour" : 2.0,
-      "attack" : 8.0,
-      "defenseSkill" : 1.0,
-      "shieldDefense" : 1.0,
-      "charge" : 3.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Moesia Superior",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -1208,35 +825,12 @@
     "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Macedonia" ],
     "buildings" : [ ],
-    "townWealth" : 42,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
-    "units" : [ {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Achaia",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -1466,7 +1060,7 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Germania Superior", "Alpes Graiae et Poeninae", "XI", "Noricum" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
@@ -1807,61 +1401,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Britannia",
-    "owner" : "SELEUCID_EMPIRE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "Lugdunensis" ],
     "buildings" : [ ],
-    "townWealth" : 80,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
-    "units" : [ {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Britannia",
-      "isMercenary" : false,
-      "health" : 1,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Britannia",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -1870,61 +1418,15 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Germania Inferior",
-    "owner" : "SELEUCID_EMPIRE",
+    "owner" : "CARTHAGE",
     "adjacent" : [ "Belgica", "Germania Superior" ],
     "buildings" : [ ],
-    "townWealth" : 90,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
-    "units" : [ {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Germania Inferior",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Germania Inferior",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -2085,7 +1587,7 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Lugdunensis", "Narbonensis", "Tarraconensis" ],
     "buildings" : [ ],
-    "townWealth" : 50,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
@@ -2097,13 +1599,53 @@
     "buildingSlotNum" : 1,
     "maxTrainingSlotNum" : 1,
     "maxBuildingSlotNum" : 1
-  }, "IX", {
+  }, {
+    "name" : "IX",
+    "owner" : "NO_ONE",
+    "adjacent" : [ "XI", "Alpes Cottiae", "Alpes Maritimae", "VIII", "VII" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "LOW_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "IX",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    } ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxTrainingSlotNum" : 1,
+    "maxBuildingSlotNum" : 1
+  }, {
     "name" : "Lugdunensis",
     "owner" : "CARTHAGE",
     "adjacent" : [ "Britannia", "Belgica", "Aquitania", "Germania Superior", "Narbonensis" ],
     "buildings" : [ ],
-    "townWealth" : 12,
-    "taxLevel" : "NORMAL_TAX",
+    "townWealth" : 30,
+    "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
@@ -2116,15 +1658,61 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Alpes Graiae et Poeninae",
-    "owner" : "CARTHAGE",
+    "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Germania Superior", "XI", "Alpes Cottiae", "Narbonensis", "Raetia" ],
     "buildings" : [ ],
-    "townWealth" : 72,
-    "taxLevel" : "LOW_TAX",
+    "townWealth" : 15,
+    "taxLevel" : "NORMAL_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
-    "units" : [ ],
+    "units" : [ {
+      "type" : "HOPILITE",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Alpes Graiae et Poeninae",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 2.0,
+      "morale" : 7.0,
+      "armour" : 6.0,
+      "attack" : 8.0,
+      "defenseSkill" : 4.0,
+      "shieldDefense" : 2.0
+    }, {
+      "type" : "SPEARMEN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE", "ANTI_CAVALRY" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Alpes Graiae et Poeninae",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 3.0,
+      "morale" : 6.0,
+      "armour" : 3.0,
+      "attack" : 8.0,
+      "defenseSkill" : 3.0,
+      "shieldDefense" : 1.0
+    } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -2222,36 +1810,53 @@
     "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Dalmatia", "Moesia Superior", "Thracia", "Achaia" ],
     "buildings" : [ ],
-    "townWealth" : 26,
+    "townWealth" : 30,
+    "taxLevel" : "LOW_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxTrainingSlotNum" : 1,
+    "maxBuildingSlotNum" : 1
+  }, {
+    "name" : "VIII",
+    "owner" : "NO_ONE",
+    "adjacent" : [ "XI", "IX", "X", "VII", "VI" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
     "units" : [ {
-      "type" : "ROMAN_LEGIONARY",
+      "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
       },
       "moraleModifiers" : {
-        "SUPPORT" : [ "LEGIONARY_EAGLE" ],
+        "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
       },
-      "province" : "Macedonia",
+      "province" : "VIII",
       "isMercenary" : false,
       "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
       "canAttack" : true,
-      "speed" : 3.0,
-      "morale" : 10.0,
-      "armour" : 5.0,
-      "attack" : 14.0,
-      "defenseSkill" : 5.0,
-      "shieldDefense" : 4.0
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
     }, {
-      "type" : "BERSERKER",
+      "type" : "BARBARIAN",
       "level" : 1,
       "combatModifiers" : {
         "SUPPORT" : [ ],
@@ -2261,15 +1866,107 @@
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
       },
-      "province" : "Macedonia",
+      "province" : "VIII",
       "isMercenary" : false,
-      "health" : 100,
+      "health" : 50,
       "maxMovPoints" : 10,
       "movPoints" : 10,
       "canAttack" : true,
       "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VIII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
       "attack" : 6.0,
       "defenseSkill" : 2.0,
       "shieldDefense" : 0.0
@@ -2280,7 +1977,7 @@
     "buildingSlotNum" : 1,
     "maxTrainingSlotNum" : 1,
     "maxBuildingSlotNum" : 1
-  }, "VIII", {
+  }, {
     "name" : "Lycia et Pamphylia",
     "owner" : "NO_ONE",
     "adjacent" : [ "Cilicia", "Galatia et Cappadocia", "Asia" ],
@@ -2457,12 +2154,35 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Noricum", "X", "Pannonia Inferior", "Dalmatia" ],
     "buildings" : [ ],
-    "townWealth" : 85,
-    "taxLevel" : "LOW_TAX",
+    "townWealth" : 15,
+    "taxLevel" : "NORMAL_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
-    "isConquered" : false,
-    "units" : [ ],
+    "isConquered" : true,
+    "units" : [ {
+      "type" : "ARCHER",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "Pannonia Superior",
+      "isMercenary" : false,
+      "health" : 25,
+      "maxMovPoints" : 10,
+      "movPoints" : 0,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : 6.0,
+      "armour" : 4.0,
+      "attack" : 4.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -2827,10 +2547,10 @@
     "maxBuildingSlotNum" : 1
   }, {
     "name" : "Pannonia Inferior",
-    "owner" : "CARTHAGE",
+    "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Pannonia Superior", "Dalmatia", "Moesia Superior" ],
     "buildings" : [ ],
-    "townWealth" : 80,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
@@ -3180,12 +2900,35 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "XI", "Noricum", "VIII", "Pannonia Superior", "Dalmatia" ],
     "buildings" : [ ],
-    "townWealth" : 85,
-    "taxLevel" : "LOW_TAX",
+    "townWealth" : 15,
+    "taxLevel" : "NORMAL_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
-    "isConquered" : false,
-    "units" : [ ],
+    "isConquered" : true,
+    "units" : [ {
+      "type" : "BERSERKER",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "X",
+      "isMercenary" : false,
+      "health" : 100,
+      "maxMovPoints" : 10,
+      "movPoints" : 0,
+      "canAttack" : false,
+      "speed" : 5.0,
+      "morale" : "Infinity",
+      "armour" : "-Infinity",
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    } ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -3375,7 +3118,7 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Tarraconensis", "Lusitania", "Mauretania Tingitana" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
@@ -3392,7 +3135,7 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Aquitania", "Narbonensis", "Baetica", "Lusitania" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
@@ -3409,32 +3152,8 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "XI", "Raetia", "X", "Pannonia Superior" ],
     "buildings" : [ ],
-    "townWealth" : 40,
-    "taxLevel" : "LOW_TAX",
-    "movCost" : 4,
-    "isLandlocked" : true,
-    "isConquered" : false,
-    "units" : [ ],
-    "buildingSlots" : [ ],
-    "trainingSlots" : [ {
-      "type" : "TREBUCHET",
-      "province" : "Noricum",
-      "level" : 0,
-      "turnsRemaining" : 2,
-      "name" : "Trebuchet",
-      "cost" : 200.0
-    } ],
-    "trainingSlotNum" : 0,
-    "buildingSlotNum" : 1,
-    "maxTrainingSlotNum" : 1,
-    "maxBuildingSlotNum" : 1
-  }, {
-    "name" : "Germania Superior",
-    "owner" : "SELEUCID_EMPIRE",
-    "adjacent" : [ "Lugdunensis", "Belgica", "Germania Inferior", "Alpes Graiae et Poeninae", "Narbonensis", "Raetia" ],
-    "buildings" : [ ],
-    "townWealth" : 42,
-    "taxLevel" : "LOW_TAX",
+    "townWealth" : 10,
+    "taxLevel" : "NORMAL_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
     "isConquered" : false,
@@ -3449,7 +3168,7 @@
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
       },
-      "province" : "Germania Superior",
+      "province" : "Noricum",
       "isMercenary" : false,
       "health" : 100,
       "maxMovPoints" : 10,
@@ -3469,109 +3188,33 @@
     "maxTrainingSlotNum" : 1,
     "maxBuildingSlotNum" : 1
   }, {
-    "name" : "Dalmatia",
+    "name" : "Germania Superior",
     "owner" : "CARTHAGE",
+    "adjacent" : [ "Lugdunensis", "Belgica", "Germania Inferior", "Alpes Graiae et Poeninae", "Narbonensis", "Raetia" ],
+    "buildings" : [ ],
+    "townWealth" : 30,
+    "taxLevel" : "LOW_TAX",
+    "movCost" : 4,
+    "isLandlocked" : true,
+    "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxTrainingSlotNum" : 1,
+    "maxBuildingSlotNum" : 1
+  }, {
+    "name" : "Dalmatia",
+    "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "X", "Pannonia Superior", "Pannonia Inferior", "Moesia Superior", "Macedonia" ],
     "buildings" : [ ],
-    "townWealth" : 80,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
-    "units" : [ {
-      "type" : "HOPILITE",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dalmatia",
-      "isMercenary" : false,
-      "health" : 50,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 2.0,
-      "morale" : 7.0,
-      "armour" : 6.0,
-      "attack" : 8.0,
-      "defenseSkill" : 4.0,
-      "shieldDefense" : 2.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dalmatia",
-      "isMercenary" : false,
-      "health" : 12,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_HEROIC_CHARGE_COMBAT" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_HEROIC_CHARGE_MORALE" ]
-      },
-      "level" : 1,
-      "type" : "HEAVY_CAVALRY",
-      "province" : "Dalmatia",
-      "isMercenary" : false,
-      "health" : 23,
-      "maxMovPoints" : 15,
-      "movPoints" : 15,
-      "canAttack" : true,
-      "speed" : 7.0,
-      "morale" : 6.0,
-      "armour" : 4.0,
-      "attack" : 10.0,
-      "defenseSkill" : 1.0,
-      "shieldDefense" : 0.0,
-      "charge" : 3.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Dalmatia",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -3623,11 +3266,28 @@
     "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Moesia Superior", "Moesia Inferior", "Macedonia", "Bithynia et Pontus" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
+    "units" : [ ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxTrainingSlotNum" : 1,
+    "maxBuildingSlotNum" : 1
+  }, {
+    "name" : "XI",
+    "owner" : "CARTHAGE",
+    "adjacent" : [ "Alpes Graiae et Poeninae", "Alpes Cottiae", "IX", "Raetia", "Noricum", "X", "VIII" ],
+    "buildings" : [ ],
+    "townWealth" : 15,
+    "taxLevel" : "NORMAL_TAX",
+    "movCost" : 4,
+    "isLandlocked" : true,
+    "isConquered" : true,
     "units" : [ {
       "type" : "BERSERKER",
       "level" : 1,
@@ -3639,35 +3299,12 @@
         "SUPPORT" : [ ],
         "ENGAGEMENT" : [ ]
       },
-      "province" : "Thracia",
+      "province" : "XI",
       "isMercenary" : false,
       "health" : 100,
       "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Thracia",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
+      "movPoints" : 0,
+      "canAttack" : false,
       "speed" : 5.0,
       "morale" : "Infinity",
       "armour" : "-Infinity",
@@ -3682,28 +3319,11 @@
     "maxTrainingSlotNum" : 1,
     "maxBuildingSlotNum" : 1
   }, {
-    "name" : "XI",
-    "owner" : "CARTHAGE",
-    "adjacent" : [ "Alpes Graiae et Poeninae", "Alpes Cottiae", "IX", "Raetia", "Noricum", "X", "VIII" ],
-    "buildings" : [ ],
-    "townWealth" : 85,
-    "taxLevel" : "LOW_TAX",
-    "movCost" : 4,
-    "isLandlocked" : true,
-    "isConquered" : false,
-    "units" : [ ],
-    "buildingSlots" : [ ],
-    "trainingSlots" : [ ],
-    "trainingSlotNum" : 1,
-    "buildingSlotNum" : 1,
-    "maxTrainingSlotNum" : 1,
-    "maxBuildingSlotNum" : 1
-  }, {
     "name" : "Alpes Cottiae",
     "owner" : "CARTHAGE",
     "adjacent" : [ "Alpes Graiae et Poeninae", "XI", "Alpes Maritimae", "IX", "Narbonensis" ],
     "buildings" : [ ],
-    "townWealth" : 65,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : true,
@@ -4008,7 +3628,93 @@
     "buildingSlotNum" : 1,
     "maxTrainingSlotNum" : 1,
     "maxBuildingSlotNum" : 1
-  }, "VII", {
+  }, {
+    "name" : "VII",
+    "owner" : "NO_ONE",
+    "adjacent" : [ "IX", "VIII", "VI", "IV", "I", "Sardinia et Corsica" ],
+    "buildings" : [ ],
+    "townWealth" : 0,
+    "taxLevel" : "LOW_TAX",
+    "movCost" : 4,
+    "isLandlocked" : false,
+    "isConquered" : false,
+    "units" : [ {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    }, {
+      "type" : "BARBARIAN",
+      "level" : 1,
+      "combatModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
+      },
+      "moraleModifiers" : {
+        "SUPPORT" : [ ],
+        "ENGAGEMENT" : [ ]
+      },
+      "province" : "VII",
+      "isMercenary" : false,
+      "health" : 50,
+      "maxMovPoints" : 10,
+      "movPoints" : 10,
+      "canAttack" : true,
+      "speed" : 5.0,
+      "morale" : 5.0,
+      "armour" : 2.0,
+      "attack" : 6.0,
+      "defenseSkill" : 2.0,
+      "shieldDefense" : 0.0
+    } ],
+    "buildingSlots" : [ ],
+    "trainingSlots" : [ ],
+    "trainingSlotNum" : 1,
+    "buildingSlotNum" : 1,
+    "maxTrainingSlotNum" : 1,
+    "maxBuildingSlotNum" : 1
+  }, {
     "name" : "Aegyptus",
     "owner" : "NO_ONE",
     "adjacent" : [ "Creta et Cyrene", "Arabia" ],
@@ -4099,35 +3805,12 @@
     "owner" : "SELEUCID_EMPIRE",
     "adjacent" : [ "Moesia Superior", "Dacia", "Thracia" ],
     "buildings" : [ ],
-    "townWealth" : 110,
+    "townWealth" : 30,
     "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
     "isConquered" : false,
-    "units" : [ {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Moesia Inferior",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 10,
-      "canAttack" : true,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -4139,81 +3822,12 @@
     "owner" : "CARTHAGE",
     "adjacent" : [ "Lugdunensis", "Germania Inferior", "Germania Superior" ],
     "buildings" : [ ],
-    "townWealth" : 42,
-    "taxLevel" : "NORMAL_TAX",
+    "townWealth" : 30,
+    "taxLevel" : "LOW_TAX",
     "movCost" : 4,
     "isLandlocked" : false,
-    "isConquered" : true,
-    "units" : [ {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Belgica",
-      "isMercenary" : false,
-      "health" : 9,
-      "maxMovPoints" : 10,
-      "movPoints" : 0,
-      "canAttack" : false,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Belgica",
-      "isMercenary" : false,
-      "health" : 27,
-      "maxMovPoints" : 10,
-      "movPoints" : 0,
-      "canAttack" : false,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    }, {
-      "type" : "BERSERKER",
-      "level" : 1,
-      "combatModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ "_SHIELD_CHARGE" ]
-      },
-      "moraleModifiers" : {
-        "SUPPORT" : [ ],
-        "ENGAGEMENT" : [ ]
-      },
-      "province" : "Belgica",
-      "isMercenary" : false,
-      "health" : 100,
-      "maxMovPoints" : 10,
-      "movPoints" : 0,
-      "canAttack" : false,
-      "speed" : 5.0,
-      "morale" : "Infinity",
-      "armour" : "-Infinity",
-      "attack" : 6.0,
-      "defenseSkill" : 2.0,
-      "shieldDefense" : 0.0
-    } ],
+    "isConquered" : false,
+    "units" : [ ],
     "buildingSlots" : [ ],
     "trainingSlots" : [ ],
     "trainingSlotNum" : 1,
@@ -4263,73 +3877,37 @@
   } ],
   "factionOrder" : [ {
     "type" : "CARTHAGE",
-    "gold" : 128,
-    "provinces" : [ "Tarraconensis", "Baetica", "Alpes Maritimae", "Raetia", "Noricum", "Pannonia Superior", "X", "XI", "Alpes Graiae et Poeninae", "Pannonia Inferior", "Dalmatia", "Narbonensis", "Aquitania", "Alpes Cottiae", "IX", "VIII", "Lugdunensis", "VII", "Belgica" ],
+    "gold" : 41,
+    "provinces" : [ "Tarraconensis", "Alpes Cottiae", "Britannia", "Baetica", "Germania Superior", "Aquitania", "Alpes Maritimae", "Belgica", "Germania Inferior", "Raetia", "Narbonensis", "Lugdunensis", "Noricum", "Pannonia Superior", "X", "XI" ],
     "vicComponent" : {
       "type" : "VicLeaf",
       "goal" : "WEALTH",
-      "progress" : 3.19
+      "progress" : 0.9375
     },
     "lostEagles" : [ {
-      "key" : "Germania Inferior",
-      "value" : 0
-    }, {
-      "key" : "Britannia",
-      "value" : 0
-    }, {
-      "key" : "Achaia",
-      "value" : 0
-    }, {
-      "key" : "Macedonia",
-      "value" : 0
-    }, {
-      "key" : "Germania Superior",
+      "key" : "Alpes Graiae et Poeninae",
       "value" : 0
     } ]
   }, {
     "type" : "SELEUCID_EMPIRE",
-    "gold" : 81,
-    "provinces" : [ "Moesia Superior", "Dacia", "Moesia Inferior", "Bithynia et Pontus", "Thracia", "Germania Inferior", "Britannia", "Macedonia", "Achaia", "Germania Superior" ],
+    "gold" : 39,
+    "provinces" : [ "Pannonia Inferior", "Macedonia", "Moesia Superior", "Dacia", "Moesia Inferior", "Bithynia et Pontus", "Dalmatia", "Achaia", "Thracia", "Alpes Graiae et Poeninae" ],
     "vicComponent" : {
       "type" : "VicLeaf",
       "goal" : "WEALTH",
-      "progress" : 2.2875
+      "progress" : 0.9375
     },
     "lostEagles" : [ {
-      "key" : "X",
+      "key" : "XI",
       "value" : 0
     }, {
       "key" : "Noricum",
       "value" : 0
     }, {
-      "key" : "Belgica",
-      "value" : 0
-    }, {
-      "key" : "Alpes Cottiae",
-      "value" : 0
-    }, {
-      "key" : "Alpes Graiae et Poeninae",
-      "value" : 0
-    }, {
-      "key" : "Lugdunensis",
-      "value" : 0
-    }, {
-      "key" : "XI",
+      "key" : "X",
       "value" : 0
     }, {
       "key" : "Pannonia Superior",
-      "value" : 0
-    }, {
-      "key" : "Narbonensis",
-      "value" : 0
-    }, {
-      "key" : "Dalmatia",
-      "value" : 0
-    }, {
-      "key" : "Pannonia Inferior",
-      "value" : 0
-    }, {
-      "key" : "Aquitania",
       "value" : 0
     } ]
   } ],
@@ -4338,7 +3916,7 @@
     "CARTHAGE" : 1613635832,
     "SELEUCID_EMPIRE" : 1615794262
   },
-  "round" : 11,
+  "round" : 3,
   "currentTurn" : 0,
   "hasWon" : true
 }

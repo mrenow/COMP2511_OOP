@@ -17,6 +17,10 @@ public class Observable<T> implements Subject<T>{
     }
  
     @Override
+    /* Call this function to trigger an event.
+     * It will then cause all the observers observing this object
+     * to call their update functions
+     */ 
     public void notifyUpdate(T m) {
         for(Observer<T> o: observers) {
             o.update(m);
